@@ -41,9 +41,23 @@
 #define KDEVICE_IPHONE6P (K_WIDTH >= 414.0)
 #define KDEVICE_IPHONE5or4  (K_WIDTH <=320.0)
 
-//数据转换宏
-#define CNull2String(idValue)  str?str:@""    //null转为空字符串
+#pragma mark --- 数据转换宏
+#define CNull2String(str)  str?str:@""    //null转为空字符串
+#define CNull2Int(str)  [str?str:@"" intValue]    //null转为0
 #define CInt2String(idValue) [NSString stringWithFormat:@"%@", @(idValue)]
+
+#pragma mark --- 获取提示文字
+#define KGetNoticeString(string) [[[NSMutableDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"AlertList" ofType:@"plist"]] objectForKey:string]
+
+#pragma mark --- 跳转到对应的UIViewController，读取nib文件
+#define KJumpToViewControllerByNib(string)  UIViewController * vc = [[NSClassFromString(string) alloc]initWithNibName:string bundle:nil];[self.navigationController pushViewController:vc animated:YES];
+#pragma mark --- 跳转到对应的UIViewController
+#define KJumpToViewController(string)  UIViewController * vc = [[NSClassFromString(string) alloc]init];[self.navigationController pushViewController:vc animated:YES];
+#pragma mark --- 从nib获取view对象
+#define KGetViewFromNib(string) [[[NSBundle mainBundle] loadNibNamed:string owner:self options:nil] lastObject]
+#pragma mark -- pop到上级页面
+#define KPopToLastViewController [self.navigationController popViewControllerAnimated:YES];
+
 
 //十六进制颜色转换（0xFFFFFF）
 #define HEXRGBCOLOR(hex)  [UIColor colorWithRed:((float)((hex & 0xFF0000) >> 16))/255.0 green:((float)((hex & 0xFF00) >> 8))/255.0 blue:((float)(hex & 0xFF))/255.0 alpha:1.0]

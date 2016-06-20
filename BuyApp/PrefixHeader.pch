@@ -30,5 +30,5 @@
 #import "UIImageView+WebCache.h"
 #import "MBProgressHUD+JY.h"
 #import "RootViewController.h"
-
+#import "MJRefresh.h"
 #endif
