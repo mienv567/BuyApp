@@ -11,7 +11,7 @@
 #import "MainTopView.h"
 #import "MainSegmentView.h"
 #import "XLPlainFlowLayout.h"
-#import "MainGoodsListCell.h"
+#import "MainGoodsListCells.h"
 
 
 static NSString *cellID = @"MainGoodsListCellID";
@@ -37,7 +37,7 @@ static NSString *footerID = @"footerID";
     [self setLeftButton:@"搜索图片" action:@selector(click_search)];
 
     XLPlainFlowLayout *layout = [XLPlainFlowLayout new];
-    layout.itemSize = CGSizeMake(K_WIDTH / 2 - 0.5 , 210);
+    layout.itemSize = CGSizeMake(K_WIDTH / 2 - 0.5 , 180);
     layout.sectionInset = UIEdgeInsetsMake(1, 0, 1, 0);
     layout.naviHeight = 0;
 
@@ -50,11 +50,10 @@ static NSString *footerID = @"footerID";
         make.edges.equalTo(self.view);
     }];
     
-//    [self.classView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:cellID];
-    [self.classView registerNib:[UINib nibWithNibName:@"MainGoodsListCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:cellID];
+    [self.classView registerClass:[MainGoodsListCells class] forCellWithReuseIdentifier:cellID];
+
     [self.classView registerClass:[MainTopView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:headerID];
     [self.classView registerClass:[MainSegmentView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:footerID];
-//    [self.classView.mj_header =
     self.classView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNew)];
     self.classView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
 }
@@ -116,7 +115,7 @@ static NSString *footerID = @"footerID";
     switch (index) {
         case 0:
         {
-            
+            KJumpToViewControllerByNib(@"GoodsClassVc");
         }
             break;
         case 1:
@@ -172,13 +171,7 @@ static NSString *footerID = @"footerID";
 }
 
 
-
-
-
-
 #pragma mark - 创建视图
-
-
 #pragma mark - 创建UICollectionView
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -190,12 +183,13 @@ static NSString *footerID = @"footerID";
     if (section == 0) {
         return 0;
     }
-    return 10;
+    return 1000;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    MainGoodsListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
+    MainGoodsListCells *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
+    [cell setDataModel:nil];
     return cell;
 }
 
@@ -288,6 +282,10 @@ static NSString *footerID = @"footerID";
         [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -50)
                                                              forBarMetrics:UIBarMetricsDefault];
     }
+}
+
+-(BOOL)hidesBottomBarWhenPushed{
+    return NO;
 }
 
 

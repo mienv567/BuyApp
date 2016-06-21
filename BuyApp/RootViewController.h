@@ -13,7 +13,8 @@
 //加载等待视图
 - (void)needLogin;
 - (void)loadingShow:(NSString *)message;
-
+-(void)setRightButtonTitle:(NSString *)titleName action:(SEL)action;//设置导航栏右侧按钮
+-(void)setLeftButtonTtile:(NSString *)titleName action:(SEL)action; //设置导航栏左侧按钮
 -(void)setLeftButton:(NSString *)imgName action:(SEL)action;  //设置导航栏左侧按钮
 -(void)setRightButton:(NSString *)imgName action:(SEL)action; //设置导航栏右侧按钮
 -(void)getMyNav_leftImgString:(NSString *)leftImgString rightImgString:(NSString *)rightImgString titleStr:(NSString * )titleStr;//自定义导航栏

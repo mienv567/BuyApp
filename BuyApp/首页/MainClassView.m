@@ -61,6 +61,7 @@
         lastBtn=button;
         UIImageView *iv = [[UIImageView alloc] init];
         iv.backgroundColor = [UIColor orangeColor];
+        iv.image = KDefaultImg;
 
         [button addSubview:iv];
         [iv sd_setImageWithURL:[NSURL URLWithString:model.PicPath] placeholderImage:KDefaultImg];

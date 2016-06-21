@@ -159,6 +159,7 @@
     
     UIImageView *iv = [[UIImageView alloc] init];
     iv.backgroundColor = [UIColor orangeColor];
+    iv.image = KDefaultImg;
     [self.newsBackView addSubview:iv];
     [iv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.newsBackView).with.offset(10);

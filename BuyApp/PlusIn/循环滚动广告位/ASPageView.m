@@ -72,6 +72,8 @@
     for(int i = 0; i < [self.items count]; i++){
         UIImageView *iv = [[UIImageView alloc] init];
         iv.userInteractionEnabled = YES;
+        iv.image = KDefaultImg;
+
         iv.backgroundColor = [UIColor clearColor];//设置了背景颜色
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap_Image:)];
         [iv addGestureRecognizer:tap];

@@ -68,7 +68,20 @@
  */
 +(BOOL)validateStringLong:(NSString *)string requireMinLong:(NSInteger)minLong
 {
-    if(string.length<minLong){
+    if(string.length < minLong){
+        
+        return NO;
+    }else{
+        
+        return YES;
+    }
+    
+    return NO;
+}
+
++(BOOL)validateStringLong:(NSString *)string requireMaxLong:(NSInteger)maxLong
+{
+    if(string.length > maxLong){
         
         return NO;
     }else{

@@ -25,4 +25,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(BOOL)hidesBottomBarWhenPushed{
+    return NO;
+}
+
 @end

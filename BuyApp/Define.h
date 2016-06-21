@@ -20,7 +20,7 @@
 #define NSLocalizedString(key, comment)   [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:nil]
 
 //全局的默认图片
-#define KDefaultImg [UIImage imageNamed:@"placeholder"]
+#define KDefaultImg [UIImage imageNamed:@"placeHolder"]
 
 //系统版本，App相关
 #define kAppVersion [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]

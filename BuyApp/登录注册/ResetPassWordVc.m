@@ -1,57 +1,52 @@
 //
-//  LoginVC.m
+//  ResetPassWordVc.m
 //  BuyApp
 //
-//  Created by D on 16/6/20.
+//  Created by D on 16/6/21.
 //  Copyright © 2016年 Super_D. All rights reserved.
 //
 
-#import "LoginVC.h"
+#import "ResetPassWordVc.h"
 #import "Img_TextfieldCell.h"
 
-@interface LoginVC ()
+@interface ResetPassWordVc () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tabView;
 @property (weak, nonatomic) IBOutlet UIButton *btn_Login;
-@property (weak, nonatomic) IBOutlet UIButton *btn_changeStyle;
-@property (weak, nonatomic) IBOutlet UIButton *btn_forgetPassWord;
 @property (nonatomic, strong) UINib * nib;
 @property (nonatomic, strong)UIButton * btn_code;               //验证码
 @property (nonatomic, strong) NSTimer *cdTimer;                 //倒计时
 @property (nonatomic) NSInteger countDown;                      //倒计时
-@property (nonatomic) BOOL JustUsePhoneLogin;                   //是否只是使用手机号，判断登录方式
+
+@property (nonatomic, strong)UITextField *txf_mobile;
+@property (nonatomic, strong)UITextField *txf_code;
+@property (nonatomic, strong)UITextField *txf_password;
+@property (nonatomic, strong)UITextField *txf_rePassword;
 @end
 
 #pragma mark - 宏
 
 #define maxNum 60
-#define CodeLoginString @"手机验证码登录"
-#define AccountLoginString @"账号登录"
-#define CellPlaceHolderArrayStyleOne @[@"请输入手机号/邮箱/用户名",@"请输入密码"]
-#define CellPlaceHolderArrayStyleTwo @[@"请输入手机号",@"请输入手机短信中的验证码"]
-#define CellImgArrayStyleOne @[@"",@""]
-#define CellImgArrayStyleTwo @[@"",@""]
+
+#define CellPlaceHolderArrayStyle @[@"请输入手机号",@"请输入手机短信中的验证码",@"请输入四个字符或以上的新密码",@"请再次输入新密码"]
+#define CellImgArrayStyle @[@"",@"",@"",@""]
 
 
-@implementation LoginVC
+@implementation ResetPassWordVc
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    self.JustUsePhoneLogin = NO;
-    self.title = @"趣云购-登录";
+    self.title = @"趣云购-重置密码";
     self.view.backgroundColor = GS_COLOR_WHITE;
     [self setLeftButtonTtile:@"取消" action:@selector(click_cancleLogin)];
-    [self setRightButtonTitle:@"注册" action:@selector(click_register)];
     
     
     self.tabView.backgroundColor = GS_COLOR_WHITE;
     [self.tabView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view);
-        make.height.mas_equalTo(@120);
+        make.height.mas_equalTo(@220);
     }];
     
-    [self.btn_changeStyle setTitle:AccountLoginString forState:UIControlStateNormal];
     [self.btn_Login mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(10);
         make.right.equalTo(self.view).offset(-10);
@@ -59,17 +54,6 @@
         make.height.mas_equalTo(@45);
     }];
     
-    [self.btn_changeStyle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.btn_Login);
-        make.top.equalTo(self.btn_Login.mas_bottom).offset(10);
-        make.height.mas_equalTo(@30);
-    }];
-    
-    [self.btn_forgetPassWord mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.btn_Login);
-        make.top.equalTo(self.btn_Login.mas_bottom).offset(10);
-        make.height.mas_equalTo(@30);
-    }];
     
     self.btn_code = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 120, 30)];
     self.btn_code.backgroundColor = [UIColor whiteColor];
@@ -77,20 +61,15 @@
     self.btn_code.titleLabel.font = [UIFont systemFontOfSize:13];
     [self.btn_code setTitle:@"点击获取验证码" forState:UIControlStateNormal];
     [self.btn_code setTitleColor:GS_COLOR_RED forState:UIControlStateNormal];
-    self.btn_code.hidden = !self.JustUsePhoneLogin;
-
+    
+    [self.btn_code setEnabled:NO];
+    self.btn_Login.backgroundColor = GS_COLOR_LIGHTGRAY;
+    [self.btn_Login setTitleColor:GS_COLOR_GRAY forState:UIControlStateNormal];
 }
 
 #pragma mark - 取消登录
 -(void)click_cancleLogin{
-    [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        
-    }];
-}
-
-#pragma mark - 注册
--(void)click_register{
-    KJumpToViewControllerByNib(@"RegisterVc");
+    KPopToLastViewController;
 }
 
 #pragma mark - 登录
@@ -98,29 +77,11 @@
     
 }
 
-#pragma mark - 更换登录方式
-- (IBAction)click_changeStyle:(id)sender {
-    if ([self.btn_changeStyle.titleLabel.text isEqualToString:AccountLoginString]) {
-        [self.btn_changeStyle setTitle:CodeLoginString forState:UIControlStateNormal];
-        self.JustUsePhoneLogin = YES;
-    }else{
-        [self.btn_changeStyle setTitle:AccountLoginString forState:UIControlStateNormal];
-        self.JustUsePhoneLogin = NO;
-    }
-    self.btn_code.hidden = !self.JustUsePhoneLogin;
-    [self.tabView reloadData];
-}
-
-#pragma mark - 忘记密码
-- (IBAction)click_forgetPassWord:(id)sender {
-    KJumpToViewControllerByNib(@"ResetPassWordVc");
-}
-
 #pragma mark - 获取验证码
 -(void)click_getCode{
     NSIndexPath * indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     Img_TextfieldCell *cell = [self.tabView cellForRowAtIndexPath:indexPath];
-
+    
     if ([GSValidate validateString:cell.txf_content.text withRequireType:RequireTypeIsMobile] && [GSValidate validateStringLong:cell.txf_content.text requireMinLong:11]) {
         self.countDown = maxNum;
         [self getCodeCountDown];
@@ -160,7 +121,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -169,7 +130,7 @@
     if (!self.nib) {
         self.nib = [UINib nibWithNibName:@"Img_TextfieldCell" bundle:nil];
         [tableView registerNib:self.nib forCellReuseIdentifier:identy];
-   
+        
     }
     
     Img_TextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
@@ -177,21 +138,39 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     //设置图片
-    if (self.btn_code.hidden) {
-        cell.txf_content.placeholder = [CellPlaceHolderArrayStyleOne objectAtIndex:indexPath.row];
-        cell.img_icon.image = [UIImage imageNamed:[CellImgArrayStyleOne objectAtIndex:indexPath.row]];
-    }else{
-        cell.txf_content.placeholder = [CellPlaceHolderArrayStyleTwo objectAtIndex:indexPath.row];
-        cell.img_icon.image = [UIImage imageNamed:[CellImgArrayStyleTwo objectAtIndex:indexPath.row]];
+    cell.txf_content.placeholder = [CellPlaceHolderArrayStyle objectAtIndex:indexPath.row];
+    cell.img_icon.image = [UIImage imageNamed:[CellImgArrayStyle objectAtIndex:indexPath.row]];
     
-    }
-    if (indexPath.row == 0 && indexPath.section == 0) {
-               [cell.contentView addSubview:self.btn_code];
+    
+    if (indexPath.row == 0 ) {
+        
+        [cell.contentView addSubview:self.btn_code];
         [self.btn_code mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(cell.mas_top).offset(5);
             make.bottom.equalTo(cell.mas_bottom).offset(-5);
             make.right.equalTo(cell.mas_right).offset(-20);
         }];
+        
+        self.txf_mobile = cell.txf_content;
+        self.txf_mobile.keyboardType = UIKeyboardTypeNumberPad;
+        self.txf_mobile.delegate = self;
+        
+    }else if (indexPath.row == 1){
+        
+        self.txf_code = cell.txf_content;
+        self.txf_code.keyboardType = UIKeyboardTypeNumberPad;
+        self.txf_code.delegate = self;
+        
+    }else if (indexPath.row == 2){
+        
+        self.txf_password = cell.txf_content;
+        self.txf_password.delegate = self;
+        
+    }else if (indexPath.row == 3){
+        
+        self.txf_rePassword = cell.txf_content;
+        self.txf_rePassword.delegate = self;
+        
     }
 
     
@@ -199,7 +178,7 @@
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-        return [UIView new];
+    return [UIView new];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -219,7 +198,61 @@
     }
 }
 
+#pragma mark -UITextFielddelegate
 
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    BOOL mobile = false;
+    BOOL code = false;
+    BOOL pass = false;
+    BOOL repass = false;
+    
+    NSString * toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    if (textField == self.txf_mobile) {
+        
+        mobile = [GSValidate validateString:toBeString withRequireType:RequireTypeIsMobile] && [GSValidate validateStringLong:toBeString requireMinLong:11];
+        code = [GSValidate validateStringLong:self.txf_code.text requireMinLong:6] && [GSValidate validateStringLong:self.txf_code.text requireMaxLong:6];
+        pass = [GSValidate validateStringLong:self.txf_password.text requireMinLong:4];
+        repass = [self.txf_rePassword.text isEqualToString:self.txf_password.text];
+        
+    }else if (textField == self.txf_code){
+        
+        mobile = [GSValidate validateString:self.txf_mobile.text withRequireType:RequireTypeIsMobile] && [GSValidate validateStringLong:self.txf_mobile.text requireMinLong:11];
+        code = [GSValidate validateStringLong:toBeString requireMinLong:6] && [GSValidate validateStringLong:toBeString requireMaxLong:6];
+        pass = [GSValidate validateStringLong:self.txf_password.text requireMinLong:4];
+        repass = [self.txf_rePassword.text isEqualToString:self.txf_password.text];
+
+        
+    }else if (textField == self.txf_password){
+        
+        mobile = [GSValidate validateString:self.txf_mobile.text withRequireType:RequireTypeIsMobile] && [GSValidate validateStringLong:self.txf_mobile.text requireMinLong:11];
+        code = [GSValidate validateStringLong:self.txf_code.text requireMinLong:6] && [GSValidate validateStringLong:self.txf_code.text requireMaxLong:6];
+        pass = [GSValidate validateStringLong:toBeString requireMinLong:4];
+        repass = [self.txf_rePassword.text isEqualToString:self.txf_password.text];
+
+        
+    }else if (textField == self.txf_rePassword){
+        
+        mobile = [GSValidate validateString:self.txf_mobile.text withRequireType:RequireTypeIsMobile] && [GSValidate validateStringLong:self.txf_mobile.text requireMinLong:11];
+        code = [GSValidate validateStringLong:self.txf_code.text requireMinLong:6] && [GSValidate validateStringLong:self.txf_code.text requireMaxLong:6];
+        pass = [GSValidate validateStringLong:toBeString requireMinLong:4];
+        repass = [self.txf_rePassword.text isEqualToString:self.txf_password.text]; 
+    }
+    
+    
+    if (mobile && code && pass) {
+        [self.btn_code setEnabled:YES];
+        self.btn_Login.backgroundColor = GS_COLOR_RED;
+        [self.btn_Login setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }else{
+        [self.btn_code setEnabled:NO];
+        self.btn_Login.backgroundColor = GS_COLOR_LIGHTGRAY;
+        [self.btn_Login setTitleColor:GS_COLOR_GRAY forState:UIControlStateNormal];
+    }
+    
+    return YES;
+}
 
 
 - (void)didReceiveMemoryWarning {

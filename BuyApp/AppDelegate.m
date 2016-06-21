@@ -41,43 +41,7 @@
     
     //初始化tabBarController
     MainTabBarVc *tb = [MainTabBarVc shared];
-    UITabBarItem *item1 = [[UITabBarItem alloc]initWithTitle:@"首页" image:[UIImage imageNamed:@"navW-1-0"] tag:0];
-    item1.selectedImage = [[UIImage imageNamed:@"nav-1-0"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
-    UITabBarItem *item2 = [[UITabBarItem alloc]initWithTitle:@"最新揭晓" image:[UIImage imageNamed:@"navW-1-1"] tag:1];
-    item2.selectedImage = [[UIImage imageNamed:@"nav-1-1"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
-    UITabBarItem *item3 = [[UITabBarItem alloc]initWithTitle:@"清单" image:[UIImage imageNamed:@"navW-1-2"] tag:2];
-    item3.selectedImage = [[UIImage imageNamed:@"nav-1-2"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
-    UITabBarItem *item4 = [[UITabBarItem alloc]initWithTitle:@"夺宝记录" image:[UIImage imageNamed:@"navW-1-3"] tag:3];
-    item4.selectedImage = [[UIImage imageNamed:@"nav-1-3"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
-    UITabBarItem *item5 = [[UITabBarItem alloc]initWithTitle:@"我" image:[UIImage imageNamed:@"navW-1-4"] tag:4];
-    item5.selectedImage = [[UIImage imageNamed:@"nav-1-4"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
-    MainVc *mainVc = [[MainVc alloc] init];
-    NewsVc *newsVc = [[NewsVc alloc] init];
-    ListVc * listVc = [[ListVc alloc] init];
-    HistoryVc *historyVc = [[HistoryVc alloc]init];
-    UserVc *userVc = [[UserVc alloc]init];
-    
-    UINavigationController *nc1 = [[UINavigationController alloc] initWithRootViewController:mainVc];
-    UINavigationController *nc2 = [[UINavigationController alloc] initWithRootViewController:newsVc];
-    UINavigationController *nc3 = [[UINavigationController alloc] initWithRootViewController:listVc];
-    UINavigationController *nc4 = [[UINavigationController alloc]initWithRootViewController:historyVc];
-    UINavigationController *nc5 = [[UINavigationController alloc]initWithRootViewController:userVc];
-    
-    nc1.tabBarItem = item1;
-    nc2.tabBarItem = item2;
-    nc3.tabBarItem = item3;
-    nc4.tabBarItem = item4;
-    nc5.tabBarItem = item5;
-    
-    tb.viewControllers = @[nc1, nc2, nc3, nc4,nc5];
-    [tb setSelectedViewController:nc1 ];
-
-    
+        
     [[UITabBar appearance] setBackgroundColor:[UIColor whiteColor]];
     
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : GS_COLOR_DARKGRAY,
@@ -128,7 +92,7 @@
 {
     if(alertView.tag == 10086){   //需要登录
         if(alertView.cancelButtonIndex != buttonIndex){
-            LoginVC *phoneVC = [[LoginVC alloc] init];
+            LoginVC *phoneVC = [[NSClassFromString(@"LoginVC") alloc]initWithNibName:@"LoginVC" bundle:nil];
             UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:phoneVC];
             [self.window.rootViewController  presentViewController:nc animated:YES completion:nil];
         }

@@ -52,11 +52,46 @@
     }
 }
 
+-(void)setLeftButtonTtile:(NSString *)titleName action:(SEL)action{
+    if (titleName.length > 0) {
+        UIButton *leftBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        leftBarButton.frame = CGRectMake(0.0, 0.0, 40.0, 30.0);
+        leftBarButton.titleLabel.font = [UIFont systemFontOfSize:13];
+        [leftBarButton setTitle:titleName forState:UIControlStateNormal];
+        [leftBarButton setTitleColor:GS_COLOR_RED forState:UIControlStateNormal];
+        [leftBarButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+        leftBarButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem * btn=[[UIBarButtonItem alloc]initWithCustomView:leftBarButton];
+        leftBarButton.backgroundColor=[UIColor whiteColor];
+        UIBarButtonItem * spaceBtn=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        spaceBtn.width = -10;
+        self.navigationItem.leftBarButtonItems = @[spaceBtn,btn];
+    }
+}
+
+
 -(void)setRightButton:(NSString *)imgName action:(SEL)action{
     if (imgName.length > 0) {
         UIButton *rightBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
         rightBarButton.frame = CGRectMake(0.0, 0.0, 30.0, 30.0);
         [rightBarButton setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
+        [rightBarButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+        rightBarButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem * btn=[[UIBarButtonItem alloc]initWithCustomView:rightBarButton];
+        rightBarButton.backgroundColor=[UIColor whiteColor];
+        UIBarButtonItem * spaceBtn=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        spaceBtn.width = -10;
+        self.navigationItem.rightBarButtonItems = @[spaceBtn,btn];
+    }
+}
+
+-(void)setRightButtonTitle:(NSString *)titleName action:(SEL)action{
+    if (titleName.length > 0) {
+        UIButton *rightBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        rightBarButton.frame = CGRectMake(0.0, 0.0, 30.0, 30.0);
+        rightBarButton.titleLabel.font = [UIFont systemFontOfSize:13];
+        [rightBarButton setTitle:titleName forState:UIControlStateNormal];
+        [rightBarButton setTitleColor:GS_COLOR_RED forState:UIControlStateNormal];
         [rightBarButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem * btn=[[UIBarButtonItem alloc]initWithCustomView:rightBarButton];
@@ -146,5 +181,10 @@
 -(void)navBackVc{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+-(BOOL)hidesBottomBarWhenPushed{
+    return YES;
+}
+
 
 @end

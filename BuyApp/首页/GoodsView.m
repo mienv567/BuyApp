@@ -22,6 +22,8 @@
         self.iv=[[UIImageView alloc]init];
         self.iv.contentMode = UIViewContentModeScaleAspectFit;
         self.iv.backgroundColor=[UIColor whiteColor];
+        self.iv.image = KDefaultImg;
+
         [self addSubview:self.iv];
         [self.iv mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.equalTo(self);

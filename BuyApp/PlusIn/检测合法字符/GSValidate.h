@@ -57,6 +57,8 @@ typedef NS_ENUM(NSUInteger, RequireStringType) {
 
 +(BOOL)validateStringLong:(NSString *)string requireMinLong:(NSInteger)minLong;
 
++(BOOL)validateStringLong:(NSString *)string requireMaxLong:(NSInteger)maxLong;
+
 
 /*
  *判断字符是否是指定的类型
