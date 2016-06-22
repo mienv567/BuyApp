@@ -9,6 +9,7 @@
 #import "RootViewController.h"
 #import "AppDelegate.h"
 
+#define FontSize   15
 @implementation RootViewController
 - (id)init
 {
@@ -41,6 +42,8 @@
     if (imgName.length > 0) {
         UIButton *leftBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
         leftBarButton.frame = CGRectMake(0.0, 0.0, 30.0, 30.0);
+        leftBarButton.titleLabel.font = [UIFont systemFontOfSize:FontSize];
+
         [leftBarButton setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
         [leftBarButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
         leftBarButton.showsTouchWhenHighlighted = YES;
@@ -56,7 +59,7 @@
     if (titleName.length > 0) {
         UIButton *leftBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
         leftBarButton.frame = CGRectMake(0.0, 0.0, 40.0, 30.0);
-        leftBarButton.titleLabel.font = [UIFont systemFontOfSize:13];
+        leftBarButton.titleLabel.font = [UIFont systemFontOfSize:FontSize];
         [leftBarButton setTitle:titleName forState:UIControlStateNormal];
         [leftBarButton setTitleColor:GS_COLOR_RED forState:UIControlStateNormal];
         [leftBarButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
@@ -74,6 +77,7 @@
     if (imgName.length > 0) {
         UIButton *rightBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
         rightBarButton.frame = CGRectMake(0.0, 0.0, 30.0, 30.0);
+        rightBarButton.titleLabel.font = [UIFont systemFontOfSize:FontSize];
         [rightBarButton setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
         [rightBarButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.showsTouchWhenHighlighted = YES;
@@ -89,7 +93,7 @@
     if (titleName.length > 0) {
         UIButton *rightBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
         rightBarButton.frame = CGRectMake(0.0, 0.0, 30.0, 30.0);
-        rightBarButton.titleLabel.font = [UIFont systemFontOfSize:13];
+        rightBarButton.titleLabel.font = [UIFont systemFontOfSize:FontSize];
         [rightBarButton setTitle:titleName forState:UIControlStateNormal];
         [rightBarButton setTitleColor:GS_COLOR_RED forState:UIControlStateNormal];
         [rightBarButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
@@ -113,6 +117,7 @@
         UIButton *leftBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
         leftBarButton.frame = CGRectMake(10.0, 24.0, 30.0, 30.0);
         leftBarButton.tag = 10000;
+        leftBarButton.titleLabel.font = [UIFont systemFontOfSize:FontSize];
         leftBarButton.backgroundColor = [UIColor clearColor];
         [leftBarButton setImage:[UIImage imageNamed:leftImgString] forState:UIControlStateNormal];
         [leftBarButton addTarget:self action:@selector(MyNavLeftClick) forControlEvents:UIControlEventTouchUpInside];
@@ -124,6 +129,7 @@
         UIButton *rightBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
         rightBarButton.frame = CGRectMake(K_WIDTH - 40, 24.0, 30.0, 30.0);
         rightBarButton.tag = 10001;
+        rightBarButton.titleLabel.font = [UIFont systemFontOfSize:FontSize];
         rightBarButton.backgroundColor = [UIColor clearColor];
         [rightBarButton setImage:[UIImage imageNamed:rightImgString] forState:UIControlStateNormal];
         [rightBarButton addTarget:self action:@selector(MyNavRightClick) forControlEvents:UIControlEventTouchUpInside];
@@ -133,7 +139,7 @@
     
     if (titleStr.length > 0) {
         UILabel *lab_class = [[UILabel alloc] initWithFrame:CGRectMake(10, 24.0 , K_WIDTH, 20)];
-        lab_class.font = [UIFont gs_font:NSAppFontLL];
+        lab_class.font = [UIFont systemFontOfSize:FontSize];
         lab_class.text = titleStr;
         lab_class.backgroundColor = [UIColor clearColor];
         lab_class.textColor = [UIColor whiteColor];
@@ -146,10 +152,6 @@
 }
 
 #pragma mark - Wating Method
-
-- (void)loadingShow{
-    [self loadingShow:nil];
-}
 
 
 + (void)showAlerMessage:(NSString *)message{

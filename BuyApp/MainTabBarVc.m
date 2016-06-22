@@ -36,8 +36,8 @@
         self.tabBar.backgroundColor = [UIColor whiteColor];
 // [self.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
         
-        UITabBarItem *item1 = [[UITabBarItem alloc]initWithTitle:@"首页" image:[UIImage imageNamed:@"navW-1-0"] tag:0];
-        item1.selectedImage = [[UIImage imageNamed:@"nav-1-0"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UITabBarItem *item1 = [[UITabBarItem alloc]initWithTitle:@"首页" image:[UIImage imageNamed:@"Bar1"] tag:0];
+        item1.selectedImage = [[UIImage imageNamed:@"Bar1"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
         UITabBarItem *item2 = [[UITabBarItem alloc]initWithTitle:@"最新揭晓" image:[UIImage imageNamed:@"navW-1-1"] tag:1];
         item2.selectedImage = [[UIImage imageNamed:@"nav-1-1"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -81,8 +81,8 @@
     return self;
 }
 
--(void)changeTabBarAtIndexZero{
-    self.selectedIndex = 0;
+-(void)changeTabBarAtIndex:(NSInteger)idnex{
+    self.selectedIndex = idnex;
 }
 -(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;

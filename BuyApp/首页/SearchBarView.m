@@ -14,7 +14,7 @@
 -(void)awakeFromNib{
     self.backgroundColor = GS_COLOR_WHITE;
     self.beginInput = NO;
-    self.txf_keyWord.leftView = [[UIImageView alloc]initWithImage:KDefaultImg];
+    self.txf_keyWord.leftView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Bar1"]];
     self.txf_keyWord.leftViewMode = UITextFieldViewModeAlways;
     self.txf_keyWord.delegate = self;
     [self.txf_keyWord mas_makeConstraints:^(MASConstraintMaker *make) {

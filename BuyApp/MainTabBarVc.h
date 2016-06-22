@@ -12,7 +12,7 @@
 @property(nonatomic, strong)UILabel * numlabel;
 @property(nonatomic, strong)UITabBarItem *item3;
 + (instancetype)shared;
--(void)changeTabBarAtIndexZero;
+-(void)changeTabBarAtIndex:(NSInteger)idnex;
 -(void)changeNum;
 @end
 

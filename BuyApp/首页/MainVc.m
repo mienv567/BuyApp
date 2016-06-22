@@ -7,12 +7,14 @@
 //
 
 #import "MainVc.h"
-#import "SearchVc.h"
+#import "SearchBarVc.h"
 #import "MainTopView.h"
 #import "MainSegmentView.h"
 #import "XLPlainFlowLayout.h"
 #import "MainGoodsListCells.h"
-
+#import "SearchListVc.h"
+#import "MainTabBarVc.h"
+#import "HelpVc.h"
 
 static NSString *cellID = @"MainGoodsListCellID";
 static NSString *headerID = @"headerID";
@@ -66,6 +68,8 @@ static NSString *footerID = @"footerID";
 
 -(void)loadMore{
     self.pageNo ++;
+    [self.classView.mj_header endRefreshing];
+    [self.classView.mj_footer endRefreshing];
 }
 
 #pragma mark - 事件
@@ -120,17 +124,22 @@ static NSString *footerID = @"footerID";
             break;
         case 1:
         {
-            
+            SearchListVc * vc = [[SearchListVc alloc]init];
+            vc.title = @"10元专区";
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case 2:
         {
-            
+            MainTabBarVc *tb = [MainTabBarVc shared];
+            [tb setSelectedIndex:1];
         }
             break;
         case 3:
         {
-            
+            HelpVc * vc = [[HelpVc alloc]init];
+            vc.title = @"帮助";
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
             
@@ -183,7 +192,7 @@ static NSString *footerID = @"footerID";
     if (section == 0) {
         return 0;
     }
-    return 1000;
+    return 10;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -240,7 +249,7 @@ static NSString *footerID = @"footerID";
 
 //搜索
 -(void)click_search{
-    KJumpToViewController(@"SearchVc");
+    KJumpToViewControllerByNib(@"SearchBarVc");
 }
 
 #pragma mark - VC方法

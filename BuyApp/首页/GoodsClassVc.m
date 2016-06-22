@@ -9,6 +9,7 @@
 #import "GoodsClassVc.h"
 #import "Img_ContentCell.h"
 #import "SearchBarView.h"
+#import "SearchListVc.h"
 
 @interface GoodsClassVc ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -27,7 +28,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-   self.searchView = KGetViewFromNib(@"SearchBarView");
+    self.title = @"夺宝分类";
+    self.searchView = KGetViewFromNib(@"SearchBarView");
     self.view.backgroundColor = [UIColor whiteColor];
     self.tableView.backgroundColor = [UIColor whiteColor];
     
@@ -38,18 +40,22 @@
     [self observeProperty:@"searchView.beginInput" withBlock:^(id object, id oldValue, id newValue) {
         if (newValue != oldValue && oldValue != nil) {
             NSLog(@"%@,%@", oldValue, newValue);
-            KJumpToViewController(@"SearchVc");
+            KJumpToViewControllerByNib(@"SearchBarVc");
         }
     }];
 
-    
 }
 
 
 #pragma mark -- Cell事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    
+    SearchListVc * vc = [[SearchListVc alloc]init];
+    if (indexPath.section == 0) {
+        vc.title = @"夺宝活动";
+    }else{
+        vc.title = [TitleArray objectAtIndex:indexPath.row];
+    }
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark -- UITableview dataSource delegate

@@ -1,5 +1,5 @@
 //
-//  SearchVc.h
+//  SearchListVc.h
 //  BuyApp
 //
 //  Created by D on 16/6/20.
@@ -8,6 +8,6 @@
 
 #import "RootViewController.h"
 
-@interface SearchVc : RootViewController
+@interface SearchListVc : RootViewController
 
 @end
