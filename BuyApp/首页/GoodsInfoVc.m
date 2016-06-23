@@ -10,12 +10,20 @@
 #import "GoodsWinnerView.h"
 #import "GoodsCountsView.h"
 #import "GoodsInfoTopView.h"
+#import "Title_ContentOrImg_Cell.h"
+#import "GoodsUsersCell.h"
+
 
 @interface GoodsInfoVc () <UITableViewDelegate,UITableViewDataSource>
+
 @property (strong, nonatomic)  UITableView *tableView;
 @property (strong, nonatomic)  GoodsInfoTopView *pageView;
+@property (nonatomic, strong) UINib * nib;
 
 @end
+
+#define TitleArray @[@"图文详情",@"往期揭晓"]
+#define ContentArray @[@"建议在Wifi下查看",@""]
 
 @implementation GoodsInfoVc
 
@@ -30,68 +38,230 @@
     
     self.pageView = KGetViewFromNib(@"GoodsInfoTopView");
     self.pageView.frame = CGRectMake(0, 0, K_WIDTH, K_WIDTH * 410.0 / 660.0 + 50 + 80);
+    self.pageView.showType = GoodsInfoTopViewProcess;
     self.tableView.tableHeaderView = self.pageView;
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
-    
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
     
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+#pragma mark -加载数据
 
+-(void)loadMore{
+
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    if (indexPath.section == 1 ) {
+        if (indexPath.row == 0) {
+            
+        }else{
+            KJumpToViewController(@"HistoryWinnersVc");
+        }
+    }
 }
 
 #pragma mark - Table view data source
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 40;
+    return 45;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
+    switch (section) {
+        case 0:
+        {
+            return 0;
+        }
+            break;
+        case 1:
+        {
+            return 2;
+        }
+            break;
+        case 2:
+        {
+            return 1;
+        }
+            break;
+        case 3:
+        {
+            return 10;
+        }
+            break;
+        default:
+            break;
+    }
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
-    cell.backgroundColor = [UIColor whiteColor];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.textColor = GS_COLOR_DARKGRAY;
-    return cell;
+    if (indexPath.section == 1) {
+        static NSString *identy = @"Title_ContentOrImg_Cell";
+        Title_ContentOrImg_Cell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+        if (!cell) {
+            cell =  [[Title_ContentOrImg_Cell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+        cell.mode = Title_Content_Right;
+        cell.lab_titile.text= [TitleArray objectAtIndex:indexPath.row];
+        cell.lab_content.text = [ContentArray objectAtIndex:indexPath.row];
+        return cell;
+        
+    }else if (indexPath.section == 2) {
+        static NSString *identy = @"Title_ContentOrImg_Cell";
+        Title_ContentOrImg_Cell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+        if (!cell) {
+            cell =  [[Title_ContentOrImg_Cell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.mode = Title_Content_Right;
+        }
+        cell.mode = Title_Content_NoImg;
+        cell.lab_titile.text= @"所有参与记录";
+        cell.lab_content.text = @"(2016-06-20 15:30:08开始)";
+        return cell;
+        
+    }else if (indexPath.section == 3){
+        
+        static NSString *identy = @"GoodsUsersCell";
+        if (!self.nib) {
+            self.nib = [UINib nibWithNibName:@"GoodsUsersCell" bundle:nil];
+            [tableView registerNib:self.nib forCellReuseIdentifier:identy];
+        }
+        GoodsUsersCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.textLabel.textColor = GS_COLOR_DARKGRAY;
+        return cell;
+    }
+    
+    return [UITableViewCell new];
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
-    GoodsWinnerView * view = KGetViewFromNib(@"GoodsWinnerView");
-    return view;
-    
+    switch (section) {
+        case 0:
+        {
+            GoodsWinnerView * view = KGetViewFromNib(@"GoodsWinnerView");
+            return view;
+        }
+            break;
+        case 1:
+        {
+            return [UIView new];
+        }
+            break;
+        case 2:
+        {
+            Title_ContentOrImg_Cell * cell =  [[Title_ContentOrImg_Cell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Title_ContentOrImg_Cell"];
+            return cell;
+        }
+            break;
+        case 3:
+        {
+            return [UIView new];
+        }
+            break;
+        default:
+            break;
+    }
+    return [UIView new];
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    GoodsCountsView * view = KGetViewFromNib(@"GoodsCountsView");
-    return view;
+    switch (section) {
+        case 0:
+        {
+            GoodsCountsView * view = KGetViewFromNib(@"GoodsCountsView");
+            view.showType = GoodsInfoTopViewProcess;
+            return view;
+        }
+            break;
+        case 1:
+        {
+            return [UIView new];
+        }
+            break;
+        case 2:
+        {
+            return [UIView new];
+        }
+            break;
+        default:
+            break;
+    }
+    return [UIView new];
 }
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 230;
+    switch (section) {
+        case 0:
+        {
+           return 230;
+        }
+            break;
+        case 1:
+        {
+           return 10;
+        }
+            break;
+        case 2:
+        {
+            return 10;
+        }
+            break;
+        case 3:
+        {
+            return 0.01;
+        }
+            break;
+        default:
+            break;
+    }
+    return 0.1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 70;
+    switch (section) {
+        case 0:
+        {
+            return 70;
+        }
+            break;
+        case 1:
+        {
+            return 10;
+        }
+            break;
+        case 2:
+        {
+            return 0.01;
+        }
+            break;
+        case 3:
+        {
+            return 0;
+        }
+            break;
+        default:
+            break;
+    }
+    return 0.1;
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{

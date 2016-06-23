@@ -43,9 +43,7 @@
             KJumpToViewControllerByNib(@"SearchBarVc");
         }
     }];
-
 }
-
 
 #pragma mark -- Cell事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

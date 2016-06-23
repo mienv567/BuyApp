@@ -26,10 +26,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *btn_method;
 @property (weak, nonatomic) IBOutlet UIImageView *img_backBottom;
 
-@property (weak, nonatomic) IBOutlet UIView *view_notice;
-@property (weak, nonatomic) IBOutlet UIButton *btn_showNumbers;
-@property (weak, nonatomic) IBOutlet UIButton *btn_login;
-@property (weak, nonatomic) IBOutlet UILabel *lab_login;
-@property (weak, nonatomic) IBOutlet UILabel *lab_showCounts;
+//@property (weak, nonatomic) IBOutlet UIView *view_notice;
+//@property (weak, nonatomic) IBOutlet UIButton *btn_showNumbers;
+//@property (weak, nonatomic) IBOutlet UIButton *btn_login;
+//@property (weak, nonatomic) IBOutlet UILabel *lab_login;
+//@property (weak, nonatomic) IBOutlet UILabel *lab_showCounts;
 
 @end

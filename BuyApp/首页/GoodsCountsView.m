@@ -36,7 +36,7 @@
     [self.lab_login mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view_notice);
         make.height.equalTo(@20);
-        make.width.equalTo(@150);
+        make.width.equalTo(@170);
     }];
     
     [self.btn_login setTitleColor:GS_COLOR_BLUE forState:UIControlStateNormal];
@@ -55,17 +55,28 @@
     switch (showType) {
         case GoodsCountsViewNeedLogin:
         {
-        
+            self.btn_showNumbers.hidden = YES;
+            self.lab_showCounts.hidden = YES;
+             self.btn_login.hidden = NO;
+             self.lab_login.hidden = NO;
         }
             break;
         case GoodsCountsViewNotJoin:
         {
-            
+            self.btn_showNumbers.hidden = YES;
+            self.lab_showCounts.hidden = YES;
+            self.btn_login.hidden = YES;
+            self.lab_login.hidden = NO;
+            self.lab_login.text = @"您没有参与本期夺宝哦!";
         }
             break;
         case GoodsCountsViewHaveSomeCounts:
         {
-            
+            self.btn_showNumbers.hidden = NO;
+            self.lab_showCounts.hidden = NO;
+            self.btn_login.hidden = YES;
+            self.lab_login.hidden = YES;
+            self.lab_login.text = @"您没有参与本期夺宝哦!";
         }
             break;
         default:
