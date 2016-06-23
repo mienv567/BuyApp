@@ -21,6 +21,13 @@
 		03376B361D1ADB77004EE048 /* HelpInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 03376B351D1ADB77004EE048 /* HelpInfo.m */; };
 		03376B3B1D1AE1BB004EE048 /* NewsCells.m in Sources */ = {isa = PBXBuildFile; fileRef = 03376B391D1AE1BB004EE048 /* NewsCells.m */; };
 		03376B3C1D1AE1BB004EE048 /* NewsCells.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03376B3A1D1AE1BB004EE048 /* NewsCells.xib */; };
+		034D89E01D1BB173005806C7 /* GoodsInfoVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 034D89DF1D1BB173005806C7 /* GoodsInfoVc.m */; };
+		034D89E31D1BB21F005806C7 /* GoodsInfoTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 034D89E21D1BB21F005806C7 /* GoodsInfoTopView.m */; };
+		034D89E51D1BB234005806C7 /* GoodsInfoTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 034D89E41D1BB234005806C7 /* GoodsInfoTopView.xib */; };
+		034D89E81D1BB37E005806C7 /* GoodsWinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 034D89E71D1BB37E005806C7 /* GoodsWinnerView.m */; };
+		034D89EA1D1BB387005806C7 /* GoodsWinnerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 034D89E91D1BB387005806C7 /* GoodsWinnerView.xib */; };
+		034D89ED1D1BCD29005806C7 /* GoodsCountsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 034D89EC1D1BCD29005806C7 /* GoodsCountsView.m */; };
+		034D89EF1D1BCD32005806C7 /* GoodsCountsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 034D89EE1D1BCD32005806C7 /* GoodsCountsView.xib */; };
 		038B18EC1D1270D7007C1CC8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 038B18EB1D1270D7007C1CC8 /* main.m */; };
 		038B18EF1D1270D7007C1CC8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 038B18EE1D1270D7007C1CC8 /* AppDelegate.m */; };
 		038B18F21D1270D7007C1CC8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 038B18F11D1270D7007C1CC8 /* ViewController.m */; };
@@ -98,6 +105,17 @@
 		03376B381D1AE1BB004EE048 /* NewsCells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCells.h; sourceTree = "<group>"; };
 		03376B391D1AE1BB004EE048 /* NewsCells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCells.m; sourceTree = "<group>"; };
 		03376B3A1D1AE1BB004EE048 /* NewsCells.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsCells.xib; sourceTree = "<group>"; };
+		034D89DE1D1BB173005806C7 /* GoodsInfoVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsInfoVc.h; sourceTree = "<group>"; };
+		034D89DF1D1BB173005806C7 /* GoodsInfoVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsInfoVc.m; sourceTree = "<group>"; };
+		034D89E11D1BB21F005806C7 /* GoodsInfoTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsInfoTopView.h; sourceTree = "<group>"; };
+		034D89E21D1BB21F005806C7 /* GoodsInfoTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsInfoTopView.m; sourceTree = "<group>"; };
+		034D89E41D1BB234005806C7 /* GoodsInfoTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoodsInfoTopView.xib; sourceTree = "<group>"; };
+		034D89E61D1BB37E005806C7 /* GoodsWinnerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsWinnerView.h; sourceTree = "<group>"; };
+		034D89E71D1BB37E005806C7 /* GoodsWinnerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsWinnerView.m; sourceTree = "<group>"; };
+		034D89E91D1BB387005806C7 /* GoodsWinnerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoodsWinnerView.xib; sourceTree = "<group>"; };
+		034D89EB1D1BCD29005806C7 /* GoodsCountsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsCountsView.h; sourceTree = "<group>"; };
+		034D89EC1D1BCD29005806C7 /* GoodsCountsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsCountsView.m; sourceTree = "<group>"; };
+		034D89EE1D1BCD32005806C7 /* GoodsCountsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoodsCountsView.xib; sourceTree = "<group>"; };
 		038B18E71D1270D7007C1CC8 /* BuyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		038B18EB1D1270D7007C1CC8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		038B18ED1D1270D7007C1CC8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -445,6 +463,8 @@
 				03376B321D1AC71A004EE048 /* HelpVc.m */,
 				03376B341D1ADB77004EE048 /* HelpInfo.h */,
 				03376B351D1ADB77004EE048 /* HelpInfo.m */,
+				034D89DE1D1BB173005806C7 /* GoodsInfoVc.h */,
+				034D89DF1D1BB173005806C7 /* GoodsInfoVc.m */,
 			);
 			path = "首页";
 			sourceTree = "<group>";
@@ -499,6 +519,15 @@
 				031B6D641D19894000BD2585 /* SearchBarView.h */,
 				031B6D651D19894000BD2585 /* SearchBarView.m */,
 				031B6D671D19895800BD2585 /* SearchBarView.xib */,
+				034D89E11D1BB21F005806C7 /* GoodsInfoTopView.h */,
+				034D89E21D1BB21F005806C7 /* GoodsInfoTopView.m */,
+				034D89E41D1BB234005806C7 /* GoodsInfoTopView.xib */,
+				034D89E61D1BB37E005806C7 /* GoodsWinnerView.h */,
+				034D89E71D1BB37E005806C7 /* GoodsWinnerView.m */,
+				034D89E91D1BB387005806C7 /* GoodsWinnerView.xib */,
+				034D89EB1D1BCD29005806C7 /* GoodsCountsView.h */,
+				034D89EC1D1BCD29005806C7 /* GoodsCountsView.m */,
+				034D89EE1D1BCD32005806C7 /* GoodsCountsView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -631,11 +660,14 @@
 				031B6D5E1D19764B00BD2585 /* GoodsClassVc.xib in Resources */,
 				038B193E1D12A44B007C1CC8 /* Block-KVO.podspec in Resources */,
 				03EB70E21D1835A800A94E50 /* Img_TextfieldCell.xib in Resources */,
+				034D89EA1D1BB387005806C7 /* GoodsWinnerView.xib in Resources */,
 				03C5BCF21D18EE6300060FB3 /* RegisterVc.xib in Resources */,
 				03376B301D1ABBA6004EE048 /* SearchListCell.xib in Resources */,
+				034D89EF1D1BCD32005806C7 /* GoodsCountsView.xib in Resources */,
 				038B195A1D12A88F007C1CC8 /* MBProgressHUD.bundle in Resources */,
 				038B18F71D1270D7007C1CC8 /* Assets.xcassets in Resources */,
 				031B6D631D197D3600BD2585 /* Img_ContentCell.xib in Resources */,
+				034D89E51D1BB234005806C7 /* GoodsInfoTopView.xib in Resources */,
 				038B18F51D1270D7007C1CC8 /* Main.storyboard in Resources */,
 				03376B3C1D1AE1BB004EE048 /* NewsCells.xib in Resources */,
 				03376B2B1D1AB51B004EE048 /* SearchBarVc.xib in Resources */,
@@ -704,7 +736,9 @@
 				03EB70E11D1835A800A94E50 /* Img_TextfieldCell.m in Sources */,
 				038B19371D12A44B007C1CC8 /* UIFont+Addtion.m in Sources */,
 				03C5BCFA1D191D1500060FB3 /* MainGoodsListCells.m in Sources */,
+				034D89E81D1BB37E005806C7 /* GoodsWinnerView.m in Sources */,
 				038B19331D12A44B007C1CC8 /* NSDate+Addition.m in Sources */,
+				034D89E31D1BB21F005806C7 /* GoodsInfoTopView.m in Sources */,
 				038B19591D12A88F007C1CC8 /* MBProgressHUD+JY.m in Sources */,
 				038B18EF1D1270D7007C1CC8 /* AppDelegate.m in Sources */,
 				03BB29871D17CBB900EDEDFD /* XLPlainFlowLayout.m in Sources */,
@@ -742,10 +776,12 @@
 				031B6D5D1D19764B00BD2585 /* GoodsClassVc.m in Sources */,
 				03BB29511D17757800EDEDFD /* MainTabBarVc.m in Sources */,
 				038B195F1D12A8D8007C1CC8 /* RootViewController.m in Sources */,
+				034D89E01D1BB173005806C7 /* GoodsInfoVc.m in Sources */,
 				03BB29771D179A7500EDEDFD /* MainClassModel.m in Sources */,
 				038B19381D12A44B007C1CC8 /* UIImage+Scale.m in Sources */,
 				038B19571D12A88F007C1CC8 /* EGOCache.m in Sources */,
 				038B19311D12A44B007C1CC8 /* Cipher.m in Sources */,
+				034D89ED1D1BCD29005806C7 /* GoodsCountsView.m in Sources */,
 				03BB29621D17824C00EDEDFD /* NewsVc.m in Sources */,
 				03BB295F1D17822C00EDEDFD /* UserVc.m in Sources */,
 			);

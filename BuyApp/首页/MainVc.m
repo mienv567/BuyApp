@@ -15,6 +15,7 @@
 #import "SearchListVc.h"
 #import "MainTabBarVc.h"
 #import "HelpVc.h"
+#import "GoodsInfoVc.h"
 
 static NSString *cellID = @"MainGoodsListCellID";
 static NSString *headerID = @"headerID";
@@ -179,6 +180,9 @@ static NSString *footerID = @"footerID";
 
 }
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    KJumpToViewController(@"GoodsInfoVc");
+}
 
 #pragma mark - 创建视图
 #pragma mark - 创建UICollectionView

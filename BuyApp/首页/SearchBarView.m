@@ -20,7 +20,6 @@
     [self.txf_keyWord mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self).insets(UIEdgeInsetsMake(10, 20, 10, 20));
     }];
- 
     [self.btn_showSearch mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self);
     }];
