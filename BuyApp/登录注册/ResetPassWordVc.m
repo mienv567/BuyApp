@@ -28,8 +28,7 @@
 #define maxNum 60
 
 #define CellPlaceHolderArrayStyle @[@"请输入手机号",@"请输入手机短信中的验证码",@"请输入四个字符或以上的新密码",@"请再次输入新密码"]
-#define CellImgArrayStyle @[@"",@"",@"",@""]
-
+#define CellImgArrayStyle @[@"Shouji",@"Code",@"Password",@"Password"]
 
 @implementation ResetPassWordVc
 
@@ -229,19 +228,17 @@
         mobile = [GSValidate validateString:self.txf_mobile.text withRequireType:RequireTypeIsMobile] && [GSValidate validateStringLong:self.txf_mobile.text requireMinLong:11];
         code = [GSValidate validateStringLong:self.txf_code.text requireMinLong:6] && [GSValidate validateStringLong:self.txf_code.text requireMaxLong:6];
         pass = [GSValidate validateStringLong:toBeString requireMinLong:4];
-        repass = [self.txf_rePassword.text isEqualToString:self.txf_password.text];
+        repass = [self.txf_password.text isEqualToString:self.txf_rePassword.text];
 
-        
     }else if (textField == self.txf_rePassword){
         
         mobile = [GSValidate validateString:self.txf_mobile.text withRequireType:RequireTypeIsMobile] && [GSValidate validateStringLong:self.txf_mobile.text requireMinLong:11];
         code = [GSValidate validateStringLong:self.txf_code.text requireMinLong:6] && [GSValidate validateStringLong:self.txf_code.text requireMaxLong:6];
         pass = [GSValidate validateStringLong:toBeString requireMinLong:4];
-        repass = [self.txf_rePassword.text isEqualToString:self.txf_password.text]; 
+        repass = [toBeString isEqualToString:self.txf_password.text];
     }
     
-    
-    if (mobile && code && pass) {
+    if (mobile && code && pass && repass) {
         [self.btn_code setEnabled:YES];
         self.btn_Login.backgroundColor = GS_COLOR_RED;
         [self.btn_Login setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

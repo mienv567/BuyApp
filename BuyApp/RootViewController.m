@@ -24,7 +24,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
-    [self setLeftButton:@"icon_back" action:@selector(navBackVc)];
+//    [self setLeftButton:@"icon_back" action:@selector(navBackVc)];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -43,12 +43,11 @@
         UIButton *leftBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
         leftBarButton.frame = CGRectMake(0.0, 0.0, 30.0, 30.0);
         leftBarButton.titleLabel.font = [UIFont systemFontOfSize:FontSize];
-
         [leftBarButton setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
         [leftBarButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
         leftBarButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem * btn=[[UIBarButtonItem alloc]initWithCustomView:leftBarButton];
-        leftBarButton.backgroundColor=[UIColor whiteColor];
+        leftBarButton.backgroundColor=[UIColor clearColor];
         UIBarButtonItem * spaceBtn=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
         spaceBtn.width = -10;
         self.navigationItem.leftBarButtonItems = @[spaceBtn,btn];
@@ -65,7 +64,7 @@
         [leftBarButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
         leftBarButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem * btn=[[UIBarButtonItem alloc]initWithCustomView:leftBarButton];
-        leftBarButton.backgroundColor=[UIColor whiteColor];
+        leftBarButton.backgroundColor=[UIColor clearColor];
         UIBarButtonItem * spaceBtn=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
         spaceBtn.width = -10;
         self.navigationItem.leftBarButtonItems = @[spaceBtn,btn];
@@ -82,7 +81,7 @@
         [rightBarButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem * btn=[[UIBarButtonItem alloc]initWithCustomView:rightBarButton];
-        rightBarButton.backgroundColor=[UIColor whiteColor];
+        rightBarButton.backgroundColor=[UIColor clearColor];
         UIBarButtonItem * spaceBtn=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
         spaceBtn.width = -10;
         self.navigationItem.rightBarButtonItems = @[spaceBtn,btn];
@@ -99,7 +98,7 @@
         [rightBarButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem * btn=[[UIBarButtonItem alloc]initWithCustomView:rightBarButton];
-        rightBarButton.backgroundColor=[UIColor whiteColor];
+        rightBarButton.backgroundColor=[UIColor clearColor];
         UIBarButtonItem * spaceBtn=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
         spaceBtn.width = -10;
         self.navigationItem.rightBarButtonItems = @[spaceBtn,btn];
@@ -142,7 +141,7 @@
         lab_class.font = [UIFont systemFontOfSize:FontSize];
         lab_class.text = titleStr;
         lab_class.backgroundColor = [UIColor clearColor];
-        lab_class.textColor = [UIColor whiteColor];
+        lab_class.textColor = [UIColor clearColor];
         lab_class.textAlignment = NSTextAlignmentCenter;
         lab_class.centerX = view.centerX;
         lab_class.centerY = view.centerY + 10;
@@ -150,6 +149,22 @@
     }
     
 }
+
+
+//设置页面标题
+- (void)setTitleLabel:(NSString *)titleStr{
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0 , 150, 80)];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.font = [UIFont systemFontOfSize:20];
+    titleLabel.textColor = [UIColor whiteColor];//设置文本颜色
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.numberOfLines=1;
+    titleLabel.lineBreakMode=NSLineBreakByTruncatingTail;
+    titleLabel.text =titleStr;
+    titleLabel.center = self.navigationItem.titleView.center;
+    self.navigationItem.titleView = titleLabel;
+}
+
 
 #pragma mark - Wating Method
 

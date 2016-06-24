@@ -34,21 +34,25 @@
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(1, 45)]
                                       forBarPosition:UIBarPositionAny
                                           barMetrics:UIBarMetricsDefault];
-    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -50)
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
                                                          forBarMetrics:UIBarMetricsDefault];
     
-    
+  
+    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+    UIImageView * im = [[UIImageView alloc]initWithFrame:CGRectMake(0, 5, 18, 18)];
+    im.image = [UIImage imageNamed:@"NavBack"];
+    [view addSubview:im];
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:[AppDelegate viewToImage:view] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+
     
     //初始化tabBarController
     MainTabBarVc *tb = [MainTabBarVc shared];
-        
     [[UITabBar appearance] setBackgroundColor:[UIColor whiteColor]];
-    
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : GS_COLOR_DARKGRAY,
-                                                        NSFontAttributeName : [UIFont gs_boldfont:NSAppFontL]}
+                                                        NSFontAttributeName : [UIFont gs_boldfont:NSAppFontS]}
                                              forState:UIControlStateNormal];
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : GS_COLOR_RED,
-                                                        NSFontAttributeName : [UIFont gs_boldfont:NSAppFontL]}
+                                                        NSFontAttributeName : [UIFont gs_boldfont:NSAppFontS]}
                                              forState:UIControlStateSelected];
     
     self.nav = [[UINavigationController alloc] initWithRootViewController:tb];
@@ -109,5 +113,13 @@
 //    }
 }
 
++ (UIImage *)viewToImage:(UIView *)bankView
+{
+    UIGraphicsBeginImageContext(bankView.bounds.size);
+    [bankView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
+}
 
 @end

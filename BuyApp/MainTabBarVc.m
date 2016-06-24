@@ -37,21 +37,21 @@
 // [self.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
         
         UITabBarItem *item1 = [[UITabBarItem alloc]initWithTitle:@"首页" image:[UIImage imageNamed:@"Bar1"] tag:0];
-        item1.selectedImage = [[UIImage imageNamed:@"Bar1"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        item1.selectedImage = [[UIImage imageNamed:@"BarH1"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
-        UITabBarItem *item2 = [[UITabBarItem alloc]initWithTitle:@"最新揭晓" image:[UIImage imageNamed:@"navW-1-1"] tag:1];
-        item2.selectedImage = [[UIImage imageNamed:@"nav-1-1"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UITabBarItem *item2 = [[UITabBarItem alloc]initWithTitle:@"最新揭晓" image:[UIImage imageNamed:@"Bar2"] tag:1];
+        item2.selectedImage = [[UIImage imageNamed:@"BarH2"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
-        self.item3 = [[UITabBarItem alloc]initWithTitle:@"清单" image:[UIImage imageNamed:@"navW-1-2"] tag:2];
-        self.item3.selectedImage = [[UIImage imageNamed:@"nav-1-2"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        self.item3 = [[UITabBarItem alloc]initWithTitle:@"清单" image:[UIImage imageNamed:@"Bar3"] tag:2];
+        self.item3.selectedImage = [[UIImage imageNamed:@"BarH3"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
 
         
-        UITabBarItem *item4 = [[UITabBarItem alloc]initWithTitle:@"夺宝记录" image:[UIImage imageNamed:@"navW-1-3"] tag:3];
-        item4.selectedImage = [[UIImage imageNamed:@"nav-1-3"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UITabBarItem *item4 = [[UITabBarItem alloc]initWithTitle:@"夺宝记录" image:[UIImage imageNamed:@"Bar4"] tag:3];
+        item4.selectedImage = [[UIImage imageNamed:@"BarH4"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
-        UITabBarItem *item5 = [[UITabBarItem alloc]initWithTitle:@"我" image:[UIImage imageNamed:@"navW-1-4"] tag:4];
-        item5.selectedImage = [[UIImage imageNamed:@"nav-1-4"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UITabBarItem *item5 = [[UITabBarItem alloc]initWithTitle:@"我" image:[UIImage imageNamed:@"Bar5"] tag:4];
+        item5.selectedImage = [[UIImage imageNamed:@"BarH5"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
         MainVc *mainVc = [[MainVc alloc] init];
         NewsVc *newsVc = [[NewsVc alloc] init];

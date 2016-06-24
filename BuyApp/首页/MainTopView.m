@@ -158,13 +158,13 @@
     [self.topBackGroundView addSubview:self.newsBackView];
     
     UIImageView *iv = [[UIImageView alloc] init];
-    iv.backgroundColor = [UIColor orangeColor];
-    iv.image = KDefaultImg;
+    iv.backgroundColor = [UIColor whiteColor];
+    iv.image = [UIImage imageNamed:@"Laba"];
     [self.newsBackView addSubview:iv];
     [iv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.newsBackView).with.offset(10);
-        make.top.equalTo(self.newsBackView).with.offset(5);
-        make.bottom.equalTo(self.newsBackView).with.offset(-5);
+        make.top.equalTo(self.newsBackView).with.offset(10);
+        make.bottom.equalTo(self.newsBackView).with.offset(-10);
         make.width.mas_equalTo(iv.mas_height);
     }];
     

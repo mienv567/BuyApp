@@ -14,8 +14,13 @@
 -(void)awakeFromNib{
     self.backgroundColor = GS_COLOR_WHITE;
     self.beginInput = NO;
-    self.txf_keyWord.leftView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Bar1"]];
+
+    UIImageView *leftImg = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 30, 20)];
+    leftImg.image = [UIImage imageNamed:@"SousuoGray"];
+    leftImg.contentMode = UIViewContentModeRight;
+    self.txf_keyWord.leftView = leftImg;
     self.txf_keyWord.leftViewMode = UITextFieldViewModeAlways;
+
     self.txf_keyWord.delegate = self;
     [self.txf_keyWord mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self).insets(UIEdgeInsetsMake(10, 20, 10, 20));

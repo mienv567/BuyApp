@@ -10,6 +10,7 @@
 #import "MainClassModel.h"
 
 #define TitleArray @[@"分类",@"十元专区",@"揭晓",@"帮助"]
+#define ImageArray @[@"Fenlei",@"Zhuanqu",@"Jiexiao",@"Bangzhu"]
 
 @implementation MainClassView
 
@@ -60,11 +61,10 @@
         }
         lastBtn=button;
         UIImageView *iv = [[UIImageView alloc] init];
-        iv.backgroundColor = [UIColor orangeColor];
-        iv.image = KDefaultImg;
-
+        iv.backgroundColor = [UIColor whiteColor];
+        iv.image = [UIImage imageNamed:[ImageArray objectAtIndex:i]];
         [button addSubview:iv];
-        [iv sd_setImageWithURL:[NSURL URLWithString:model.PicPath] placeholderImage:KDefaultImg];
+//        [iv sd_setImageWithURL:[NSURL URLWithString:model.PicPath] placeholderImage:KDefaultImg];
         [iv mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(button).with.offset(25);
             make.top.equalTo(button).with.offset(10);

@@ -12,6 +12,8 @@
 #import "GoodsInfoTopView.h"
 #import "Title_ContentOrImg_Cell.h"
 #import "GoodsUsersCell.h"
+#import "GoodsBottomView.h"
+#import "ShoppingView.h"
 
 
 @interface GoodsInfoVc () <UITableViewDelegate,UITableViewDataSource>
@@ -19,6 +21,8 @@
 @property (strong, nonatomic)  UITableView *tableView;
 @property (strong, nonatomic)  GoodsInfoTopView *pageView;
 @property (nonatomic, strong) UINib * nib;
+@property (strong, nonatomic)  GoodsBottomView *bottomView;
+@property (strong, nonatomic)  ShoppingView *shoppingView;
 
 @end
 
@@ -31,6 +35,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
+    
+    self.bottomView = KGetViewFromNib(@"GoodsBottomView");
+    [self.view addSubview:self.bottomView];
+    
+    WeakSelf;
+    self.bottomView.myRootVc = weakSelf;
+
+    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.view);
+        make.height.mas_equalTo(@50);
+    }];
     
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
@@ -45,17 +61,50 @@
     self.tableView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.left.right.top.equalTo(self.view);
+        make.bottom.equalTo(self.bottomView.mas_top);
     }];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
     
+    //底部控件
+    self.shoppingView = KGetViewFromNib(@"ShoppingView");
+    [self.view addSubview:self.shoppingView];
+    [self.shoppingView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    
+    self.shoppingView.view_count.value = 1;
+    self.shoppingView.view_count.minimumValue = 0;
+    self.shoppingView.view_count.maximumValue = 50;
+    self.shoppingView.view_count.editableManually = YES;
+    self.shoppingView.view_count.stepValue = 1;
+    
+    
+    [self loadData];
 }
 
 #pragma mark -加载数据
 
--(void)loadMore{
+-(void)loadData{
+    //根据商品是否参加了，切换模式
+    self.bottomView.showType = GoodsBottomViewBuy;
+    
+    //调整加减器
+    self.shoppingView.view_count.stepValue = 1;
+    self.shoppingView.view_count.value = 1;
+    if (self.shoppingView.view_count.stepValue == 10) {
+        self.shoppingView.view_count.editableManually = NO;
+    }else{
+        self.shoppingView.view_count.editableManually = YES;
+
+    }
 
 }
+-(void)loadMore{
+   
+}
+
+#pragma mark - 事件
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -67,6 +116,30 @@
         }
     }
 }
+
+//参加新的一期，立即前往
+- (void)click_showDeatil:(id)sender {
+
+}
+
+//立即购买
+- (void)click_Join:(id)sender {
+    self.shoppingView.showType = ShoppingViewBuy;
+    self.shoppingView.hidden = NO;
+
+}
+
+//加入清单
+- (void)click_addList:(id)sender {
+    self.shoppingView.showType = ShoppingViewAddList;
+    self.shoppingView.hidden = NO;
+}
+
+//显示购物车
+- (void)click_shoppingCart:(id)sender {
+    
+}
+
 
 #pragma mark - Table view data source
 

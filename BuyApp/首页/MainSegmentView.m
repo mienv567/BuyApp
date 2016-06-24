@@ -45,7 +45,7 @@
     self.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
     self.segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
     self.segmentedControl.selectionIndicatorColor = GS_COLOR_RED;
-    self.segmentedControl.textColor = GS_COLOR_GRAY;
+    self.segmentedControl.textColor = GS_COLOR_DARKGRAY;
     self.segmentedControl.selectedTextColor= GS_COLOR_RED;
     self.segmentedControl.font = [UIFont gs_font:NSAppFontL];
     self.segmentedControl.selectionIndicatorHeight = 3;

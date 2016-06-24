@@ -28,8 +28,8 @@
 #define AccountLoginString @"账号登录"
 #define CellPlaceHolderArrayStyleOne @[@"请输入手机号/邮箱/用户名",@"请输入密码"]
 #define CellPlaceHolderArrayStyleTwo @[@"请输入手机号",@"请输入手机短信中的验证码"]
-#define CellImgArrayStyleOne @[@"",@""]
-#define CellImgArrayStyleTwo @[@"",@""]
+#define CellImgArrayStyleOne @[@"UserName",@"Password"]
+#define CellImgArrayStyleTwo @[@"Shouji",@"Code"]
 
 
 @implementation LoginVC
@@ -169,7 +169,6 @@
     if (!self.nib) {
         self.nib = [UINib nibWithNibName:@"Img_TextfieldCell" bundle:nil];
         [tableView registerNib:self.nib forCellReuseIdentifier:identy];
-   
     }
     
     Img_TextfieldCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];

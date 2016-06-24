@@ -58,6 +58,12 @@
     [self.classView.mj_footer endRefreshing];
 }
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    KJumpToViewController(@"GoodsInfoVc");
+    vc.title = @"来自首页的商品";
+}
+
+
 #pragma mark - 创建视图
 #pragma mark - 创建UICollectionView
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView

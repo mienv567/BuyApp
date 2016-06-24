@@ -27,7 +27,7 @@
 #define maxNum 60
 
 #define CellPlaceHolderArrayStyle @[@"请输入手机号",@"请输入手机短信中的验证码",@"请输入您的登录密码"]
-#define CellImgArrayStyle @[@"",@"",@""]
+#define CellImgArrayStyle @[@"Shouji",@"Code",@"Password"]
 
 
 @implementation RegisterVc

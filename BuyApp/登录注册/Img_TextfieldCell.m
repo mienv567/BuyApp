@@ -15,9 +15,9 @@
     // Initialization code
     
     [self.img_icon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView.mas_top).offset(5);
+        make.top.equalTo(self.contentView.mas_top).offset(15);
         make.left.equalTo(self.contentView.mas_left).offset(10);
-        make.bottom.equalTo(self.contentView.mas_bottom).offset(-5);
+        make.bottom.equalTo(self.contentView.mas_bottom).offset(-15);
         make.width.mas_equalTo(self.img_icon.mas_height);
     }];
     

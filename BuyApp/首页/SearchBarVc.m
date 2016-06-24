@@ -27,13 +27,15 @@
     self.btn_search.layer.cornerRadius = 4.0;
     self.btn_search.layer.masksToBounds = YES;
     
-    
     [self.view_bg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view);
         make.height.mas_equalTo(@60);
     }];
     
-    self.txf_search.leftView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Bar1"]];
+    UIImageView *leftImg = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 30, 20)];
+    leftImg.image = [UIImage imageNamed:@"SousuoGray"];
+    leftImg.contentMode = UIViewContentModeRight;
+    self.txf_search.leftView = leftImg;
     self.txf_search.leftViewMode = UITextFieldViewModeAlways;
     self.txf_search.delegate = self;
     [self.txf_search mas_makeConstraints:^(MASConstraintMaker *make) {

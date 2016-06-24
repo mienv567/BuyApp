@@ -38,7 +38,7 @@
 #pragma mark - Table view data source
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 130;
+    return 140;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

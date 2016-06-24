@@ -58,6 +58,8 @@
 #pragma mark -- pop到上级页面
 #define KPopToLastViewController [self.navigationController popViewControllerAnimated:YES];
 
+#define WeakSelf __weak typeof(self)weakSelf = self
+
 
 //十六进制颜色转换（0xFFFFFF）
 #define HEXRGBCOLOR(hex)  [UIColor colorWithRed:((float)((hex & 0xFF0000) >> 16))/255.0 green:((float)((hex & 0xFF00) >> 8))/255.0 blue:((float)(hex & 0xFF))/255.0 alpha:1.0]
@@ -74,7 +76,8 @@
 #define GS_COLOR_YELLOW       HEXRGBCOLOR(0xFFC000)
 #define GS_COLOR_LIGHTYELLOW  HEXRGBCOLOR(0xFAE6B4)
 #define GS_COLOR_ORANGE       HEXRGBCOLOR(0xFF8000)
-#define GS_COLOR_RED          HEXRGBCOLOR(0xFF4444)    //主色
+#define GS_COLOR_RED          HEXRGBCOLOR(0xD93A55)    //主色
+#define GS_COLOR_RED2          HEXRGBCOLOR(0xFF4444)    //主色
 #define GS_COLOR_DARKRED      HEXRGBCOLOR(0xE60012)    //logo色
 #define GS_COLOR_BROWN        HEXRGBCOLOR(0xC00000)
 #define GS_COLOR_GRAYT        HEXRGBCOLOR(0xCCCCCC)

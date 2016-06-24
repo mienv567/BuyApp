@@ -34,10 +34,10 @@ static NSString *footerID = @"footerID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.title = @"首页";
+    [self setTitleLabel:@"趣云购-首页"];
     self.pageNo = 0;
     [self changeNavigationBarStyleToRed:YES];
-    [self setLeftButton:@"搜索图片" action:@selector(click_search)];
+    [self setLeftButton:@"Sousuo" action:@selector(click_search)];
 
     XLPlainFlowLayout *layout = [XLPlainFlowLayout new];
     layout.itemSize = CGSizeMake(K_WIDTH / 2 - 0.5 , 180);
@@ -84,17 +84,20 @@ static NSString *footerID = @"footerID";
     switch (index) {
         case 0:
         {
-            
+            KJumpToViewController(@"GoodsInfoVc");
+            vc.title = @"来自最新揭晓1的商品";
         }
             break;
         case 1:
         {
-            
+            KJumpToViewController(@"GoodsInfoVc");
+            vc.title = @"来自最新揭晓2的商品";
         }
             break;
         case 2:
         {
-            
+            KJumpToViewController(@"GoodsInfoVc");
+            vc.title = @"来自最新揭晓3的商品";
         }
             break;
             
@@ -105,7 +108,8 @@ static NSString *footerID = @"footerID";
 
 //显示获奖详情
 -(void)click_showNewsInfo{
-    
+    KJumpToViewController(@"GoodsInfoVc");
+    vc.title = @"来自首页获奖信息的商品";
 }
 
 //循环广告
@@ -182,6 +186,7 @@ static NSString *footerID = @"footerID";
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     KJumpToViewController(@"GoodsInfoVc");
+    vc.title = @"来自首页的商品";
 }
 
 #pragma mark - 创建视图
@@ -210,13 +215,15 @@ static NSString *footerID = @"footerID";
     
     if (kind == UICollectionElementKindSectionFooter && indexPath.section == 0) {
         self.TopView = [collectionView  dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:headerID forIndexPath:indexPath];
-        self.TopView.myRootVc = self;
+        WeakSelf;
+        self.TopView.myRootVc = weakSelf;
         return self.TopView;
     }
     
     if (kind == UICollectionElementKindSectionHeader && indexPath.section == 1) {
         self.segmentView = [collectionView  dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:footerID forIndexPath:indexPath];
-        self.segmentView.myRootVc = self;
+        WeakSelf;
+        self.segmentView.myRootVc = weakSelf;
         return self.segmentView;
     }
     return nil;
@@ -275,25 +282,10 @@ static NSString *footerID = @"footerID";
 
 -(void)changeNavigationBarStyleToRed:(BOOL)red{
     if (red) {
-        [[UINavigationBar appearance] setTitleTextAttributes: @{NSForegroundColorAttributeName : [UIColor whiteColor],
-                                                                NSFontAttributeName : [UIFont gs_font:NSAppFontXL]}];
-        //        [[UINavigationBar appearance] setBarTintColor:GS_COLOR_BLUE];
-        [[UINavigationBar appearance] setTintColor:GS_COLOR_BLUE];
-        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithColor:[UIColor redColor] size:CGSizeMake(1, 45)]
-                                          forBarPosition:UIBarPositionAny
-                                              barMetrics:UIBarMetricsDefault];
-        [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -50)
-                                                             forBarMetrics:UIBarMetricsDefault];
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:GS_COLOR_RED size:CGSizeMake(K_WIDTH, 64)] forBarMetrics:UIBarMetricsDefault];
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     }else{
-        [[UINavigationBar appearance] setTitleTextAttributes: @{NSForegroundColorAttributeName : GS_COLOR_RED,
-                                                                NSFontAttributeName : [UIFont gs_font:NSAppFontXL]}];
-        //        [[UINavigationBar appearance] setBarTintColor:GS_COLOR_BLUE];
-        [[UINavigationBar appearance] setTintColor:GS_COLOR_BLUE];
-        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(1, 45)]
-                                          forBarPosition:UIBarPositionAny
-                                              barMetrics:UIBarMetricsDefault];
-        [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -50)
-                                                             forBarMetrics:UIBarMetricsDefault];
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(K_WIDTH, 64)] forBarMetrics:UIBarMetricsDefault];
     }
 }
 

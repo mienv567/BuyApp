@@ -12,6 +12,7 @@
 + (void)showAlerMessage:(NSString *)message;
 //加载等待视图
 - (void)needLogin;
+- (void)setTitleLabel:(NSString *)titleStr;
 -(void)setRightButtonTitle:(NSString *)titleName action:(SEL)action;//设置导航栏右侧按钮
 -(void)setLeftButtonTtile:(NSString *)titleName action:(SEL)action; //设置导航栏左侧按钮
 -(void)setLeftButton:(NSString *)imgName action:(SEL)action;  //设置导航栏左侧按钮
