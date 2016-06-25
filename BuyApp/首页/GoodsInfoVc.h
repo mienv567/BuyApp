@@ -20,8 +20,8 @@
 - (void)click_addList:(id)sender;
 //显示购物车
 - (void)click_shoppingCart:(id)sender;
-
-
-
-
+//显示计算详情
+- (void)click_countDetail:(id)sender;
+//显示我的号码
+- (void)click_showNumbers:(id)sender;
 @end

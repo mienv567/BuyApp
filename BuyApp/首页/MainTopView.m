@@ -40,7 +40,7 @@
 
 //显示获奖详情
 -(void)click_showNewsInfo{
-    [self.myRootVc click_showNewsInfo];
+    [self.myRootVc click_showNewsInfo:[self.ary_news objectAtIndex:0]];
 }
 
 //循环广告
@@ -173,6 +173,19 @@
     self.newsLabel.textColor = GS_COLOR_DARKGRAY;
     self.newsLabel.font = [UIFont gs_boldfont:NSAppFontL];
     self.newsLabel.text = @"测试: 暂时没有数据";
+    
+    NSString * user = @"用户A";
+    NSString * info = @"在1小时前获得MacBook一台";
+    
+    NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"恭喜%@%@",user,info]];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 2)];
+    [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 2)];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(2, user.length)];
+    [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_BLUE range:NSMakeRange(2, user.length)];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:14] range:NSMakeRange(noticeStr.length - info.length, info.length)];
+    [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(noticeStr.length - info.length,info.length)];
+    self.newsLabel.attributedText = noticeStr;
+    
     [self.newsBackView addSubview:self.newsLabel];
     [self.newsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(iv);

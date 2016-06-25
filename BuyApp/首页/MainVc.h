@@ -15,7 +15,7 @@
 - (void)tapAction:(NSInteger)index;
 
 //显示获奖详情
--(void)click_showNewsInfo;
+-(void)click_showNewsInfo:(id)data;
 
 //循环广告
 -(void)pageView:(ASPageView *)pageView didSelected:(NSInteger)index;

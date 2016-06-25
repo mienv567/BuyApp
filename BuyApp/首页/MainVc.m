@@ -38,7 +38,9 @@ static NSString *footerID = @"footerID";
     self.pageNo = 0;
     [self changeNavigationBarStyleToRed:YES];
     [self setLeftButton:@"Sousuo" action:@selector(click_search)];
-
+    [self setRightButton:@" " action:nil];
+    
+    
     XLPlainFlowLayout *layout = [XLPlainFlowLayout new];
     layout.itemSize = CGSizeMake(K_WIDTH / 2 - 0.5 , 180);
     layout.sectionInset = UIEdgeInsetsMake(1, 0, 1, 0);
@@ -107,7 +109,7 @@ static NSString *footerID = @"footerID";
 }
 
 //显示获奖详情
--(void)click_showNewsInfo{
+-(void)click_showNewsInfo:(id)data{
     KJumpToViewController(@"GoodsInfoVc");
     vc.title = @"来自首页获奖信息的商品";
 }

@@ -30,6 +30,8 @@
 - (id)init{
     if(self = [super init]){
         self.delegate = self;
+        self.view.backgroundColor = [UIColor whiteColor];
+
         self.tabBar.translucent = NO;
 //        self.tabBar.backgroundImage = [UIImage imageNamed:@"nav-bg"];
         [self.tabBar setShadowImage:[UIImage new]];
@@ -85,9 +87,11 @@
     self.selectedIndex = idnex;
 }
 -(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    if(appDelegate) {
-        [appDelegate showNeedLoginAlertView];
+    if (tabBarController.selectedIndex == 4) {
+        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        if(appDelegate) {
+            [appDelegate showNeedLoginAlertView];
+        }
     }
 }
 

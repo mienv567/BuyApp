@@ -120,13 +120,13 @@
         case ShoppingViewBuy:
         {
             self.btn_buy.backgroundColor = GS_COLOR_RED;
-
+            [self.btn_buy setTitle:@"一元夺宝" forState:UIControlStateNormal];
         }
             break;
         case ShoppingViewAddList:
         {
             self.btn_buy.backgroundColor = GS_COLOR_BLUE;
-
+            [self.btn_buy setTitle:@"加入清单" forState:UIControlStateNormal];
         }
             break;
         default:

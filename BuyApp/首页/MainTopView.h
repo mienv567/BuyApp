@@ -27,4 +27,6 @@
 
 @property (nonatomic, strong)UILabel *newsLabel;                    //  最新消息
 
+@property (nonatomic, strong)NSArray *ary_news;                    //  最新消息数据
+
 @end

@@ -13,6 +13,13 @@
 		031B6D631D197D3600BD2585 /* Img_ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 031B6D611D197D3600BD2585 /* Img_ContentCell.xib */; };
 		031B6D661D19894000BD2585 /* SearchBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 031B6D651D19894000BD2585 /* SearchBarView.m */; };
 		031B6D681D19895800BD2585 /* SearchBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 031B6D671D19895800BD2585 /* SearchBarView.xib */; };
+		032940DA1D1E507C000D54D9 /* CountInfoVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 032940D91D1E507C000D54D9 /* CountInfoVc.m */; };
+		032940DD1D1E5389000D54D9 /* CountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 032940DC1D1E5389000D54D9 /* CountView.m */; };
+		032940DF1D1E5393000D54D9 /* CountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 032940DE1D1E5393000D54D9 /* CountView.xib */; };
+		032940E21D1E6ECF000D54D9 /* CountWebVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 032940E11D1E6ECF000D54D9 /* CountWebVc.m */; };
+		032940E51D1E9DD8000D54D9 /* MyNumbers.m in Sources */ = {isa = PBXBuildFile; fileRef = 032940E41D1E9DD8000D54D9 /* MyNumbers.m */; };
+		032940E81D1EA9B8000D54D9 /* AllCountsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 032940E71D1EA9B8000D54D9 /* AllCountsView.m */; };
+		032940EA1D1EAA52000D54D9 /* AllCountsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 032940E91D1EAA52000D54D9 /* AllCountsView.xib */; };
 		03376B2A1D1AB51B004EE048 /* SearchBarVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 03376B281D1AB51B004EE048 /* SearchBarVc.m */; };
 		03376B2B1D1AB51B004EE048 /* SearchBarVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03376B291D1AB51B004EE048 /* SearchBarVc.xib */; };
 		03376B2F1D1ABBA6004EE048 /* SearchListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03376B2D1D1ABBA6004EE048 /* SearchListCell.m */; };
@@ -103,6 +110,18 @@
 		031B6D641D19894000BD2585 /* SearchBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchBarView.h; sourceTree = "<group>"; };
 		031B6D651D19894000BD2585 /* SearchBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchBarView.m; sourceTree = "<group>"; };
 		031B6D671D19895800BD2585 /* SearchBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchBarView.xib; sourceTree = "<group>"; };
+		032940D81D1E507C000D54D9 /* CountInfoVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountInfoVc.h; sourceTree = "<group>"; };
+		032940D91D1E507C000D54D9 /* CountInfoVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountInfoVc.m; sourceTree = "<group>"; };
+		032940DB1D1E5389000D54D9 /* CountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountView.h; sourceTree = "<group>"; };
+		032940DC1D1E5389000D54D9 /* CountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountView.m; sourceTree = "<group>"; };
+		032940DE1D1E5393000D54D9 /* CountView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountView.xib; sourceTree = "<group>"; };
+		032940E01D1E6ECF000D54D9 /* CountWebVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountWebVc.h; sourceTree = "<group>"; };
+		032940E11D1E6ECF000D54D9 /* CountWebVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountWebVc.m; sourceTree = "<group>"; };
+		032940E31D1E9DD8000D54D9 /* MyNumbers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNumbers.h; sourceTree = "<group>"; };
+		032940E41D1E9DD8000D54D9 /* MyNumbers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNumbers.m; sourceTree = "<group>"; };
+		032940E61D1EA9B8000D54D9 /* AllCountsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllCountsView.h; sourceTree = "<group>"; };
+		032940E71D1EA9B8000D54D9 /* AllCountsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllCountsView.m; sourceTree = "<group>"; };
+		032940E91D1EAA52000D54D9 /* AllCountsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllCountsView.xib; sourceTree = "<group>"; };
 		03376B271D1AB51B004EE048 /* SearchBarVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchBarVc.h; sourceTree = "<group>"; };
 		03376B281D1AB51B004EE048 /* SearchBarVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchBarVc.m; sourceTree = "<group>"; };
 		03376B291D1AB51B004EE048 /* SearchBarVc.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchBarVc.xib; sourceTree = "<group>"; };
@@ -496,6 +515,10 @@
 				034D89DF1D1BB173005806C7 /* GoodsInfoVc.m */,
 				03D50DA61D1C34970017AAC3 /* HistoryWinnersVc.h */,
 				03D50DA71D1C34970017AAC3 /* HistoryWinnersVc.m */,
+				032940D81D1E507C000D54D9 /* CountInfoVc.h */,
+				032940D91D1E507C000D54D9 /* CountInfoVc.m */,
+				032940E01D1E6ECF000D54D9 /* CountWebVc.h */,
+				032940E11D1E6ECF000D54D9 /* CountWebVc.m */,
 			);
 			path = "首页";
 			sourceTree = "<group>";
@@ -559,6 +582,8 @@
 				034D89EB1D1BCD29005806C7 /* GoodsCountsView.h */,
 				034D89EC1D1BCD29005806C7 /* GoodsCountsView.m */,
 				034D89EE1D1BCD32005806C7 /* GoodsCountsView.xib */,
+				032940E31D1E9DD8000D54D9 /* MyNumbers.h */,
+				032940E41D1E9DD8000D54D9 /* MyNumbers.m */,
 				03D312DA1D1D023F00B2BB26 /* GoodsBottomView.h */,
 				03D312DB1D1D023F00B2BB26 /* GoodsBottomView.m */,
 				03D312DD1D1D024900B2BB26 /* GoodsBottomView.xib */,
@@ -567,6 +592,12 @@
 				03D312E21D1D139C00B2BB26 /* ShoppingView.xib */,
 				03D312E41D1D1E4900B2BB26 /* PAStepper.h */,
 				03D312E51D1D1E4900B2BB26 /* PAStepper.m */,
+				032940DB1D1E5389000D54D9 /* CountView.h */,
+				032940DC1D1E5389000D54D9 /* CountView.m */,
+				032940DE1D1E5393000D54D9 /* CountView.xib */,
+				032940E61D1EA9B8000D54D9 /* AllCountsView.h */,
+				032940E71D1EA9B8000D54D9 /* AllCountsView.m */,
+				032940E91D1EAA52000D54D9 /* AllCountsView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -711,11 +742,13 @@
 				038B193E1D12A44B007C1CC8 /* Block-KVO.podspec in Resources */,
 				03EB70E21D1835A800A94E50 /* Img_TextfieldCell.xib in Resources */,
 				034D89EA1D1BB387005806C7 /* GoodsWinnerView.xib in Resources */,
+				032940EA1D1EAA52000D54D9 /* AllCountsView.xib in Resources */,
 				03C5BCF21D18EE6300060FB3 /* RegisterVc.xib in Resources */,
 				03376B301D1ABBA6004EE048 /* SearchListCell.xib in Resources */,
 				034D89EF1D1BCD32005806C7 /* GoodsCountsView.xib in Resources */,
 				038B195A1D12A88F007C1CC8 /* MBProgressHUD.bundle in Resources */,
 				038B18F71D1270D7007C1CC8 /* Assets.xcassets in Resources */,
+				032940DF1D1E5393000D54D9 /* CountView.xib in Resources */,
 				031B6D631D197D3600BD2585 /* Img_ContentCell.xib in Resources */,
 				034D89E51D1BB234005806C7 /* GoodsInfoTopView.xib in Resources */,
 				038B18F51D1270D7007C1CC8 /* Main.storyboard in Resources */,
@@ -788,6 +821,7 @@
 				038B18F21D1270D7007C1CC8 /* ViewController.m in Sources */,
 				03EB70E11D1835A800A94E50 /* Img_TextfieldCell.m in Sources */,
 				038B19371D12A44B007C1CC8 /* UIFont+Addtion.m in Sources */,
+				032940E21D1E6ECF000D54D9 /* CountWebVc.m in Sources */,
 				03C5BCFA1D191D1500060FB3 /* MainGoodsListCells.m in Sources */,
 				034D89E81D1BB37E005806C7 /* GoodsWinnerView.m in Sources */,
 				038B19331D12A44B007C1CC8 /* NSDate+Addition.m in Sources */,
@@ -801,14 +835,17 @@
 				038B193C1D12A44B007C1CC8 /* UITableViewCell+GSMasonryAutoCellHeight.m in Sources */,
 				038B193A1D12A44B007C1CC8 /* UITableView+GSCacheHeight.m in Sources */,
 				03376B2F1D1ABBA6004EE048 /* SearchListCell.m in Sources */,
+				032940DD1D1E5389000D54D9 /* CountView.m in Sources */,
 				03BB29541D17765F00EDEDFD /* UITabBarItem+Universal.m in Sources */,
 				031B6D661D19894000BD2585 /* SearchBarView.m in Sources */,
+				032940E81D1EA9B8000D54D9 /* AllCountsView.m in Sources */,
 				03BB295C1D17821700EDEDFD /* MainVc.m in Sources */,
 				031B6D621D197D3600BD2585 /* Img_ContentCell.m in Sources */,
 				03D312E11D1D138800B2BB26 /* ShoppingView.m in Sources */,
 				03BB29831D17C91E00EDEDFD /* MainSegmentView.m in Sources */,
 				03EB70DC1D1834AA00A94E50 /* LoginVC.m in Sources */,
 				038B19411D12A44B007C1CC8 /* NSObject+MTKObserving.m in Sources */,
+				032940DA1D1E507C000D54D9 /* CountInfoVc.m in Sources */,
 				038B19391D12A44B007C1CC8 /* UIView+Layout.m in Sources */,
 				03BB29801D17C8D200EDEDFD /* MainTopView.m in Sources */,
 				03376B2A1D1AB51B004EE048 /* SearchBarVc.m in Sources */,
@@ -832,6 +869,7 @@
 				03C5BCF61D19080E00060FB3 /* ResetPassWordVc.m in Sources */,
 				031B6D5D1D19764B00BD2585 /* GoodsClassVc.m in Sources */,
 				03BB29511D17757800EDEDFD /* MainTabBarVc.m in Sources */,
+				032940E51D1E9DD8000D54D9 /* MyNumbers.m in Sources */,
 				038B195F1D12A8D8007C1CC8 /* RootViewController.m in Sources */,
 				034D89E01D1BB173005806C7 /* GoodsInfoVc.m in Sources */,
 				03BB29771D179A7500EDEDFD /* MainClassModel.m in Sources */,

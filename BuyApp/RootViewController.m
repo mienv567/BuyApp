@@ -8,6 +8,7 @@
 
 #import "RootViewController.h"
 #import "AppDelegate.h"
+#import "MainTabBarVc.h"
 
 #define FontSize   15
 @implementation RootViewController
@@ -25,6 +26,8 @@
     [super viewDidLoad];
     
 //    [self setLeftButton:@"icon_back" action:@selector(navBackVc)];
+    
+    [self setRightButton:@"BarH1" action:@selector(click_rightNav)];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -75,7 +78,7 @@
 -(void)setRightButton:(NSString *)imgName action:(SEL)action{
     if (imgName.length > 0) {
         UIButton *rightBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        rightBarButton.frame = CGRectMake(0.0, 0.0, 30.0, 30.0);
+        rightBarButton.frame = CGRectMake(5.0, 0.0, 20.0, 20.0);
         rightBarButton.titleLabel.font = [UIFont systemFontOfSize:FontSize];
         [rightBarButton setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
         [rightBarButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
@@ -168,6 +171,11 @@
 
 #pragma mark - Wating Method
 
+-(void)click_rightNav{
+    [self.navigationController popToRootViewControllerAnimated:NO];
+    MainTabBarVc *tb = [MainTabBarVc shared];
+    [tb changeTabBarAtIndex:0];
+}
 
 + (void)showAlerMessage:(NSString *)message{
     [MBProgressHUD showMessage:message];
@@ -184,8 +192,6 @@
         [appDelegate showNeedLoginAlertView];
     }
 }
-
-
 
 -(void)MyNavLeftClick{
     

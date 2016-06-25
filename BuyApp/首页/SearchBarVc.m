@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    self.title = @"搜索";
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.view_bg.backgroundColor = GS_COLOR_WHITE;

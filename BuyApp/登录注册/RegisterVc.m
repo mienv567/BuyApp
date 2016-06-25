@@ -38,6 +38,7 @@
     self.title = @"趣云购-注册";
     self.view.backgroundColor = GS_COLOR_WHITE;
     [self setLeftButtonTtile:@"取消" action:@selector(click_cancleLogin)];
+    [self setRightButton:@" " action:nil];
     
     self.tabView.backgroundColor = GS_COLOR_WHITE;
     [self.tabView mas_makeConstraints:^(MASConstraintMaker *make) {

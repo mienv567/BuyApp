@@ -7,6 +7,7 @@
 //
 
 #import "GoodsCountsView.h"
+#import "AppDelegate.h"
 
 @implementation GoodsCountsView
 
@@ -21,7 +22,7 @@
         make.centerY.equalTo(self.view_notice);
         make.right.mas_equalTo(self.view_notice).offset(-10);
         make.height.equalTo(@30);
-        make.width.equalTo(@46);
+        make.width.equalTo(@60);
     }];
     
     [self.lab_showCounts mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -77,11 +78,31 @@
             self.btn_login.hidden = YES;
             self.lab_login.hidden = YES;
             self.lab_login.text = @"您没有参与本期夺宝哦!";
+            self.lab_showCounts.text = @"您参与了：2次\n夺宝号码：1000009 1000000";
         }
             break;
         default:
             break;
     }
 }
+
+//
+- (IBAction)click_showNumbers:(id)sender {
+    [self.myRootVc click_showNumbers:sender];
+}
+
+//
+- (IBAction)click_login:(id)sender {
+    
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if(appDelegate) {
+        [appDelegate showNeedLoginAlertView];
+    }
+}
+
+-(void)setMyRootVc:(GoodsInfoVc *)myRootVc{
+    _myRootVc = myRootVc;
+}
+
 
 @end

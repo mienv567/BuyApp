@@ -8,6 +8,7 @@
 
 #import "ResetPassWordVc.h"
 #import "Img_TextfieldCell.h"
+#import "MainTabBarVc.h"
 
 @interface ResetPassWordVc () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tabView;
@@ -65,6 +66,16 @@
     self.btn_Login.backgroundColor = GS_COLOR_LIGHTGRAY;
     [self.btn_Login setTitleColor:GS_COLOR_GRAY forState:UIControlStateNormal];
 }
+
+#pragma mark - 导航返回主页
+
+-(void)click_rightNav{
+    [self.navigationController dismissViewControllerAnimated:NO completion:^{
+        MainTabBarVc *tb = [MainTabBarVc shared];
+        [tb changeTabBarAtIndex:0];
+    }];
+}
+
 
 #pragma mark - 取消登录
 -(void)click_cancleLogin{

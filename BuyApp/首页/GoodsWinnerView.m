@@ -44,6 +44,19 @@
     }];
     
 }
+
+
+- (IBAction)click_countDetail:(id)sender {
+    [self.myRootVc click_countDetail:sender];
+}
+
+
+-(void)setMyRootVc:(GoodsInfoVc *)myRootVc{
+    _myRootVc = myRootVc;
+}
+
+
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GoodsInfoVc.h"
 
 typedef NS_ENUM(NSUInteger, GoodsCountsViewType) {
     GoodsCountsViewNeedLogin,
@@ -22,5 +23,5 @@ typedef NS_ENUM(NSUInteger, GoodsCountsViewType) {
 @property (weak, nonatomic) IBOutlet UILabel *lab_showCounts;
 
 @property (nonatomic) GoodsCountsViewType showType;
-
+@property (nonatomic, strong)GoodsInfoVc * myRootVc;                     // 父视图
 @end

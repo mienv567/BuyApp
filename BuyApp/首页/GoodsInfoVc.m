@@ -14,7 +14,8 @@
 #import "GoodsUsersCell.h"
 #import "GoodsBottomView.h"
 #import "ShoppingView.h"
-
+#import "CountInfoVc.h"
+#import "AllCountsView.h"
 
 @interface GoodsInfoVc () <UITableViewDelegate,UITableViewDataSource>
 
@@ -23,6 +24,7 @@
 @property (nonatomic, strong) UINib * nib;
 @property (strong, nonatomic)  GoodsBottomView *bottomView;
 @property (strong, nonatomic)  ShoppingView *shoppingView;
+@property (strong, nonatomic)  AllCountsView *allCountsView;
 
 @end
 
@@ -35,14 +37,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-
     
     self.bottomView = KGetViewFromNib(@"GoodsBottomView");
     [self.view addSubview:self.bottomView];
-    
     WeakSelf;
     self.bottomView.myRootVc = weakSelf;
-
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);
         make.height.mas_equalTo(@50);
@@ -80,7 +79,12 @@
     self.shoppingView.view_count.stepValue = 1;
     
     
+    
+
+
     [self loadData];
+
+    
 }
 
 #pragma mark -加载数据
@@ -140,6 +144,31 @@
     
 }
 
+//显示计算详情
+- (void)click_countDetail:(id)sender{
+    KJumpToViewController(@"CountInfoVc");
+}
+
+//显示我的号码
+- (void)click_showNumbers:(id)sender{
+    if (!self.allCountsView) {
+        AllCountsView * view = KGetViewFromNib(@"AllCountsView");
+        [self.view addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view);
+        }];
+    }
+    self.allCountsView.hidden = NO;
+    
+    NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:@"  计算公式\n  [(数值A+数值B)÷商品所需人次]取余数+100000001"];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:16] range:NSMakeRange(0, 6)];
+    [noticeStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, 6)];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:13] range:NSMakeRange(6, noticeStr.length - 6)];
+    [noticeStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(6,noticeStr.length - 6)];
+    self.allCountsView.lab_notice.attributedText = noticeStr;
+    
+    
+}
 
 #pragma mark - Table view data source
 
@@ -230,6 +259,8 @@
         case 0:
         {
             GoodsWinnerView * view = KGetViewFromNib(@"GoodsWinnerView");
+            WeakSelf;
+            view.myRootVc = weakSelf;
             return view;
         }
             break;
@@ -259,8 +290,10 @@
     switch (section) {
         case 0:
         {
+            WeakSelf;
             GoodsCountsView * view = KGetViewFromNib(@"GoodsCountsView");
-            view.showType = GoodsInfoTopViewProcess;
+            view.showType = GoodsCountsViewHaveSomeCounts;
+            view.myRootVc = weakSelf;
             return view;
         }
             break;

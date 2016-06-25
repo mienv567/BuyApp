@@ -22,7 +22,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.title = @"最新揭晓";
-    
+    [self setRightButton:@" " action:nil];
+
     XLPlainFlowLayout *layout = [XLPlainFlowLayout new];
     layout.itemSize = CGSizeMake(K_WIDTH / 2 - 0.5 , 235);
     layout.sectionInset = UIEdgeInsetsMake(1, 0, 1, 0);

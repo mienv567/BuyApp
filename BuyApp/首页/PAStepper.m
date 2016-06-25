@@ -91,7 +91,7 @@
 	
 	// label
 	label = [[UILabel alloc] initWithFrame:CGRectMake(2.0, 2.0, 62.0, 25.0)];
-	[label setTextAlignment:UITextAlignmentCenter];
+	[label setTextAlignment:NSTextAlignmentCenter];
 	[label setFont:[UIFont boldSystemFontOfSize:17.0]];
 	[label setTextColor:_textColor];
 	[self updateViews];
