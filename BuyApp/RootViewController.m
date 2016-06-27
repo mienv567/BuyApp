@@ -86,7 +86,7 @@
         UIBarButtonItem * btn=[[UIBarButtonItem alloc]initWithCustomView:rightBarButton];
         rightBarButton.backgroundColor=[UIColor clearColor];
         UIBarButtonItem * spaceBtn=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-        spaceBtn.width = -10;
+        spaceBtn.width = -5;
         self.navigationItem.rightBarButtonItems = @[spaceBtn,btn];
     }
 }

@@ -52,10 +52,10 @@
                         <action selector="click_addList:" destination="8Lh-93-WBe" eventType="touchUpInside" id="Nmm-zS-Hss"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ynT-Qe-L6O">
-                    <rect key="frame" x="261" y="15" width="46" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ynT-Qe-L6O">
+                    <rect key="frame" x="276" y="19" width="17" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="购物"/>
+                    <state key="normal" image="GoodsCar"/>
                     <connections>
                         <action selector="click_shoppingCart:" destination="8Lh-93-WBe" eventType="touchUpInside" id="RtU-nV-VbT"/>
                     </connections>
@@ -73,4 +73,7 @@
             <point key="canvasLocation" x="287" y="226"/>
         </view>
     </objects>
+    <resources>
+        <image name="GoodsCar" width="17" height="17"/>
+    </resources>
 </document>

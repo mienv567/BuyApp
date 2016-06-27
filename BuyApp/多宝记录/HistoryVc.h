@@ -10,4 +10,6 @@
 
 @interface HistoryVc : RootViewController
 
+-(void)setSegmentIndex:(NSInteger)index;//根据不同的index，跳转到不同的列表
+
 @end

@@ -83,7 +83,19 @@
             self.btn_join.hidden = NO;
         }
             break;
-
+        case GoodsBottomViewPay:
+        {
+            self.lab_notice.hidden = NO;
+            self.btn_showDetail.hidden = NO;
+            self.btn_shoppingCart.hidden = YES;
+            self.btn_addList.hidden = YES;
+            self.btn_join.hidden = YES;
+            self.btn_showDetail.titleLabel.text = @"结算";
+            [self.btn_showDetail setTitle:@"结算" forState:UIControlStateNormal];
+//            self.lab_notice.text = @"共1件商品，总计1元";
+            
+        }
+            break;
         default:
             break;
     }

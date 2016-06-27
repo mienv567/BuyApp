@@ -14,5 +14,6 @@
 + (instancetype)shared;
 -(void)changeTabBarAtIndex:(NSInteger)idnex;
 -(void)changeNum;
+-(void)changeHistoryList:(NSInteger)index;
 @end
 

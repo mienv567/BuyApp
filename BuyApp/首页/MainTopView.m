@@ -67,7 +67,7 @@
     
     //创建广告
     self.pageView = [[ASPageView alloc]init];
-    self.pageView.backgroundColor = [UIColor redColor];
+    self.pageView.backgroundColor = GS_COLOR_WHITE;
     self.pageView.userInteractionEnabled = YES;
     self.pageView.delegate = self;
     [self.topBackGroundView addSubview:self.pageView];

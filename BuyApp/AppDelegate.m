@@ -51,7 +51,7 @@
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : GS_COLOR_DARKGRAY,
                                                         NSFontAttributeName : [UIFont gs_boldfont:NSAppFontS]}
                                              forState:UIControlStateNormal];
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : GS_COLOR_RED,
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName :  HEXRGBCOLOR(0xff7423),
                                                         NSFontAttributeName : [UIFont gs_boldfont:NSAppFontS]}
                                              forState:UIControlStateSelected];
     

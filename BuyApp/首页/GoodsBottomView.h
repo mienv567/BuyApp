@@ -13,6 +13,7 @@
 typedef NS_ENUM(NSUInteger, GoodsBottomViewType) {
     GoodsBottomViewNeedJoin,
     GoodsBottomViewBuy,
+    GoodsBottomViewPay,
 };
 
 @interface GoodsBottomView : UIView

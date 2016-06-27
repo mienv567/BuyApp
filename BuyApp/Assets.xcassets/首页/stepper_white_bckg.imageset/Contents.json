@@ -2,16 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "stepper_white_bckg.png",
+      "filename" : "中间@1x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "stepper_white_bckg@2x.png",
+      "filename" : "中间@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "中间@3x.png",
       "scale" : "3x"
     }
   ],

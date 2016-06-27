@@ -52,6 +52,7 @@
     self.tableView.dataSource = self;
     
     self.pageView = KGetViewFromNib(@"GoodsInfoTopView");
+    self.pageView.backgroundColor = GS_COLOR_WHITE;
     self.pageView.frame = CGRectMake(0, 0, K_WIDTH, K_WIDTH * 410.0 / 660.0 + 50 + 80);
     self.pageView.showType = GoodsInfoTopViewProcess;
     self.tableView.tableHeaderView = self.pageView;
@@ -78,18 +79,14 @@
     self.shoppingView.view_count.editableManually = YES;
     self.shoppingView.view_count.stepValue = 1;
     
-    
-    
-
-
     [self loadData];
-
-    
 }
 
 #pragma mark -加载数据
 
 -(void)loadData{
+    [self.tableView.mj_footer endRefreshing];
+    
     //根据商品是否参加了，切换模式
     self.bottomView.showType = GoodsBottomViewBuy;
     
@@ -152,9 +149,9 @@
 //显示我的号码
 - (void)click_showNumbers:(id)sender{
     if (!self.allCountsView) {
-        AllCountsView * view = KGetViewFromNib(@"AllCountsView");
-        [self.view addSubview:view];
-        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.allCountsView = KGetViewFromNib(@"AllCountsView");
+        [self.view addSubview:self.allCountsView];
+        [self.allCountsView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.view);
         }];
     }
@@ -245,6 +242,7 @@
             [tableView registerNib:self.nib forCellReuseIdentifier:identy];
         }
         GoodsUsersCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor whiteColor];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.textLabel.textColor = GS_COLOR_DARKGRAY;

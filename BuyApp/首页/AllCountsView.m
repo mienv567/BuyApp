@@ -127,7 +127,6 @@
     }
 }
 
-
 #pragma mark - 创建视图
 #pragma mark - 创建UICollectionView
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView

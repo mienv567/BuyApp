@@ -15,7 +15,18 @@
 #import "AppDelegate.h"
 #import "UITabBarItem+Universal.h"
 
+
+
+@interface MainTabBarVc()
+@property(nonatomic, strong)HistoryVc *historyVc;
+@end
+
+
+
 @implementation MainTabBarVc
+
+
+
 
 + (instancetype)shared
 {
@@ -58,13 +69,13 @@
         MainVc *mainVc = [[MainVc alloc] init];
         NewsVc *newsVc = [[NewsVc alloc] init];
         ListVc * listVc = [[ListVc alloc] init];
-        HistoryVc *historyVc = [[HistoryVc alloc]init];
+        self.historyVc = [[HistoryVc alloc]init];
         UserVc *userVc = [[UserVc alloc]init];
         
         UINavigationController *nc1 = [[UINavigationController alloc] initWithRootViewController:mainVc];
         UINavigationController *nc2 = [[UINavigationController alloc] initWithRootViewController:newsVc];
         UINavigationController *nc3 = [[UINavigationController alloc] initWithRootViewController:listVc];
-        UINavigationController *nc4 = [[UINavigationController alloc]initWithRootViewController:historyVc];
+        UINavigationController *nc4 = [[UINavigationController alloc]initWithRootViewController:self.historyVc];
         UINavigationController *nc5 = [[UINavigationController alloc]initWithRootViewController:userVc];
         
         nc1.tabBarItem = item1;
@@ -83,9 +94,17 @@
     return self;
 }
 
+
 -(void)changeTabBarAtIndex:(NSInteger)idnex{
     self.selectedIndex = idnex;
 }
+
+-(void)changeHistoryList:(NSInteger)index{
+    self.selectedIndex = 3;
+    [self.historyVc setSegmentIndex:index];
+}
+
+
 -(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     if (tabBarController.selectedIndex == 4) {
         AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;

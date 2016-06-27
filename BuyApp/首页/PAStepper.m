@@ -76,7 +76,7 @@
 	decrementButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 25.0, 29.0)];
 	[decrementButton setBackgroundImage:[UIImage imageNamed:@"minus_bckg"] forState:UIControlStateNormal];
 	[decrementButton setTintColor:_tintColor];
-	[decrementButton setTitle:@"-" forState:UIControlStateNormal];
+//	[decrementButton setTitle:@"-" forState:UIControlStateNormal];
 	[decrementButton setAutoresizingMask:UIViewAutoresizingNone];
     [decrementButton addTarget:self action:@selector(didPressButton:) forControlEvents:UIControlEventTouchUpInside];
     [decrementButton addTarget:self action:@selector(didBeginLongTap:) forControlEvents:UIControlEventTouchDown | UIControlEventTouchDragEnter];
@@ -117,10 +117,10 @@
     [self addSubview:_textField];
     
 	// init right button
-	incrementButton = [[UIButton alloc] initWithFrame:CGRectMake(91.0, 0.0, 25.0, 29.0)];
+	incrementButton = [[UIButton alloc] initWithFrame:CGRectMake(90.0, 0.0, 25.0, 29.0)];
 	[incrementButton setBackgroundImage:[UIImage imageNamed:@"plus_bckg"] forState:UIControlStateNormal];
 	[incrementButton setTintColor:_tintColor];
-	[incrementButton setTitle:@"+" forState:UIControlStateNormal];
+//	[incrementButton setTitle:@"+" forState:UIControlStateNormal];
     [incrementButton addTarget:self action:@selector(didPressButton:) forControlEvents:UIControlEventTouchUpInside];
     [incrementButton addTarget:self action:@selector(didBeginLongTap:) forControlEvents:UIControlEventTouchDown | UIControlEventTouchDragEnter];
     [incrementButton addTarget:self action:@selector(didEndLongTap) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside | UIControlEventTouchCancel | UIControlEventTouchDragExit];

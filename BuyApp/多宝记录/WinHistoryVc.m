@@ -1,0 +1,133 @@
+//
+//  WinHistoryVc.m
+//  BuyApp
+//
+//  Created by D on 16/6/27.
+//  Copyright © 2016年 Super_D. All rights reserved.
+//
+
+#import "WinHistoryVc.h"
+#import "AllCountsView.h"
+#import "HistoryListCells.h"
+
+@interface WinHistoryVc ()<UITableViewDelegate,UITableViewDataSource,HistoryListCellsDelegate>
+@property (strong, nonatomic)  UITableView *tableView;
+@property (strong, nonatomic)  UIView *classView;
+@property (nonatomic, strong) UINib * nib;
+@property (strong, nonatomic)  AllCountsView *allCountsView;
+
+@end
+
+@implementation WinHistoryVc
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    [self setRightButton:@" " action:nil];
+    
+    self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+
+    [self.tableView registerClass:[HistoryListCells class] forCellReuseIdentifier:@"HistoryListCells"];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.tableView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    
+}
+
+-(void)click_showAllCounts:(HistoryListCells *)cell{
+    if (!self.allCountsView) {
+        self.allCountsView = KGetViewFromNib(@"AllCountsView");
+        [self.view addSubview:self.allCountsView];
+        [self.allCountsView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view);
+        }];
+    }
+    self.allCountsView.hidden = NO;
+    
+    NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:@"  计算公式\n  [(数值A+数值B)÷商品所需人次]取余数+100000001"];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:16] range:NSMakeRange(0, 6)];
+    [noticeStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, 6)];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:13] range:NSMakeRange(6, noticeStr.length - 6)];
+    [noticeStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(6,noticeStr.length - 6)];
+    self.allCountsView.lab_notice.attributedText = noticeStr;
+    
+    
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    KJumpToViewController(@"GoodsInfoVc");
+    vc.title = @"来自最新揭晓2的商品";
+    
+}
+
+#pragma mark - Table view data source
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.row % 3 == 0) {
+        return 150;
+    }else{
+       return 210;
+    }
+    
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *identy = @"HistoryListCells";
+    if (!self.nib) {
+        self.nib = [UINib nibWithNibName:@"HistoryListCells" bundle:nil];
+        [tableView registerNib:self.nib forCellReuseIdentifier:identy];
+    }
+    
+    HistoryListCells *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+    cell.backgroundColor = [UIColor whiteColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.delegate = self;
+    if (indexPath.row % 3 == 0) {
+        cell.showType = HistoryListCellsInProcess;
+    }else{
+        cell.showType = HistoryListCellsEnd;
+    }
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]){
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

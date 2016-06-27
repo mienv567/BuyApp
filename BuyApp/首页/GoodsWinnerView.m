@@ -11,6 +11,9 @@
 @implementation GoodsWinnerView
 
 -(void)awakeFromNib{
+    self.lab_IP.textColor = GS_COLOR_RED;
+    
+    
     self.view_topBackGound.layer.shadowColor = [UIColor blackColor].CGColor;//shadowColor阴影颜色
     self.view_topBackGound.layer.shadowOffset = CGSizeMake(0,0);
     self.view_topBackGound.layer.shadowOpacity = 1;//阴影透明度，默认0
@@ -32,6 +35,14 @@
         make.height.mas_equalTo(@35);
     }];
     
+    [self.lab_time mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.lab_joinCount);
+        make.top.equalTo(self.lab_joinCount.mas_bottom);
+        make.right.equalTo(self.view_topBackGound.mas_right).offset(-10);
+        make.height.mas_equalTo(@20);
+    }];
+    
+    
     self.btn_method.layer.cornerRadius = 4.0;
     self.btn_method.layer.masksToBounds = YES;
     self.btn_method.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -43,6 +54,9 @@
         make.width.equalTo(@70);
     }];
     
+    self.img_header.layer.cornerRadius = 25.0;
+    self.img_header.layer.masksToBounds = YES;
+    self.img_header.image = KDefaultImg;
 }
 
 
