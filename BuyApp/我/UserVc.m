@@ -68,7 +68,7 @@
             if (indexPath.row == 0) {
                 
             }else{//我的消息
-            
+                KJumpToViewController(@"UserNewsVc");
             }
         }
             break;

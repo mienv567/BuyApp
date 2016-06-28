@@ -13,6 +13,10 @@
 		031B6D631D197D3600BD2585 /* Img_ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 031B6D611D197D3600BD2585 /* Img_ContentCell.xib */; };
 		031B6D661D19894000BD2585 /* SearchBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 031B6D651D19894000BD2585 /* SearchBarView.m */; };
 		031B6D681D19895800BD2585 /* SearchBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 031B6D671D19895800BD2585 /* SearchBarView.xib */; };
+		032224D51D22761E00B20525 /* RedCouponVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 032224D41D22761E00B20525 /* RedCouponVc.m */; };
+		032224D81D22762F00B20525 /* CouponListVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 032224D71D22762F00B20525 /* CouponListVc.m */; };
+		032224DC1D2278A200B20525 /* CouponListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 032224DA1D2278A200B20525 /* CouponListCell.m */; };
+		032224DD1D2278A200B20525 /* CouponListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 032224DB1D2278A200B20525 /* CouponListCell.xib */; };
 		032940DA1D1E507C000D54D9 /* CountInfoVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 032940D91D1E507C000D54D9 /* CountInfoVc.m */; };
 		032940DD1D1E5389000D54D9 /* CountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 032940DC1D1E5389000D54D9 /* CountView.m */; };
 		032940DF1D1E5393000D54D9 /* CountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 032940DE1D1E5393000D54D9 /* CountView.xib */; };
@@ -35,6 +39,9 @@
 		034D89EA1D1BB387005806C7 /* GoodsWinnerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 034D89E91D1BB387005806C7 /* GoodsWinnerView.xib */; };
 		034D89ED1D1BCD29005806C7 /* GoodsCountsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 034D89EC1D1BCD29005806C7 /* GoodsCountsView.m */; };
 		034D89EF1D1BCD32005806C7 /* GoodsCountsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 034D89EE1D1BCD32005806C7 /* GoodsCountsView.xib */; };
+		0360BCD71D2264EE00A2C07D /* UserNewsVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 0360BCD61D2264EE00A2C07D /* UserNewsVc.m */; };
+		0360BCDC1D22656900A2C07D /* UserNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0360BCDA1D22656900A2C07D /* UserNewsCell.m */; };
+		0360BCDD1D22656900A2C07D /* UserNewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0360BCDB1D22656900A2C07D /* UserNewsCell.xib */; };
 		037232DD1D20B85000F258D2 /* UserTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 037232DC1D20B85000F258D2 /* UserTopView.m */; };
 		037232DF1D20B85800F258D2 /* UserTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 037232DE1D20B85800F258D2 /* UserTopView.xib */; };
 		037232E41D20F7AA00F258D2 /* ShopListCells.m in Sources */ = {isa = PBXBuildFile; fileRef = 037232E21D20F7AA00F258D2 /* ShopListCells.m */; };
@@ -118,6 +125,13 @@
 		031B6D641D19894000BD2585 /* SearchBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchBarView.h; sourceTree = "<group>"; };
 		031B6D651D19894000BD2585 /* SearchBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchBarView.m; sourceTree = "<group>"; };
 		031B6D671D19895800BD2585 /* SearchBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchBarView.xib; sourceTree = "<group>"; };
+		032224D31D22761E00B20525 /* RedCouponVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedCouponVc.h; sourceTree = "<group>"; };
+		032224D41D22761E00B20525 /* RedCouponVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedCouponVc.m; sourceTree = "<group>"; };
+		032224D61D22762F00B20525 /* CouponListVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponListVc.h; sourceTree = "<group>"; };
+		032224D71D22762F00B20525 /* CouponListVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponListVc.m; sourceTree = "<group>"; };
+		032224D91D2278A200B20525 /* CouponListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponListCell.h; sourceTree = "<group>"; };
+		032224DA1D2278A200B20525 /* CouponListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponListCell.m; sourceTree = "<group>"; };
+		032224DB1D2278A200B20525 /* CouponListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponListCell.xib; sourceTree = "<group>"; };
 		032940D81D1E507C000D54D9 /* CountInfoVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountInfoVc.h; sourceTree = "<group>"; };
 		032940D91D1E507C000D54D9 /* CountInfoVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountInfoVc.m; sourceTree = "<group>"; };
 		032940DB1D1E5389000D54D9 /* CountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountView.h; sourceTree = "<group>"; };
@@ -154,6 +168,11 @@
 		034D89EB1D1BCD29005806C7 /* GoodsCountsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsCountsView.h; sourceTree = "<group>"; };
 		034D89EC1D1BCD29005806C7 /* GoodsCountsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsCountsView.m; sourceTree = "<group>"; };
 		034D89EE1D1BCD32005806C7 /* GoodsCountsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoodsCountsView.xib; sourceTree = "<group>"; };
+		0360BCD51D2264EE00A2C07D /* UserNewsVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserNewsVc.h; sourceTree = "<group>"; };
+		0360BCD61D2264EE00A2C07D /* UserNewsVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserNewsVc.m; sourceTree = "<group>"; };
+		0360BCD91D22656900A2C07D /* UserNewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserNewsCell.h; sourceTree = "<group>"; };
+		0360BCDA1D22656900A2C07D /* UserNewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserNewsCell.m; sourceTree = "<group>"; };
+		0360BCDB1D22656900A2C07D /* UserNewsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserNewsCell.xib; sourceTree = "<group>"; };
 		037232DB1D20B85000F258D2 /* UserTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTopView.h; sourceTree = "<group>"; };
 		037232DC1D20B85000F258D2 /* UserTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTopView.m; sourceTree = "<group>"; };
 		037232DE1D20B85800F258D2 /* UserTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserTopView.xib; sourceTree = "<group>"; };
@@ -309,6 +328,19 @@
 				03376B381D1AE1BB004EE048 /* NewsCells.h */,
 				03376B391D1AE1BB004EE048 /* NewsCells.m */,
 				03376B3A1D1AE1BB004EE048 /* NewsCells.xib */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		0360BCD81D22654A00A2C07D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0360BCD91D22656900A2C07D /* UserNewsCell.h */,
+				0360BCDA1D22656900A2C07D /* UserNewsCell.m */,
+				0360BCDB1D22656900A2C07D /* UserNewsCell.xib */,
+				032224D91D2278A200B20525 /* CouponListCell.h */,
+				032224DA1D2278A200B20525 /* CouponListCell.m */,
+				032224DB1D2278A200B20525 /* CouponListCell.xib */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -581,11 +613,18 @@
 		03BB29581D1781E300EDEDFD /* 我 */ = {
 			isa = PBXGroup;
 			children = (
+				0360BCD81D22654A00A2C07D /* Cell */,
 				037232DA1D20B83E00F258D2 /* View */,
 				03BB295D1D17822C00EDEDFD /* UserVc.h */,
 				03BB295E1D17822C00EDEDFD /* UserVc.m */,
+				032224D31D22761E00B20525 /* RedCouponVc.h */,
+				032224D41D22761E00B20525 /* RedCouponVc.m */,
+				032224D61D22762F00B20525 /* CouponListVc.h */,
+				032224D71D22762F00B20525 /* CouponListVc.m */,
 				03BF770B1D216C7C00F1270F /* SheZhiVc.h */,
 				03BF770C1D216C7C00F1270F /* SheZhiVc.m */,
+				0360BCD51D2264EE00A2C07D /* UserNewsVc.h */,
+				0360BCD61D2264EE00A2C07D /* UserNewsVc.m */,
 			);
 			path = "我";
 			sourceTree = "<group>";
@@ -806,12 +845,14 @@
 				03C5BCF21D18EE6300060FB3 /* RegisterVc.xib in Resources */,
 				03376B301D1ABBA6004EE048 /* SearchListCell.xib in Resources */,
 				034D89EF1D1BCD32005806C7 /* GoodsCountsView.xib in Resources */,
+				032224DD1D2278A200B20525 /* CouponListCell.xib in Resources */,
 				038B195A1D12A88F007C1CC8 /* MBProgressHUD.bundle in Resources */,
 				038B18F71D1270D7007C1CC8 /* Assets.xcassets in Resources */,
 				032940DF1D1E5393000D54D9 /* CountView.xib in Resources */,
 				031B6D631D197D3600BD2585 /* Img_ContentCell.xib in Resources */,
 				037232EE1D21209700F258D2 /* HistoryListCells.xib in Resources */,
 				037232E51D20F7AA00F258D2 /* ShopListCells.xib in Resources */,
+				0360BCDD1D22656900A2C07D /* UserNewsCell.xib in Resources */,
 				034D89E51D1BB234005806C7 /* GoodsInfoTopView.xib in Resources */,
 				038B18F51D1270D7007C1CC8 /* Main.storyboard in Resources */,
 				03D50DA51D1C27C80017AAC3 /* GoodsUsersCell.xib in Resources */,
@@ -905,6 +946,7 @@
 				032940E81D1EA9B8000D54D9 /* AllCountsView.m in Sources */,
 				03BB295C1D17821700EDEDFD /* MainVc.m in Sources */,
 				031B6D621D197D3600BD2585 /* Img_ContentCell.m in Sources */,
+				0360BCDC1D22656900A2C07D /* UserNewsCell.m in Sources */,
 				03D312E11D1D138800B2BB26 /* ShoppingView.m in Sources */,
 				03BB29831D17C91E00EDEDFD /* MainSegmentView.m in Sources */,
 				03EB70DC1D1834AA00A94E50 /* LoginVC.m in Sources */,
@@ -915,6 +957,7 @@
 				03376B2A1D1AB51B004EE048 /* SearchBarVc.m in Sources */,
 				038B193F1D12A44B007C1CC8 /* MTKDeallocator.m in Sources */,
 				038B18EC1D1270D7007C1CC8 /* main.m in Sources */,
+				032224D51D22761E00B20525 /* RedCouponVc.m in Sources */,
 				038B195B1D12A88F007C1CC8 /* GSValidate.m in Sources */,
 				038B19341D12A44B007C1CC8 /* NSString+Addition.m in Sources */,
 				03BB29681D17826400EDEDFD /* ListVc.m in Sources */,
@@ -925,11 +968,13 @@
 				03BB297A1D17B14300EDEDFD /* GoodsView.m in Sources */,
 				038B19561D12A88F007C1CC8 /* ASCache.m in Sources */,
 				03376B361D1ADB77004EE048 /* HelpInfo.m in Sources */,
+				032224DC1D2278A200B20525 /* CouponListCell.m in Sources */,
 				03C5BCF11D18EE6300060FB3 /* RegisterVc.m in Sources */,
 				03D50DA81D1C34970017AAC3 /* HistoryWinnersVc.m in Sources */,
 				038B19401D12A44B007C1CC8 /* MTKObserver.m in Sources */,
 				037232ED1D21209700F258D2 /* HistoryListCells.m in Sources */,
 				03376B3B1D1AE1BB004EE048 /* NewsCells.m in Sources */,
+				032224D81D22762F00B20525 /* CouponListVc.m in Sources */,
 				03376B331D1AC71A004EE048 /* HelpVc.m in Sources */,
 				03C5BCF61D19080E00060FB3 /* ResetPassWordVc.m in Sources */,
 				031B6D5D1D19764B00BD2585 /* GoodsClassVc.m in Sources */,
@@ -944,6 +989,7 @@
 				038B19571D12A88F007C1CC8 /* EGOCache.m in Sources */,
 				038B19311D12A44B007C1CC8 /* Cipher.m in Sources */,
 				034D89ED1D1BCD29005806C7 /* GoodsCountsView.m in Sources */,
+				0360BCD71D2264EE00A2C07D /* UserNewsVc.m in Sources */,
 				03BB29621D17824C00EDEDFD /* NewsVc.m in Sources */,
 				03BB295F1D17822C00EDEDFD /* UserVc.m in Sources */,
 				03D312E61D1D1E4900B2BB26 /* PAStepper.m in Sources */,
