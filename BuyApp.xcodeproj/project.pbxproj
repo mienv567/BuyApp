@@ -76,6 +76,19 @@
 		038B195B1D12A88F007C1CC8 /* GSValidate.m in Sources */ = {isa = PBXBuildFile; fileRef = 038B19521D12A88F007C1CC8 /* GSValidate.m */; };
 		038B195C1D12A88F007C1CC8 /* ASPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 038B19551D12A88F007C1CC8 /* ASPageView.m */; };
 		038B195F1D12A8D8007C1CC8 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 038B195E1D12A8D8007C1CC8 /* RootViewController.m */; };
+		03A9FD371D236ADF006AD04D /* RedCouponTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A9FD361D236ADF006AD04D /* RedCouponTopView.m */; };
+		03A9FD391D236AE9006AD04D /* RedCouponTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03A9FD381D236AE9006AD04D /* RedCouponTopView.xib */; };
+		03A9FD3C1D2370EC006AD04D /* GetCouponVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A9FD3B1D2370EC006AD04D /* GetCouponVc.m */; };
+		03A9FD401D23907C006AD04D /* CouponGetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A9FD3E1D23907C006AD04D /* CouponGetCell.m */; };
+		03A9FD411D23907C006AD04D /* CouponGetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03A9FD3F1D23907C006AD04D /* CouponGetCell.xib */; };
+		03A9FD451D23A8CA006AD04D /* ImgTitleContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A9FD431D23A8CA006AD04D /* ImgTitleContent.m */; };
+		03A9FD461D23A8CA006AD04D /* ImgTitleContent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03A9FD441D23A8CA006AD04D /* ImgTitleContent.xib */; };
+		03A9FD491D23ACCC006AD04D /* MoneyVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A9FD481D23ACCC006AD04D /* MoneyVc.m */; };
+		03A9FD4C1D23AECF006AD04D /* MoneyList.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A9FD4B1D23AECF006AD04D /* MoneyList.m */; };
+		03A9FD501D23B075006AD04D /* MoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A9FD4E1D23B075006AD04D /* MoneyCell.m */; };
+		03A9FD511D23B075006AD04D /* MoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03A9FD4F1D23B075006AD04D /* MoneyCell.xib */; };
+		03A9FD5A1D23BDF8006AD04D /* ChongZhiVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A9FD581D23BDF8006AD04D /* ChongZhiVc.m */; };
+		03A9FD5B1D23BDF8006AD04D /* ChongZhiVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03A9FD591D23BDF8006AD04D /* ChongZhiVc.xib */; };
 		03BB29511D17757800EDEDFD /* MainTabBarVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 03BB29501D17757800EDEDFD /* MainTabBarVc.m */; };
 		03BB29541D17765F00EDEDFD /* UITabBarItem+Universal.m in Sources */ = {isa = PBXBuildFile; fileRef = 03BB29531D17765F00EDEDFD /* UITabBarItem+Universal.m */; };
 		03BB295C1D17821700EDEDFD /* MainVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 03BB295B1D17821700EDEDFD /* MainVc.m */; };
@@ -108,6 +121,11 @@
 		03D50DA81D1C34970017AAC3 /* HistoryWinnersVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D50DA71D1C34970017AAC3 /* HistoryWinnersVc.m */; };
 		03D50DAC1D1C34DF0017AAC3 /* WinnerListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D50DAA1D1C34DF0017AAC3 /* WinnerListCell.m */; };
 		03D50DAD1D1C34DF0017AAC3 /* WinnerListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03D50DAB1D1C34DF0017AAC3 /* WinnerListCell.xib */; };
+		03D66C091D23F5EB006C9855 /* MyWinHistoryVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D66C081D23F5EB006C9855 /* MyWinHistoryVc.m */; };
+		03D66C0D1D23FF24006C9855 /* MyWinListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D66C0B1D23FF24006C9855 /* MyWinListCell.m */; };
+		03D66C0E1D23FF24006C9855 /* MyWinListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03D66C0C1D23FF24006C9855 /* MyWinListCell.xib */; };
+		03D66C111D241800006C9855 /* BackGoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D66C101D241800006C9855 /* BackGoundView.m */; };
+		03D66C131D241810006C9855 /* BackGoundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03D66C121D241810006C9855 /* BackGoundView.xib */; };
 		03EB70DC1D1834AA00A94E50 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EB70DA1D1834AA00A94E50 /* LoginVC.m */; };
 		03EB70DD1D1834AA00A94E50 /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03EB70DB1D1834AA00A94E50 /* LoginVC.xib */; };
 		03EB70E11D1835A800A94E50 /* Img_TextfieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EB70DF1D1835A800A94E50 /* Img_TextfieldCell.m */; };
@@ -241,6 +259,27 @@
 		038B19551D12A88F007C1CC8 /* ASPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASPageView.m; sourceTree = "<group>"; };
 		038B195D1D12A8D8007C1CC8 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		038B195E1D12A8D8007C1CC8 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		03A9FD351D236ADF006AD04D /* RedCouponTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedCouponTopView.h; sourceTree = "<group>"; };
+		03A9FD361D236ADF006AD04D /* RedCouponTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedCouponTopView.m; sourceTree = "<group>"; };
+		03A9FD381D236AE9006AD04D /* RedCouponTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RedCouponTopView.xib; sourceTree = "<group>"; };
+		03A9FD3A1D2370EC006AD04D /* GetCouponVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetCouponVc.h; sourceTree = "<group>"; };
+		03A9FD3B1D2370EC006AD04D /* GetCouponVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetCouponVc.m; sourceTree = "<group>"; };
+		03A9FD3D1D23907C006AD04D /* CouponGetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponGetCell.h; sourceTree = "<group>"; };
+		03A9FD3E1D23907C006AD04D /* CouponGetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponGetCell.m; sourceTree = "<group>"; };
+		03A9FD3F1D23907C006AD04D /* CouponGetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponGetCell.xib; sourceTree = "<group>"; };
+		03A9FD421D23A8CA006AD04D /* ImgTitleContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImgTitleContent.h; sourceTree = "<group>"; };
+		03A9FD431D23A8CA006AD04D /* ImgTitleContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImgTitleContent.m; sourceTree = "<group>"; };
+		03A9FD441D23A8CA006AD04D /* ImgTitleContent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImgTitleContent.xib; sourceTree = "<group>"; };
+		03A9FD471D23ACCC006AD04D /* MoneyVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyVc.h; sourceTree = "<group>"; };
+		03A9FD481D23ACCC006AD04D /* MoneyVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyVc.m; sourceTree = "<group>"; };
+		03A9FD4A1D23AECF006AD04D /* MoneyList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyList.h; sourceTree = "<group>"; };
+		03A9FD4B1D23AECF006AD04D /* MoneyList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyList.m; sourceTree = "<group>"; };
+		03A9FD4D1D23B075006AD04D /* MoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyCell.h; sourceTree = "<group>"; };
+		03A9FD4E1D23B075006AD04D /* MoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyCell.m; sourceTree = "<group>"; };
+		03A9FD4F1D23B075006AD04D /* MoneyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoneyCell.xib; sourceTree = "<group>"; };
+		03A9FD571D23BDF8006AD04D /* ChongZhiVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChongZhiVc.h; sourceTree = "<group>"; };
+		03A9FD581D23BDF8006AD04D /* ChongZhiVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChongZhiVc.m; sourceTree = "<group>"; };
+		03A9FD591D23BDF8006AD04D /* ChongZhiVc.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChongZhiVc.xib; sourceTree = "<group>"; };
 		03BB294F1D17757800EDEDFD /* MainTabBarVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarVc.h; sourceTree = "<group>"; };
 		03BB29501D17757800EDEDFD /* MainTabBarVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarVc.m; sourceTree = "<group>"; };
 		03BB29521D17765F00EDEDFD /* UITabBarItem+Universal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarItem+Universal.h"; sourceTree = "<group>"; };
@@ -299,6 +338,14 @@
 		03D50DA91D1C34DF0017AAC3 /* WinnerListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinnerListCell.h; sourceTree = "<group>"; };
 		03D50DAA1D1C34DF0017AAC3 /* WinnerListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WinnerListCell.m; sourceTree = "<group>"; };
 		03D50DAB1D1C34DF0017AAC3 /* WinnerListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WinnerListCell.xib; sourceTree = "<group>"; };
+		03D66C071D23F5EB006C9855 /* MyWinHistoryVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWinHistoryVc.h; sourceTree = "<group>"; };
+		03D66C081D23F5EB006C9855 /* MyWinHistoryVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWinHistoryVc.m; sourceTree = "<group>"; };
+		03D66C0A1D23FF24006C9855 /* MyWinListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWinListCell.h; sourceTree = "<group>"; };
+		03D66C0B1D23FF24006C9855 /* MyWinListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWinListCell.m; sourceTree = "<group>"; };
+		03D66C0C1D23FF24006C9855 /* MyWinListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyWinListCell.xib; sourceTree = "<group>"; };
+		03D66C0F1D241800006C9855 /* BackGoundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackGoundView.h; sourceTree = "<group>"; };
+		03D66C101D241800006C9855 /* BackGoundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackGoundView.m; sourceTree = "<group>"; };
+		03D66C121D241810006C9855 /* BackGoundView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BackGoundView.xib; sourceTree = "<group>"; };
 		03EB70D91D1834AA00A94E50 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		03EB70DA1D1834AA00A94E50 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
 		03EB70DB1D1834AA00A94E50 /* LoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginVC.xib; sourceTree = "<group>"; };
@@ -341,6 +388,18 @@
 				032224D91D2278A200B20525 /* CouponListCell.h */,
 				032224DA1D2278A200B20525 /* CouponListCell.m */,
 				032224DB1D2278A200B20525 /* CouponListCell.xib */,
+				03A9FD3D1D23907C006AD04D /* CouponGetCell.h */,
+				03A9FD3E1D23907C006AD04D /* CouponGetCell.m */,
+				03A9FD3F1D23907C006AD04D /* CouponGetCell.xib */,
+				03A9FD421D23A8CA006AD04D /* ImgTitleContent.h */,
+				03A9FD431D23A8CA006AD04D /* ImgTitleContent.m */,
+				03A9FD441D23A8CA006AD04D /* ImgTitleContent.xib */,
+				03A9FD4D1D23B075006AD04D /* MoneyCell.h */,
+				03A9FD4E1D23B075006AD04D /* MoneyCell.m */,
+				03A9FD4F1D23B075006AD04D /* MoneyCell.xib */,
+				03D66C0A1D23FF24006C9855 /* MyWinListCell.h */,
+				03D66C0B1D23FF24006C9855 /* MyWinListCell.m */,
+				03D66C0C1D23FF24006C9855 /* MyWinListCell.xib */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -351,6 +410,12 @@
 				037232DB1D20B85000F258D2 /* UserTopView.h */,
 				037232DC1D20B85000F258D2 /* UserTopView.m */,
 				037232DE1D20B85800F258D2 /* UserTopView.xib */,
+				03A9FD351D236ADF006AD04D /* RedCouponTopView.h */,
+				03A9FD361D236ADF006AD04D /* RedCouponTopView.m */,
+				03A9FD381D236AE9006AD04D /* RedCouponTopView.xib */,
+				03D66C0F1D241800006C9855 /* BackGoundView.h */,
+				03D66C101D241800006C9855 /* BackGoundView.m */,
+				03D66C121D241810006C9855 /* BackGoundView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -621,10 +686,21 @@
 				032224D41D22761E00B20525 /* RedCouponVc.m */,
 				032224D61D22762F00B20525 /* CouponListVc.h */,
 				032224D71D22762F00B20525 /* CouponListVc.m */,
-				03BF770B1D216C7C00F1270F /* SheZhiVc.h */,
-				03BF770C1D216C7C00F1270F /* SheZhiVc.m */,
+				03A9FD3A1D2370EC006AD04D /* GetCouponVc.h */,
+				03A9FD3B1D2370EC006AD04D /* GetCouponVc.m */,
 				0360BCD51D2264EE00A2C07D /* UserNewsVc.h */,
 				0360BCD61D2264EE00A2C07D /* UserNewsVc.m */,
+				03BF770B1D216C7C00F1270F /* SheZhiVc.h */,
+				03BF770C1D216C7C00F1270F /* SheZhiVc.m */,
+				03A9FD471D23ACCC006AD04D /* MoneyVc.h */,
+				03A9FD481D23ACCC006AD04D /* MoneyVc.m */,
+				03A9FD4A1D23AECF006AD04D /* MoneyList.h */,
+				03A9FD4B1D23AECF006AD04D /* MoneyList.m */,
+				03A9FD571D23BDF8006AD04D /* ChongZhiVc.h */,
+				03A9FD581D23BDF8006AD04D /* ChongZhiVc.m */,
+				03A9FD591D23BDF8006AD04D /* ChongZhiVc.xib */,
+				03D66C071D23F5EB006C9855 /* MyWinHistoryVc.h */,
+				03D66C081D23F5EB006C9855 /* MyWinHistoryVc.m */,
 			);
 			path = "我";
 			sourceTree = "<group>";
@@ -834,8 +910,10 @@
 				03D312DE1D1D024A00B2BB26 /* GoodsBottomView.xib in Resources */,
 				03D312E31D1D139C00B2BB26 /* ShoppingView.xib in Resources */,
 				03EB70DD1D1834AA00A94E50 /* LoginVC.xib in Resources */,
+				03A9FD511D23B075006AD04D /* MoneyCell.xib in Resources */,
 				03D50DAD1D1C34DF0017AAC3 /* WinnerListCell.xib in Resources */,
 				038B18FA1D1270D7007C1CC8 /* LaunchScreen.storyboard in Resources */,
+				03D66C131D241810006C9855 /* BackGoundView.xib in Resources */,
 				037232DF1D20B85800F258D2 /* UserTopView.xib in Resources */,
 				031B6D5E1D19764B00BD2585 /* GoodsClassVc.xib in Resources */,
 				038B193E1D12A44B007C1CC8 /* Block-KVO.podspec in Resources */,
@@ -843,11 +921,14 @@
 				034D89EA1D1BB387005806C7 /* GoodsWinnerView.xib in Resources */,
 				032940EA1D1EAA52000D54D9 /* AllCountsView.xib in Resources */,
 				03C5BCF21D18EE6300060FB3 /* RegisterVc.xib in Resources */,
+				03D66C0E1D23FF24006C9855 /* MyWinListCell.xib in Resources */,
 				03376B301D1ABBA6004EE048 /* SearchListCell.xib in Resources */,
 				034D89EF1D1BCD32005806C7 /* GoodsCountsView.xib in Resources */,
 				032224DD1D2278A200B20525 /* CouponListCell.xib in Resources */,
 				038B195A1D12A88F007C1CC8 /* MBProgressHUD.bundle in Resources */,
+				03A9FD5B1D23BDF8006AD04D /* ChongZhiVc.xib in Resources */,
 				038B18F71D1270D7007C1CC8 /* Assets.xcassets in Resources */,
+				03A9FD411D23907C006AD04D /* CouponGetCell.xib in Resources */,
 				032940DF1D1E5393000D54D9 /* CountView.xib in Resources */,
 				031B6D631D197D3600BD2585 /* Img_ContentCell.xib in Resources */,
 				037232EE1D21209700F258D2 /* HistoryListCells.xib in Resources */,
@@ -856,8 +937,10 @@
 				034D89E51D1BB234005806C7 /* GoodsInfoTopView.xib in Resources */,
 				038B18F51D1270D7007C1CC8 /* Main.storyboard in Resources */,
 				03D50DA51D1C27C80017AAC3 /* GoodsUsersCell.xib in Resources */,
+				03A9FD391D236AE9006AD04D /* RedCouponTopView.xib in Resources */,
 				03376B3C1D1AE1BB004EE048 /* NewsCells.xib in Resources */,
 				03376B2B1D1AB51B004EE048 /* SearchBarVc.xib in Resources */,
+				03A9FD461D23A8CA006AD04D /* ImgTitleContent.xib in Resources */,
 				03C5BCF71D19080E00060FB3 /* ResetPassWordVc.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -919,6 +1002,9 @@
 			files = (
 				03BB29731D1799A400EDEDFD /* MainClassView.m in Sources */,
 				03D50DA01D1C1C950017AAC3 /* Title_ContentOrImg_Cell.m in Sources */,
+				03A9FD5A1D23BDF8006AD04D /* ChongZhiVc.m in Sources */,
+				03D66C091D23F5EB006C9855 /* MyWinHistoryVc.m in Sources */,
+				03A9FD501D23B075006AD04D /* MoneyCell.m in Sources */,
 				03D50DAC1D1C34DF0017AAC3 /* WinnerListCell.m in Sources */,
 				038B195C1D12A88F007C1CC8 /* ASPageView.m in Sources */,
 				038B18F21D1270D7007C1CC8 /* ViewController.m in Sources */,
@@ -934,11 +1020,14 @@
 				034D89E31D1BB21F005806C7 /* GoodsInfoTopView.m in Sources */,
 				038B19591D12A88F007C1CC8 /* MBProgressHUD+JY.m in Sources */,
 				038B18EF1D1270D7007C1CC8 /* AppDelegate.m in Sources */,
+				03A9FD401D23907C006AD04D /* CouponGetCell.m in Sources */,
 				03BB29871D17CBB900EDEDFD /* XLPlainFlowLayout.m in Sources */,
+				03D66C111D241800006C9855 /* BackGoundView.m in Sources */,
 				03BB297D1D17B1BC00EDEDFD /* MainGoodsModel.m in Sources */,
 				038B193C1D12A44B007C1CC8 /* UITableViewCell+GSMasonryAutoCellHeight.m in Sources */,
 				038B193A1D12A44B007C1CC8 /* UITableView+GSCacheHeight.m in Sources */,
 				037232E81D21175D00F258D2 /* WinHistoryVc.m in Sources */,
+				03D66C0D1D23FF24006C9855 /* MyWinListCell.m in Sources */,
 				03376B2F1D1ABBA6004EE048 /* SearchListCell.m in Sources */,
 				032940DD1D1E5389000D54D9 /* CountView.m in Sources */,
 				03BB29541D17765F00EDEDFD /* UITabBarItem+Universal.m in Sources */,
@@ -955,19 +1044,24 @@
 				038B19391D12A44B007C1CC8 /* UIView+Layout.m in Sources */,
 				03BB29801D17C8D200EDEDFD /* MainTopView.m in Sources */,
 				03376B2A1D1AB51B004EE048 /* SearchBarVc.m in Sources */,
+				03A9FD371D236ADF006AD04D /* RedCouponTopView.m in Sources */,
 				038B193F1D12A44B007C1CC8 /* MTKDeallocator.m in Sources */,
 				038B18EC1D1270D7007C1CC8 /* main.m in Sources */,
 				032224D51D22761E00B20525 /* RedCouponVc.m in Sources */,
 				038B195B1D12A88F007C1CC8 /* GSValidate.m in Sources */,
 				038B19341D12A44B007C1CC8 /* NSString+Addition.m in Sources */,
+				03A9FD491D23ACCC006AD04D /* MoneyVc.m in Sources */,
 				03BB29681D17826400EDEDFD /* ListVc.m in Sources */,
 				038B19351D12A44B007C1CC8 /* UIBarButtonItem+Badge.m in Sources */,
 				03BB29651D17825800EDEDFD /* HistoryVc.m in Sources */,
+				03A9FD3C1D2370EC006AD04D /* GetCouponVc.m in Sources */,
+				03A9FD4C1D23AECF006AD04D /* MoneyList.m in Sources */,
 				038B19581D12A88F007C1CC8 /* ASWaitingView.m in Sources */,
 				03BB296F1D178E6B00EDEDFD /* SearchListVc.m in Sources */,
 				03BB297A1D17B14300EDEDFD /* GoodsView.m in Sources */,
 				038B19561D12A88F007C1CC8 /* ASCache.m in Sources */,
 				03376B361D1ADB77004EE048 /* HelpInfo.m in Sources */,
+				03A9FD451D23A8CA006AD04D /* ImgTitleContent.m in Sources */,
 				032224DC1D2278A200B20525 /* CouponListCell.m in Sources */,
 				03C5BCF11D18EE6300060FB3 /* RegisterVc.m in Sources */,
 				03D50DA81D1C34970017AAC3 /* HistoryWinnersVc.m in Sources */,

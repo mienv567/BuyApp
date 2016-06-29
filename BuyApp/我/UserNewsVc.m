@@ -31,7 +31,7 @@
     self.tableView.dataSource = self;
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, K_WIDTH, 10)];
     [self.tableView registerClass:[UserNewsCell class] forCellReuseIdentifier:@"UserNewsCell"];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {

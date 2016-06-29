@@ -26,7 +26,7 @@ typedef NS_ENUM(NSUInteger, UserTopViewType) {
 
 @property (nonatomic) UserTopViewType showType;
 
-@property (nonatomic, strong)UserVc * myRootVc;                     // 父视图
+@property (nonatomic, strong)id myRootVc;                     // 父视图
 
 
 @end

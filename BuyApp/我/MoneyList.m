@@ -1,49 +1,46 @@
 //
-//  CouponListVc.m
+//  MoneyList.m
 //  BuyApp
 //
-//  Created by D on 16/6/28.
+//  Created by D on 16/6/29.
 //  Copyright © 2016年 Super_D. All rights reserved.
 //
 
-#import "CouponListVc.h"
-#import "AllCountsView.h"
-#import "CouponListCell.h"
+#import "MoneyList.h"
+#import "ImgTitleContent.h"
+#import "MoneyCell.h"
 
-@interface CouponListVc ()<UITableViewDelegate,UITableViewDataSource>
+@interface MoneyList ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)  UITableView *tableView;
-@property (strong, nonatomic)  UIView *classView;
-@property (nonatomic, strong) UINib * nib;
-@property (strong, nonatomic)  AllCountsView *allCountsView;
+@property (nonatomic, strong)  UINib * nib;
 
 @end
 
-@implementation CouponListVc
+@implementation MoneyList
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self setRightButton:@" " action:nil];
+    self.title = @"我的账户";
     
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    [self.tableView registerClass:[CouponListCell class] forCellReuseIdentifier:@"CouponListCell"];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerClass:[MoneyCell class] forCellReuseIdentifier:@"MoneyCell"];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.tableView.backgroundColor = GS_COLOR_WHITE;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    
 }
+
 
 #pragma mark - Table view data source
 
-
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 160;
+    return 100;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -51,22 +48,23 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *identy = @"CouponListCell";
+    static NSString *identy = @"MoneyCell";
     if (!self.nib) {
-        self.nib = [UINib nibWithNibName:@"CouponListCell" bundle:nil];
+        self.nib = [UINib nibWithNibName:@"MoneyCell" bundle:nil];
         [tableView registerNib:self.nib forCellReuseIdentifier:identy];
     }
     
-    CouponListCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
-    cell.backgroundColor = GS_COLOR_WHITE;
+    MoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+    cell.backgroundColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    
+    cell.lab_title.text = @"资金记录";
+    cell.lab_content.text = @"201616161616订单付款，付款单号\n160816081608\n2016-06-20 12:20:20";
+    cell.lab_action.text = @"200夺宝币";
     return cell;
 }
 
@@ -82,15 +80,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

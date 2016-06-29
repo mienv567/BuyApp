@@ -48,7 +48,7 @@
     //初始化tabBarController
     MainTabBarVc *tb = [MainTabBarVc shared];
     [[UITabBar appearance] setBackgroundColor:[UIColor whiteColor]];
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : GS_COLOR_DARKGRAY,
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : GS_COLOR_Main,
                                                         NSFontAttributeName : [UIFont gs_boldfont:NSAppFontS]}
                                              forState:UIControlStateNormal];
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName :  HEXRGBCOLOR(0xff7423),

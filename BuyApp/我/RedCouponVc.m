@@ -8,13 +8,14 @@
 
 #import "RedCouponVc.h"
 #import "HMSegmentedControl.h"
+#import "CouponListVc.h"
 
 @interface RedCouponVc ()
 @property (nonatomic, strong) HMSegmentedControl *segmentedControl;
 @property (nonatomic, strong) UIScrollView *scrollView;         //背景scrollView
-@property (nonatomic, strong) RedCouponVc *currentVC;      //当前选择的Vc
-@property (nonatomic, strong) RedCouponVc *firstVc;      //当前选择的Vc
-@property (nonatomic, strong) RedCouponVc *secondVc;      //当前选择的Vc
+@property (nonatomic, strong) CouponListVc *currentVC;      //当前选择的Vc
+@property (nonatomic, strong) CouponListVc *firstVc;      //当前选择的Vc
+@property (nonatomic, strong) CouponListVc *secondVc;      //当前选择的Vc
 @property (nonatomic, strong) UIView *contentView;              //当前选择的Vc
 @end
 
@@ -27,7 +28,9 @@
     // Do any additional setup after loading the view.
     self.title = @"夺宝记录";
     [self setRightButton:@" " action:nil];
+    [self setRightButtonTitle:@"红包兑换" action:@selector(click_History)];
     
+
     self.segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"可使用",@"已过期"]];
     self.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
     self.segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
@@ -46,11 +49,11 @@
         make.height.mas_equalTo(@50);
     }];
     
-    self.firstVc = [[RedCouponVc alloc]init];
+    self.firstVc = [[CouponListVc alloc]init];
     self.firstVc.view.frame = CGRectMake(0, 50, K_WIDTH, K_HEIGHT);
     [self addChildViewController:self.firstVc];
     
-    self.secondVc = [[RedCouponVc alloc]init];
+    self.secondVc = [[CouponListVc alloc]init];
     self.secondVc.view.frame = CGRectMake(K_WIDTH, 50, K_WIDTH, K_HEIGHT);
     [self addChildViewController:self.secondVc];
     
@@ -66,6 +69,10 @@
     [self.contentView addSubview:self.firstVc.view];
     self.currentVC = self.firstVc;
     
+}
+
+-(void)click_History{
+    KJumpToViewController(@"GetCouponVc");
 }
 
 #pragma mark -- 重新设置frame
@@ -87,9 +94,9 @@
     [self transitionFromViewController:oldViewController toViewController:newViewController duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:nil completion:^(BOOL finished) {
         if (finished) {
             [newViewController didMoveToParentViewController:self];
-            _currentVC =(RedCouponVc *) newViewController;
+            _currentVC =(CouponListVc *) newViewController;
         }else{
-            _currentVC =(RedCouponVc *) oldViewController;
+            _currentVC =(CouponListVc *) oldViewController;
         }
     }];
 }
@@ -125,7 +132,7 @@
 }
 
 -(BOOL)hidesBottomBarWhenPushed{
-    return NO;
+    return YES;
 }
 
 @end

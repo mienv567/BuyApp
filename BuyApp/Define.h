@@ -81,7 +81,7 @@
 #define GS_COLOR_DARKRED      HEXRGBCOLOR(0xE60012)    //logo色
 #define GS_COLOR_BROWN        HEXRGBCOLOR(0xC00000)
 #define GS_COLOR_GRAYT        HEXRGBCOLOR(0xCCCCCC)
-
+#define GS_COLOR_Main        HEXRGBCOLOR(0x6E7D8B)
 //通知
 #define Notification_APNS           @"Notification_APNS"
 

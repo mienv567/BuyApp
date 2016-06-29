@@ -31,23 +31,26 @@
     self.btn_Chongzhi.layer.cornerRadius = 4.0;
     self.btn_Chongzhi.layer.masksToBounds = YES;
     [self.btn_Chongzhi mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.right.equalTo(self.view_bottomBackGound).offset(-5);
-        make.top.equalTo(self.view_bottomBackGound.mas_top).offset(5);
+        make.bottom.right.equalTo(self.view_bottomBackGound).offset(-8);
+        make.top.equalTo(self.view_bottomBackGound.mas_top).offset(8);
         make.width.mas_equalTo(@60);
     }];
     
 }
 
 - (IBAction)click_chongchi:(id)sender {
-
+    
+    [self.myRootVc click_chongchi:sender];
     
 }
 
--(void)setMyRootVc:(UserVc *)myRootVc{
+-(void)setMyRootVc:(id )myRootVc{
+
     _myRootVc = myRootVc;
 }
 
 -(void)setShowType:(UserTopViewType )showType{
+    
     _showType = showType;
     
     if (showType == UserTopViewOnly) {

@@ -1,35 +1,36 @@
 //
-//  CouponListVc.m
+//  RedHistoryVc.m
 //  BuyApp
 //
-//  Created by D on 16/6/28.
+//  Created by D on 16/6/29.
 //  Copyright © 2016年 Super_D. All rights reserved.
 //
 
-#import "CouponListVc.h"
-#import "AllCountsView.h"
-#import "CouponListCell.h"
+#import "GetCouponVc.h"
+#import "RedCouponTopView.h"
+#import "CouponGetCell.h"
 
-@interface CouponListVc ()<UITableViewDelegate,UITableViewDataSource>
+@interface GetCouponVc ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)  UITableView *tableView;
 @property (strong, nonatomic)  UIView *classView;
 @property (nonatomic, strong) UINib * nib;
-@property (strong, nonatomic)  AllCountsView *allCountsView;
+@property (strong, nonatomic)  RedCouponTopView *topView;
 
 @end
 
-@implementation CouponListVc
+@implementation GetCouponVc
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setRightButton:@" " action:nil];
+    [self setTitleLabel:@"红包兑换"];
+    
     
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    
-    [self.tableView registerClass:[CouponListCell class] forCellReuseIdentifier:@"CouponListCell"];
+    [self.tableView registerClass:[CouponGetCell class] forCellReuseIdentifier:@"CouponGetCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = GS_COLOR_WHITE;
     [self.view addSubview:self.tableView];
@@ -37,13 +38,17 @@
         make.edges.equalTo(self.view);
     }];
     
+    self.topView = KGetViewFromNib(@"RedCouponTopView");
+    self.topView.frame = CGRectMake(0, 0, K_WIDTH, 180);
+    self.tableView.tableHeaderView = self.topView;
+    
 }
 
 #pragma mark - Table view data source
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 160;
+    return 120;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -56,13 +61,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *identy = @"CouponListCell";
+    static NSString *identy = @"CouponGetCell";
     if (!self.nib) {
-        self.nib = [UINib nibWithNibName:@"CouponListCell" bundle:nil];
+        self.nib = [UINib nibWithNibName:@"CouponGetCell" bundle:nil];
         [tableView registerNib:self.nib forCellReuseIdentifier:identy];
     }
     
-    CouponListCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+    CouponGetCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
     cell.backgroundColor = GS_COLOR_WHITE;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryNone;
@@ -78,10 +83,31 @@
         [cell setSeparatorInset:UIEdgeInsetsZero];
     }
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self changeNavigationBarStyleToRed:YES];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self changeNavigationBarStyleToRed:NO];
+}
+
+-(void)changeNavigationBarStyleToRed:(BOOL)red{
+    if (red) {
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:GS_COLOR_RED size:CGSizeMake(K_WIDTH, 64)] forBarMetrics:UIBarMetricsDefault];
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    }else{
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(K_WIDTH, 64)] forBarMetrics:UIBarMetricsDefault];
+    }
+}
+
 
 /*
  #pragma mark - Navigation

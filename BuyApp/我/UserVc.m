@@ -35,6 +35,8 @@
     self.tableView.dataSource = self;
     
     self.topView = KGetViewFromNib(@"UserTopView");
+    WeakSelf;
+    self.topView.myRootVc = weakSelf;
     self.topView.frame = CGRectMake(0, 0, K_WIDTH, 160);
     self.topView.showType = UserTopViewChongZhi;
     self.tableView.tableHeaderView = self.topView;
@@ -47,6 +49,11 @@
         make.edges.equalTo(self.view);
     }];
     [self getClassView];
+}
+
+
+- (void)click_chongchi:(id)sender{
+    KJumpToViewControllerByNib(@"ChongZhiVc");
 }
 
 -(void)click_class:(UIButton *)sender{
@@ -66,7 +73,7 @@
         {
             //我的红包
             if (indexPath.row == 0) {
-                
+                KJumpToViewController(@"RedCouponVc");
             }else{//我的消息
                 KJumpToViewController(@"UserNewsVc");
             }
@@ -76,9 +83,11 @@
         {
             //资金记录
             if (indexPath.row == 0) {
-                
+                KJumpToViewController(@"MoneyVc");
+
             }else if (indexPath.row == 1){//中奖记录
-                
+                KJumpToViewController(@"MyWinHistoryVc");
+
             }if (indexPath.row == 2){//我的邀请
             
             }
@@ -121,7 +130,7 @@
             } else {
                 make.left.equalTo(lastBtn.mas_right);
             }
-            make.height.mas_equalTo(@60);
+            make.height.mas_equalTo(@80);
             make.width.mas_equalTo(K_WIDTH/3-3);
         }];
         if ((i+1)%4==0) {
@@ -133,24 +142,23 @@
         iv.contentMode = UIViewContentModeScaleAspectFit;
         iv.image = [UIImage imageNamed:[ImgArray objectAtIndex:i]];
         [button addSubview:iv];
-        //        [iv sd_setImageWithURL:[NSURL URLWithString:model.PicPath] placeholderImage:KDefaultImg];
         [iv mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(button);
-            make.height.mas_equalTo(@40);
+            make.top.equalTo(button).offset(15);
+            make.width.height.mas_equalTo(@30);
             make.centerX.equalTo(button);
         }];
         
         UILabel *lb = [[UILabel alloc] init];
-        lb.tag=200+i;
+        lb.tag = 200+i;
         lb.backgroundColor = [UIColor whiteColor];
-        lb.textColor = GS_COLOR_LIGHTBLACK;
+        lb.textColor = GS_COLOR_Main;
         lb.font = [UIFont gs_boldfont:NSAppFontS];
         [button addSubview:lb];
         lb.text =[TitleArray objectAtIndex:i];
         [lb sizeToFit];
         [lb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(button);
-            make.top.equalTo(iv.mas_bottom);
+            make.top.equalTo(iv.mas_bottom).offset(10);
 //            make.bottom.equalTo(button.mas_bottom);
             
         }];
@@ -206,7 +214,7 @@
     cell.backgroundColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.textColor = GS_COLOR_DARKGRAY;
+    cell.lab_content.textColor = GS_COLOR_Main;
     cell.lab_content.text = [[CellTitleArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     cell.img_icon.image =[UIImage imageNamed: [[CellImgArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row]];
 
@@ -227,7 +235,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-         return 60;
+         return 80;
     }
     return 0.1;
 }
