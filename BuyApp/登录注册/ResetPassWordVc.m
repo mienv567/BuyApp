@@ -43,17 +43,21 @@
     
     self.tabView.backgroundColor = GS_COLOR_WHITE;
     [self.tabView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(self.view);
-        make.height.mas_equalTo(@220);
+        make.edges.equalTo(self.view);
+//        make.height.mas_equalTo(@220);
     }];
     
+
+    
+    UIView * bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, K_WIDTH, 70)];
+    [bottomView addSubview:self.btn_Login];
     [self.btn_Login mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).offset(10);
-        make.right.equalTo(self.view).offset(-10);
-        make.top.equalTo(self.tabView.mas_bottom).offset(0);
+        make.left.equalTo(bottomView).offset(10);
+        make.right.equalTo(bottomView).offset(-10);
+        make.top.equalTo(bottomView).offset(20);
         make.height.mas_equalTo(@45);
     }];
-    
+    self.tabView.tableFooterView = bottomView;
     
     self.btn_code = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 120, 30)];
     self.btn_code.backgroundColor = [UIColor whiteColor];
@@ -126,11 +130,40 @@
 
 #pragma mark - Table view data source
 
+-(void)setShowType:(ResetPassWordVcType)showType{
+    _showType = showType;
+    switch (showType) {
+        case ResetPassWordVcNomal:
+        {
+            self.title = @"趣云购-重置密码";
+        }
+            break;
+        case ResetPassWordVcPhone:
+        {
+            self.title = @"会员资料更新";
+
+        }
+            break;
+        case ResetPassWordVcPassWord:
+        {
+            self.title = @"趣云购-重置密码";
+
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.showType == ResetPassWordVcPhone) {
+        return 2;
+    }
     return 4;
 }
 
@@ -164,7 +197,15 @@
         self.txf_mobile = cell.txf_content;
         self.txf_mobile.keyboardType = UIKeyboardTypeNumberPad;
         self.txf_mobile.delegate = self;
-        
+        if (self.showType == ResetPassWordVcPhone) {
+            self.txf_mobile.text = @"18626465685";
+
+        }
+        if (self.showType == ResetPassWordVcPassWord) {
+            self.txf_mobile.text = @"18626465685";
+            self.txf_mobile.userInteractionEnabled = NO;
+
+        }
     }else if (indexPath.row == 1){
         
         self.txf_code = cell.txf_content;

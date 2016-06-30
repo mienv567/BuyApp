@@ -76,6 +76,12 @@
 		038B195B1D12A88F007C1CC8 /* GSValidate.m in Sources */ = {isa = PBXBuildFile; fileRef = 038B19521D12A88F007C1CC8 /* GSValidate.m */; };
 		038B195C1D12A88F007C1CC8 /* ASPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 038B19551D12A88F007C1CC8 /* ASPageView.m */; };
 		038B195F1D12A8D8007C1CC8 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 038B195E1D12A8D8007C1CC8 /* RootViewController.m */; };
+		039A196A1D24A9EE00D10287 /* ResetPhoneVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 039A19691D24A9EE00D10287 /* ResetPhoneVc.m */; };
+		039A196D1D24B71F00D10287 /* EditAddressVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 039A196C1D24B71F00D10287 /* EditAddressVc.m */; };
+		039A19711D24C9B500D10287 /* AddressInfoVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 039A196F1D24C9B500D10287 /* AddressInfoVc.m */; };
+		039A19721D24C9B500D10287 /* AddressInfoVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 039A19701D24C9B500D10287 /* AddressInfoVc.xib */; };
+		039A19741D24ED8A00D10287 /* Area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 039A19731D24ED8A00D10287 /* Area.plist */; };
+		039A19781D24EDD500D10287 /* MMPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 039A19771D24EDD500D10287 /* MMPickerView.m */; };
 		03A9FD371D236ADF006AD04D /* RedCouponTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A9FD361D236ADF006AD04D /* RedCouponTopView.m */; };
 		03A9FD391D236AE9006AD04D /* RedCouponTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03A9FD381D236AE9006AD04D /* RedCouponTopView.xib */; };
 		03A9FD3C1D2370EC006AD04D /* GetCouponVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A9FD3B1D2370EC006AD04D /* GetCouponVc.m */; };
@@ -259,6 +265,16 @@
 		038B19551D12A88F007C1CC8 /* ASPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASPageView.m; sourceTree = "<group>"; };
 		038B195D1D12A8D8007C1CC8 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		038B195E1D12A8D8007C1CC8 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		039A19681D24A9EE00D10287 /* ResetPhoneVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPhoneVc.h; sourceTree = "<group>"; };
+		039A19691D24A9EE00D10287 /* ResetPhoneVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPhoneVc.m; sourceTree = "<group>"; };
+		039A196B1D24B71F00D10287 /* EditAddressVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditAddressVc.h; sourceTree = "<group>"; };
+		039A196C1D24B71F00D10287 /* EditAddressVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditAddressVc.m; sourceTree = "<group>"; };
+		039A196E1D24C9B500D10287 /* AddressInfoVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressInfoVc.h; sourceTree = "<group>"; };
+		039A196F1D24C9B500D10287 /* AddressInfoVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressInfoVc.m; sourceTree = "<group>"; };
+		039A19701D24C9B500D10287 /* AddressInfoVc.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressInfoVc.xib; sourceTree = "<group>"; };
+		039A19731D24ED8A00D10287 /* Area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Area.plist; sourceTree = "<group>"; };
+		039A19761D24EDD500D10287 /* MMPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMPickerView.h; sourceTree = "<group>"; };
+		039A19771D24EDD500D10287 /* MMPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMPickerView.m; sourceTree = "<group>"; };
 		03A9FD351D236ADF006AD04D /* RedCouponTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedCouponTopView.h; sourceTree = "<group>"; };
 		03A9FD361D236ADF006AD04D /* RedCouponTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedCouponTopView.m; sourceTree = "<group>"; };
 		03A9FD381D236AE9006AD04D /* RedCouponTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RedCouponTopView.xib; sourceTree = "<group>"; };
@@ -496,6 +512,7 @@
 		038B19031D12A44B007C1CC8 /* PlusIn */ = {
 			isa = PBXGroup;
 			children = (
+				039A19751D24EDD500D10287 /* MMPickerView */,
 				03BB29841D17CBB900EDEDFD /* XLPlainFlowLayout */,
 				038B19451D12A88F007C1CC8 /* 缓存 */,
 				038B194A1D12A88F007C1CC8 /* 加载等待视图 */,
@@ -576,6 +593,7 @@
 				038B18F81D1270D7007C1CC8 /* LaunchScreen.storyboard */,
 				038B18FB1D1270D7007C1CC8 /* Info.plist */,
 				038B19431D12A4DA007C1CC8 /* PrefixHeader.pch */,
+				039A19731D24ED8A00D10287 /* Area.plist */,
 			);
 			name = Configuration;
 			sourceTree = "<group>";
@@ -619,6 +637,15 @@
 				038B19551D12A88F007C1CC8 /* ASPageView.m */,
 			);
 			path = "循环滚动广告位";
+			sourceTree = "<group>";
+		};
+		039A19751D24EDD500D10287 /* MMPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				039A19761D24EDD500D10287 /* MMPickerView.h */,
+				039A19771D24EDD500D10287 /* MMPickerView.m */,
+			);
+			path = MMPickerView;
 			sourceTree = "<group>";
 		};
 		03BB29551D1781E300EDEDFD /* 多宝记录 */ = {
@@ -701,6 +728,11 @@
 				03A9FD591D23BDF8006AD04D /* ChongZhiVc.xib */,
 				03D66C071D23F5EB006C9855 /* MyWinHistoryVc.h */,
 				03D66C081D23F5EB006C9855 /* MyWinHistoryVc.m */,
+				039A196B1D24B71F00D10287 /* EditAddressVc.h */,
+				039A196C1D24B71F00D10287 /* EditAddressVc.m */,
+				039A196E1D24C9B500D10287 /* AddressInfoVc.h */,
+				039A196F1D24C9B500D10287 /* AddressInfoVc.m */,
+				039A19701D24C9B500D10287 /* AddressInfoVc.xib */,
 			);
 			path = "我";
 			sourceTree = "<group>";
@@ -728,6 +760,8 @@
 				03C5BCF31D19080E00060FB3 /* ResetPassWordVc.h */,
 				03C5BCF41D19080E00060FB3 /* ResetPassWordVc.m */,
 				03C5BCF51D19080E00060FB3 /* ResetPassWordVc.xib */,
+				039A19681D24A9EE00D10287 /* ResetPhoneVc.h */,
+				039A19691D24A9EE00D10287 /* ResetPhoneVc.m */,
 			);
 			path = "登录注册";
 			sourceTree = "<group>";
@@ -907,10 +941,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				031B6D681D19895800BD2585 /* SearchBarView.xib in Resources */,
+				039A19741D24ED8A00D10287 /* Area.plist in Resources */,
 				03D312DE1D1D024A00B2BB26 /* GoodsBottomView.xib in Resources */,
 				03D312E31D1D139C00B2BB26 /* ShoppingView.xib in Resources */,
 				03EB70DD1D1834AA00A94E50 /* LoginVC.xib in Resources */,
 				03A9FD511D23B075006AD04D /* MoneyCell.xib in Resources */,
+				039A19721D24C9B500D10287 /* AddressInfoVc.xib in Resources */,
 				03D50DAD1D1C34DF0017AAC3 /* WinnerListCell.xib in Resources */,
 				038B18FA1D1270D7007C1CC8 /* LaunchScreen.storyboard in Resources */,
 				03D66C131D241810006C9855 /* BackGoundView.xib in Resources */,
@@ -1017,6 +1053,7 @@
 				03D312DC1D1D023F00B2BB26 /* GoodsBottomView.m in Sources */,
 				03D50DA41D1C27C80017AAC3 /* GoodsUsersCell.m in Sources */,
 				037232DD1D20B85000F258D2 /* UserTopView.m in Sources */,
+				039A19781D24EDD500D10287 /* MMPickerView.m in Sources */,
 				034D89E31D1BB21F005806C7 /* GoodsInfoTopView.m in Sources */,
 				038B19591D12A88F007C1CC8 /* MBProgressHUD+JY.m in Sources */,
 				038B18EF1D1270D7007C1CC8 /* AppDelegate.m in Sources */,
@@ -1047,6 +1084,8 @@
 				03A9FD371D236ADF006AD04D /* RedCouponTopView.m in Sources */,
 				038B193F1D12A44B007C1CC8 /* MTKDeallocator.m in Sources */,
 				038B18EC1D1270D7007C1CC8 /* main.m in Sources */,
+				039A196D1D24B71F00D10287 /* EditAddressVc.m in Sources */,
+				039A196A1D24A9EE00D10287 /* ResetPhoneVc.m in Sources */,
 				032224D51D22761E00B20525 /* RedCouponVc.m in Sources */,
 				038B195B1D12A88F007C1CC8 /* GSValidate.m in Sources */,
 				038B19341D12A44B007C1CC8 /* NSString+Addition.m in Sources */,
@@ -1081,6 +1120,7 @@
 				03BB29771D179A7500EDEDFD /* MainClassModel.m in Sources */,
 				038B19381D12A44B007C1CC8 /* UIImage+Scale.m in Sources */,
 				038B19571D12A88F007C1CC8 /* EGOCache.m in Sources */,
+				039A19711D24C9B500D10287 /* AddressInfoVc.m in Sources */,
 				038B19311D12A44B007C1CC8 /* Cipher.m in Sources */,
 				034D89ED1D1BCD29005806C7 /* GoodsCountsView.m in Sources */,
 				0360BCD71D2264EE00A2C07D /* UserNewsVc.m in Sources */,

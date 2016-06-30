@@ -8,6 +8,7 @@
 
 #import "LoginVC.h"
 #import "Img_TextfieldCell.h"
+#import "ResetPassWordVc.h"
 
 @interface LoginVC ()
 @property (weak, nonatomic) IBOutlet UITableView *tabView;
@@ -113,7 +114,9 @@
 
 #pragma mark - 忘记密码
 - (IBAction)click_forgetPassWord:(id)sender {
-    KJumpToViewControllerByNib(@"ResetPassWordVc");
+    ResetPassWordVc * vc = [[NSClassFromString(@"ResetPassWordVc") alloc]initWithNibName:@"ResetPassWordVc" bundle:nil];
+    vc.showType = ResetPassWordVcNomal;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 获取验证码

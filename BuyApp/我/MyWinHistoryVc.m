@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"我的账户";
+    self.title = @"中奖记录";
     
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
@@ -40,9 +40,6 @@
     self.topView.frame = CGRectMake(0, 0, K_WIDTH, 120);
     self.topView.showType = UserTopViewOnly;
     self.tableView.tableHeaderView = self.topView;
-    
-    
-    
     
 }
 

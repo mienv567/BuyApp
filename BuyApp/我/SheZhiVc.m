@@ -9,6 +9,7 @@
 #import "SheZhiVc.h"
 #import "Img_ContentCell.h"
 #import "UserTopView.h"
+#import "ResetPassWordVc.h"
 
 @interface SheZhiVc ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)  UITableView *tableView;
@@ -69,6 +70,33 @@
 - (void)click_chongchi:(id)sender{
     KJumpToViewControllerByNib(@"ChongZhiVc");
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    switch (indexPath.row) {
+        case 0:
+        {
+             ResetPassWordVc * vc = [[NSClassFromString(@"ResetPassWordVc") alloc]initWithNibName:@"ResetPassWordVc" bundle:nil];
+            vc.showType = ResetPassWordVcPassWord;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 1:
+        {
+            ResetPassWordVc * vc = [[NSClassFromString(@"ResetPassWordVc") alloc]initWithNibName:@"ResetPassWordVc" bundle:nil];
+            vc.showType = ResetPassWordVcPhone;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 2:
+        {
+            KJumpToViewController(@"EditAddressVc");
+        }
+            break;
+        default:
+            break;
+    }
+}
+
 
 #pragma mark - Table view data source
 

@@ -8,6 +8,18 @@
 
 #import "RootViewController.h"
 
+
+
+typedef NS_ENUM(NSUInteger, ResetPassWordVcType) {
+    ResetPassWordVcNomal = 0,
+    ResetPassWordVcPhone,
+    ResetPassWordVcPassWord,
+};
+
+
+
 @interface ResetPassWordVc : RootViewController
 
+
+@property (nonatomic) ResetPassWordVcType showType;
 @end

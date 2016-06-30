@@ -168,8 +168,27 @@
     self.navigationItem.titleView = titleLabel;
 }
 
+//设置页面标题
+- (void)setRedTitleLabel:(NSString *)titleStr{
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0 , 200, 80)];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.font = [UIFont systemFontOfSize:20];
+    titleLabel.textColor = GS_COLOR_RED;//设置文本颜色
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.numberOfLines=1;
+    titleLabel.lineBreakMode=NSLineBreakByTruncatingTail;
+    titleLabel.text =titleStr;
+    titleLabel.center = self.navigationItem.titleView.center;
+    self.navigationItem.titleView = titleLabel;
+}
+
+
 
 #pragma mark - Wating Method
+
+-(void)setTitle:(NSString *)title{
+    [self setRedTitleLabel:title];
+}
 
 -(void)click_rightNav{
     [self.navigationController popToRootViewControllerAnimated:NO];
