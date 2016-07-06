@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"夺宝记录";
+    self.title = @"我的红包";
     [self setRightButton:@" " action:nil];
     [self setRightButtonTitle:@"红包兑换" action:@selector(click_History)];
     

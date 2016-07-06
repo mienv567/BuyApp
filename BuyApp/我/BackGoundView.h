@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSUInteger, BackGoundViewType) {
-    BackGoundViewShopCar,
+    BackGoundViewNoData,
     BackGoundViewWinHistory,
     BackGoundViewRedCoupon,
 };

@@ -48,7 +48,12 @@
                                                                                       @"user_id ":CNull2String(USERMODEL.ID)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           if (SUCCESSED) {
-                                                                                                  [self.dataArray addObjectsFromArray:[NewsModel arrayOfModelsFromDictionaries:responseObject[@"value"] error:nil]];
+                                                                                                  [self.dataArray addObjectsFromArray:[NewsModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"list"] error:nil]];
+                                                                                              if (self.dataArray.count == 0) {
+                                                                                                  BackGoundView * view = KGetViewFromNib(@"BackGoundView");
+                                                                                                  view.myType = BackGoundViewNoData;
+                                                                                                  self.tableView.backgroundView = view;
+                                                                                              }
                                                                                           }else{
                                                                                               ShowNotce;
                                                                                           }

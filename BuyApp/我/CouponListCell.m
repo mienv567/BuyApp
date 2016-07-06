@@ -7,7 +7,7 @@
 //
 
 #import "CouponListCell.h"
-
+#import "MainTabBarVc.h"
 @implementation CouponListCell
 
 - (void)awakeFromNib {
@@ -30,11 +30,11 @@
         make.left.equalTo(self.view_grayBackGound).offset(20);
         make.bottom.equalTo(self.img_line.mas_top);
         make.top.equalTo(self.view_infoBackGound.mas_top);
-
+        make.width.mas_equalTo(@50);
     }];
     
     [self.lab_title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view_infoBackGound).offset(10);
+        make.top.equalTo(self.view_infoBackGound).offset(20);
         make.left.equalTo(self.lab_money.mas_right).offset(20);
         make.right.equalTo(self.view_infoBackGound).offset(-10);
         make.height.mas_equalTo(@20);
@@ -64,15 +64,39 @@
     self.btn_buy.layer.masksToBounds = YES;
     self.btn_buy.backgroundColor = GS_COLOR_RED;
     [self.btn_buy mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.img_line.mas_bottom).offset(5);
+        make.top.equalTo(self.img_line.mas_bottom).offset(7);
         make.right.equalTo(self.view_infoBackGound).offset(-10);
         make.width.mas_equalTo(@80);
-        make.bottom.equalTo(self.view_infoBackGound.mas_bottom).offset(-5);
+        make.bottom.equalTo(self.view_infoBackGound.mas_bottom).offset(-7);
     }];
     
 }
 
+-(void)dealloc{
+    self.myRootVc = nil;
+}
+
 - (IBAction)click_buyNow:(id)sender {
+    [self.myRootVc.navigationController popToRootViewControllerAnimated:NO];
+     [[MainTabBarVc shared] changeTabBarAtIndex:0];
+}
+
+-(void)setDataModel:(CouponModel *)model{
+    if ([model.use_status integerValue]!= 0) {
+        self.view_grayBackGound.backgroundColor = GS_COLOR_LIGHTGRAY;
+        self.btn_buy.hidden = YES;
+    }
+
+    self.lab_title.text = model.name;
+    self.lab_content.text = model.memo;
+    self.lab_useTime.text = model.datetime;
+    
+    NSMutableAttributedString *statusStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"¥%@",model.money]];
+    [statusStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 1)];
+    [statusStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(0, 1)];
+    [statusStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:NSMakeRange(1, statusStr.length - 1)];
+    [statusStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(1,statusStr.length - 1)];
+    self.lab_money.attributedText = statusStr;
     
     
 }

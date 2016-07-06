@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UINib * nib;
 @property (strong, nonatomic)  AllCountsView *allCountsView;
 @property (strong, nonatomic)  NSMutableArray *dataArray;
+@property (nonatomic)NSInteger pageNo;
 @end
 
 @implementation CouponListVc
@@ -25,6 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setRightButton:@" " action:nil];
+    self.pageNo= 0;
     
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
@@ -37,39 +39,54 @@
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    self.dataArray = [NSMutableArray array];
+    self.dataArray = [NSMutableArray array];    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNew)];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 
     if (self.dataArray.count == 0) {
-        [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
-                                                                         withParameters:@{@"ctl":@"uc_ecv",
-                                                                                          @"act":@"index",
-                                                                                          @"user_id ":CNull2String(USERMODEL.ID),
-                                                                                          @"n_valid":self.n_validString
-                                                                                          } success:^(NSURLSessionDataTask *task, id responseObject) {
-                                                                                              if (SUCCESSED) {
-                                                                                                  [self.dataArray addObjectsFromArray:[CouponModel arrayOfModelsFromDictionaries:responseObject[@"data"] error:nil]];
-                                                                                                  
-                                                                                              }else{
-                                                                                                  ShowNotce;
-                                                                                              }
-                                                                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                                                                              
-                                                                                          }];
-
+        [self loadNew];
     }
 
 }
+-(void)loadNew{
+    self.pageNo =0;
+    [self.dataArray removeAllObjects];
+    [self loadMore];
+}
 
+
+-(void)loadMore{
+    self.pageNo ++;
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"uc_ecv",
+                                                                                      @"act":@"index",
+                                                                                      @"user_id ":CNull2String(USERMODEL.ID),
+                                                                                      @"n_valid":self.n_validString
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          [self.tableView.mj_header endRefreshing];
+                                                                                          [self.tableView.mj_footer endRefreshing];
+                                                                                          if (SUCCESSED) {
+                                                                                              [self.dataArray addObjectsFromArray:[CouponModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"data"] error:nil]];
+                                                                                              [self.tableView reloadData];
+                                                                                          }else{
+                                                                                              ShowNotce;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          [self.tableView.mj_header endRefreshing];
+                                                                                          [self.tableView.mj_footer endRefreshing];
+                                                                                      }];
+
+}
 
 #pragma mark - Table view data source
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 160;
+    return 180;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -93,26 +110,10 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryNone;
     
-    if (self.n_validString) {
-        
-    }else{
-    
-    }
-    
     if (self.dataArray.count > indexPath.row) {
-        CouponModel * model = [self.dataArray objectAtIndex:indexPath.row];
-        cell.lab_title.text = model.name;
-#warning 缺少详情字段
-        cell.lab_content.text = @"无该字段";
-        cell.lab_useTime.text =[NSString stringWithFormat:@"%@ - %@",model.begin_time,model.end_time];
-        
-        NSMutableAttributedString *statusStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"¥%@",model.money]];
-        [statusStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11] range:NSMakeRange(0, 1)];
-        [statusStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 1)];
-        [statusStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(1, statusStr.length - 1)];
-        [statusStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(1,statusStr.length - 1)];
-        cell.lab_money.attributedText = statusStr;
-        
+        WeakSelf;
+        cell.myRootVc = weakSelf;
+        [cell setDataModel:[self.dataArray objectAtIndex:indexPath.row]];
     }
     
     return cell;

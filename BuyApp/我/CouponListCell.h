@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CouponModel.h"
+#import "CouponListVc.h"
 
 @interface CouponListCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIView *view_grayBackGound;
@@ -17,5 +19,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *img_line;
 @property (weak, nonatomic) IBOutlet UILabel *lab_useTime;
 @property (weak, nonatomic) IBOutlet UIButton *btn_buy;
-
+@property (nonatomic,strong)CouponListVc * myRootVc;
+-(void)setDataModel:(CouponModel *)model;
 @end

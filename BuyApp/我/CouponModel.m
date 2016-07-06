@@ -9,5 +9,11 @@
 #import "CouponModel.h"
 
 @implementation CouponModel
++(JSONKeyMapper*)keyMapper
+{
+    return [[JSONKeyMapper alloc] initWithDictionary:@{
+                                                       @"id" : @"ID"
+                                                       }];
+}
 
 @end

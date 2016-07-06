@@ -20,8 +20,9 @@
         make.width.height.mas_equalTo(@100);
     }];
     
+    self.lab_content.textColor = GS_COLOR_DARKGRAY;
     [self.lab_content mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.img_icon);
+        make.width.mas_equalTo(@200);
         make.centerX.equalTo(self);
         make.top.equalTo(self.img_icon.mas_bottom).offset(10);
     }];
@@ -45,12 +46,13 @@
     
 }
 
+
 -(void)setMyType:(BackGoundViewType )myType{
     _myType = myType;
     switch (myType) {
-        case BackGoundViewShopCar:
+        case BackGoundViewNoData:
         {
-            self.img_icon.image = [UIImage imageNamed:@"Backgound1"];
+            self.img_icon.image = [UIImage imageNamed:@"Backgound3"];
             self.lab_content.text = @"暂无数据";
             self.btn_action.hidden = YES;
             [self.img_icon mas_remakeConstraints:^(MASConstraintMaker *make) {
