@@ -65,7 +65,7 @@
 }
 
 - (IBAction)click_delete:(id)sender {
-    
+    [self.myRootVc click_delete:self];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -51,10 +51,12 @@
     
     self.firstVc = [[CouponListVc alloc]init];
     self.firstVc.view.frame = CGRectMake(0, 50, K_WIDTH, K_HEIGHT);
+    self.firstVc.n_validString = @"0";
     [self addChildViewController:self.firstVc];
     
     self.secondVc = [[CouponListVc alloc]init];
     self.secondVc.view.frame = CGRectMake(K_WIDTH, 50, K_WIDTH, K_HEIGHT);
+    self.secondVc.n_validString = @"1";
     [self addChildViewController:self.secondVc];
     
     self.contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 50, K_WIDTH, K_HEIGHT - 50 - 64)];
@@ -123,6 +125,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(K_WIDTH, 64)] forBarMetrics:UIBarMetricsDefault];
+    
 }
 
 

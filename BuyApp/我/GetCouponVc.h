@@ -7,7 +7,8 @@
 //
 
 #import "RootViewController.h"
+#import "CouponGetCell.h"
 
 @interface GetCouponVc : RootViewController
-
+- (void)click_getCoupon:(CouponGetCell *)sender;
 @end

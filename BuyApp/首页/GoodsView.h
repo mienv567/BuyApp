@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MainGoodsModel.h"
+#import "MainNewGoodsModel.h"
+
 
 @interface GoodsView : UIView
-- (void)setDataModel:(MainGoodsModel *)model;
+- (void)setDataModel:(MainNewGoodsModel *)model;
 
 @end

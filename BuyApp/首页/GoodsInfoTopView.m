@@ -148,6 +148,21 @@
     }
 }
 
+
+-(void)setDataModel:(GoodsInfoModel *)model{
+    self.lab_title.text = model.name;
+    self.lab_state.text = model.status;
+    self.lab_processQihao.text = [NSString stringWithFormat:@"期号:%@",model.schedule];
+    self.lab_all.text = [NSString stringWithFormat:@"总需%@人次",model.max_buy];
+    
+    NSMutableAttributedString *lastString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"剩余%@",@"暂无数据"]];
+    [lastString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(2, lastString.length - 2)];
+    [lastString addAttribute:NSForegroundColorAttributeName value:GS_COLOR_BLUE range:NSMakeRange(2, lastString.length - 2)];
+    self.lab_last.attributedText = lastString;
+
+}
+
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

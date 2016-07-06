@@ -121,7 +121,7 @@
                 <outlet property="view_showProcess" destination="Wap-9b-B0r" id="N0g-vG-n4r"/>
                 <outlet property="view_showTime" destination="hLY-XB-4BJ" id="KpO-lL-0R3"/>
             </connections>
-            <point key="canvasLocation" x="579" y="246.5"/>
+            <point key="canvasLocation" x="105" y="259.5"/>
         </view>
     </objects>
 </document>

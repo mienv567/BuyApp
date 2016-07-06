@@ -12,5 +12,7 @@ target 'BuyApp' do
 	pod 'IQKeyboardManager', '~> 3.3.4'
 	pod 'HMSegmentedControl', '~> 1.5.2'
 	pod 'BlocksKit', '~> 2.2.5'
+    pod 'pop', '~> 1.0.9'
+    pod 'MZTimerLabel', '~> 0.5.4'
 end
 

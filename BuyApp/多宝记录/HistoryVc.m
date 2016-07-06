@@ -50,14 +50,17 @@
     
     self.firstVc = [[WinHistoryVc alloc]init];
     self.firstVc.view.frame = CGRectMake(0, 50, K_WIDTH, K_HEIGHT);
+    self.firstVc.log_type = @"0";
     [self addChildViewController:self.firstVc];
 
     self.secondVc = [[WinHistoryVc alloc]init];
     self.secondVc.view.frame = CGRectMake(K_WIDTH, 50, K_WIDTH, K_HEIGHT);
+    self.secondVc.log_type = @"1";
     [self addChildViewController:self.secondVc];
 
     self.thirdVc = [[WinHistoryVc alloc]init];
     self.thirdVc.view.frame = CGRectMake(K_WIDTH * 1, 50, K_WIDTH, K_HEIGHT);
+    self.thirdVc.log_type = @"2";
     [self addChildViewController:self.thirdVc];
 
     self.contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 50, K_WIDTH, K_HEIGHT - 50 - 64)];

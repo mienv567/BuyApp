@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BackGoundView.h"
 
 @interface RootViewController : UIViewController
+
+@property (nonatomic, strong)BackGoundView * backGoundView;
+
 + (void)showAlerMessage:(NSString *)message;
 //加载等待视图
 - (void)needLogin;

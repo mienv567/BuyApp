@@ -8,7 +8,6 @@
 
 #import "GetCouponVc.h"
 #import "RedCouponTopView.h"
-#import "CouponGetCell.h"
 
 @interface GetCouponVc ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)  UITableView *tableView;
@@ -25,7 +24,7 @@
     // Do any additional setup after loading the view from its nib.
     [self setRightButton:@" " action:nil];
     [self setTitleLabel:@"红包兑换"];
-    
+    [self setLeftButton:@"backWhite" action:@selector(navBackVc)];
     
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
@@ -43,6 +42,26 @@
     self.tableView.tableHeaderView = self.topView;
     
 }
+
+- (void)click_getCoupon:(CouponGetCell *)sender{
+    NSIndexPath * index = [self.tableView indexPathForCell:sender];
+    
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"uc_ecv",
+                                                                                      @"act":@"do_snexchange",
+                                                                                      @"sn ":CNull2String(USERMODEL.ID),
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          if (SUCCESSED) {
+                                                                                              
+                                                                                          }else{
+                                                                                              ShowNotce;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          
+                                                                                      }];
+
+}
+
 
 #pragma mark - Table view data source
 
@@ -68,6 +87,8 @@
     }
     
     CouponGetCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+    WeakSelf;
+    cell.myRootVc = weakSelf;
     cell.backgroundColor = GS_COLOR_WHITE;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryNone;
@@ -108,6 +129,9 @@
     }
 }
 
+-(void)navBackVc{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 /*
  #pragma mark - Navigation

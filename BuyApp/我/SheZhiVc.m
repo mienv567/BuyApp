@@ -10,6 +10,7 @@
 #import "Img_ContentCell.h"
 #import "UserTopView.h"
 #import "ResetPassWordVc.h"
+#import "MainTabBarVc.h"
 
 @interface SheZhiVc ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)  UITableView *tableView;
@@ -63,7 +64,9 @@
 }
 
 -(void)click_loginOut{
-    KPopToLastViewController;
+    [[UserManager sharedManager] loginOut];
+    [self.navigationController popViewControllerAnimated:NO];
+    [[MainTabBarVc shared] changeTabBarAtIndex:0];
 }
 
 

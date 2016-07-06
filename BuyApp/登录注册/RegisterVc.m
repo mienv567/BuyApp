@@ -67,7 +67,7 @@
     [self.btn_code setTitle:@"点击获取验证码" forState:UIControlStateNormal];
     [self.btn_code setTitleColor:GS_COLOR_RED forState:UIControlStateNormal];
     
-    [self.btn_code setEnabled:NO];
+    [self.btn_code setEnabled:YES];
     self.btn_Login.backgroundColor = GS_COLOR_LIGHTGRAY;
     [self.btn_Login setTitleColor:GS_COLOR_GRAY forState:UIControlStateNormal];
 }
@@ -80,6 +80,45 @@
 #pragma mark - 
 - (IBAction)click_login:(id)sender {
     
+    if ([GSValidate validateString:self.txf_mobile.text withRequireType:RequireTypeIsMobile] && [GSValidate validateStringLong:self.txf_mobile.text requireMinLong:11] ) {
+        
+    }else{
+        [MBProgressHUD showError:@"请检查手机号码"];
+        return;
+    }
+    
+    if ([GSValidate validateStringLong:self.txf_code.text requireMinLong:6]) {
+        
+    }else{
+        [MBProgressHUD showError:@"请检查验证码"];
+        return;
+    }
+    
+    if ([GSValidate validateStringLong:self.txf_password.text requireMinLong:6] && [GSValidate validateStringLong:self.txf_password.text requireMaxLong:10]) {
+        
+    }else{
+        [MBProgressHUD showError:@"请检查密码"];
+        return;
+    }
+    
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"user",
+                                                                                      @"act":@"dophregister",
+                                                                                      @"mobile":CNull2String(self.txf_mobile.text),
+                                                                                      @"sms_verify":CNull2String(self.txf_code.text),
+                                                                                      @"user_pwd":CNull2String(self.txf_password.text)
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          if (SUCCESSED) {
+                                                                                              UserModel * userModel = [[UserModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
+                                                                                              [[UserManager sharedManager] saveLoginUser:userModel];
+                                                                                              [self click_cancleLogin];
+
+                                                                                          }else{
+                                                                                              ShowNotce;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          
+                                                                                      }];
 }
 
 #pragma mark - 忘记密码
@@ -93,8 +132,22 @@
 -(void)click_getCode{
     
     if ([GSValidate validateString:self.txf_mobile.text withRequireType:RequireTypeIsMobile] && [GSValidate validateStringLong:self.txf_mobile.text requireMinLong:11]) {
-        self.countDown = maxNum;
-        [self getCodeCountDown];
+        [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                         withParameters:@{@"ctl":@"ajax",
+                                                                                          @"act":@"send_sms_code",
+                                                                                          @"mobile ":CNull2String(self.txf_mobile.text),
+                                                                                          @"unique":@"0"
+                                                                                          } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                              if (SUCCESSED) {
+                                                                                                  self.countDown = maxNum;
+                                                                                                  [self getCodeCountDown];
+                                                                                              }else{
+                                                                                                  
+                                                                                              }
+                                                                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                              
+                                                                                          }];
+
     }else{
         [MBProgressHUD showError:@"请重新检查手机号码是否正确"];
     }
@@ -235,11 +288,9 @@
 
     
     if (mobile && code && pass) {
-        [self.btn_code setEnabled:YES];
         self.btn_Login.backgroundColor = GS_COLOR_RED;
         [self.btn_Login setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }else{
-        [self.btn_code setEnabled:NO];
         self.btn_Login.backgroundColor = GS_COLOR_LIGHTGRAY;
         [self.btn_Login setTitleColor:GS_COLOR_GRAY forState:UIControlStateNormal];
     }

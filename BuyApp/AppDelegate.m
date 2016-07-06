@@ -14,8 +14,16 @@
 #import "NewsVc.h"
 #import "LoginVC.h"
 
+#import "JPUSHService.h"
+
+static NSString *appKey = @"eac3de4a7717dc5354ba849a";
+static NSString *channel = @"iOS test";
+static BOOL isProduction = FALSE;
 
 @interface AppDelegate () <UIAlertViewDelegate>
+
+@property (nonatomic, strong) NSTimer *timerCountDown;  //倒计时
+@property (nonatomic) NSInteger countDown;              //倒计时值
 
 @end
 
@@ -24,7 +32,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
     
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setTitleTextAttributes: @{NSForegroundColorAttributeName : GS_COLOR_RED,
@@ -51,7 +58,7 @@
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : GS_COLOR_Main,
                                                         NSFontAttributeName : [UIFont gs_boldfont:NSAppFontS]}
                                              forState:UIControlStateNormal];
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName :  HEXRGBCOLOR(0xff7423),
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName :  GS_COLOR_Gold,
                                                         NSFontAttributeName : [UIFont gs_boldfont:NSAppFontS]}
                                              forState:UIControlStateSelected];
     
@@ -60,8 +67,73 @@
     self.window.rootViewController = self.nav;
     self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
+    
+    
+    
+    
+    //Required
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        //可以添加自定义categories
+        [JPUSHService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+                                                          UIUserNotificationTypeSound |
+                                                          UIUserNotificationTypeAlert)
+                                              categories:nil];
+    } else {
+        //categories 必须为nil
+        [JPUSHService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                          UIRemoteNotificationTypeSound |
+                                                          UIRemoteNotificationTypeAlert)
+                                              categories:nil];
+    }
+    //Required
+    // 如需继续使用pushConfig.plist文件声明appKey等配置内容，请依旧使用[JPUSHService setupWithOption:launchOptions]方式初始化。
+    [JPUSHService setupWithOption:launchOptions appKey:appKey
+                          channel:channel
+                 apsForProduction:isProduction
+            advertisingIdentifier:nil];
+    
+    
+    self.countDown = 0;
+    self.timerCountDown = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(handleCountDown:) userInfo:nil repeats:NO];
+    [[NSRunLoop mainRunLoop] addTimer:self.timerCountDown forMode:NSRunLoopCommonModes];
+    
+    
     return YES;
 }
+
+- (void)handleCountDown:(NSTimer *)sender{
+    if(self.timerCountDown){
+        [self.timerCountDown invalidate];
+    }
+    self.timerCountDown = nil;
+    self.countDown++;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:Notification_Main object:@(self.countDown)];
+    self.timerCountDown = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(handleCountDown:) userInfo:nil repeats:NO];
+    [[NSRunLoop mainRunLoop] addTimer:self.timerCountDown forMode:NSRunLoopCommonModes];
+}
+
+
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    // Required,For systems with less than or equal to iOS6
+    [JPUSHService handleRemoteNotification:userInfo];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+    // IOS 7 Support Required
+    [JPUSHService handleRemoteNotification:userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    //Optional
+    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+}
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -86,9 +158,12 @@
 }
 
 - (void)showNeedLoginAlertView{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还未登录，请先登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
-    alert.tag = 10086;
-    [alert show];
+    LoginVC *phoneVC = [[NSClassFromString(@"LoginVC") alloc]initWithNibName:@"LoginVC" bundle:nil];
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:phoneVC];
+    [self.window.rootViewController  presentViewController:nc animated:NO completion:nil];
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还未登录，请先登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
+//    alert.tag = 10086;
+//    [alert show];
 }
 
 #pragma mark - alertView delegate

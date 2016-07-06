@@ -19,8 +19,8 @@ typedef NS_ENUM(NSUInteger, UserTopViewType) {
 @property (weak, nonatomic) IBOutlet UIView *view_topBackGound;
 @property (weak, nonatomic) IBOutlet UIView *view_bottomBackGound;
 @property (weak, nonatomic) IBOutlet UIImageView *img_header;
-@property (weak, nonatomic) IBOutlet UIView *lab_userName;
-@property (weak, nonatomic) IBOutlet UIView *lab_content;
+@property (weak, nonatomic) IBOutlet UILabel *lab_userName;
+@property (weak, nonatomic) IBOutlet UILabel *lab_content;
 @property (weak, nonatomic) IBOutlet UILabel *lab_coinCount;
 @property (weak, nonatomic) IBOutlet UIButton *btn_Chongzhi;
 

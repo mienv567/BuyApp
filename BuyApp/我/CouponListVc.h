@@ -9,5 +9,5 @@
 #import "RootViewController.h"
 
 @interface CouponListVc : RootViewController
-
+@property (strong, nonatomic)  NSString *n_validString;//是否可使用(0可使用，1不可使用) 默认为可使用
 @end

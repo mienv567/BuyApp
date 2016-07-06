@@ -9,12 +9,13 @@
 #import "MyWinHistoryVc.h"
 #import "MyWinListCell.h"
 #import "UserTopView.h"
+#import "WinHistoryModel.h"
 
 @interface MyWinHistoryVc ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)  UITableView *tableView;
 @property (nonatomic, strong)  UINib * nib;
 @property (nonatomic, strong)  UserTopView * topView;
-
+@property (nonatomic, strong)  NSMutableArray * dataArray;
 @end
 
 @implementation MyWinHistoryVc
@@ -39,8 +40,29 @@
     self.topView = KGetViewFromNib(@"UserTopView");
     self.topView.frame = CGRectMake(0, 0, K_WIDTH, 120);
     self.topView.showType = UserTopViewOnly;
+    self.topView.lab_userName.text = CNull2String(USERMODEL.user_name);
+    self.topView.lab_content.text = [NSString stringWithFormat:@"ID:%@",USERMODEL.ID];
     self.tableView.tableHeaderView = self.topView;
     
+    self.dataArray = [NSMutableArray array];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"user_center",
+                                                                                      @"act":@"index",
+                                                                                      @"user_id ":CNull2String(USERMODEL.ID)
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          if (SUCCESSED) {
+                                                                                              [self.dataArray addObjectsFromArray:[WinHistoryModel arrayOfModelsFromDictionaries:responseObject[@"value"] error:nil]];
+                                                                                          }else{
+                                                                                              ShowNotce;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          
+                                                                                      }];
+
 }
 
 #pragma mark - Table view data source
@@ -54,7 +76,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -64,11 +86,13 @@
         self.nib = [UINib nibWithNibName:@"MyWinListCell" bundle:nil];
         [tableView registerNib:self.nib forCellReuseIdentifier:identy];
     }
-    
     MyWinListCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
     cell.backgroundColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    if (self.dataArray.count > indexPath.row) {
+#warning 我的中奖纪录接口，缺少标题，参与期号，下单时间，
+        [cell setDataModel:[self.dataArray objectAtIndex:indexPath.row]];
+    }
     return cell;
 }
 

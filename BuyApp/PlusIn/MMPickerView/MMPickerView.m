@@ -19,7 +19,7 @@ NSString * const MMtoolbarBackgroundImage = @"toolbarBackgroundImage";
 NSString * const MMtextAlignment = @"textAlignment";
 NSString * const MMshowsSelectionIndicator = @"showsSelectionIndicator";
 
-@interface MMPickerView () <UIPickerViewDelegate, UIPickerViewDataSource>
+@interface MMPickerView () <UIPickerViewDelegate, UIPickerViewDataSource,UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UILabel *pickerViewLabel;
 @property (nonatomic, strong) UIView *pickerViewLabelView;
@@ -181,7 +181,7 @@ NSString * const MMshowsSelectionIndicator = @"showsSelectionIndicator";
   
   UIColor *pickerViewBackgroundColor = [[UIColor alloc] initWithCGColor:[options[MMbackgroundColor] CGColor]];
   UIColor *pickerViewTextColor = [[UIColor alloc] initWithCGColor:[options[MMtextColor] CGColor]];
-  UIColor *toolbarBackgroundColor = [[UIColor alloc] initWithCGColor:[options[MMtoolbarColor] CGColor]];
+  UIColor *toolbarBackgroundColor = GS_COLOR_LIGHTGRAY;
   UIColor *buttonTextColor = [[UIColor alloc] initWithCGColor:[options[MMbuttonColor] CGColor]];
   UIFont *pickerViewFont = [[UIFont alloc] init];
   pickerViewFont = options[MMfont];
@@ -196,7 +196,17 @@ NSString * const MMshowsSelectionIndicator = @"showsSelectionIndicator";
   _pickerViewContainerView = [[UIView alloc] initWithFrame:view.bounds];
   [_pickerViewContainerView setBackgroundColor: [UIColor colorWithRed:0.412 green:0.412 blue:0.412 alpha:0.7]];
   [self addSubview:_pickerViewContainerView];
-  
+    
+    UITapGestureRecognizer *singleFingerOne = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(tap_backGound)];
+    singleFingerOne.numberOfTouchesRequired = 1; //手指数
+    singleFingerOne.numberOfTapsRequired = 1; //tap次数
+    singleFingerOne.delegate = self;
+    [_pickerViewContainerView addGestureRecognizer:singleFingerOne];
+    
+    
+    
+    
+    
   //PickerView Container with top bar
   _pickerContainerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, _pickerViewContainerView.bounds.size.height - 260.0, K_WIDTH, 260.0)];
     
@@ -249,7 +259,7 @@ NSString * const MMshowsSelectionIndicator = @"showsSelectionIndicator";
   //Top bar view
   _pickerTopBarView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, _pickerContainerView.frame.size.width, 44.0)];
   [_pickerContainerView addSubview:_pickerTopBarView];
-  [_pickerTopBarView setBackgroundColor:[UIColor whiteColor]];
+  [_pickerTopBarView setBackgroundColor:GS_COLOR_LIGHTGRAY];
   
   
   _pickerViewToolBar = [[UIToolbar alloc] initWithFrame:_pickerTopBarView.frame];
@@ -281,7 +291,7 @@ NSString * const MMshowsSelectionIndicator = @"showsSelectionIndicator";
     _pickerViewBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
     
   _pickerViewToolBar.items = @[flexibleSpace, _pickerViewBarButtonItem];
-  [_pickerViewBarButtonItem setTintColor:buttonTextColor];
+  [_pickerViewBarButtonItem setTintColor:GS_COLOR_LIGHTBLACK];
   
   //[_pickerViewBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIFont fontWithName:@"Helvetica-Neue" size:23.0], UITextAttributeFont,nil] forState:UIControlStateNormal];
   
@@ -304,6 +314,23 @@ NSString * const MMshowsSelectionIndicator = @"showsSelectionIndicator";
   
   //Set selected row
   [_pickerView selectRow:selectedRow inComponent:0 animated:YES];
+}
+
+-(void)tap_backGound{
+    
+    [UIView animateWithDuration:0.3
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         
+                         if (YES) {
+                             [_pickerViewContainerView setAlpha:0.0];
+                             [_pickerContainerView setTransform:CGAffineTransformMakeTranslation(0.0, CGRectGetHeight(_pickerContainerView.frame))];
+                         }
+                     } completion:^(BOOL completed) {
+                             [MMPickerView removePickerView];
+                     }];
+    
 }
 
 #pragma mark - UIPickerViewDataSource

@@ -8,6 +8,7 @@
 
 #import "RootViewController.h"
 #import "ASPageView.h"
+#import "MainNewsModel.h"
 
 @interface MainVc : RootViewController
 
@@ -15,7 +16,7 @@
 - (void)tapAction:(NSInteger)index;
 
 //显示获奖详情
--(void)click_showNewsInfo:(id)data;
+-(void)click_showNewsInfo:(MainNewsModel *)model;
 
 //循环广告
 -(void)pageView:(ASPageView *)pageView didSelected:(NSInteger)index;

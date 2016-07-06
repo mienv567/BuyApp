@@ -3,7 +3,7 @@
 //  ChemicalApp
 //
 //  Created by D on 16/5/6.
-//  Copyright © 2016年 JIYun. All rights reserved.
+//  Copyright © 2016年 Super_D. All rights reserved.
 //
 
 #import "Title_ContentOrImg_Cell.h"

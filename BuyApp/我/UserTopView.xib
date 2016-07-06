@@ -69,8 +69,8 @@
                 <outlet property="btn_Chongzhi" destination="wBk-QW-2vO" id="qo5-rL-JMD"/>
                 <outlet property="img_header" destination="vMI-hC-9HQ" id="eeb-pk-Zpe"/>
                 <outlet property="lab_coinCount" destination="r99-K5-b07" id="x6A-ek-eUB"/>
-                <outlet property="lab_content" destination="oeZ-MH-Gan" id="RUi-P5-GCN"/>
-                <outlet property="lab_userName" destination="oeZ-MH-Gan" id="oCh-ZL-M5d"/>
+                <outlet property="lab_content" destination="IC5-Pw-fjk" id="dnX-vw-hnQ"/>
+                <outlet property="lab_userName" destination="phv-ai-8OU" id="vyx-3r-hyG"/>
                 <outlet property="view_bottomBackGound" destination="anu-2u-db7" id="Rpm-0z-L6u"/>
                 <outlet property="view_topBackGound" destination="oeZ-MH-Gan" id="liQ-Is-XJY"/>
             </connections>

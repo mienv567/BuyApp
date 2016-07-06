@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MainGoodsListModel.h"
 
 @interface MainGoodsListCells : UICollectionViewCell
 
@@ -15,7 +16,7 @@
 @property (strong, nonatomic)  UILabel *lab_process;
 @property (strong, nonatomic)  UIButton *btn_addList;
 @property (strong, nonatomic)  UIProgressView *view_process;
-
--(void)setDataModel:(id)model;
+@property (strong, nonatomic)  MainGoodsListModel *myModel;
+-(void)setDataModel:(MainGoodsListModel *)model;
 
 @end

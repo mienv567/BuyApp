@@ -7,7 +7,8 @@
 //
 
 #import "RootViewController.h"
+#import "UserNewsCell.h"
 
 @interface UserNewsVc : RootViewController
-
+-(void)click_delete:(UserNewsCell *)sender;
 @end

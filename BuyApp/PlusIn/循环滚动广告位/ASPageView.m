@@ -7,6 +7,7 @@
 //
 
 #import "ASPageView.h"
+#import "MainAdvModel.h"
 
 @interface ASPageView ()
 @property (nonatomic, strong) UIScrollView *contentView;
@@ -70,15 +71,14 @@
     [self.contentView removeAllSubViews];
     UIImageView *lastView = nil;
     for(int i = 0; i < [self.items count]; i++){
+        MainAdvModel * model = [self.items objectAtIndex:i];
         UIImageView *iv = [[UIImageView alloc] init];
         iv.userInteractionEnabled = YES;
-        iv.image = KDefaultImg;
-
         iv.backgroundColor = [UIColor clearColor];//设置了背景颜色
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap_Image:)];
         [iv addGestureRecognizer:tap];
         iv.tag = i;
-        [iv sd_setImageWithURL:[NSURL URLWithString:self.items[i]] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [iv sd_setImageWithURL:[NSURL URLWithString:model.img] placeholderImage:KDefaultImg completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             if (error) {
                 iv.contentMode = UIViewContentModeCenter;
                 iv.image = KDefaultImg;

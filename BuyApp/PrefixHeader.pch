@@ -18,6 +18,7 @@
 #import <MapKit/MapKit.h>
 #import <CoreData/CoreData.h>
 #import <QuartzCore/QuartzCore.h>
+//#import "IQKeyboardManager.h"
 
 #import "Define.h"
 #import "JSONModel.h"
@@ -39,4 +40,8 @@
 #import "keypath.h"
 #import "scope.h"
 
+
+#import "NetworkManager.h"
+#import "UserManager.h"
+#import "POP.h"
 #endif

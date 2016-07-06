@@ -7,15 +7,14 @@
 //
 
 #import "UserNewsVc.h"
-#import "UserNewsCell.h"
 #import "UITableViewCell+GSMasonryAutoCellHeight.h"
+#import "NewsModel.h"
 
-#define titleArray @[@"如果设置为YES，",@"如果设置为YES，若有缓存，则更新缓存，否则直接计算并缓存,",@"如果设置为YES，若有缓存，则更新缓存，否则直接计算并缓存,主要是对社交这种有动态评论等不同状态，高度也会不同的情况的处理~~如果设置为YES，若有缓存，则更新缓存，否则直接计算并缓存,主要是对社交这种有动态评论等不同状态，高度也会不同的情况的处理",@"如果设置为YES，",@"如果设置为YES，若有缓存，则更新缓存，否则直接计算并缓存,主要是对社交这种有动态评论等不同状态，高度也会不同的情况的处理~~如果设置为YES，",@"如果设置为YES，若有缓存，则更新缓存，否则直接计算并缓存,主要是对社交这种有动态评论等不同状态，高度也会不同的情况的处理~~如果设置为YES，若有缓存，则更新缓存，否则直接计算并缓存,主要是对社交这种有动态评论等不同状态，高度也会不同的情况的处理",@"如果设置为YES，",@"如果设置为YES，若有缓存，则更新缓存，否则直接计算并缓存,主要是对社交这种有动态评论等不同状态，高度也会不同的情况的处理~~如果设置为YES，",@"如果设置为YES，若有缓存，则更新缓存，否则直接计算并缓存,主要是对社交这种有动态评论等不同状态，高度也会不同的情况的处理~~如果设置为YES，若有缓存，则更新缓存，否则直接计算并缓存,主要是对社交这种有动态评论等不同状态，高度也会不同的情况的处理"]
 @interface UserNewsVc ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)  UITableView *tableView;
 @property (strong, nonatomic)  UIView *classView;
 @property (nonatomic, strong) UINib * nib;
-
+@property (nonatomic, strong) NSMutableArray * dataArray;
 @end
 
 @implementation UserNewsVc
@@ -38,8 +37,31 @@
         make.edges.equalTo(self.view);
     }];
     
+    self.dataArray = [NSMutableArray array];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"uc_msg",
+                                                                                      @"act":@"index",
+                                                                                      @"user_id ":CNull2String(USERMODEL.ID)
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          if (SUCCESSED) {
+                                                                                                  [self.dataArray addObjectsFromArray:[NewsModel arrayOfModelsFromDictionaries:responseObject[@"value"] error:nil]];
+                                                                                          }else{
+                                                                                              ShowNotce;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          
+                                                                                      }];
+
+}
+
+-(void)click_delete:(UserNewsCell *)sender{
+    NSIndexPath * index = [self.tableView indexPathForCell:sender];
+#warning  缺少删除消息的接口
+}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
@@ -53,7 +75,8 @@
     
     return [UserNewsCell GS_heightForIndexPath:indexPath config:^(UITableViewCell *sourceCell) {
         UserNewsCell *cell = (UserNewsCell *)sourceCell;
-        cell.lab_title.text = [titleArray objectAtIndex:indexPath.row];
+        NewsModel * model = [self.dataArray objectAtIndex:indexPath.row];
+        cell.lab_title.text = model.content;
     } cache:^NSDictionary *{
         return @{kGSCacheUniqueKey: [NSString stringWithFormat:@"%ld",(long)indexPath.row],
                  kGSCacheStateKey :[NSString stringWithFormat:@"%ld",(long)indexPath.row],
@@ -72,7 +95,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 9;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -85,9 +108,20 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    cell.backgroundColor = [UIColor whiteColor];
-    cell.lab_title.text = [titleArray objectAtIndex:indexPath.row];
 
+
+    if (self.dataArray.count > indexPath.row) {
+
+        WeakSelf;
+        cell.myRootVc = weakSelf;
+        cell.backgroundColor = [UIColor whiteColor];
+        
+        NewsModel * model = [self.dataArray objectAtIndex:indexPath.row];
+        cell.lab_title.text = model.content;
+        cell.lab_time.text = model.create_time;
+
+    }
+    
     return cell;
 }
 

@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    self.title = @"趣云购-地址管理";
     self.lab_classShi.layer.cornerRadius = 2.0;
     self.lab_classShi.layer.masksToBounds = YES;
     self.lab_classShi.layer.borderColor = GS_COLOR_LIGHTGRAY.CGColor;
@@ -132,12 +132,13 @@
 
 
 - (IBAction)click_first:(id)sender {
+    [self.view endEditing:YES];
     [MMPickerView showPickerViewInView:self.view
                            withStrings:self.FirstArray
                            withOptions:@{MMbackgroundColor: [UIColor whiteColor],
                                          MMtextColor: [UIColor blackColor],
                                          MMtoolbarColor: [UIColor whiteColor],
-                                         MMbuttonColor: [UIColor blueColor],
+                                         MMbuttonColor: GS_COLOR_BLUE,
                                          MMfont: [UIFont systemFontOfSize:18],
                                          MMvalueY: @3,
                                          MMselectedObject:self.firstString,
@@ -147,7 +148,6 @@
                                 self.firstString = selectedString;
                                 self.secondString = @"";
                                 self.thirdString = @"";
-                                
                                 
                                 self.lab_classSheng.text = self.firstString;
                                 self.lab_classShi.text = @"=请选择=";
@@ -172,6 +172,8 @@
 
 }
 - (IBAction)click_second:(id)sender {
+    [self.view endEditing:YES];
+
     if (self.SecondArray.count == 0) {
         return;
     }
@@ -180,7 +182,7 @@
                            withOptions:@{MMbackgroundColor: [UIColor whiteColor],
                                          MMtextColor: [UIColor blackColor],
                                          MMtoolbarColor: [UIColor whiteColor],
-                                         MMbuttonColor: [UIColor blueColor],
+                                         MMbuttonColor: GS_COLOR_BLUE,
                                          MMfont: [UIFont systemFontOfSize:18],
                                          MMvalueY: @3,
                                          MMselectedObject:self.secondString,
@@ -189,11 +191,8 @@
                                 self.secondString = selectedString;
                                 self.thirdString = @"";
                                 
-                                
                                 self.lab_classShi.text = self.secondString;
                                 self.lab_classQu.text = @"=请选择=";
-                                
-                                
                                 
                                 NSInteger selectedRow;
                                 if (self.secondString!=nil  && selectedRow > -1  ) {
@@ -206,10 +205,17 @@
                                 
                                 [self.ThirdArray removeAllObjects];
                                 [self.ThirdArray addObjectsFromArray:[[[[self.AllArray objectAtIndex:self.firstIndex] objectForKey:@"cities"] objectAtIndex:self.secondIndex] objectForKey:@"areas"]];
+                                
+                                if (self.ThirdArray.count == 0) {
+                                    self.lab_classQu.text = @"";
+;
+                                }
                             }];
 }
 
 - (IBAction)click_third:(id)sender {
+    [self.view endEditing:YES];
+
     if (self.ThirdArray.count == 0) {
         return;
     }
@@ -218,7 +224,7 @@
                            withOptions:@{MMbackgroundColor: [UIColor whiteColor],
                                          MMtextColor: [UIColor blackColor],
                                          MMtoolbarColor: [UIColor whiteColor],
-                                         MMbuttonColor: [UIColor blueColor],
+                                         MMbuttonColor: GS_COLOR_BLUE,
                                          MMfont: [UIFont systemFontOfSize:18],
                                          MMvalueY: @3,
                                          MMselectedObject:self.thirdString,

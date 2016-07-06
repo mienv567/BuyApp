@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *btn_Login;
 @property (weak, nonatomic) IBOutlet UIButton *btn_changeStyle;
 @property (weak, nonatomic) IBOutlet UIButton *btn_forgetPassWord;
+@property (strong,nonatomic)UITextField * txf_name;
+@property (strong,nonatomic)UITextField * txf_password;
 @property (nonatomic, strong) UINib * nib;
 @property (nonatomic, strong)UIButton * btn_code;               //验证码
 @property (nonatomic, strong) NSTimer *cdTimer;                 //倒计时
@@ -97,6 +99,75 @@
 #pragma mark - 登录
 - (IBAction)click_login:(id)sender {
     
+    if ([self.btn_changeStyle.titleLabel.text isEqualToString:AccountLoginString]) {
+        if ( [GSValidate validateStringLong:self.txf_name.text requireMinLong:6] ) {
+            
+        }else{
+            [MBProgressHUD showError:@"请校验登录账号"];
+            return;
+        }
+        
+        if ([GSValidate validateStringLong:self.txf_password.text requireMinLong:6] && [GSValidate validateStringLong:self.txf_password.text requireMaxLong:10]) {
+            
+        }else{
+            [MBProgressHUD showError:@"请校验密码"];
+            return;
+        }
+        
+        [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                         withParameters:@{@"ctl":@"user",
+                                                                                          @"act":@"dologin",
+                                                                                          @"user_name":CNull2String(self.txf_name.text),
+                                                                                          @"password":CNull2String(self.txf_password.text)
+                                                                                          } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                              if (SUCCESSED) {
+                                                                                                  UserModel * userModel = [[UserModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
+                                                                                                  [[UserManager sharedManager] saveLoginUser:userModel];
+                                                                                                  [self click_cancleLogin];
+                                                                                              }else{
+                                                                                                  ShowNotce;
+                                                                                              }
+                                                                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                              
+                                                                                          }];
+    }else{
+
+        if ([GSValidate validateString:self.txf_name.text withRequireType:RequireTypeIsMobile] && [GSValidate validateStringLong:self.txf_name.text requireMinLong:11] ) {
+            
+        }else{
+            [MBProgressHUD showError:@"请校验手机号码"];
+            return;
+        }
+        
+        if ([GSValidate validateStringLong:self.txf_password.text requireMinLong:6] && [GSValidate validateStringLong:self.txf_password.text requireMaxLong:10]) {
+            
+        }else{
+            [MBProgressHUD showError:@"请校验密码"];
+            return;
+        }
+        
+        [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                         withParameters:@{@"ctl":@"user",
+                                                                                          @"act":@"dophlogin",
+                                                                                          @"name ":CNull2String(self.txf_name.text),
+                                                                                          @"password":CNull2String(self.txf_password.text)
+                                                                                          } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                              if (SUCCESSED) {
+                                                                                                  UserModel * userModel = [[UserModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
+                                                                                                  [[UserManager sharedManager] saveLoginUser:userModel];
+                                                                                                   [self click_cancleLogin];
+                                                                                              }else{
+                                                                                                  ShowNotce;
+                                                                                              }
+                                                                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                              
+                                                                                          }];
+
+    }
+    
+    
+    
+
 }
 
 #pragma mark - 更换登录方式
@@ -125,8 +196,25 @@
     Img_TextfieldCell *cell = [self.tabView cellForRowAtIndexPath:indexPath];
 
     if ([GSValidate validateString:cell.txf_content.text withRequireType:RequireTypeIsMobile] && [GSValidate validateStringLong:cell.txf_content.text requireMinLong:11]) {
-        self.countDown = maxNum;
-        [self getCodeCountDown];
+        
+        [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                         withParameters:@{@"ctl":@"ajax",
+                                                                                          @"act":@"send_sms_code",
+                                                                                          @"mobile ":CNull2String(self.txf_name.text),
+                                                                                          @"unique":@"0"
+                                                                                          } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                              if (SUCCESSED) {
+                                                                                                  self.countDown = maxNum;
+                                                                                                  [self getCodeCountDown];
+                                                                                                  
+                                                                                              }else{
+                                                                                                  
+                                                                                              }
+                                                                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                              
+                                                                                          }];
+        
+
     }else{
         [MBProgressHUD showError:@"请重新检查手机号码是否正确"];
     }
@@ -178,6 +266,12 @@
     cell.backgroundColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    if (indexPath.row == 0) {
+        self.txf_name = cell.txf_content;
+    }else{
+        self.txf_password = cell.txf_content;
+    }
+    
     //设置图片
     if (self.btn_code.hidden) {
         cell.txf_content.placeholder = [CellPlaceHolderArrayStyleOne objectAtIndex:indexPath.row];
@@ -188,7 +282,7 @@
     
     }
     if (indexPath.row == 0 && indexPath.section == 0) {
-               [cell.contentView addSubview:self.btn_code];
+        [cell.contentView addSubview:self.btn_code];
         [self.btn_code mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(cell.mas_top).offset(5);
             make.bottom.equalTo(cell.mas_bottom).offset(-5);

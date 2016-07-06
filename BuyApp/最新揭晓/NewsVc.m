@@ -9,10 +9,12 @@
 #import "NewsVc.h"
 #import "NewsCells.h"
 #import "XLPlainFlowLayout.h"
+#import "NewsListModel.h"
 
 @interface NewsVc ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property(nonatomic, strong)UICollectionView * classView;      //瀑布流
 @property (nonatomic) NSInteger pageNo;
+@property(nonatomic, strong)NSMutableArray * dataArray;        //数据源
 @end
 
 
@@ -23,7 +25,8 @@
     // Do any additional setup after loading the view, typically from a nib.
     self.title = @"最新揭晓";
     [self setRightButton:@" " action:nil];
-
+    self.pageNo = 0;
+    
     XLPlainFlowLayout *layout = [XLPlainFlowLayout new];
     layout.itemSize = CGSizeMake(K_WIDTH / 2 - 0.5 , 235);
     layout.sectionInset = UIEdgeInsetsMake(1, 0, 1, 0);
@@ -40,27 +43,48 @@
     
 //    [self.classView registerClass:[NewsCells class] forCellWithReuseIdentifier:@"NewsCells"];
     [self.classView registerNib:[UINib nibWithNibName:@"NewsCells" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"NewsCell"];
-
     self.classView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNew)];
     self.classView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
 
+    self.dataArray = [NSMutableArray array];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(K_WIDTH, 64)] forBarMetrics:UIBarMetricsDefault];
+    if (self.dataArray.count == 0) {
+        [self loadNew];
+    }
 }
 #pragma mark - 事件
 #pragma mark - 获取数据
 -(void)loadNew{
     self.pageNo = 0;
+    [self.dataArray removeAllObjects];
     [self loadMore];
 }
 
 -(void)loadMore{
     self.pageNo ++;
-    [self.classView.mj_header endRefreshing];
-    [self.classView.mj_footer endRefreshing];
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"anno",
+                                                                                      @"show_prog":@(self.pageNo)
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          [self.classView.mj_header endRefreshing];
+                                                                                          [self.classView.mj_footer endRefreshing];
+                                                                                          if (SUCCESSED) {
+                                                                                              [self.dataArray addObjectsFromArray:[NewsListModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"list"] error:nil]];
+                                                                                              [self.classView reloadData];
+                                                                                          }else{
+                                                                                              ShowNotce;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          [self.classView.mj_header endRefreshing];
+                                                                                          [self.classView.mj_footer endRefreshing];
+                                                                                      }];
+    
+    
+    
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -78,14 +102,17 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 10;
+    return self.dataArray.count;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NewsCells *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"NewsCell" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor whiteColor];
-    cell.view_timeBackGound.hidden = indexPath.row % 2 == 0;
+    if (self.dataArray.count > indexPath.row) {
+        [cell setDataModel:[self.dataArray objectAtIndex:indexPath.row]];
+
+    }
     return cell;
 }
 

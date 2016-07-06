@@ -44,7 +44,7 @@
 -(void)setLeftButton:(NSString *)imgName action:(SEL)action{
     if (imgName.length > 0) {
         UIButton *leftBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        leftBarButton.frame = CGRectMake(0.0, 0.0, 30.0, 30.0);
+        leftBarButton.frame = CGRectMake(0.0, 0.0, 30.0, 20.0);
         leftBarButton.titleLabel.font = [UIFont systemFontOfSize:FontSize];
         [leftBarButton setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
         [leftBarButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
@@ -60,7 +60,7 @@
 -(void)setLeftButtonTtile:(NSString *)titleName action:(SEL)action{
     if (titleName.length > 0) {
         UIButton *leftBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        leftBarButton.frame = CGRectMake(0.0, 0.0, 40.0, 30.0);
+        leftBarButton.frame = CGRectMake(0.0, 0.0, 40.0, 20.0);
         leftBarButton.titleLabel.font = [UIFont systemFontOfSize:FontSize];
         [leftBarButton setTitle:titleName forState:UIControlStateNormal];
         [leftBarButton setTitleColor:GS_COLOR_RED forState:UIControlStateNormal];
@@ -94,10 +94,14 @@
 -(void)setRightButtonTitle:(NSString *)titleName action:(SEL)action{
     if (titleName.length > 0) {
         UIButton *rightBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        rightBarButton.frame = CGRectMake(0.0, 0.0, 30.0, 30.0);
+        rightBarButton.frame = CGRectMake(0.0, 0.0, 80.0, 20.0);
         rightBarButton.titleLabel.font = [UIFont systemFontOfSize:FontSize];
         [rightBarButton setTitle:titleName forState:UIControlStateNormal];
-        [rightBarButton setTitleColor:GS_COLOR_RED forState:UIControlStateNormal];
+        if ([titleName isEqualToString:@"红包兑换"]) {
+            [rightBarButton setTitleColor:GS_COLOR_BLUE forState:UIControlStateNormal];
+        }else{
+            [rightBarButton setTitleColor:GS_COLOR_RED forState:UIControlStateNormal];
+        }
         [rightBarButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem * btn=[[UIBarButtonItem alloc]initWithCustomView:rightBarButton];
@@ -181,8 +185,6 @@
     titleLabel.center = self.navigationItem.titleView.center;
     self.navigationItem.titleView = titleLabel;
 }
-
-
 
 #pragma mark - Wating Method
 

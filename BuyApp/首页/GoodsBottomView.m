@@ -52,7 +52,7 @@
         make.width.mas_equalTo((K_WIDTH - 70) / 2 );
     }];
     
-    self.btn_shoppingCart.backgroundColor = [UIColor orangeColor];
+    self.btn_shoppingCart.backgroundColor = [UIColor whiteColor];
     [self.btn_shoppingCart mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.right.equalTo(self).offset(-10);
 //        make.left.equalTo(self.btn_shoppingCart.mas_right).offset(10);

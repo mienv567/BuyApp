@@ -7,11 +7,16 @@
 //
 
 #import "GoodsView.h"
+#import "MZTimerLabel.h"
 
 @interface GoodsView ()
 
 @property (nonatomic ,strong) UIImageView *iv;
 @property (nonatomic ,strong) UILabel *nameLb;
+@property (nonatomic) long lastRTime;
+@property (nonatomic ,strong) MainNewGoodsModel *myModel;
+@property (nonatomic ,strong) MZTimerLabel *lab_CountDown;
+
 @end
 
 @implementation GoodsView
@@ -36,34 +41,110 @@
         _nameLb.font=[UIFont gs_fontNum:10];
         _nameLb.textColor = GS_COLOR_LIGHTBLACK;
         _nameLb.lineBreakMode = NSLineBreakByCharWrapping;
-        _nameLb.numberOfLines = 1;
+        _nameLb.numberOfLines = 0;
         _nameLb.textAlignment = NSTextAlignmentCenter;
         _nameLb.text = @"倒计时多少多少";
         [self addSubview:_nameLb];
         [_nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(self);
             make.top.equalTo(self.iv.mas_bottom).offset(5);
-            make.bottom.equalTo(self.mas_bottom).offset(-10);
+            make.bottom.equalTo(self.mas_bottom).offset(-5);
         }];
         
       }
     return self;
 }
 
-- (void)setDataModel:(MainGoodsModel *)model
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+- (void)setDataModel:(MainNewGoodsModel *)model
 {
     if (!model) {
         return;
     }
-    [self.iv sd_setImageWithURL:[NSURL URLWithString:model.PicPath] placeholderImage:KDefaultImg completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    self.myModel = model;
+    [self.iv sd_setImageWithURL:[NSURL URLWithString:model.icon] placeholderImage:KDefaultImg completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (error) {
             self.iv.contentMode = UIViewContentModeCenter;
         }else{
             self.iv.contentMode = UIViewContentModeScaleAspectFit;
         }
     }];
-    _nameLb.attributedText = [[NSAttributedString alloc] initWithString:model.Title//model.DelText
-                                                             attributes:@{NSStrikethroughStyleAttributeName : @(NSUnderlinePatternSolid | NSUnderlineStyleSingle),NSFontAttributeName : [UIFont gs_font:NSAppFontXXS]}];
+    
+    if ([model.has_lottery integerValue] == 1) {
+        NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"恭喜%@中奖\n幸运号%@",model.luck_user_name,model.lottery_sn]];
+        [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:11] range:NSMakeRange(0, 2)];
+        [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_LIGHTBLACK range:NSMakeRange(0, 2)];
+        [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:11] range:NSMakeRange(2, model.luck_user_name.length)];
+        [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_Main range:NSMakeRange(2, model.luck_user_name.length)];
+        [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:11] range:NSMakeRange(model.luck_user_name.length + 2, 3)];
+        [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_LIGHTBLACK range:NSMakeRange(model.luck_user_name.length + 2, 3)];
+        [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:11] range:NSMakeRange(noticeStr.length - model.lottery_sn.length , model.lottery_sn.length)];
+        [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(noticeStr.length - model.lottery_sn.length,model.lottery_sn.length)];
+        self.nameLb.attributedText = noticeStr;
+    }else{
+        
+        if (!self.lab_CountDown) {
+            self.lab_CountDown = [[MZTimerLabel alloc] initWithLabel:self.nameLb andTimerType:MZTimerLabelTypeStopWatch];
+            [self.lab_CountDown setCountDownTime:[model.lottery_time integerValue]];
+            self.lab_CountDown.timeFormat = @"HH:mm:ss:SS";
+            NSString* text = @"倒计时 多少";
+            NSRange r = [text rangeOfString:@"多少"];
+            NSDictionary* attributesForRange = @{NSForegroundColorAttributeName: GS_COLOR_RED,};
+            self.lab_CountDown.attributedDictionaryForTextInRange = attributesForRange;
+            self.lab_CountDown.text = text;
+            self.lab_CountDown.textRange = r;
+            self.lab_CountDown.timeFormat = @"HH:mm:ss:SS";
+            self.lab_CountDown.resetTimerAfterFinish = NO;
+            [self.lab_CountDown startWithEndingBlock:^(NSTimeInterval countTime) {
+                
+                NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"倒计时 %@",@"计算中"]];
+                [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:11] range:NSMakeRange(0, 4)];
+                [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 4)];
+                [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:11] range:NSMakeRange(4, noticeStr.length - 4)];
+                [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(4,noticeStr.length - 4)];
+                self.lab_CountDown.timeLabel.attributedText = noticeStr;
+            }];
+        }
+        
+        
+//        self.lastRTime = [model.lottery_time longLongValue];
+//        NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"倒计时 %@",[self leftTimer:self.lastRTime]]];
+//        [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:11] range:NSMakeRange(0, 4)];
+//        [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 4)];
+//        [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:11] range:NSMakeRange(4, noticeStr.length - 4)];
+//        [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(4,noticeStr.length - 4)];
+//        self.nameLb.attributedText = noticeStr;
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadRTime) name:Notification_Main object:nil];
+    }
 }
+
+//- (void)reloadRTime{
+//
+//    self.lastRTime =  self.lastRTime - 1;
+//    
+//    
+//    
+//    
+//    if ([self.myModel.lottery_time longLongValue] > 0) {
+//        
+//        NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"倒计时 %@",[self leftTimer:self.lastRTime]]];
+//        [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:11] range:NSMakeRange(0, 4)];
+//        [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 4)];
+//        [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:11] range:NSMakeRange(4, noticeStr.length - 4)];
+//        [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(4,noticeStr.length - 4)];
+//        self.nameLb.attributedText = noticeStr;
+//        
+//    }else{
+//        
+//
+//        [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    }
+//    
+//}
+
 
 @end

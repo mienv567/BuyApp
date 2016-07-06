@@ -9,6 +9,7 @@
 #import "MainGoodsListCells.h"
 #import "MainTabBarVc.h"
 
+
 @implementation MainGoodsListCells
 
 -(id)initWithFrame:(CGRect)frame{
@@ -29,7 +30,7 @@
         
         self.lab_title = [UILabel new];
         self.lab_title.backgroundColor = [UIColor whiteColor];
-        self.lab_title.textColor = GS_COLOR_LIGHTBLACK;
+        self.lab_title.textColor = [UIColor blackColor];
         self.lab_title.font = [UIFont systemFontOfSize:13];
         self.lab_title.text = @"新款笔记本电脑，现在只卖10000元，快来抢购吧，机不可失失不再来！";
         [self.contentView addSubview:self.lab_title];
@@ -92,23 +93,24 @@
     return self;
 }
 
--(void)setDataModel:(id)model{
-    [self.img_goods sd_setImageWithURL:nil placeholderImage:KDefaultImg];
-    NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"开奖进度%@",@"45%"]];
-    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 4)];
-    [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 4)];
+-(void)setDataModel:(MainGoodsListModel *)model{
+    self.myModel = model;
+     self.lab_title.text = model.name;
     
+    [self.img_goods sd_setImageWithURL:[NSURL URLWithString:model.iCon] placeholderImage:KDefaultImg];
+    
+    NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"开奖进度%d\%%",(int)model.progress]];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 4)];
+    [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_LIGHTBLACK range:NSMakeRange(0, 4)];
     [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(4, noticeStr.length - 4)];
     [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_BLUE range:NSMakeRange(4,noticeStr.length - 4)];
     self.lab_process.attributedText = noticeStr;
     
-    
-     self.view_process.progress = 0.5;
-    
- 
+    self.view_process.progress = (CGFloat)model.progress / 100;
 }
 
 -(void)click_addToList{
+    [[UserManager sharedManager].shopCarGoodsArray addObject:self.myModel];
     MainTabBarVc *tb = [MainTabBarVc shared];
     [tb changeNum];
 }

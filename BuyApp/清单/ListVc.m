@@ -9,12 +9,15 @@
 #import "ListVc.h"
 #import "ShopListCells.h"
 #import "GoodsBottomView.h"
+#import "MainGoodsListModel.h"
+
 
 @interface ListVc ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)  UITableView *tableView;
 @property (strong, nonatomic)  UIView *classView;
 @property (nonatomic, strong) UINib * nib;
 @property (nonatomic, strong) GoodsBottomView * bottomView;
+@property (nonatomic, strong) NSMutableArray * dataArray;
 @end
 
 @implementation ListVc
@@ -36,7 +39,6 @@
         make.left.right.bottom.equalTo(self.view);
         make.height.mas_equalTo(@60);
     }];
-    
     
     [self.tableView registerClass:[ShopListCells class] forCellReuseIdentifier:@"ShopListCells"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -126,6 +128,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(K_WIDTH, 64)] forBarMetrics:UIBarMetricsDefault];
+    
 }
 
 

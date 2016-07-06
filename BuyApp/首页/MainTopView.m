@@ -7,6 +7,8 @@
 //
 
 #import "MainTopView.h"
+#import "MainNewGoodsModel.h"
+#import "MainNewsModel.h"
 
 #define  GoodsArray @[@"",@"",@""]
 
@@ -26,9 +28,6 @@
     _myRootVc = myRootVc;
 }
 
--(void)dealloc{
-    self.myRootVc = nil;
-}
 //最新揭晓
 - (void)tapAction:(UITapGestureRecognizer *)tap
 {
@@ -40,7 +39,7 @@
 
 //显示获奖详情
 -(void)click_showNewsInfo{
-    [self.myRootVc click_showNewsInfo:[self.ary_news objectAtIndex:0]];
+    [self.myRootVc click_showNewsInfo:self.currentNewsModel];
 }
 
 //循环广告
@@ -109,14 +108,17 @@
 
 //创建最新揭晓视图
 -(void)view_goodsBackView{
-    
-    self.goodsBackView = [UIView new];
-    self.goodsBackView.backgroundColor = GS_COLOR_WHITE;
-    [self.topBackGroundView addSubview:self.goodsBackView];
+    [self.goodsBackView removeAllSubViews];
+    if (!self.goodsBackView) {
+        self.goodsBackView = [UIView new];
+        self.goodsBackView.backgroundColor = GS_COLOR_WHITE;
+        [self.topBackGroundView addSubview:self.goodsBackView];
+    }
+
     
     UILabel * titleLab = [[UILabel alloc] init];
     titleLab.backgroundColor = [UIColor whiteColor];
-    titleLab.textColor = GS_COLOR_DARKGRAY;
+    titleLab.textColor = GS_COLOR_LIGHTBLACK;
     titleLab.font = [UIFont gs_boldfont:NSAppFontM];
     titleLab.text = @"  最新揭晓";
     [self.goodsBackView addSubview:titleLab];
@@ -134,8 +136,8 @@
         make.bottom.equalTo(self.goodsBackView.mas_bottom);
     }];
     
-    for (int i = 0; i < 3; i++) {
-        MainGoodsModel *item = nil;
+    for (int i = 0; i < self.ary_newGoods.count; i++) {
+        MainNewGoodsModel *item = [self.ary_newGoods objectAtIndex:i];
         GoodsView *gv=[[GoodsView alloc]initWithFrame:CGRectMake(K_WIDTH/3 * i , 0, K_WIDTH / 3 - 1, K_WIDTH / 3)];
         [gv setDataModel:item];
         gv.tag = 500 + i;
@@ -153,10 +155,13 @@
 //创建最新消息视图
 -(void)view_NewsBackView{
     
-    self.newsBackView = [UIView new];
-    self.newsBackView.backgroundColor = [UIColor whiteColor];
-    [self.topBackGroundView addSubview:self.newsBackView];
-    
+    [self.newsBackView removeAllSubViews];
+    if (!self.newsBackView) {
+        self.newsBackView = [UIView new];
+        self.newsBackView.backgroundColor = [UIColor whiteColor];
+        [self.topBackGroundView addSubview:self.newsBackView];
+    }
+
     UIImageView *iv = [[UIImageView alloc] init];
     iv.backgroundColor = [UIColor whiteColor];
     iv.image = [UIImage imageNamed:@"Laba"];
@@ -172,19 +177,19 @@
     self.newsLabel.backgroundColor = [UIColor clearColor];
     self.newsLabel.textColor = GS_COLOR_DARKGRAY;
     self.newsLabel.font = [UIFont gs_boldfont:NSAppFontL];
-    self.newsLabel.text = @"测试: 暂时没有数据";
+    self.newsLabel.text = @" 暂时没有数据";
     
-    NSString * user = @"用户A";
-    NSString * info = @"在1小时前获得MacBook一台";
-    
-    NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"恭喜%@%@",user,info]];
-    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 2)];
-    [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 2)];
-    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(2, user.length)];
-    [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_BLUE range:NSMakeRange(2, user.length)];
-    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:14] range:NSMakeRange(noticeStr.length - info.length, info.length)];
-    [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(noticeStr.length - info.length,info.length)];
-    self.newsLabel.attributedText = noticeStr;
+//    NSString * user = @"用户A";
+//    NSString * info = @"在1小时前获得MacBook一台";
+//    
+//    NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"恭喜%@%@",user,info]];
+//    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 2)];
+//    [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 2)];
+//    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(2, user.length)];
+//    [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_BLUE range:NSMakeRange(2, user.length)];
+//    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:14] range:NSMakeRange(noticeStr.length - info.length, info.length)];
+//    [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(noticeStr.length - info.length,info.length)];
+//    self.newsLabel.attributedText = noticeStr;
     
     [self.newsBackView addSubview:self.newsLabel];
     [self.newsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -193,15 +198,77 @@
         make.right.equalTo(self.newsBackView.mas_right);
     }];
     
-    UIButton *newsButton = [[UIButton alloc] init];
-    [newsButton addTarget:self action:@selector(click_showNewsInfo) forControlEvents:UIControlEventTouchUpInside];
-    [self.newsBackView addSubview:newsButton];
-    [newsButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.newsButton = [[UIButton alloc] init];
+    [self.newsButton  addTarget:self action:@selector(click_showNewsInfo) forControlEvents:UIControlEventTouchUpInside];
+    [self.newsBackView addSubview:self.newsButton];
+    [self.newsButton  mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.newsBackView);
     }];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadRTime) name:Notification_Main object:nil];
+
 }
 
 
+- (void)dealloc{
+    self.myRootVc = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
+-(void)reloadRTime{
+
+    if (self.ary_news.count == 0) {
+        return;
+    }
+    self.timeCount ++;
+    
+    if (self.timeCount % 3  != 0) {
+        return;
+    }else{
+        self.timeCount = 0;
+    }
+    
+    if (self.newsButton.tag == self.ary_news.count || self.newsButton.tag > self.ary_news.count) {
+        self.currentNewsModel = [self.ary_news lastObject];
+        self.newsButton.tag = 0;
+    }else{
+        self.currentNewsModel = [self.ary_news objectAtIndex:self.newsButton.tag];
+        self.newsButton.tag += 1;
+
+    }
+    NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"恭喜%@%@获得%@",self.currentNewsModel.user_name,self.currentNewsModel.span_time,self.currentNewsModel.name]];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 2)];
+    [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 2)];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(2, self.currentNewsModel.user_name.length)];
+    [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_BLUE range:NSMakeRange(2, self.currentNewsModel.user_name.length)];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:14] range:NSMakeRange(self.currentNewsModel.user_name.length + 2, noticeStr.length - self.currentNewsModel.user_name.length - 2)];
+    [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(self.currentNewsModel.user_name.length + 2,noticeStr.length - self.currentNewsModel.user_name.length - 2)];
+    self.newsLabel.attributedText = noticeStr;
+}
+
+-(void)setAry_adv:(NSArray *)ary_adv{
+    _ary_adv = ary_adv;
+    [self.pageView setItems:_ary_adv andTimeInterval:5];
+}
+
+-(void)setAry_news:(NSArray *)ary_news{
+    _ary_news = ary_news;
+    if (ary_news.count > 0) {
+        self.newsButton.tag = 0;
+        self.currentNewsModel = [self.ary_news objectAtIndex:0];
+        NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"恭喜%@%@获得%@",self.currentNewsModel.user_name,self.currentNewsModel.span_time,self.currentNewsModel.name]];
+        [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 2)];
+        [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 2)];
+        [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(2, self.currentNewsModel.user_name.length)];
+        [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_BLUE range:NSMakeRange(2, self.currentNewsModel.user_name.length)];
+        [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:14] range:NSMakeRange(self.currentNewsModel.user_name.length + 2, noticeStr.length - self.currentNewsModel.user_name.length - 2)];
+        [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(self.currentNewsModel.user_name.length + 2,noticeStr.length - self.currentNewsModel.user_name.length - 2)];
+        self.newsLabel.attributedText = noticeStr;
+    }
+}
+
+-(void)setAry_newGoods:(NSArray *)ary_newGoods{
+    _ary_newGoods = ary_newGoods;
+    [self view_goodsBackView];
+}
 @end

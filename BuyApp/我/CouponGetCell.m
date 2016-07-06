@@ -40,8 +40,7 @@
 
 
 - (IBAction)click_getCoupon:(id)sender {
-    
-    
+    [self.myRootVc click_getCoupon:self];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

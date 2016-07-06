@@ -10,6 +10,7 @@
 
 @interface GoodsInfoVc : RootViewController
 
+@property (strong, nonatomic)  NSString *GoodsID;   //传参商品ID
 
 //GoodsBottomView
 //参加新的一期，立即前往

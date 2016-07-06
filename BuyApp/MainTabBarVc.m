@@ -106,10 +106,13 @@
 
 
 -(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-    if (tabBarController.selectedIndex == 4) {
-        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        if(appDelegate) {
-            [appDelegate showNeedLoginAlertView];
+    if (![[UserManager sharedManager] isUserLoad]) {
+        if (tabBarController.selectedIndex == 4 || tabBarController.selectedIndex == 3) {
+            AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            if(appDelegate) {
+                [appDelegate showNeedLoginAlertView];
+            }
+            self.selectedIndex = 0;
         }
     }
 }
@@ -132,31 +135,8 @@
 
 -(void)changeNum{
     
-     self.item3.badgeValue = CInt2String(arc4random()%100);
+     self.item3.badgeValue = [NSString stringWithFormat:@"%d",(int)[UserManager sharedManager].shopCarGoodsArray.count];
     
-//    self.numlabel.hidden = NO;
-//
-//    [UIView animateWithDuration:0.5 animations:^{
-//        self.numlabel.height = self.numlabel.width = 20;
-//        self.numlabel.layer.cornerRadius = 10;
-//
-//    }completion:^(BOOL finished){
-//
-//        [UIView animateWithDuration:0.5 animations:^{
-//            
-//            self.numlabel.layer.cornerRadius = 15;
-//            self.numlabel.height = self.numlabel.width = 30;
-//            
-//         }completion:^(BOOL finished){
-//             
-//            self.numlabel.layer.cornerRadius = 10;
-//            self.numlabel.height = self.numlabel.width = 30;
-//            self.numlabel.hidden = YES;
-//            self.item3.badgeValue = @"3";
-//             
-//        }];
-//        
-//    }];
 
 }
 - (void)viewWillAppear:(BOOL)animated{

@@ -66,7 +66,7 @@
 
 - (void)showWating:(NSString *)tips{
     if([tips length] == 0){
-        tips = kDefalutLoadingText;
+//        tips = kDefalutLoadingText;
     }
     
     self.title.text = tips;

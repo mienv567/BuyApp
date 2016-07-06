@@ -16,6 +16,7 @@
 #import "ShoppingView.h"
 #import "CountInfoVc.h"
 #import "AllCountsView.h"
+#import "GoodsInfoModel.h"
 
 @interface GoodsInfoVc () <UITableViewDelegate,UITableViewDataSource>
 
@@ -25,7 +26,9 @@
 @property (strong, nonatomic)  GoodsBottomView *bottomView;
 @property (strong, nonatomic)  ShoppingView *shoppingView;
 @property (strong, nonatomic)  AllCountsView *allCountsView;
-
+@property (strong, nonatomic)  GoodsInfoModel *dataModel;
+@property (strong, nonatomic)  NSMutableArray *usersArray;
+@property (nonatomic)NSInteger pageno;
 @end
 
 #define TitleArray @[@"图文详情",@"往期揭晓"]
@@ -65,7 +68,7 @@
         make.bottom.equalTo(self.bottomView.mas_top);
     }];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
-    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNew)];
     //底部控件
     self.shoppingView = KGetViewFromNib(@"ShoppingView");
     [self.view addSubview:self.shoppingView];
@@ -79,15 +82,41 @@
     self.shoppingView.view_count.editableManually = YES;
     self.shoppingView.view_count.stepValue = 1;
     
-    [self loadData];
 }
 
 #pragma mark -加载数据
 
--(void)loadData{
-    [self.tableView.mj_footer endRefreshing];
+-(void)loadNew{
+    if (!self.dataModel) {
+        [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                         withParameters:@{@"ctl":@"duobao",
+                                                                                          @"act":@"index",
+                                                                                          @"data_id":self.GoodsID
+                                                                                          } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                              [self.tableView.mj_footer endRefreshing];
+                                                                                              if (SUCCESSED) {
+                                                                                                  
+                                                                                                  self.dataModel = [[GoodsInfoModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
+                                                                                                  [self.pageView setDataModel:self.dataModel];
+                                                                                                  
+                                                                                              }else{
+                                                                                                  ShowNotce;
+                                                                                              }
+                                                                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                              [self.tableView.mj_footer endRefreshing];
+                                                                                              
+                                                                                          }];
+
+    }
     
-    //根据商品是否参加了，切换模式
+    self.pageno = 0;
+    [self.usersArray removeAllObjects];
+    [self loadMore];
+}
+
+-(void)loadMore{
+    
+      //根据商品是否参加了，切换模式
     self.bottomView.showType = GoodsBottomViewBuy;
     
     //调整加减器
@@ -99,10 +128,6 @@
         self.shoppingView.view_count.editableManually = YES;
 
     }
-
-}
--(void)loadMore{
-   
 }
 
 #pragma mark - 事件
@@ -197,7 +222,7 @@
             break;
         case 3:
         {
-            return 10;
+            return self.usersArray.count;
         }
             break;
         default:

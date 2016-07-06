@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "WinHistoryVc.h"
+#import "NewsListModel.h"
 
 
 
@@ -50,5 +51,5 @@ typedef NS_ENUM(NSUInteger, HistoryListCellsType) {
 
 @property (nonatomic) HistoryListCellsType showType;
 
-
+-(void)setDataModel:(NewsListModel*)model;
 @end

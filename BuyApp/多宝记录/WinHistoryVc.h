@@ -9,5 +9,5 @@
 #import "RootViewController.h"
 
 @interface WinHistoryVc : RootViewController
-
+@property (nonatomic, strong)NSString *log_type;//类型(0全部，1进行中，2已揭晓)
 @end

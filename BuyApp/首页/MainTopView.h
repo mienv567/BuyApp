@@ -12,6 +12,7 @@
 #import "MainClassView.h"
 #import "MainGoodsModel.h"
 #import "GoodsView.h"
+#import "MainNewsModel.h"
 
 @interface MainTopView : UICollectionReusableView  <MainClassViewDelegate,ASPageViewDelegate,UIGestureRecognizerDelegate>
 
@@ -26,7 +27,11 @@
 @property (nonatomic, strong)MainClassView * classView;             // 功能分类
 
 @property (nonatomic, strong)UILabel *newsLabel;                    //  最新消息
+@property (nonatomic, strong) UIButton *newsButton;                     //最新消息
+@property (nonatomic, strong)MainNewsModel * currentNewsModel ;
 
 @property (nonatomic, strong)NSArray *ary_news;                    //  最新消息数据
-
+@property (nonatomic, strong)NSArray *ary_adv;                     //  广告位数据
+@property (nonatomic, strong)NSArray *ary_newGoods;                //  最新揭晓数据
+@property (nonatomic) NSInteger timeCount;                          //用于计时，三秒跳动一次
 @end

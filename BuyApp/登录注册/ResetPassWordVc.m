@@ -36,7 +36,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"趣云购-重置密码";
     self.view.backgroundColor = GS_COLOR_WHITE;
     [self setLeftButtonTtile:@"取消" action:@selector(click_cancleLogin)];
     
@@ -66,7 +65,7 @@
     [self.btn_code setTitle:@"点击获取验证码" forState:UIControlStateNormal];
     [self.btn_code setTitleColor:GS_COLOR_RED forState:UIControlStateNormal];
     
-    [self.btn_code setEnabled:NO];
+    [self.btn_code setEnabled:YES];
     self.btn_Login.backgroundColor = GS_COLOR_LIGHTGRAY;
     [self.btn_Login setTitleColor:GS_COLOR_GRAY forState:UIControlStateNormal];
 }
@@ -89,6 +88,47 @@
 #pragma mark - 登录
 - (IBAction)click_login:(id)sender {
     
+    if ([GSValidate validateString:self.txf_mobile.text withRequireType:RequireTypeIsMobile] && [GSValidate validateStringLong:self.txf_mobile.text requireMinLong:11] ) {
+        
+    }else{
+        [MBProgressHUD showError:@"请检查手机号码"];
+        return;
+    }
+    
+
+    
+    if ([GSValidate validateStringLong:self.txf_code.text requireMinLong:6]) {
+        
+    }else{
+        [MBProgressHUD showError:@"请检查验证码"];
+        return;
+    }
+    
+    if ([GSValidate validateStringLong:self.txf_password.text requireMinLong:6] && [GSValidate validateStringLong:self.txf_password.text requireMaxLong:10]) {
+        if (self.txf_password.text != self.txf_rePassword.text) {
+            [MBProgressHUD showError:@"请检查密码"];
+        }
+    }else{
+        [MBProgressHUD showError:@"请检查密码"];
+        return;
+    }    
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"user",
+                                                                                      @"act":@"phmodifypassword",
+                                                                                      @"mobile":CNull2String(self.txf_mobile.text),
+                                                                                      @"sms_verify":CNull2String(self.txf_code.text),
+                                                                                      @"new_pwd":CNull2String(self.txf_password.text),
+                                                                                      @"cfm_new_pwd":CNull2String(self.txf_rePassword.text),
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          if (SUCCESSED) {
+                                                                                              
+                                                                                          }else{
+                                                                                              
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          
+                                                                                      }];
+
 }
 
 #pragma mark - 获取验证码
@@ -97,8 +137,22 @@
     Img_TextfieldCell *cell = [self.tabView cellForRowAtIndexPath:indexPath];
     
     if ([GSValidate validateString:cell.txf_content.text withRequireType:RequireTypeIsMobile] && [GSValidate validateStringLong:cell.txf_content.text requireMinLong:11]) {
-        self.countDown = maxNum;
-        [self getCodeCountDown];
+        [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                         withParameters:@{@"ctl":@"ajax",
+                                                                                          @"act":@"send_sms_code",
+                                                                                          @"mobile ":CNull2String(self.txf_mobile.text),
+                                                                                          @"unique":@"0"
+                                                                                          } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                              if (SUCCESSED) {
+                                                                                                  self.countDown = maxNum;
+                                                                                                  [self getCodeCountDown];
+                                                                                              }else{
+                                                                                                  
+                                                                                              }
+                                                                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                              
+                                                                                          }];
+
     }else{
         [MBProgressHUD showError:@"请重新检查手机号码是否正确"];
     }
@@ -141,13 +195,12 @@
         case ResetPassWordVcPhone:
         {
             self.title = @"会员资料更新";
-
+            
         }
             break;
         case ResetPassWordVcPassWord:
         {
             self.title = @"趣云购-重置密码";
-
         }
             break;
         default:
@@ -204,7 +257,6 @@
         if (self.showType == ResetPassWordVcPassWord) {
             self.txf_mobile.text = @"18626465685";
             self.txf_mobile.userInteractionEnabled = NO;
-
         }
     }else if (indexPath.row == 1){
         
@@ -291,11 +343,9 @@
     }
     
     if (mobile && code && pass && repass) {
-        [self.btn_code setEnabled:YES];
         self.btn_Login.backgroundColor = GS_COLOR_RED;
         [self.btn_Login setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }else{
-        [self.btn_code setEnabled:NO];
         self.btn_Login.backgroundColor = GS_COLOR_LIGHTGRAY;
         [self.btn_Login setTitleColor:GS_COLOR_GRAY forState:UIControlStateNormal];
     }

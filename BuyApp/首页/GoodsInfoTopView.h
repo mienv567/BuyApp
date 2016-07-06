@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ASPageView.h"
+#import "GoodsInfoModel.h"
 
 typedef NS_ENUM(NSUInteger, GoodsInfoTopViewType) {
     GoodsInfoTopViewNone,
@@ -37,5 +38,5 @@ typedef NS_ENUM(NSUInteger, GoodsInfoTopViewType) {
 
 @property (nonatomic) GoodsInfoTopViewType showType;
 
-
+-(void)setDataModel:(GoodsInfoModel *)model;
 @end

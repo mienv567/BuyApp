@@ -9,7 +9,7 @@
 //测试服务器开关
 #define TEST_SERVER
 #ifdef TEST_SERVER
-#define kAppHost @"http://line3.71tong.net:53001"
+#define kAppHost @"http://www.quyungou.com/api/index.php"
 #define kAppPostHost @"http://line3.71tong.net:53004"
 #else
 #define kAppHost @"http://appapiv3.gosheng.cn"
@@ -27,7 +27,6 @@
 #define kAppVersionDto [kAppVersion stringByReplacingOccurrencesOfString:@"." withString:@"_"]
 #define kAppDownLoadUrl @"https://itunes.apple.com/cn/app/*-*-*-*/id**********?mt=8"
 #define kAppItunesUrl @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=*********"
-#define kDefalutLoadingText @"正在加载.."   //默认加载提示
 
 //获取屏幕宽度
 #define K_WIDTH    [[UIScreen mainScreen] bounds].size.width
@@ -59,6 +58,9 @@
 #define KPopToLastViewController [self.navigationController popViewControllerAnimated:YES];
 
 #define WeakSelf __weak typeof(self)weakSelf = self
+#define SUCCESSED [responseObject[@"code"] intValue] == 200
+#define USERMODEL [UserManager sharedManager].loginUser
+#define ShowNotce [MBProgressHUD showError:responseObject[@"msg"] toView:nil]
 
 
 //十六进制颜色转换（0xFFFFFF）
@@ -72,37 +74,40 @@
 #define GS_COLOR_BLACK        HEXRGBCOLOR(0x000000)
 #define GS_COLOR_LIGHTBLACK   HEXRGBCOLOR(0x404040)
 #define GS_COLOR_GREEN        HEXRGBCOLOR(0x60A000)
-#define GS_COLOR_BLUE         HEXRGBCOLOR(0x18B4ED)
+#define GS_COLOR_BLUE         [UIColor blueColor]//HEXRGBCOLOR(0x18B4ED)
 #define GS_COLOR_YELLOW       HEXRGBCOLOR(0xFFC000)
 #define GS_COLOR_LIGHTYELLOW  HEXRGBCOLOR(0xFAE6B4)
 #define GS_COLOR_ORANGE       HEXRGBCOLOR(0xFF8000)
 #define GS_COLOR_RED          HEXRGBCOLOR(0xD93A55)    //主色
-#define GS_COLOR_RED2          HEXRGBCOLOR(0xFF4444)    //主色
+#define GS_COLOR_RED2         HEXRGBCOLOR(0xFF4444)    //主色
 #define GS_COLOR_DARKRED      HEXRGBCOLOR(0xE60012)    //logo色
 #define GS_COLOR_BROWN        HEXRGBCOLOR(0xC00000)
 #define GS_COLOR_GRAYT        HEXRGBCOLOR(0xCCCCCC)
-#define GS_COLOR_Main        HEXRGBCOLOR(0x6E7D8B)
+#define GS_COLOR_Main         HEXRGBCOLOR(0x6E7D8B)
+#define GS_COLOR_Gold         HEXRGBCOLOR(0xff7423)
+#define GS_COLOR_GoldRed         HEXRGBCOLOR(0xF7CAD3)
+
 //通知
 #define Notification_APNS           @"Notification_APNS"
-
+#define Notification_Main          @"Notification_MainTime"
 //新浪微博
-#define kAppKey                 @"3147391273"
-#define kRedirectURI            @"https://itunes.apple.com/us/app/jian-shen-jin-shan/id1019049921?l=zh&ls=1&mt=8"
-#define Sina_Key                @"wb3147391273"
+#define kAppKey                 @""
+#define kRedirectURI            @""
+#define Sina_Key                @""
 //微信
 #define WeixinAppID             @""
 #define WeixinAppSecret         @""
 //腾讯
-#define TencentAppKey           @"1104916581"
-#define TencentAppScheme        @"https://itunes.apple.com/app/ai-shan-yang/id1062508429?l=zh&ls=1&mt=8"
-#define TencentAppSecret        @"oOPQDRCqc2e1h46q"//
+#define TencentAppKey           @""
+#define TencentAppScheme        @""
+#define TencentAppSecret        @""//
 //支付宝
 #define ZhiFuBaoScheme          @""
 #define ZhiFuBaoNotification    @""
 //百度
 #define BMAP_KEY                @""
-//友盟
-#define UMENG_KEY               @""
+//极光
+#define JPUSH_KEY               @"eac3de4a7717dc5354ba849a"
 //用户信息
 #define USER_INFO               @""
 #define USER_ShoppingCar        @""

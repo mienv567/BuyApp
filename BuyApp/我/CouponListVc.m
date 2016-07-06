@@ -9,13 +9,14 @@
 #import "CouponListVc.h"
 #import "AllCountsView.h"
 #import "CouponListCell.h"
+#import "CouponModel.h"
 
 @interface CouponListVc ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)  UITableView *tableView;
 @property (strong, nonatomic)  UIView *classView;
 @property (nonatomic, strong) UINib * nib;
 @property (strong, nonatomic)  AllCountsView *allCountsView;
-
+@property (strong, nonatomic)  NSMutableArray *dataArray;
 @end
 
 @implementation CouponListVc
@@ -36,8 +37,33 @@
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    
+    self.dataArray = [NSMutableArray array];
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+
+    if (self.dataArray.count == 0) {
+        [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                         withParameters:@{@"ctl":@"uc_ecv",
+                                                                                          @"act":@"index",
+                                                                                          @"user_id ":CNull2String(USERMODEL.ID),
+                                                                                          @"n_valid":self.n_validString
+                                                                                          } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                              if (SUCCESSED) {
+                                                                                                  [self.dataArray addObjectsFromArray:[CouponModel arrayOfModelsFromDictionaries:responseObject[@"data"] error:nil]];
+                                                                                                  
+                                                                                              }else{
+                                                                                                  ShowNotce;
+                                                                                              }
+                                                                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                              
+                                                                                          }];
+
+    }
+
+}
+
 
 #pragma mark - Table view data source
 
@@ -51,7 +77,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -66,6 +92,28 @@
     cell.backgroundColor = GS_COLOR_WHITE;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryNone;
+    
+    if (self.n_validString) {
+        
+    }else{
+    
+    }
+    
+    if (self.dataArray.count > indexPath.row) {
+        CouponModel * model = [self.dataArray objectAtIndex:indexPath.row];
+        cell.lab_title.text = model.name;
+#warning 缺少详情字段
+        cell.lab_content.text = @"无该字段";
+        cell.lab_useTime.text =[NSString stringWithFormat:@"%@ - %@",model.begin_time,model.end_time];
+        
+        NSMutableAttributedString *statusStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"¥%@",model.money]];
+        [statusStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11] range:NSMakeRange(0, 1)];
+        [statusStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 1)];
+        [statusStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(1, statusStr.length - 1)];
+        [statusStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(1,statusStr.length - 1)];
+        cell.lab_money.attributedText = statusStr;
+        
+    }
     
     return cell;
 }

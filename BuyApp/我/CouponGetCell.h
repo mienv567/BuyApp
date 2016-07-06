@@ -15,4 +15,5 @@
 @property (weak, nonatomic) IBOutlet UIView *view_whiteBackGound;
 @property (weak, nonatomic) IBOutlet UIView *view_redBackGound;
 
+@property (nonatomic) id myRootVc;
 @end

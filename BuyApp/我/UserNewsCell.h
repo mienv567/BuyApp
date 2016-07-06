@@ -16,4 +16,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *lab_time;
 @property (weak, nonatomic) IBOutlet UIButton *btn_delete;
 
+@property (nonatomic) id myRootVc;
 @end
