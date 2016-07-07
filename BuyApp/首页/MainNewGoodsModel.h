@@ -20,4 +20,5 @@
 @property (nonatomic,strong)NSString <Optional>* has_lottery;
 @property (nonatomic,strong)NSString <Optional>* icon;
 @property (nonatomic,strong)NSString <Optional>* lottery_sn;
+@property (nonatomic,strong)NSString <Optional>* name;
 @end

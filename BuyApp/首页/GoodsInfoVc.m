@@ -16,7 +16,8 @@
 #import "ShoppingView.h"
 #import "CountInfoVc.h"
 #import "AllCountsView.h"
-#import "GoodsInfoModel.h"
+#import "GoodInfoModel.h"
+
 
 @interface GoodsInfoVc () <UITableViewDelegate,UITableViewDataSource>
 
@@ -26,9 +27,11 @@
 @property (strong, nonatomic)  GoodsBottomView *bottomView;
 @property (strong, nonatomic)  ShoppingView *shoppingView;
 @property (strong, nonatomic)  AllCountsView *allCountsView;
-@property (strong, nonatomic)  GoodsInfoModel *dataModel;
 @property (strong, nonatomic)  NSMutableArray *usersArray;
 @property (nonatomic)NSInteger pageno;
+@property (strong, nonatomic) GoodsWinnerView *winnerView;
+@property (strong, nonatomic)GoodInfoModel * dataModel;
+
 @end
 
 #define TitleArray @[@"图文详情",@"往期揭晓"]
@@ -91,14 +94,20 @@
         [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                          withParameters:@{@"ctl":@"duobao",
                                                                                           @"act":@"index",
-                                                                                          @"data_id":self.GoodsID
+                                                                                          @"data_id":self.GoodsID,
+                                                                                           @"user_id ":CNull2String(USERMODEL.ID)
                                                                                           } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                               [self.tableView.mj_footer endRefreshing];
+                                                                                              [self.tableView.mj_header endRefreshing];
                                                                                               if (SUCCESSED) {
                                                                                                   
-                                                                                                  self.dataModel = [[GoodsInfoModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
-                                                                                                  [self.pageView setDataModel:self.dataModel];
+                                                                                                  self.dataModel = [[GoodInfoModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
+                                                                                                  [self.pageView setDataModel:self.dataModel.item_data];
                                                                                                   
+                                                                                                  self.dataModel.item_data.luck_lottery.lottery_time_format = self.dataModel.item_data.lottery_time_format;
+                                                                                                  [self.winnerView setDataModel:self.dataModel.item_data.luck_lottery];
+                                                                                                  
+                                                                                                  [self.tableView reloadData];
                                                                                               }else{
                                                                                                   ShowNotce;
                                                                                               }
@@ -222,7 +231,8 @@
             break;
         case 3:
         {
-            return self.usersArray.count;
+//            return self.usersArray.count;
+            return self.dataModel.duobao_order_list.count;
         }
             break;
         default:
@@ -256,7 +266,7 @@
         }
         cell.mode = Title_Content_NoImg;
         cell.lab_titile.text= @"所有参与记录";
-        cell.lab_content.text = @"(2016-06-20 15:30:08开始)";
+        cell.lab_content.text = [NSString stringWithFormat:@"(%@)",self.dataModel.item_data.create_time_format];
         return cell;
         
     }else if (indexPath.section == 3){
@@ -271,6 +281,9 @@
         cell.backgroundColor = [UIColor whiteColor];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.textLabel.textColor = GS_COLOR_DARKGRAY;
+        if (self.dataModel.duobao_order_list.count > indexPath.row) {
+            [cell setDataModel:[self.dataModel.duobao_order_list objectAtIndex:indexPath.row]];
+        }
         return cell;
     }
     
@@ -281,10 +294,13 @@
     switch (section) {
         case 0:
         {
-            GoodsWinnerView * view = KGetViewFromNib(@"GoodsWinnerView");
-            WeakSelf;
-            view.myRootVc = weakSelf;
-            return view;
+            if (!self.winnerView) {
+                self.winnerView = KGetViewFromNib(@"GoodsWinnerView");
+                WeakSelf;
+                self.winnerView.myRootVc = weakSelf;
+            }
+           
+            return self.winnerView;
         }
             break;
         case 1:

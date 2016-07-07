@@ -127,6 +127,9 @@
 		03C5BCF61D19080E00060FB3 /* ResetPassWordVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C5BCF41D19080E00060FB3 /* ResetPassWordVc.m */; };
 		03C5BCF71D19080E00060FB3 /* ResetPassWordVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03C5BCF51D19080E00060FB3 /* ResetPassWordVc.xib */; };
 		03C5BCFA1D191D1500060FB3 /* MainGoodsListCells.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C5BCF91D191D1500060FB3 /* MainGoodsListCells.m */; };
+		03CE76B01D2E9DC400A416E7 /* GoodInfoUserList.m in Sources */ = {isa = PBXBuildFile; fileRef = 03CE76AF1D2E9DC400A416E7 /* GoodInfoUserList.m */; };
+		03CE76B31D2E9FE800A416E7 /* GoodInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 03CE76B21D2E9FE800A416E7 /* GoodInfoModel.m */; };
+		03CE76B61D2EA04300A416E7 /* GoodsItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 03CE76B51D2EA04300A416E7 /* GoodsItemModel.m */; };
 		03D312DC1D1D023F00B2BB26 /* GoodsBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D312DB1D1D023F00B2BB26 /* GoodsBottomView.m */; };
 		03D312DE1D1D024A00B2BB26 /* GoodsBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03D312DD1D1D024900B2BB26 /* GoodsBottomView.xib */; };
 		03D312E11D1D138800B2BB26 /* ShoppingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D312E01D1D138800B2BB26 /* ShoppingView.m */; };
@@ -373,6 +376,12 @@
 		03C5BCF51D19080E00060FB3 /* ResetPassWordVc.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResetPassWordVc.xib; sourceTree = "<group>"; };
 		03C5BCF81D191D1500060FB3 /* MainGoodsListCells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainGoodsListCells.h; sourceTree = "<group>"; };
 		03C5BCF91D191D1500060FB3 /* MainGoodsListCells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainGoodsListCells.m; sourceTree = "<group>"; };
+		03CE76AE1D2E9DC400A416E7 /* GoodInfoUserList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodInfoUserList.h; sourceTree = "<group>"; };
+		03CE76AF1D2E9DC400A416E7 /* GoodInfoUserList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodInfoUserList.m; sourceTree = "<group>"; };
+		03CE76B11D2E9FE800A416E7 /* GoodInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodInfoModel.h; sourceTree = "<group>"; };
+		03CE76B21D2E9FE800A416E7 /* GoodInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodInfoModel.m; sourceTree = "<group>"; };
+		03CE76B41D2EA04300A416E7 /* GoodsItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsItemModel.h; sourceTree = "<group>"; };
+		03CE76B51D2EA04300A416E7 /* GoodsItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsItemModel.m; sourceTree = "<group>"; };
 		03D312DA1D1D023F00B2BB26 /* GoodsBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsBottomView.h; sourceTree = "<group>"; };
 		03D312DB1D1D023F00B2BB26 /* GoodsBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsBottomView.m; sourceTree = "<group>"; };
 		03D312DD1D1D024900B2BB26 /* GoodsBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoodsBottomView.xib; sourceTree = "<group>"; };
@@ -916,6 +925,12 @@
 				035C57F51D2B8650000D68D6 /* MainNewsModel.m */,
 				03F44A981D2CEF8E00CEE5FD /* GoodsInfoModel.h */,
 				03F44A991D2CEF8E00CEE5FD /* GoodsInfoModel.m */,
+				03CE76AE1D2E9DC400A416E7 /* GoodInfoUserList.h */,
+				03CE76AF1D2E9DC400A416E7 /* GoodInfoUserList.m */,
+				03CE76B11D2E9FE800A416E7 /* GoodInfoModel.h */,
+				03CE76B21D2E9FE800A416E7 /* GoodInfoModel.m */,
+				03CE76B41D2EA04300A416E7 /* GoodsItemModel.h */,
+				03CE76B51D2EA04300A416E7 /* GoodsItemModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1197,6 +1212,7 @@
 				03D312E11D1D138800B2BB26 /* ShoppingView.m in Sources */,
 				03BB29831D17C91E00EDEDFD /* MainSegmentView.m in Sources */,
 				03EB70DC1D1834AA00A94E50 /* LoginVC.m in Sources */,
+				03CE76B61D2EA04300A416E7 /* GoodsItemModel.m in Sources */,
 				039DCDC81D29F734000DA425 /* CouponModel.m in Sources */,
 				038B19411D12A44B007C1CC8 /* NSObject+MTKObserving.m in Sources */,
 				032940DA1D1E507C000D54D9 /* CountInfoVc.m in Sources */,
@@ -1245,11 +1261,13 @@
 				032940E51D1E9DD8000D54D9 /* MyNumbers.m in Sources */,
 				038B195F1D12A8D8007C1CC8 /* RootViewController.m in Sources */,
 				03BF770D1D216C7C00F1270F /* SheZhiVc.m in Sources */,
+				03CE76B01D2E9DC400A416E7 /* GoodInfoUserList.m in Sources */,
 				034D89E01D1BB173005806C7 /* GoodsInfoVc.m in Sources */,
 				037232E41D20F7AA00F258D2 /* ShopListCells.m in Sources */,
 				03BB29771D179A7500EDEDFD /* MainClassModel.m in Sources */,
 				038B19381D12A44B007C1CC8 /* UIImage+Scale.m in Sources */,
 				038B19571D12A88F007C1CC8 /* EGOCache.m in Sources */,
+				03CE76B31D2E9FE800A416E7 /* GoodInfoModel.m in Sources */,
 				039A19711D24C9B500D10287 /* AddressInfoVc.m in Sources */,
 				035C57F01D2B83E1000D68D6 /* MainGoodsListModel.m in Sources */,
 				038B19311D12A44B007C1CC8 /* Cipher.m in Sources */,

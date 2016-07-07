@@ -11,13 +11,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="251"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="rvd-n3-UhO" customClass="ASPageView">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="                苹果笔记本大降价，全场五折起，快来抢购吧，机不可失失不再来！" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ADA-RY-oAZ">
-                    <rect key="frame" x="10" y="132" width="300" height="40"/>
+                    <rect key="frame" x="10" y="132" width="300" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -26,7 +21,7 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已揭晓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nS6-Xh-Xpz">
                     <rect key="frame" x="10" y="132" width="50" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -116,7 +111,6 @@
                 <outlet property="lab_timeCount" destination="tqI-0O-Pio" id="AqF-gG-5Dp"/>
                 <outlet property="lab_timeQihao" destination="Vv6-Fe-o88" id="U4m-9A-COr"/>
                 <outlet property="lab_title" destination="ADA-RY-oAZ" id="SJK-qz-VfN"/>
-                <outlet property="view_pageView" destination="rvd-n3-UhO" id="mGx-Ru-xpE"/>
                 <outlet property="view_progress" destination="ksL-Gz-u4g" id="AI1-50-ztp"/>
                 <outlet property="view_showProcess" destination="Wap-9b-B0r" id="N0g-vG-n4r"/>
                 <outlet property="view_showTime" destination="hLY-XB-4BJ" id="KpO-lL-0R3"/>

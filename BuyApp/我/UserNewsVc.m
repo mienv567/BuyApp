@@ -54,6 +54,7 @@
                                                                                                   view.myType = BackGoundViewNoData;
                                                                                                   self.tableView.backgroundView = view;
                                                                                               }
+                                                                                              [self.tableView reloadData];
                                                                                           }else{
                                                                                               ShowNotce;
                                                                                           }
@@ -81,7 +82,7 @@
     return [UserNewsCell GS_heightForIndexPath:indexPath config:^(UITableViewCell *sourceCell) {
         UserNewsCell *cell = (UserNewsCell *)sourceCell;
         NewsModel * model = [self.dataArray objectAtIndex:indexPath.row];
-        cell.lab_title.text = model.content;
+        cell.lab_title.text = [NSString stringWithFormat:@"%@\n%@",model.short_title,model.content];
     } cache:^NSDictionary *{
         return @{kGSCacheUniqueKey: [NSString stringWithFormat:@"%ld",(long)indexPath.row],
                  kGSCacheStateKey :[NSString stringWithFormat:@"%ld",(long)indexPath.row],
@@ -90,7 +91,7 @@
                  // 主要是对社交这种有动态评论等不同状态，高度也会不同的情况的处理
                  kGSRecalculateForStateKey : @(YES) // 标识不用重新更新
                  };
-    }];
+    }] ;
 
 }
 
@@ -122,7 +123,7 @@
         cell.backgroundColor = [UIColor whiteColor];
         
         NewsModel * model = [self.dataArray objectAtIndex:indexPath.row];
-        cell.lab_title.text = model.content;
+        cell.lab_title.text = [NSString stringWithFormat:@"%@\n%@",model.short_title,model.content];
         cell.lab_time.text = model.create_time;
 
     }

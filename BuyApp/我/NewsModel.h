@@ -12,9 +12,10 @@
 @property (nonatomic,strong)NSString <Optional>* ID;
 @property (nonatomic,strong)NSString <Optional>* content;
 @property (nonatomic,strong)NSString <Optional>* is_read;
-@property (nonatomic,strong)NSString <Optional>* is_delete;
 @property (nonatomic,strong)NSString <Optional>* type;
 @property (nonatomic,strong)NSString <Optional>* data;
 @property (nonatomic,strong)NSString <Optional>* create_time;
-
+@property (nonatomic,strong)NSString <Optional>* data_id;
+@property (nonatomic,strong)NSString <Optional>* short_title;
+@property (nonatomic,strong)NSString <Optional>* icon;
 @end

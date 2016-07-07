@@ -119,6 +119,7 @@
         self.lab_time.attributedText = openTimeString;
         
     }else{
+          self.view_timeBackGound.hidden = NO;
         if (!self.lab_CountDown) {
             self.lab_CountDown = [[MZTimerLabel alloc] initWithLabel:self.lab_lastTime andTimerType:MZTimerLabelTypeTimer];
             [self.lab_CountDown setCountDownTime:[model.success_time integerValue]];

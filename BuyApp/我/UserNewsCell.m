@@ -32,8 +32,9 @@
         }];
         
         [self.btn_delete mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.lab_title.mas_bottom).offset(5);
             make.right.equalTo(self).offset(-10);
+            make.bottom.equalTo(self.lab_time.mas_bottom);
+
         }];
         
         self.view_bakgound.backgroundColor = GS_COLOR_WHITE;

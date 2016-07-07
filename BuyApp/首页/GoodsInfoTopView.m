@@ -7,15 +7,27 @@
 //
 
 #import "GoodsInfoTopView.h"
+#import "MainAdvModel.h"
+#import "ASPageView.h"
 
 @implementation GoodsInfoTopView
 
 
 -(void)awakeFromNib{
-    [self.view_pageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(self);
-        make.height.equalTo(self.view_pageView.mas_width).dividedBy(660.0/410.0);
+//    [self.view_pageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.left.right.equalTo(self);
+//        make.height.mas_equalTo(1000);
+//    }];
+    
+    self.pageView = [[ASPageView alloc]init];
+    self.pageView.backgroundColor = GS_COLOR_WHITE;
+    self.pageView.userInteractionEnabled = YES;
+    [self addSubview:self.pageView];
+    [self.pageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.width.equalTo(self);
+        make.height.equalTo(self.pageView.mas_width).dividedBy(660.0/410.0);
     }];
+    
     
     self.lab_state.layer.cornerRadius = 2.0;
     self.lab_state.layer.masksToBounds = YES;
@@ -23,18 +35,20 @@
     self.lab_state.layer.borderWidth = 1.0;
     self.lab_state.textColor = GS_COLOR_RED;
     [self.lab_state mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view_pageView.mas_bottom).offset(10);
-        make.left.equalTo(self.view_pageView.mas_left).offset(10);
+        make.top.equalTo(self.pageView.mas_bottom).offset(10);
+        make.left.equalTo(self.pageView.mas_left).offset(10);
         make.width.mas_equalTo(@50);
-        make.height.mas_equalTo(@20);
+        make.height.mas_equalTo(@16);
     }];
     
     self.lab_title.textColor = GS_COLOR_LIGHTBLACK;
+    [self.lab_title sizeToFit];
+    self.lab_title.numberOfLines = 2;
     [self.lab_title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view_pageView.mas_bottom).offset(10);
-        make.left.equalTo(self.view_pageView.mas_left).offset(10);
-        make.right.equalTo(self.view_pageView.mas_right).offset(-10);
-        make.height.mas_equalTo(@40);
+        make.top.equalTo(self.pageView.mas_bottom).offset(10);
+        make.left.equalTo(self.pageView.mas_left).offset(15);
+        make.right.equalTo(self.pageView.mas_right).offset(-10);
+        make.height.mas_equalTo(@36);
     }];
 
 
@@ -149,13 +163,28 @@
 }
 
 
--(void)setDataModel:(GoodsInfoModel *)model{
-    self.lab_title.text = model.name;
-    self.lab_state.text = model.status;
-    self.lab_processQihao.text = [NSString stringWithFormat:@"期号:%@",model.schedule];
+-(void)setDataModel:(GoodsItemModel *)model{
+
+    NSMutableArray * array = [NSMutableArray array];
+    for (NSString * string in model.deal_gallery) {
+        MainAdvModel * model = [MainAdvModel new];
+        model.img = string;
+        [array addObject:model];
+    }
+    [self.pageView setItems:array andTimeInterval:5];
+    
+    
+    NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"            %@\n%@",model.name,model.brief]];
+    [titleString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(titleString.length - model.brief.length, model.brief.length)];
+    [titleString addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(titleString.length - model.brief.length, model.brief.length)];
+    self.lab_title.attributedText = titleString;
+    
+    
+    self.lab_state.text = @"未知字段";
+    self.lab_processQihao.text = [NSString stringWithFormat:@"期号:%@",model.ID];
     self.lab_all.text = [NSString stringWithFormat:@"总需%@人次",model.max_buy];
     
-    NSMutableAttributedString *lastString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"剩余%@",@"暂无数据"]];
+    NSMutableAttributedString *lastString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"剩余%@",model.surplus_count]];
     [lastString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(2, lastString.length - 2)];
     [lastString addAttribute:NSForegroundColorAttributeName value:GS_COLOR_BLUE range:NSMakeRange(2, lastString.length - 2)];
     self.lab_last.attributedText = lastString;

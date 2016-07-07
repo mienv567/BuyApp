@@ -29,7 +29,7 @@
 #import "MZTimerLabel.h"
 
 
-#define kDefaultTimeFormat  @"HH:mm:ss"
+#define kDefaultTimeFormat  @"HH:mm:ss:SS"
 #define kHourFormatReplace  @"!!!*"
 #define kDefaultFireIntervalNormal  0.1
 #define kDefaultFireIntervalHighUse  0.01

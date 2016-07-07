@@ -57,6 +57,15 @@
     self.img_header.layer.cornerRadius = 25.0;
     self.img_header.layer.masksToBounds = YES;
     self.img_header.image = KDefaultImg;
+    
+    self.lab_name.textColor = GS_COLOR_DARKGRAY;
+    self.lab_IP.textColor = GS_COLOR_DARKGRAY;
+    self.lab_ID.textColor = GS_COLOR_DARKGRAY;
+    self.lab_qiHao.textColor = GS_COLOR_DARKGRAY;
+    self.lab_joinCount.textColor = GS_COLOR_DARKGRAY;
+    self.lab_time.textColor = GS_COLOR_DARKGRAY;
+    self.lab_luckyNumber.textColor = GS_COLOR_DARKGRAY;
+    
 }
 
 
@@ -69,7 +78,42 @@
     _myRootVc = myRootVc;
 }
 
+-(void)setDataModel:(GoodInfoUserList *)model{
+    
+    [self.img_header sd_setImageWithURL:[NSURL URLWithString:model.user_logo] placeholderImage:KDefaultImg];
+    
+    NSMutableAttributedString *nameStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"获奖者:  %@",model.user_name]];
+    [nameStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 6)];
+    [nameStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 6)];
+    [nameStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(6, model.user_name.length)];
+    [nameStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_BLUE range:NSMakeRange(6,model.user_name.length )];
+    self.lab_name.attributedText = nameStr;
 
+    self.lab_IP.textColor = [UIColor orangeColor];
+    self.lab_IP.text = [NSString stringWithFormat:@"%@(%@)",model.duobao_ip,model.duobao_area];
+    
+    self.lab_ID.text = [NSString stringWithFormat:@"用户ID:  %@ (唯一不变标识)",model.user_id];
+    
+    self.lab_qiHao.text = [NSString stringWithFormat:@"期    号:  %@",model.duobao_item_id];
+
+    NSMutableAttributedString *canyuStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"本期参与: %@人次",model.user_total]];
+    [canyuStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(6, 1)];
+    [canyuStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(6, 1)];
+    self.lab_joinCount.attributedText = canyuStr;
+    
+    
+    self.lab_time.text = [NSString stringWithFormat:@"揭晓时间: %@",model.lottery_time_format];
+
+    
+    NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"幸运号码: %@",model.lottery_sn]];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 6)];
+    [noticeStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, 6)];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:15] range:NSMakeRange(6, model.lottery_sn.length)];
+    [noticeStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(6,model.lottery_sn.length )];
+    self.lab_luckyNumber.attributedText = noticeStr;
+    
+    
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

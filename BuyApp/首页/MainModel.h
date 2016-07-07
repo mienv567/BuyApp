@@ -14,8 +14,7 @@
 
 @interface MainModel : JSONModel
 @property (nonatomic,strong)NSMutableArray <Optional,MainAdvModel>* advs;
-@property (nonatomic,strong)NSMutableArray <Optional,MainGoodsListModel>* index_duobao_list;
-@property (nonatomic,strong)NSMutableArray <Optional,MainNewGoodsModel>* newest_doubao_list;
-@property (nonatomic,strong)NSMutableArray <Optional,MainNewsModel>* newest_lottery_list;
+@property (nonatomic,strong)NSMutableArray <Optional,MainNewGoodsModel>* newest_doubao_list;    //最新揭晓
+@property (nonatomic,strong)NSMutableArray <Optional,MainNewsModel>* newest_lottery_list;       //最新消息
 @property (nonatomic,strong)NSString <Optional>* sess_id;
 @end

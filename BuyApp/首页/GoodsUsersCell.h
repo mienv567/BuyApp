@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "GoodInfoUserList.h"
 @interface GoodsUsersCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *img_header;
 @property (weak, nonatomic) IBOutlet UILabel *lab_name;
@@ -15,4 +15,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *lab_joinCount;
 @property (weak, nonatomic) IBOutlet UIImageView *img_line;
 
+-(void)setDataModel:(GoodInfoUserList *)model;
 @end

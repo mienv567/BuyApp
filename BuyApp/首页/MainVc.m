@@ -76,7 +76,10 @@ static NSString *footerID = @"footerID";
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           if (SUCCESSED) {
                                                                                               self.dataModel = [[MainModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
-                                                                                              [self.classView reloadData];
+                                                                                              self.TopView.ary_news = self.dataModel.newest_lottery_list;
+                                                                                              self.TopView.ary_adv = self.dataModel.advs;
+                                                                                              self.TopView.ary_newGoods = self.dataModel.newest_doubao_list;
+
                                                                                               
                                                                                           }else{
                                                                                               ShowNotce;
@@ -94,17 +97,16 @@ static NSString *footerID = @"footerID";
 
 -(void)loadMore{
     self.pageNo ++;
-
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
-                                                                     withParameters:@{@"ctl":@"index",
-                                                                                      @"act":@"index",
+                                                                     withParameters:@{@"ctl":@"ajax",
+                                                                                      @"act":@"load_index_list_data",
                                                                                       @"order":[APIArray objectAtIndex:self.segmentView.segmentedControl.selectedSegmentIndex],
                                                                                       @"page":@(self.pageNo)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           [self.classView.mj_header endRefreshing];
                                                                                           [self.classView.mj_footer endRefreshing];
                                                                                           if (SUCCESSED) {
-                                                                                            [self.dataArray addObjectsFromArray:[MainGoodsListModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"index_duobao_list"] error:nil]];
+                                                                                            [self.dataArray addObjectsFromArray:[MainGoodsListModel arrayOfModelsFromDictionaries:responseObject[@"data"  ][@"index_duobao_list"] error:nil]];
                                                                                             NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
                                                                                             [self.classView reloadSections:indexSet];
                                                                                           }else{
@@ -124,38 +126,19 @@ static NSString *footerID = @"footerID";
 //最新揭晓
 - (void)tapAction:(NSInteger)index
 {
-    //         MainGoodsModel* model = [self.model.Goods objectAtIndex:tap.view.tag-500];
-    //        [UserManager handleOpenURL:model.Url title:nil type:1 needLogin:0];
-    
-    switch (index) {
-        case 0:
-        {
-            KJumpToViewController(@"GoodsInfoVc");
-            vc.title = @"来自最新揭晓1的商品";
-        }
-            break;
-        case 1:
-        {
-            KJumpToViewController(@"GoodsInfoVc");
-            vc.title = @"来自最新揭晓2的商品";
-        }
-            break;
-        case 2:
-        {
-            KJumpToViewController(@"GoodsInfoVc");
-            vc.title = @"来自最新揭晓3的商品";
-        }
-            break;
-            
-        default:
-            break;
-    }
+    MainNewGoodsModel* model = [self.dataModel.newest_doubao_list objectAtIndex:index];
+     GoodsInfoVc * vc = [[NSClassFromString(@"GoodsInfoVc") alloc]init];
+    vc.title = model.name;
+    vc.GoodsID = model.ID;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //显示获奖详情
 -(void)click_showNewsInfo:(MainNewsModel *)model{
-    KJumpToViewController(@"GoodsInfoVc");
+    GoodsInfoVc * vc = [[NSClassFromString(@"GoodsInfoVc") alloc]init];
     vc.title = model.name;
+    vc.GoodsID = model.ID;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //循环广告
@@ -232,8 +215,11 @@ static NSString *footerID = @"footerID";
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    KJumpToViewController(@"GoodsInfoVc");
-    vc.title = @"来自首页的商品";
+    MainNewGoodsModel* model = [self.dataModel.newest_doubao_list objectAtIndex:indexPath.row];
+    GoodsInfoVc * vc = [[NSClassFromString(@"GoodsInfoVc") alloc]init];
+    vc.title = model.name;
+    vc.GoodsID = model.ID;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 创建视图
@@ -261,10 +247,7 @@ static NSString *footerID = @"footerID";
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     
     if (kind == UICollectionElementKindSectionFooter && indexPath.section == 0) {
-        self.TopView = [collectionView  dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:headerID forIndexPath:indexPath];
-        self.TopView.ary_news = self.dataModel.newest_lottery_list;
-        self.TopView.ary_adv = self.dataModel.advs;
-        self.TopView.ary_newGoods = self.dataModel.newest_doubao_list;
+        self.TopView = [self.classView  dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:headerID forIndexPath:indexPath];
         WeakSelf;
         self.TopView.myRootVc = weakSelf;
         return self.TopView;

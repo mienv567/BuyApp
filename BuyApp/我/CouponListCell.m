@@ -85,18 +85,26 @@
     if ([model.use_status integerValue]!= 0) {
         self.view_grayBackGound.backgroundColor = GS_COLOR_LIGHTGRAY;
         self.btn_buy.hidden = YES;
+        NSMutableAttributedString *statusStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"¥%@",model.money]];
+        [statusStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:15] range:NSMakeRange(0, 1)];
+        [statusStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_GRAY range:NSMakeRange(0, 1)];
+        [statusStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20] range:NSMakeRange(1, statusStr.length - 1)];
+        [statusStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_GRAY range:NSMakeRange(1,statusStr.length - 1)];
+        self.lab_money.attributedText = statusStr;
+    }else{
+        NSMutableAttributedString *statusStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"¥%@",model.money]];
+        [statusStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:15] range:NSMakeRange(0, 1)];
+        [statusStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(0, 1)];
+        [statusStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20] range:NSMakeRange(1, statusStr.length - 1)];
+        [statusStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(1,statusStr.length - 1)];
+        self.lab_money.attributedText = statusStr;
     }
 
     self.lab_title.text = model.name;
     self.lab_content.text = model.memo;
     self.lab_useTime.text = model.datetime;
     
-    NSMutableAttributedString *statusStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"¥%@",model.money]];
-    [statusStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 1)];
-    [statusStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(0, 1)];
-    [statusStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:NSMakeRange(1, statusStr.length - 1)];
-    [statusStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(1,statusStr.length - 1)];
-    self.lab_money.attributedText = statusStr;
+
     
     
 }

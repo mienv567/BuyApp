@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ASPageView.h"
-#import "GoodsInfoModel.h"
+#import "GoodsItemModel.h"
 
 typedef NS_ENUM(NSUInteger, GoodsInfoTopViewType) {
     GoodsInfoTopViewNone,
@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, GoodsInfoTopViewType) {
 };
 
 @interface GoodsInfoTopView : UIView
-@property (weak, nonatomic) IBOutlet ASPageView *view_pageView;
+@property (strong, nonatomic)  ASPageView *pageView;
 @property (weak, nonatomic) IBOutlet UILabel *lab_state;
 @property (weak, nonatomic) IBOutlet UILabel *lab_title;
 
@@ -38,5 +38,5 @@ typedef NS_ENUM(NSUInteger, GoodsInfoTopViewType) {
 
 @property (nonatomic) GoodsInfoTopViewType showType;
 
--(void)setDataModel:(GoodsInfoModel *)model;
+-(void)setDataModel:(GoodsItemModel *)model;
 @end
