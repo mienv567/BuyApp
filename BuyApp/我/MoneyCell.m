@@ -21,12 +21,13 @@
     [self.lab_action mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self).offset(-10);
         make.centerY.mas_equalTo(self);
+        make.width.mas_equalTo(@100);
     }];
     
     [self.lab_content mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lab_title.mas_bottom).offset(5);
         make.left.equalTo(self.lab_title.mas_left);
-        make.right.equalTo(self.lab_action.mas_left).offset(-5);
+        make.right.equalTo(self.lab_action.mas_left).offset(-30);
     }];
 
 }

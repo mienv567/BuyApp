@@ -9,11 +9,12 @@
 #import "MoneyList.h"
 #import "ImgTitleContent.h"
 #import "MoneyCell.h"
+#import "MoneyListModel.h"
 
 @interface MoneyList ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)  UITableView *tableView;
 @property (nonatomic, strong)  UINib * nib;
-
+@property (nonatomic, strong) NSMutableArray * dataArray;
 @end
 
 @implementation MoneyList
@@ -22,6 +23,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"我的账户";
+    self.dataArray = [NSMutableArray array];
     
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
@@ -35,8 +37,28 @@
         make.edges.equalTo(self.view);
     }];
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, 0.1)];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNew)];
+    [self loadNew];
 }
 
+-(void)loadNew{
+    
+    [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
+                                                                      withParameters:@{@"ctl":@"uc_money",
+                                                                                       @"user_id ":CNull2String(USERMODEL.ID),
+                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                           NSLog(@"%@",responseObject[@"data"][@"info"]);
+                                                                                           [self.tableView.mj_header endRefreshing];
+                                                                                           if (SUCCESSED) {
+                                                                                               [self.dataArray addObjectsFromArray:[MoneyListModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"list"] error:nil]];
+                                                                                               [self.tableView reloadData];
+                                                                                           }else{
+                                                                                               ShowNotce;
+                                                                                           }
+                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                           [self.tableView.mj_header endRefreshing];
+                                                                                       }];
+}
 
 #pragma mark - Table view data source
 
@@ -49,7 +71,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -63,9 +85,13 @@
     MoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
     cell.backgroundColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.lab_title.text = @"资金记录";
-    cell.lab_content.text = @"201616161616订单付款，付款单号\n160816081608\n2016-06-20 12:20:20";
-    cell.lab_action.text = @"200夺宝币";
+    if (self.dataArray.count > indexPath.row) {
+        MoneyListModel * model = [self.dataArray objectAtIndex:indexPath.row];
+        cell.lab_title.text = @"资金记录";
+        cell.lab_content.text = [NSString stringWithFormat:@"%@\n%@",model.log_info,model.log_time];
+        cell.lab_action.text = model.money;;
+    }
+
     return cell;
 }
 

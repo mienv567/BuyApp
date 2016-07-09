@@ -9,5 +9,6 @@
 #import "RootViewController.h"
 
 @interface HistoryWinnersVc : RootViewController
+@property (nonatomic, strong)NSString * GoodsID;
 
 @end

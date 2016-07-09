@@ -54,6 +54,10 @@
 		037232E81D21175D00F258D2 /* WinHistoryVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 037232E71D21175D00F258D2 /* WinHistoryVc.m */; };
 		037232ED1D21209700F258D2 /* HistoryListCells.m in Sources */ = {isa = PBXBuildFile; fileRef = 037232EB1D21209700F258D2 /* HistoryListCells.m */; };
 		037232EE1D21209700F258D2 /* HistoryListCells.xib in Resources */ = {isa = PBXBuildFile; fileRef = 037232EC1D21209700F258D2 /* HistoryListCells.xib */; };
+		037D0E601D30A2A700DFF88A /* RedCouponList.m in Sources */ = {isa = PBXBuildFile; fileRef = 037D0E5F1D30A2A700DFF88A /* RedCouponList.m */; };
+		037D0E631D30ADFC00DFF88A /* MoneyListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 037D0E621D30ADFC00DFF88A /* MoneyListModel.m */; };
+		037D0E661D31148200DFF88A /* WinnerHistoryListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 037D0E651D31148200DFF88A /* WinnerHistoryListModel.m */; };
+		037D0E691D31343900DFF88A /* DuoBaoClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 037D0E681D31343900DFF88A /* DuoBaoClassModel.m */; };
 		038B18EC1D1270D7007C1CC8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 038B18EB1D1270D7007C1CC8 /* main.m */; };
 		038B18EF1D1270D7007C1CC8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 038B18EE1D1270D7007C1CC8 /* AppDelegate.m */; };
 		038B18F21D1270D7007C1CC8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 038B18F11D1270D7007C1CC8 /* ViewController.m */; };
@@ -236,6 +240,14 @@
 		037232EA1D21209700F258D2 /* HistoryListCells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryListCells.h; sourceTree = "<group>"; };
 		037232EB1D21209700F258D2 /* HistoryListCells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryListCells.m; sourceTree = "<group>"; };
 		037232EC1D21209700F258D2 /* HistoryListCells.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryListCells.xib; sourceTree = "<group>"; };
+		037D0E5E1D30A2A700DFF88A /* RedCouponList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedCouponList.h; sourceTree = "<group>"; };
+		037D0E5F1D30A2A700DFF88A /* RedCouponList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedCouponList.m; sourceTree = "<group>"; };
+		037D0E611D30ADFC00DFF88A /* MoneyListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyListModel.h; sourceTree = "<group>"; };
+		037D0E621D30ADFC00DFF88A /* MoneyListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyListModel.m; sourceTree = "<group>"; };
+		037D0E641D31148200DFF88A /* WinnerHistoryListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinnerHistoryListModel.h; sourceTree = "<group>"; };
+		037D0E651D31148200DFF88A /* WinnerHistoryListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WinnerHistoryListModel.m; sourceTree = "<group>"; };
+		037D0E671D31343900DFF88A /* DuoBaoClassModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuoBaoClassModel.h; sourceTree = "<group>"; };
+		037D0E681D31343900DFF88A /* DuoBaoClassModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuoBaoClassModel.m; sourceTree = "<group>"; };
 		038B18E71D1270D7007C1CC8 /* BuyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		038B18EB1D1270D7007C1CC8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		038B18ED1D1270D7007C1CC8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -716,6 +728,10 @@
 				039DCDCA1D29FB69000DA425 /* NewsModel.m */,
 				039DCDCC1D29FEB1000DA425 /* WinHistoryModel.h */,
 				039DCDCD1D29FEB1000DA425 /* WinHistoryModel.m */,
+				037D0E5E1D30A2A700DFF88A /* RedCouponList.h */,
+				037D0E5F1D30A2A700DFF88A /* RedCouponList.m */,
+				037D0E611D30ADFC00DFF88A /* MoneyListModel.h */,
+				037D0E621D30ADFC00DFF88A /* MoneyListModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -931,6 +947,10 @@
 				03CE76B21D2E9FE800A416E7 /* GoodInfoModel.m */,
 				03CE76B41D2EA04300A416E7 /* GoodsItemModel.h */,
 				03CE76B51D2EA04300A416E7 /* GoodsItemModel.m */,
+				037D0E641D31148200DFF88A /* WinnerHistoryListModel.h */,
+				037D0E651D31148200DFF88A /* WinnerHistoryListModel.m */,
+				037D0E671D31343900DFF88A /* DuoBaoClassModel.h */,
+				037D0E681D31343900DFF88A /* DuoBaoClassModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1176,6 +1196,7 @@
 				03A9FD501D23B075006AD04D /* MoneyCell.m in Sources */,
 				03D50DAC1D1C34DF0017AAC3 /* WinnerListCell.m in Sources */,
 				038B195C1D12A88F007C1CC8 /* ASPageView.m in Sources */,
+				037D0E601D30A2A700DFF88A /* RedCouponList.m in Sources */,
 				038B18F21D1270D7007C1CC8 /* ViewController.m in Sources */,
 				03EB70E11D1835A800A94E50 /* Img_TextfieldCell.m in Sources */,
 				038B19371D12A44B007C1CC8 /* UIFont+Addtion.m in Sources */,
@@ -1214,6 +1235,7 @@
 				03EB70DC1D1834AA00A94E50 /* LoginVC.m in Sources */,
 				03CE76B61D2EA04300A416E7 /* GoodsItemModel.m in Sources */,
 				039DCDC81D29F734000DA425 /* CouponModel.m in Sources */,
+				037D0E691D31343900DFF88A /* DuoBaoClassModel.m in Sources */,
 				038B19411D12A44B007C1CC8 /* NSObject+MTKObserving.m in Sources */,
 				032940DA1D1E507C000D54D9 /* CountInfoVc.m in Sources */,
 				038B19391D12A44B007C1CC8 /* UIView+Layout.m in Sources */,
@@ -1264,6 +1286,7 @@
 				03CE76B01D2E9DC400A416E7 /* GoodInfoUserList.m in Sources */,
 				034D89E01D1BB173005806C7 /* GoodsInfoVc.m in Sources */,
 				037232E41D20F7AA00F258D2 /* ShopListCells.m in Sources */,
+				037D0E631D30ADFC00DFF88A /* MoneyListModel.m in Sources */,
 				03BB29771D179A7500EDEDFD /* MainClassModel.m in Sources */,
 				038B19381D12A44B007C1CC8 /* UIImage+Scale.m in Sources */,
 				038B19571D12A88F007C1CC8 /* EGOCache.m in Sources */,
@@ -1277,6 +1300,7 @@
 				03F44A9A1D2CEF8E00CEE5FD /* GoodsInfoModel.m in Sources */,
 				03BB295F1D17822C00EDEDFD /* UserVc.m in Sources */,
 				03D312E61D1D1E4900B2BB26 /* PAStepper.m in Sources */,
+				037D0E661D31148200DFF88A /* WinnerHistoryListModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

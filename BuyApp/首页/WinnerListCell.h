@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WinnerHistoryListModel.h"
 
 @interface WinnerListCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIView *view_bakGound;
@@ -16,5 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lab_ip;
 @property (weak, nonatomic) IBOutlet UILabel *lab_id;
 @property (weak, nonatomic) IBOutlet UILabel *lab_number;
+
+-(void)setDataModel:(WinnerHistoryListModel *)model;
 
 @end

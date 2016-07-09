@@ -9,5 +9,6 @@
 #import "RootViewController.h"
 
 @interface CountWebVc : RootViewController
-
+@property(nonatomic, strong)NSString * UrlString;
+@property(nonatomic, strong)NSString * HtmlString;
 @end

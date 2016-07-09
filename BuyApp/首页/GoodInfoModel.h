@@ -13,4 +13,8 @@
 @interface GoodInfoModel : JSONModel
 @property (nonatomic,strong)NSMutableArray <Optional,GoodInfoUserList>* duobao_order_list;    //参加人员
 @property (nonatomic,strong)GoodsItemModel <Optional>* item_data;    //最新揭晓
+@property (nonatomic,strong)NSString <Optional>* next_id;
+@property (nonatomic,strong)NSMutableArray <Optional>* my_duobao_log;
+@property (nonatomic,strong)NSString <Optional>* page_title;
+
 @end

@@ -10,12 +10,13 @@
 #import "Img_ContentCell.h"
 #import "SearchBarView.h"
 #import "SearchListVc.h"
+#import "DuoBaoClassModel.h"
 
 @interface GoodsClassVc ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UINib * nib;
 @property (nonatomic, strong) SearchBarView * searchView;
-
+@property (nonatomic, strong) NSMutableArray * dataArray;
 @end
 
 #pragma mark - 宏
@@ -43,6 +44,29 @@
             KJumpToViewControllerByNib(@"SearchBarVc");
         }
     }];
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear: animated];
+    
+}
+-(void)loadClass{
+//http://www.quyungou.com/api/index.php?ctl=cate&show_prog=1
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"cate"
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                        
+                                                                                          if (SUCCESSED) {
+                                                                                              [self.dataArray addObjectsFromArray:[DuoBaoClassModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"list"] error:nil]];
+                                                                                              [self.tableView reloadData];
+                                                                                          }else{
+                                                                                              ShowNotce;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                   
+                                                                                          
+                                                                                      }];
 }
 
 #pragma mark -- Cell事件
@@ -51,7 +75,11 @@
     if (indexPath.section == 0) {
         vc.title = @"夺宝活动";
     }else{
-        vc.title = [TitleArray objectAtIndex:indexPath.row];
+        if (self.dataArray.count < indexPath.row) {
+            DuoBaoClassModel * model = [self.dataArray objectAtIndex:indexPath.row];
+            vc.title = model.name;
+            
+        }
     }
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -88,7 +116,7 @@
             return 1;
             break;
         case 1:
-            return 8;
+            return self.dataArray.count;
             break;
         default:
             break;

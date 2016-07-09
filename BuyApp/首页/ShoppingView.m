@@ -76,7 +76,7 @@
 }
 
 - (IBAction)click_buyAll:(id)sender {
-    
+    self.view_count.value = self.view_count.maximumValue ;
 }
 
 - (IBAction)click_buy:(id)sender {

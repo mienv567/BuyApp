@@ -9,5 +9,5 @@
 #import "RootViewController.h"
 
 @interface CountInfoVc : RootViewController
-
+@property (nonatomic, strong)NSString * GoodsID;
 @end

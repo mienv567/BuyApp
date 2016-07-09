@@ -8,6 +8,11 @@
 
 #import "MainModel.h"
 
+@implementation my_duobao
+
+@end
+
+
 @implementation MainModel
 
 @end

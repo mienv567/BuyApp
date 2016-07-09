@@ -76,8 +76,6 @@
             self.btn_showNumbers.hidden = NO;
             self.lab_showCounts.hidden = NO;
             self.btn_login.hidden = YES;
-            self.lab_login.hidden = YES;
-            self.lab_login.text = @"您没有参与本期夺宝哦!";
             self.lab_showCounts.text = @"您参与了：2次\n夺宝号码：1000009 1000000";
         }
             break;

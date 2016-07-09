@@ -9,6 +9,7 @@
 #import "CountWebVc.h"
 
 @interface CountWebVc ()
+@property (nonatomic, strong)UIWebView * webView;
 
 @end
 
@@ -18,7 +19,30 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"开奖查询";
+    self.title = @"查询";
+    self.webView = [[UIWebView alloc]initWithFrame:self.view.bounds];
+    self.webView.scalesPageToFit = NO;//自动对页面进行缩放以适应屏幕
+    [self.view addSubview:self.webView];
+    [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(0, 0, 0, 0));
+    }];
+    self.webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+    self.webView.scalesPageToFit=YES;
+    self.webView.multipleTouchEnabled=YES;
+    self.webView.userInteractionEnabled=YES;
+
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+
+    if (self.UrlString.length > 0) {
+        NSURL* url = [NSURL URLWithString:self.UrlString];//创建URL
+        NSURLRequest* request = [NSURLRequest requestWithURL:url];//创建NSURLRequest
+        [self.webView loadRequest:request];//加载
+    }else{
+        [self.webView loadHTMLString:self.HtmlString baseURL:nil];//加载
+    }
 
 }
 

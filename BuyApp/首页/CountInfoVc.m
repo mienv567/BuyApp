@@ -17,6 +17,8 @@
 @property (strong, nonatomic) CountView * headViewB ;
 @property (strong, nonatomic) CountView * headViewResult ;
 @property (nonatomic) BOOL hiddenList;
+@property(nonatomic, strong)NSString * UrlString;
+
 @end
 
 @implementation CountInfoVc
@@ -65,12 +67,58 @@
     
     [self observeProperty:@"headViewB.lab_chaXun.backgroundColor" withBlock:^(id my, id oldValue, id newValue) {
         if ( oldValue != newValue) {
-            KJumpToViewController(@"CountWebVc");
+
+            CountWebVc * vc = [[NSClassFromString(@"CountWebVc") alloc]init];
+            vc.UrlString = self.UrlString;
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }];
 
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"duobao",
+                                                                                      @"act":@"detail",
+                                                                                      @"data_id":CNull2String(self.GoodsID)
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          if (SUCCESSED) {
+                                                                                              
+                                                                                              self.UrlString = responseObject[@"data"][@"fair_check_link"];
+
+                                                                                              
+                                                                                              //A
+                                                                                              NSMutableAttributedString *countStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"=%@",responseObject[@"data"][@"value_a"]]];
+                                                                                              [countStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:12] range:NSMakeRange(1, countStr.length - 1)];
+                                                                                              [countStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(1,countStr.length - 1)];
+                                                                                              self.headViewA.lab_qiHao.attributedText = countStr;
+                                                                                              //B
+                                                                                              
+                                                                                              NSString * qihapo = responseObject[@"data"][@"value_b"];
+                                                                                              NSMutableAttributedString *qihaoStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"=%@(第%@期)",responseObject[@"data"][@"value_b"],responseObject[@"data"][@"fair_period"]]];
+                                                                                              [qihaoStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:12] range:NSMakeRange(1, qihapo.length )];
+                                                                                              [qihaoStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(1,qihapo.length )];
+                                                                                              self.headViewB.lab_qiHao.attributedText = qihaoStr;
+                                                                                              self.headViewB.lab_history.text = [NSString stringWithFormat:@"=最近一期%@的开奖结果",responseObject[@"data"][@"fair_name"]];
+                                                                                              //C
+                                                                                              NSMutableAttributedString *numStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"幸运号码：%@",responseObject[@"data"][@"lottery_sn"]]];
+                                                                                              [numStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:17] range:NSMakeRange(5, numStr.length - 5)];
+                                                                                              [numStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(5,numStr.length - 5)];
+                                                                                              self.headViewResult.lab_luckyNumber.attributedText = numStr;
+                                                                                              
+                                                                                              
+                                                                                          }else{
+                                                                                              ShowNotce;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                         
+                                                                                      }];
+    
+    
+}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
     
@@ -167,7 +215,7 @@
         return self.headViewA;
     }else if (section == 1){
         self.headViewB.lab_title.text = @"数值B";
-        self.headViewB.lab_history.text = @"=最近一期重庆时时彩的开奖结果";
+        self.headViewB.lab_history.text = @"=最近一期的开奖结果";
 
         NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"=%@%@",@"27181",@"(第160622006期)"]];
         [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 1)];
@@ -199,7 +247,14 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section == 1) {
+        return 10;
+    }
     return 0.1;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    return [UIView new];
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{

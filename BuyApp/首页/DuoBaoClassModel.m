@@ -1,14 +1,14 @@
 //
-//  GoodsItemModel.m
+//  DuoBaoClassModel.m
 //  BuyApp
 //
-//  Created by D on 16/7/7.
+//  Created by D on 16/7/9.
 //  Copyright © 2016年 Super_D. All rights reserved.
 //
 
-#import "GoodsItemModel.h"
+#import "DuoBaoClassModel.h"
 
-@implementation GoodsItemModel
+@implementation DuoBaoClassModel
 +(JSONKeyMapper*)keyMapper
 {
     return [[JSONKeyMapper alloc] initWithDictionary:@{

@@ -61,7 +61,7 @@
 #define SUCCESSED [responseObject[@"code"] intValue] == 200
 #define USERMODEL [UserManager sharedManager].loginUser
 #define ShowNotce [MBProgressHUD showError:responseObject[@"msg"] toView:nil]
-
+#define UserIsLoaded [[UserManager sharedManager]isUserLoad]
 
 //十六进制颜色转换（0xFFFFFF）
 #define HEXRGBCOLOR(hex)  [UIColor colorWithRed:((float)((hex & 0xFF0000) >> 16))/255.0 green:((float)((hex & 0xFF00) >> 8))/255.0 blue:((float)(hex & 0xFF))/255.0 alpha:1.0]

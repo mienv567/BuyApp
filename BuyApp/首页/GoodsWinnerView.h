@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GoodsInfoVc.h"
-#import "GoodInfoUserList.h"
+#import "GoodsItemModel.h"
 
 
 
@@ -30,6 +30,6 @@
 
 @property (nonatomic, strong)GoodsInfoVc * myRootVc;                     // 父视图
 
--(void)setDataModel:(GoodInfoUserList *)model;
+-(void)setDataModel:(GoodsItemModel *)model;
 
 @end

@@ -31,8 +31,12 @@
         make.height.mas_equalTo(@20);
     }];
     self.lab_title.textColor = GS_COLOR_LIGHTBLACK;
+     self.lab_qiHao.textColor = GS_COLOR_DARKGRAY;
+     self.lab_history.textColor = GS_COLOR_DARKGRAY;
+    
     [self.lab_chaXun setTitleColor:GS_COLOR_BLUE forState:UIControlStateNormal];
     [self.lab_show setTitleColor:GS_COLOR_BLUE forState:UIControlStateNormal];
+    
 }
 
 - (IBAction)click_showList:(id)sender {

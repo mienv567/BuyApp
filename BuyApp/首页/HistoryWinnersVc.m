@@ -8,11 +8,14 @@
 
 #import "HistoryWinnersVc.h"
 #import "WinnerListCell.h"
+#import "WinnerHistoryListModel.h"
+#import "GoodsInfoVc.h"
 
 @interface HistoryWinnersVc () <UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)  UITableView *tableView;
 @property (nonatomic, strong) UINib * nib;
-
+@property (nonatomic, strong) NSMutableArray * dataArray;
+@property (nonatomic) NSInteger pageNO;
 @end
 
 @implementation HistoryWinnersVc
@@ -21,18 +24,70 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"往期揭晓";
+    self.dataArray = [NSMutableArray array];
+    self.pageNO = 0;
     
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-//    [self.tableView registerClass:[WinnerListCell class] forCellReuseIdentifier:@"WinnerListCell"];
+
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNew)];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
+}
+
+-(void)loadNew{
+    self.pageNO = 0;
+    [self.dataArray removeAllObjects];
+    [self loadMore];
+}
+
+-(void)loadMore{
+    self.pageNO ++;
     
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"duobao",
+                                                                                      @"data_id":self.GoodsID,
+                                                                                      @"act":@"duobao_record",
+                                                                                      @"page" : @(self.pageNO)
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          [self.tableView.mj_header endRefreshing];
+                                                                                          [self.tableView.mj_footer endRefreshing];
+                                                                                          if (SUCCESSED) {
+                                                                                              [self.dataArray addObjectsFromArray:[WinnerHistoryListModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"list"] error:nil]];
+                                                                                              [self.tableView reloadData];
+                                                                                              
+                                                                                          }else{
+                                                                                              ShowNotce;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          [self.tableView.mj_header endRefreshing];
+                                                                                          [self.tableView.mj_footer endRefreshing];
+                                                                                      }];
+
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (self.dataArray.count == 0) {
+        [self loadNew];
+    }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.dataArray.count > indexPath.row) {
+        WinnerHistoryListModel *  model = [self.dataArray objectAtIndex:indexPath.row];
+        GoodsInfoVc * vc = [[NSClassFromString(@"GoodsInfoVc") alloc]init];
+        vc.title = model.duobaoitem_name;
+        vc.GoodsID = model.ID;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+
 }
 
 #pragma mark - Table view data source
@@ -46,7 +101,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return self.dataArray.count;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -69,7 +124,9 @@
     WinnerListCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
     cell.backgroundColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    if (self.dataArray.count > indexPath.row) {
+        [cell setDataModel:[self.dataArray objectAtIndex:indexPath.row]];
+    }
     return cell;
 }
 

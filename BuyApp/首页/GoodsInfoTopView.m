@@ -180,9 +180,11 @@
     self.lab_title.attributedText = titleString;
     
     
-    self.lab_state.text = @"未知字段";
+    self.lab_state.text = model.luck_user_id?@"已揭晓":@"进行中";
     self.lab_processQihao.text = [NSString stringWithFormat:@"期号:%@",model.ID];
     self.lab_all.text = [NSString stringWithFormat:@"总需%@人次",model.max_buy];
+    self.view_progress.progress = (CGFloat)[model.progress integerValue] / 100;
+
     
     NSMutableAttributedString *lastString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"剩余%@",model.surplus_count]];
     [lastString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(2, lastString.length - 2)];

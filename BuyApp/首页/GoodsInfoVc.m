@@ -17,6 +17,8 @@
 #import "CountInfoVc.h"
 #import "AllCountsView.h"
 #import "GoodInfoModel.h"
+#import "CountWebVc.h"
+#import "HistoryWinnersVc.h"
 
 
 @interface GoodsInfoVc () <UITableViewDelegate,UITableViewDataSource>
@@ -31,7 +33,7 @@
 @property (nonatomic)NSInteger pageno;
 @property (strong, nonatomic) GoodsWinnerView *winnerView;
 @property (strong, nonatomic)GoodInfoModel * dataModel;
-
+@property (strong, nonatomic)GoodsCountsView * bottomActionView;
 @end
 
 #define TitleArray @[@"图文详情",@"往期揭晓"]
@@ -58,7 +60,7 @@
     self.tableView.dataSource = self;
     
     self.pageView = KGetViewFromNib(@"GoodsInfoTopView");
-    self.pageView.backgroundColor = GS_COLOR_WHITE;
+    self.pageView.backgroundColor = [UIColor whiteColor];
     self.pageView.frame = CGRectMake(0, 0, K_WIDTH, K_WIDTH * 410.0 / 660.0 + 50 + 80);
     self.pageView.showType = GoodsInfoTopViewProcess;
     self.tableView.tableHeaderView = self.pageView;
@@ -78,23 +80,31 @@
     [self.shoppingView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+
     
-    self.shoppingView.view_count.value = 1;
-    self.shoppingView.view_count.minimumValue = 0;
-    self.shoppingView.view_count.maximumValue = 50;
-    self.shoppingView.view_count.editableManually = YES;
-    self.shoppingView.view_count.stepValue = 1;
+    self.bottomActionView = KGetViewFromNib(@"GoodsCountsView");
+    self.bottomActionView.showType = GoodsCountsViewNeedLogin;
+    self.bottomActionView.myRootVc = weakSelf;
     
+    
+    self.usersArray = [NSMutableArray array];
 }
 
 #pragma mark -加载数据
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (!self.dataModel) {
+        [self loadNew];
+    }
+}
 
 -(void)loadNew{
     if (!self.dataModel) {
         [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                          withParameters:@{@"ctl":@"duobao",
                                                                                           @"act":@"index",
-                                                                                          @"data_id":self.GoodsID,
+                                                                                          @"data_id":CNull2String(self.GoodsID),
                                                                                            @"user_id ":CNull2String(USERMODEL.ID)
                                                                                           } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                               [self.tableView.mj_footer endRefreshing];
@@ -102,10 +112,58 @@
                                                                                               if (SUCCESSED) {
                                                                                                   
                                                                                                   self.dataModel = [[GoodInfoModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
-                                                                                                  [self.pageView setDataModel:self.dataModel.item_data];
                                                                                                   
-                                                                                                  self.dataModel.item_data.luck_lottery.lottery_time_format = self.dataModel.item_data.lottery_time_format;
-                                                                                                  [self.winnerView setDataModel:self.dataModel.item_data.luck_lottery];
+                                                                                                  //广告
+                                                                                                  [self.pageView setDataModel:self.dataModel.item_data];
+                                                                                                  if (self.dataModel.item_data.luck_lottery) {
+#warning 倒计时或者进度    
+                                                                                                      self.pageView.frame = CGRectMake(0, 0, K_WIDTH, K_WIDTH * 410.0 / 660.0 + 50 );
+                                                                                                      self.tableView.tableHeaderView = self.pageView;
+
+                                                                                                      self.pageView.showType = GoodsInfoTopViewNone;
+                                                                                                      
+                                                                                                  }else{
+                                                                                                      self.pageView.showType = GoodsInfoTopViewProcess;
+
+                                                                                                  }
+                                                                                                  
+                                                                                                  //获得者view
+                                                                                                  self.winnerView.hidden = !self.dataModel.item_data.luck_lottery;
+                                                                                   
+                                                                                                  [self.winnerView setDataModel:self.dataModel.item_data];
+                                                                                                  
+                                                                                                  //当前用户参与的view
+                                                                                                  if (UserIsLoaded) {
+                                                                                                      if (self.dataModel.my_duobao_log.count> 0) {
+                                                                                                          self.bottomActionView.showType = GoodsCountsViewHaveSomeCounts;
+                                                                                                          if (self.dataModel.my_duobao_log.count > 1) {
+                                                                                                                  self.bottomActionView.lab_showCounts.text = [NSString stringWithFormat:@"您参与了：%@次\n夺宝号码：%@ %@",@(self.dataModel.my_duobao_log.count),[self.dataModel.my_duobao_log objectAtIndex:0],[self.dataModel.my_duobao_log objectAtIndex:1]];
+                                                                                                          }else{
+                                                                                                                  self.bottomActionView.lab_showCounts.text = [NSString stringWithFormat:@"您参与了：%@次\n夺宝号码：%@ ",@(self.dataModel.my_duobao_log.count),[self.dataModel.my_duobao_log objectAtIndex:0]];
+                                                                                                          }
+                                                                                                      }else{
+                                                                                                          self.bottomActionView.showType = GoodsCountsViewNotJoin;
+                                                                                                      }
+
+                                                                                                  }else{
+                                                                                                      self.bottomActionView.showType = GoodsCountsViewNeedLogin;
+                                                                                                  }
+                                                                                                  
+                                                                                                  
+                                                                                                  //底部的购买view
+                                                                                                  if (CNull2String(self.dataModel.next_id.length) > 0) {
+                                                                                                      self.bottomView.showType = GoodsBottomViewNeedJoin;
+                                                                                                  }else{
+                                                                                                      self.bottomView.showType = GoodsBottomViewBuy;
+                                                                                                  }
+                                                                                                  
+                                                                                                  //购买的约束
+                                                                                                  self.shoppingView.view_count.value = 0;
+                                                                                                  self.shoppingView.view_count.minimumValue = [self.dataModel.item_data.min_buy integerValue];
+                                                                                                  self.shoppingView.view_count.maximumValue = [self.dataModel.item_data.max_buy integerValue];
+                                                                                                  self.shoppingView.view_count.editableManually = YES;
+                                                                                                  self.shoppingView.view_count.stepValue = [self.dataModel.item_data.min_buy integerValue];
+                                                                                               
                                                                                                   
                                                                                                   [self.tableView reloadData];
                                                                                               }else{
@@ -113,6 +171,7 @@
                                                                                               }
                                                                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                               [self.tableView.mj_footer endRefreshing];
+                                                                                              [self.tableView.mj_header endRefreshing];
                                                                                               
                                                                                           }];
 
@@ -124,6 +183,33 @@
 }
 
 -(void)loadMore{
+    self.pageno ++;
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"duobao",
+                                                                                      @"data_id":self.GoodsID,
+                                                                                      @"user_id ":CNull2String(USERMODEL.ID),
+                                                                                      @"page":@(self.pageno)
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          [self.tableView.mj_footer endRefreshing];
+                                                                                          [self.tableView.mj_header endRefreshing];
+                                                                                          if (SUCCESSED) {
+                                                                                              
+                                                                                            [self.usersArray addObjectsFromArray:[GoodInfoUserList arrayOfModelsFromDictionaries:responseObject[@"data"  ][@"duobao_order_list"] error:nil]];
+                                                                                              
+                                                                                              NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:3];
+                                                                                              [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
+                                                                                              
+                                                                                          }else{
+                                                                                              ShowNotce;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          [self.tableView.mj_footer endRefreshing];
+                                                                                          [self.tableView.mj_header endRefreshing];
+                                                                                      }];
+    
+    
+    
+    
     
       //根据商品是否参加了，切换模式
     self.bottomView.showType = GoodsBottomViewBuy;
@@ -145,16 +231,24 @@
     
     if (indexPath.section == 1 ) {
         if (indexPath.row == 0) {
+            CountWebVc * vc = [[NSClassFromString(@"CountWebVc") alloc]init];
+            vc.HtmlString = self.dataModel.item_data.Description;
+            [self.navigationController pushViewController:vc animated:YES];
             
         }else{
-            KJumpToViewController(@"HistoryWinnersVc");
+            HistoryWinnersVc * vc = [[NSClassFromString(@"HistoryWinnersVc") alloc]init];
+            vc.GoodsID = self.dataModel.item_data.duobao_id;
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
 }
 
 //参加新的一期，立即前往
 - (void)click_showDeatil:(id)sender {
-
+    GoodsInfoVc * vc = [[NSClassFromString(@"GoodsInfoVc") alloc]init];
+    vc.title = self.dataModel.page_title;
+    vc.GoodsID = self.dataModel.next_id;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //立即购买
@@ -177,7 +271,9 @@
 
 //显示计算详情
 - (void)click_countDetail:(id)sender{
-    KJumpToViewController(@"CountInfoVc");
+    CountInfoVc * vc = [[NSClassFromString(@"CountInfoVc") alloc]init];
+    vc.GoodsID = self.dataModel.item_data.ID;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //显示我的号码
@@ -231,8 +327,7 @@
             break;
         case 3:
         {
-//            return self.usersArray.count;
-            return self.dataModel.duobao_order_list.count;
+            return self.usersArray.count;
         }
             break;
         default:
@@ -264,6 +359,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.mode = Title_Content_Right;
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.mode = Title_Content_NoImg;
         cell.lab_titile.text= @"所有参与记录";
         cell.lab_content.text = [NSString stringWithFormat:@"(%@)",self.dataModel.item_data.create_time_format];
@@ -281,8 +377,8 @@
         cell.backgroundColor = [UIColor whiteColor];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.textLabel.textColor = GS_COLOR_DARKGRAY;
-        if (self.dataModel.duobao_order_list.count > indexPath.row) {
-            [cell setDataModel:[self.dataModel.duobao_order_list objectAtIndex:indexPath.row]];
+        if (self.usersArray.count > indexPath.row) {
+            [cell setDataModel:[self.usersArray objectAtIndex:indexPath.row]];
         }
         return cell;
     }
@@ -299,7 +395,12 @@
                 WeakSelf;
                 self.winnerView.myRootVc = weakSelf;
             }
-           
+            
+            if (!self.dataModel.item_data.luck_lottery) {
+                UIView * view = [[UIView alloc]init];
+                view.backgroundColor = [UIColor whiteColor];
+                 return view;
+            }
             return self.winnerView;
         }
             break;
@@ -329,11 +430,7 @@
     switch (section) {
         case 0:
         {
-            WeakSelf;
-            GoodsCountsView * view = KGetViewFromNib(@"GoodsCountsView");
-            view.showType = GoodsCountsViewHaveSomeCounts;
-            view.myRootVc = weakSelf;
-            return view;
+            return self.bottomActionView;
         }
             break;
         case 1:
@@ -357,7 +454,12 @@
     switch (section) {
         case 0:
         {
-           return 230;
+            if (self.dataModel.item_data.luck_lottery) {
+                return 230;
+            }else{
+                return 10;
+            }
+           return 10;
         }
             break;
         case 1:

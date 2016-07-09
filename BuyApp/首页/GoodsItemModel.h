@@ -22,6 +22,7 @@
 @property (nonatomic,strong)NSString <Optional>* is_effect ;//  1 ,
 @property (nonatomic,strong)NSString <Optional>* brief ;//  满载动力，满足你的一天！ ,
 @property (nonatomic,strong)NSString <Optional>* icon ;//  http;////www.quyungou.com/public/attachment/201604/17/17/57135dd73aecb.jpg ,
+@property (nonatomic,strong)NSString <Optional>* Description;
 @property (nonatomic,strong)NSString <Optional>* brand_id ;//  1 ,
 @property (nonatomic,strong)NSMutableArray <Optional>* deal_gallery ;// [],
 @property (nonatomic,strong)NSString <Optional>* create_time ;//  1467660504 ,
