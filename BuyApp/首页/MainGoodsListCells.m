@@ -10,6 +10,7 @@
 #import "MainTabBarVc.h"
 
 
+
 @implementation MainGoodsListCells
 
 -(id)initWithFrame:(CGRect)frame{
@@ -107,12 +108,28 @@
     self.lab_process.attributedText = noticeStr;
     
     self.view_process.progress = (CGFloat)model.progress / 100;
+    
 }
 
 -(void)click_addToList{
-    [[UserManager sharedManager].shopCarGoodsArray addObject:self.myModel];
-    MainTabBarVc *tb = [MainTabBarVc shared];
-    [tb changeNum];
+//    http://www.quyungou.com/wap/index.php?ctl=ajax&show_prog=1&act=add_cart&buy_num=1&data_id=100004221
+
+    [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"ajax",
+                                                                                      @"act":@"add_cart",
+                                                                                      @"buy_num":@"1",
+                                                                                      @"data_id":self.myModel.ID
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          if (SUCCESSED) {
+                                                                                              MainTabBarVc *tb = [MainTabBarVc shared];
+                                                                                              [tb changeNum];
+                                                                                          }else{
+                                                                                              ShowNotce;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                
+                                                                                      }];
+    
 }
 
 @end

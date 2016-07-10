@@ -10,6 +10,7 @@
 #import "AllCountsView.h"
 #import "HistoryListCells.h"
 #import "NewsListModel.h"
+#import "GoodsInfoVc.h"
 
 
 @interface WinHistoryVc ()<UITableViewDelegate,UITableViewDataSource,HistoryListCellsDelegate>
@@ -106,9 +107,11 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    KJumpToViewController(@"GoodsInfoVc");
-    vc.title = @"来自最新揭晓2的商品";
-    
+    NewsListModel* model = [self.dataArray objectAtIndex:indexPath.row];
+    GoodsInfoVc * vc = [[NSClassFromString(@"GoodsInfoVc") alloc]init];
+    vc.title = model.name;
+    vc.GoodsID = model.ID;
+    [self.navigationController pushViewController:vc animated:YES];    
 }
 
 #pragma mark - Table view data source

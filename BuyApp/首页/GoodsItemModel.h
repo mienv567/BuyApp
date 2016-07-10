@@ -64,3 +64,7 @@
 @property (nonatomic,strong)GoodInfoUserList <Optional>* luck_lottery ;//  2016-07-05 11;//28;//24
 
 @end
+
+
+
+

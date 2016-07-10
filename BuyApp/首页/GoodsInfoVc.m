@@ -137,10 +137,12 @@
                                                                                                       if (self.dataModel.my_duobao_log.count> 0) {
                                                                                                           self.bottomActionView.showType = GoodsCountsViewHaveSomeCounts;
                                                                                                           if (self.dataModel.my_duobao_log.count > 1) {
-                                                                                                                  self.bottomActionView.lab_showCounts.text = [NSString stringWithFormat:@"您参与了：%@次\n夺宝号码：%@ %@",@(self.dataModel.my_duobao_log.count),[self.dataModel.my_duobao_log objectAtIndex:0],[self.dataModel.my_duobao_log objectAtIndex:1]];
+                                                                                                              self.bottomActionView.lab_showCounts.text = [NSString stringWithFormat:@"您参与了：%@次  \n夺宝号码：%@ %@",@(self.dataModel.my_duobao_log.count),[[self.dataModel.my_duobao_log objectAtIndex:0] objectForKey:@"lottery_sn"],[[self.dataModel.my_duobao_log objectAtIndex:1]objectForKey:@"lottery_sn"]];
                                                                                                           }else{
-                                                                                                                  self.bottomActionView.lab_showCounts.text = [NSString stringWithFormat:@"您参与了：%@次\n夺宝号码：%@ ",@(self.dataModel.my_duobao_log.count),[self.dataModel.my_duobao_log objectAtIndex:0]];
+                                                                                                                  self.bottomActionView.lab_showCounts.text = [NSString stringWithFormat:@"您参与了：%@次  \n夺宝号码：%@",@(self.dataModel.my_duobao_log.count),[[self.dataModel.my_duobao_log objectAtIndex:0]objectForKey:@"lottery_sn"]];
                                                                                                           }
+                                                                                                          
+                                                                                                          
                                                                                                       }else{
                                                                                                           self.bottomActionView.showType = GoodsCountsViewNotJoin;
                                                                                                       }
@@ -286,15 +288,14 @@
         }];
     }
     self.allCountsView.hidden = NO;
+    self.allCountsView.dataArray = self.dataModel.my_duobao_log;
     
-    NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:@"  计算公式\n  [(数值A+数值B)÷商品所需人次]取余数+100000001"];
-    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:16] range:NSMakeRange(0, 6)];
-    [noticeStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, 6)];
-    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:13] range:NSMakeRange(6, noticeStr.length - 6)];
-    [noticeStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(6,noticeStr.length - 6)];
+    self.allCountsView.lab_title.text = self.dataModel.item_data.name;
+    
+    NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"共参与了%@人次:",@(self.dataModel.my_duobao_log.count)]];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(4, noticeStr.length - 6)];
+    [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(4, noticeStr.length - 6)];
     self.allCountsView.lab_notice.attributedText = noticeStr;
-    
-    
 }
 
 #pragma mark - Table view data source

@@ -135,7 +135,6 @@
 
 -(void)changeNum{
     
-     self.item3.badgeValue = [NSString stringWithFormat:@"%d",(int)[UserManager sharedManager].shopCarGoodsArray.count];
     
 
 }

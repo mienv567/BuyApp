@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		030BD4BC1D31EF6D000038B6 /* CarListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 030BD4BB1D31EF6D000038B6 /* CarListModel.m */; };
 		031B6D5D1D19764B00BD2585 /* GoodsClassVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 031B6D5B1D19764B00BD2585 /* GoodsClassVc.m */; };
 		031B6D5E1D19764B00BD2585 /* GoodsClassVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 031B6D5C1D19764B00BD2585 /* GoodsClassVc.xib */; };
 		031B6D621D197D3600BD2585 /* Img_ContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 031B6D601D197D3600BD2585 /* Img_ContentCell.m */; };
@@ -162,6 +163,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		030BD4BA1D31EF6D000038B6 /* CarListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarListModel.h; sourceTree = "<group>"; };
+		030BD4BB1D31EF6D000038B6 /* CarListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarListModel.m; sourceTree = "<group>"; };
 		031B6D5A1D19764B00BD2585 /* GoodsClassVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsClassVc.h; sourceTree = "<group>"; };
 		031B6D5B1D19764B00BD2585 /* GoodsClassVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsClassVc.m; sourceTree = "<group>"; };
 		031B6D5C1D19764B00BD2585 /* GoodsClassVc.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoodsClassVc.xib; sourceTree = "<group>"; };
@@ -773,6 +776,8 @@
 				037232E01D20F78400F258D2 /* View */,
 				03BB29661D17826400EDEDFD /* ListVc.h */,
 				03BB29671D17826400EDEDFD /* ListVc.m */,
+				030BD4BA1D31EF6D000038B6 /* CarListModel.h */,
+				030BD4BB1D31EF6D000038B6 /* CarListModel.m */,
 			);
 			path = "清单";
 			sourceTree = "<group>";
@@ -1282,6 +1287,7 @@
 				03BB29511D17757800EDEDFD /* MainTabBarVc.m in Sources */,
 				032940E51D1E9DD8000D54D9 /* MyNumbers.m in Sources */,
 				038B195F1D12A8D8007C1CC8 /* RootViewController.m in Sources */,
+				030BD4BC1D31EF6D000038B6 /* CarListModel.m in Sources */,
 				03BF770D1D216C7C00F1270F /* SheZhiVc.m in Sources */,
 				03CE76B01D2E9DC400A416E7 /* GoodInfoUserList.m in Sources */,
 				034D89E01D1BB173005806C7 /* GoodsInfoVc.m in Sources */,

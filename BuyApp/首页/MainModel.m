@@ -8,7 +8,7 @@
 
 #import "MainModel.h"
 
-@implementation my_duobao
+@implementation My_duobao
 
 @end
 

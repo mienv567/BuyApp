@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PAStepper.h"
+#import "CarListModel.h"
 
 @interface ShopListCells : UITableViewCell
 
@@ -18,6 +19,6 @@
 @property (weak, nonatomic) IBOutlet PAStepper *view_changeCount;
 @property (weak, nonatomic) IBOutlet UIButton *btn_delete;
 @property (weak, nonatomic) IBOutlet UILabel *lab_notice;
-
--(void)setDataModel:(id)model;
+@property (nonatomic, strong)CarListModel * myModel;
+-(void)setDataModel:(CarListModel *)model;
 @end

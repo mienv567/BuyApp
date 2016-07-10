@@ -19,5 +19,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lab_number;
 
 -(void)setDataModel:(WinnerHistoryListModel *)model;
+@property (weak, nonatomic) IBOutlet UILabel *lab_title;
 
 @end

@@ -34,7 +34,7 @@ static NSString *kMessageLastUpdate = @"kMessageLastUpdate";
     if (self) {
         NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:USER_INFO];
         UserModel *um = nil;
-        self.shopCarGoodsArray = [NSMutableArray array];
+
         if(dict) {
             NSError *error;
             um = [[UserModel alloc] initWithDictionary:dict error:&error];

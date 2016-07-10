@@ -25,6 +25,7 @@
         make.width.equalTo(@60);
     }];
     
+    [self.lab_showCounts sizeToFit];
     [self.lab_showCounts mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.btn_showNumbers);
         make.right.mas_equalTo(self.btn_showNumbers.mas_left).offset(-10);
@@ -76,6 +77,7 @@
             self.btn_showNumbers.hidden = NO;
             self.lab_showCounts.hidden = NO;
             self.btn_login.hidden = YES;
+            self.lab_login.hidden = YES;
             self.lab_showCounts.text = @"您参与了：2次\n夺宝号码：1000009 1000000";
         }
             break;

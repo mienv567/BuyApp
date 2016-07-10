@@ -9,7 +9,7 @@
 @property (nonatomic) NSInteger cartCount;
 @property (nonatomic, readonly) NSString *messageLastUpdateStr;
 @property (nonatomic, strong) NSString <Optional>*nextVilege;//查看的村居
-@property (nonatomic, strong) NSMutableArray *shopCarGoodsArray;
+
 -(NSString *)changedVilege;
 + (UserManager *)sharedManager;
 //判断用户是否登录 yes登录 no未登录

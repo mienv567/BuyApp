@@ -8,6 +8,7 @@
 
 #import "AllCountsView.h"
 #import "XLPlainFlowLayout.h"
+#import "MainModel.h"
 
 @implementation AllCountsView
 
@@ -87,11 +88,16 @@
 }
 
 #pragma mark - 事件
+-(void)setDataArray:(NSMutableArray *)dataArray{
+    _dataArray = dataArray;
+    
+    
+    [self.classView reloadData];
+}
 
 -(void)tap_backGound{
     self.hidden = YES;
 }
-
 
 - (IBAction)click_hidden:(id)sender {
     
@@ -136,7 +142,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 10;
+    return self.dataArray.count;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -150,7 +156,10 @@
     [cell.contentView addSubview:label];
     label.textColor = GS_COLOR_LIGHTBLACK;
     label.textAlignment = NSTextAlignmentCenter;
-    label.text = @"19901225";
+    if (self.dataArray.count > indexPath.row) {
+        NSDictionary * model = [self.dataArray objectAtIndex:indexPath.row];
+        label.text = [model objectForKey:@"lottery_sn"];
+    }
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(cell.contentView);
     }];

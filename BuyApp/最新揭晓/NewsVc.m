@@ -10,6 +10,7 @@
 #import "NewsCells.h"
 #import "XLPlainFlowLayout.h"
 #import "NewsListModel.h"
+#import "GoodsInfoVc.h"
 
 @interface NewsVc ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property(nonatomic, strong)UICollectionView * classView;      //瀑布流
@@ -88,8 +89,13 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    KJumpToViewController(@"GoodsInfoVc");
-    vc.title = @"来自首页的商品";
+    
+    NewsListModel* model = [self.dataArray objectAtIndex:indexPath.row];
+    GoodsInfoVc * vc = [[NSClassFromString(@"GoodsInfoVc") alloc]init];
+    vc.title = model.duobaoitem_name;
+    vc.GoodsID = model.ID;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 

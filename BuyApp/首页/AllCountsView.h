@@ -19,4 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *img_topLine;
 @property (weak, nonatomic) IBOutlet UIImageView *img_bottomLine;
 @property (weak, nonatomic) IBOutlet UIButton *btn_sure;
+
+@property (nonatomic, strong) NSMutableArray * dataArray;
+
 @end

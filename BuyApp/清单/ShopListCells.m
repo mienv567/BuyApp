@@ -59,12 +59,25 @@
     
 }
 
--(void)setDataModel:(id)model{
-    self.view_changeCount.value = 1;
-    self.view_changeCount.minimumValue = 1;
-    self.view_changeCount.maximumValue = 50;
-    self.view_changeCount.editableManually = YES;
-    self.view_changeCount.stepValue = 1;
+-(void)setDataModel:(CarListModel *)model{
+    self.myModel = model;
+    
+    self.lab_title.text = model.name;
+    
+    [self.img_header sd_setImageWithURL:[NSURL URLWithString:model.deal_icon] placeholderImage:KDefaultImg];
+    
+    NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"总需:%@人才,剩余%@人次",model.max_buy,model.residue_count]];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(noticeStr.length - model.residue_count.length - 2, model.residue_count.length)];
+    [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_BLUE range:NSMakeRange(noticeStr.length - model.residue_count.length - 2, model.residue_count.length)];
+    self.lab_allcounts.attributedText = noticeStr;
+    
+    self.lab_notice.text = [NSString stringWithFormat:@"参与人次需是%@的倍数",model.min_buy];
+    
+    self.view_changeCount.value = [model.number integerValue];
+    self.view_changeCount.minimumValue = [model.min_buy integerValue];
+    self.view_changeCount.maximumValue = [model.max_buy integerValue] > [model.residue_count integerValue] ? [model.max_buy integerValue]:[model.residue_count integerValue];
+    self.view_changeCount.editableManually = NO;
+    self.view_changeCount.stepValue = [model.min_buy integerValue];
 }
 
 

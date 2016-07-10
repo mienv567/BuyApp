@@ -90,6 +90,7 @@ static NSString *footerID = @"footerID";
 }
 -(void)loadNew{
     self.pageNo =0;
+    [self.dataArray removeAllObjects];
     [self loadMore];
     [self loadMainData];
 }

@@ -22,11 +22,9 @@
     self.img_header.layer.masksToBounds = YES;
     self.img_header.image = KDefaultImg;
     
-    [self.btn_info setTitleColor:GS_COLOR_Main forState:UIControlStateNormal];
-    self.btn_info.titleLabel.font = [UIFont boldSystemFontOfSize:13];
-    self.btn_info.backgroundColor = GS_COLOR_LIGHTGRAY;
-    self.btn_info.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    self.btn_info.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+    self.lab_title.textColor = GS_COLOR_Main;
+    self.lab_title.backgroundColor = GS_COLOR_LIGHTGRAY;
+    self.lab_title.font = [UIFont boldSystemFontOfSize:13];
     
     self.lab_ip.textColor = GS_COLOR_RED;
     
@@ -41,16 +39,20 @@
          make.right.bottom.equalTo(self).offset(-10);
     }];
     
-    [self.btn_info mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.lab_title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view_bakGound);
         make.height.mas_equalTo(@30);
     }];
     
+    [self.btn_info mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(self.view_bakGound);
+        make.height.mas_equalTo(@30);
+    }];
 }
 
 -(void)setDataModel:(WinnerHistoryListModel *)model{
 
-    self.btn_info.titleLabel.text = [NSString stringWithFormat:@"期号:%@(揭晓时间:%@%@)",model.ID,model.date,model.lottery_time_show];
+    self.lab_title.text = [NSString stringWithFormat:@"  期号:%@(揭晓时间:%@ %@)",model.ID,model.date,model.lottery_time_show];
     
     [self.img_header sd_setImageWithURL:[NSURL URLWithString:model.user_logo] placeholderImage:KDefaultImg];
     

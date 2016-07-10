@@ -9,7 +9,7 @@
 #import "ListVc.h"
 #import "ShopListCells.h"
 #import "GoodsBottomView.h"
-#import "MainGoodsListModel.h"
+#import "CarListModel.h"
 
 
 @interface ListVc ()<UITableViewDelegate,UITableViewDataSource>
@@ -18,6 +18,7 @@
 @property (nonatomic, strong) UINib * nib;
 @property (nonatomic, strong) GoodsBottomView * bottomView;
 @property (nonatomic, strong) NSMutableArray * dataArray;
+@property (nonatomic) NSInteger pageNo;
 @end
 
 @implementation ListVc
@@ -27,7 +28,9 @@
     // Do any additional setup after loading the view from its nib.
     [self setRightButton:@" " action:nil];
     self.title = @"购物车";
-
+    self.pageNo = 0;
+    self.dataArray = [NSMutableArray array];
+    
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -50,7 +53,41 @@
     }];
     
     [self refreshBottonView];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNew)];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
+    
 }
+
+-(void)loadNew{
+    self.pageNo =0;
+    [self.dataArray removeAllObjects];
+    [self loadMore];
+}
+
+
+-(void)loadMore{
+    self.pageNo ++;
+    http://www.quyungou.com/wap/index.php?ctl=cart&show_prog=1
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"cart",
+                                                                                      @"page":@(self.pageNo)
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          [self.tableView.mj_header endRefreshing];
+                                                                                          [self.tableView.mj_footer endRefreshing];
+                                                                                          if (SUCCESSED) {
+                                                                                              
+                                                                                              [self.dataArray addObjectsFromArray:[CarListModel arrayOfModelsFromDictionaries:responseObject[@"data"  ][@"cart_list"] error:nil]];
+                                                                                              [self.tableView reloadData];
+                                                                                              
+                                                                                          }else{
+                                                                                              ShowNotce;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          [self.tableView.mj_header endRefreshing];
+                                                                                          [self.tableView.mj_footer endRefreshing];
+                                                                                      }];
+}
+
 
 
 -(void)refreshBottonView{
@@ -90,7 +127,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -105,8 +142,11 @@
     cell.backgroundColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryNone;
-
-    [cell setDataModel:nil];
+    if (self.dataArray.count > indexPath.row) {
+        CarListModel * model = [self.dataArray objectAtIndex:indexPath.row];
+        [cell setDataModel:model];
+    }
+    
     
     return cell;
 }
