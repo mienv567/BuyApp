@@ -9,5 +9,6 @@
 #import "RootViewController.h"
 
 @interface SearchListVc : RootViewController
-
+@property (nonatomic, strong)NSString * data_ID;
+@property (nonatomic, strong)NSString * min_buy;
 @end

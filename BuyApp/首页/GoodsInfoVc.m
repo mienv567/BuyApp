@@ -100,7 +100,6 @@
 }
 
 -(void)loadNew{
-    if (!self.dataModel) {
         [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                          withParameters:@{@"ctl":@"duobao",
                                                                                           @"act":@"index",
@@ -153,7 +152,7 @@
                                                                                                   
                                                                                                   
                                                                                                   //底部的购买view
-                                                                                                  if (CNull2String(self.dataModel.next_id.length) > 0) {
+                                                                                                  if (self.dataModel.next_id.length > 0) {
                                                                                                       self.bottomView.showType = GoodsBottomViewNeedJoin;
                                                                                                   }else{
                                                                                                       self.bottomView.showType = GoodsBottomViewBuy;
@@ -176,8 +175,6 @@
                                                                                               [self.tableView.mj_header endRefreshing];
                                                                                               
                                                                                           }];
-
-    }
     
     self.pageno = 0;
     [self.usersArray removeAllObjects];

@@ -121,8 +121,11 @@
     }else{
           self.view_timeBackGound.hidden = NO;
         if (!self.lab_CountDown) {
+            NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+            NSTimeInterval now =[dat timeIntervalSince1970];
+            
             self.lab_CountDown = [[MZTimerLabel alloc] initWithLabel:self.lab_lastTime andTimerType:MZTimerLabelTypeTimer];
-            [self.lab_CountDown setCountDownTime:[model.success_time integerValue]];
+            [self.lab_CountDown setCountDownTime:[model.success_time integerValue] + 28800 - now];
             self.lab_CountDown.timeFormat = @"HH:mm:ss:SS";
             [self.lab_CountDown startWithEndingBlock:^(NSTimeInterval countTime) {
                  self.lab_CountDown.timeLabel.text = @"计算中";

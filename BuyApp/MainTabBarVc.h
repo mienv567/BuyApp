@@ -13,7 +13,7 @@
 @property(nonatomic, strong)UITabBarItem *item3;
 + (instancetype)shared;
 -(void)changeTabBarAtIndex:(NSInteger)idnex;
--(void)changeNum;
+-(void)changeNum:(NSString *)numString;
 -(void)changeHistoryList:(NSInteger)index;
 @end
 

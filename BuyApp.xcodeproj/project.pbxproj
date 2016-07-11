@@ -153,6 +153,7 @@
 		03D66C131D241810006C9855 /* BackGoundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03D66C121D241810006C9855 /* BackGoundView.xib */; };
 		03E8DC1A1D2758300028464B /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E8DC191D2758300028464B /* UserModel.m */; };
 		03E8DC1E1D27598E0028464B /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E8DC1D1D27598E0028464B /* NetworkManager.m */; };
+		03EACFC41D33CE060041E209 /* SearchListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EACFC31D33CE060041E209 /* SearchListModel.m */; };
 		03EB70DC1D1834AA00A94E50 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EB70DA1D1834AA00A94E50 /* LoginVC.m */; };
 		03EB70DD1D1834AA00A94E50 /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03EB70DB1D1834AA00A94E50 /* LoginVC.xib */; };
 		03EB70E11D1835A800A94E50 /* Img_TextfieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EB70DF1D1835A800A94E50 /* Img_TextfieldCell.m */; };
@@ -427,6 +428,8 @@
 		03E8DC191D2758300028464B /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		03E8DC1C1D27598E0028464B /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		03E8DC1D1D27598E0028464B /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
+		03EACFC21D33CE060041E209 /* SearchListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchListModel.h; sourceTree = "<group>"; };
+		03EACFC31D33CE060041E209 /* SearchListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchListModel.m; sourceTree = "<group>"; };
 		03EB70D91D1834AA00A94E50 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		03EB70DA1D1834AA00A94E50 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
 		03EB70DB1D1834AA00A94E50 /* LoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginVC.xib; sourceTree = "<group>"; };
@@ -956,6 +959,8 @@
 				037D0E651D31148200DFF88A /* WinnerHistoryListModel.m */,
 				037D0E671D31343900DFF88A /* DuoBaoClassModel.h */,
 				037D0E681D31343900DFF88A /* DuoBaoClassModel.m */,
+				03EACFC21D33CE060041E209 /* SearchListModel.h */,
+				03EACFC31D33CE060041E209 /* SearchListModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1273,6 +1278,7 @@
 				039DCDD21D2A11FC000DA425 /* WinModel.m in Sources */,
 				038B19561D12A88F007C1CC8 /* ASCache.m in Sources */,
 				03376B361D1ADB77004EE048 /* HelpInfo.m in Sources */,
+				03EACFC41D33CE060041E209 /* SearchListModel.m in Sources */,
 				03A9FD451D23A8CA006AD04D /* ImgTitleContent.m in Sources */,
 				032224DC1D2278A200B20525 /* CouponListCell.m in Sources */,
 				03C5BCF11D18EE6300060FB3 /* RegisterVc.m in Sources */,

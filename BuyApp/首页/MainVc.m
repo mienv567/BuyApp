@@ -161,6 +161,7 @@ static NSString *footerID = @"footerID";
         {
             SearchListVc * vc = [[SearchListVc alloc]init];
             vc.title = @"10元专区";
+            vc.min_buy = @"10";
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;

@@ -8,11 +8,13 @@
 
 #import "SearchListVc.h"
 #import "SearchListCell.h"
+#import "SearchListModel.h"
+#import "GoodsInfoVc.h"
 
 @interface SearchListVc () <UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)  UITableView *tableView;
 @property (nonatomic, strong) UINib * nib;
-
+@property (nonatomic, strong) NSMutableArray * dataArray;
 @end
 
 @implementation SearchListVc
@@ -20,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.dataArray = [NSMutableArray array];
     
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
@@ -34,6 +37,56 @@
     
 }
 
+-(void)loadData{
+//http://www.quyungou.com/wap/index.php?ctl=duobaos&data_id=1&show_prog=1
+    http://www.quyungou.com/wap/index.php?ctl=duobaost&min_buy=10&show_prog=1
+    if ([self.min_buy integerValue] == 10) {//10元专区
+        [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                         withParameters:@{@"ctl":@"duobaost",
+                                                                                          @"min_buy" : CNull2String(self.min_buy)
+                                                                                          } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                              
+                                                                                              if (SUCCESSED) {
+                                                                                                  [self.dataArray addObjectsFromArray:[SearchListModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"list"] error:nil]];
+                                                                                                  [self.tableView reloadData];
+                                                                                              }else{
+                                                                                                  ShowNotce;
+                                                                                              }
+                                                                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                              
+                                                                                              
+                                                                                          }];
+    }else{//普通区
+        [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                         withParameters:@{@"ctl":@"duobaos",
+                                                                                          @"data_id" : CNull2String(self.data_ID)
+                                                                                          } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                              
+                                                                                              if (SUCCESSED) {
+                                                                                                  [self.dataArray addObjectsFromArray:[SearchListModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"list"] error:nil]];
+                                                                                                  [self.tableView reloadData];
+                                                                                              }else{
+                                                                                                  ShowNotce;
+                                                                                              }
+                                                                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                              
+                                                                                              
+                                                                                          }];
+    }
+
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.dataArray.count > indexPath.row) {
+        SearchListModel * model = [self.dataArray objectAtIndex:indexPath.row];
+        GoodsInfoVc * vc = [[NSClassFromString(@"GoodsInfoVc") alloc]init];
+        vc.title = model.name;
+        vc.GoodsID = model.ID;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+
+}
+
 #pragma mark - Table view data source
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -45,7 +98,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -59,7 +112,9 @@
     cell.backgroundColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    [cell setDataModel:nil];
+    if (self.dataArray.count > indexPath.row) {
+        [cell setDataModel:[self.dataArray objectAtIndex:indexPath.row]];
+    }
     
     return cell;
 }
@@ -78,6 +133,9 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self changeNavigationBarStyleToRed:NO];
+    if (self.dataArray.count == 0) {
+        [self loadData];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated{

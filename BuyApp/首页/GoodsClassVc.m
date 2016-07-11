@@ -28,8 +28,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    self.dataArray = [NSMutableArray array];
     self.title = @"夺宝分类";
+    
     self.searchView = KGetViewFromNib(@"SearchBarView");
     self.view.backgroundColor = [UIColor whiteColor];
     self.tableView.backgroundColor = [UIColor whiteColor];
@@ -49,10 +50,13 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear: animated];
+    if (self.dataArray.count == 0) {
+        [self loadClass];
+    }
     
 }
 -(void)loadClass{
-//http://www.quyungou.com/api/index.php?ctl=cate&show_prog=1
+
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"cate"
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -75,10 +79,10 @@
     if (indexPath.section == 0) {
         vc.title = @"夺宝活动";
     }else{
-        if (self.dataArray.count < indexPath.row) {
+        if (self.dataArray.count > indexPath.row) {
             DuoBaoClassModel * model = [self.dataArray objectAtIndex:indexPath.row];
             vc.title = model.name;
-            
+            vc.data_ID = model.ID;
         }
     }
     [self.navigationController pushViewController:vc animated:YES];

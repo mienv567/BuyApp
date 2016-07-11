@@ -166,7 +166,7 @@
 
 - (IBAction)click_addGoods:(id)sender {
     MainTabBarVc * main = [MainTabBarVc shared];
-    [main changeNum];
+//    [main changeNum];
     
 }
 

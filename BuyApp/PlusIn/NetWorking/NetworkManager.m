@@ -60,9 +60,13 @@
             
                 [MBProgressHUD hideNetworkIndicator];
                     success(task,responseObject);
+                NSLog(@"调用接口_____%@   %@",urlString,parameters);
+                NSLog(@"返回数据_____%@",responseObject);
+
             } failure:^(NSURLSessionDataTask *task, NSError * error){
                 [MBProgressHUD hideNetworkIndicator];
                 failure(task,error);
+                  NSLog(@"调用接口_____%@   %@",urlString,parameters);
             }];
 
         }else{

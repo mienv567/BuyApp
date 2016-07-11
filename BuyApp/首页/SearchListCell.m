@@ -69,28 +69,40 @@
     
 }
 
--(void)setDataModel:(id)model{
-
-    [self.img_goods sd_setImageWithURL:nil placeholderImage:KDefaultImg];
+-(void)setDataModel:(SearchListModel *)model{
     
-    self.lab_title.text = @"所有的苹果商品大降价了哦！原价20000元的点按哦，现在只出售10000元，快来抢购啊！";
+    _myModel = model;
     
-    NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"剩余%@",@"45"]];
+    [self.img_goods sd_setImageWithURL:[NSURL URLWithString:model.icon] placeholderImage:KDefaultImg];
+    
+    self.lab_title.text = model.name;
+    
+    NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"剩余%@",model.surplus_buy]];
     [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 2)];
     [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 2)];
     [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(2, noticeStr.length - 2)];
     [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_BLUE range:NSMakeRange(2,noticeStr.length - 2)];
     self.lab_last.attributedText = noticeStr;
     
-    self.lab_all.text = [NSString stringWithFormat:@"总需%@",@"100"];
-    
-    self.view_progress.progress = 0.5;
-    
+    self.lab_all.text = [NSString stringWithFormat:@"总需%@",model.max_buy];
+    self.view_progress.progress = (CGFloat)[model.current_buy integerValue] / [model.max_buy integerValue];
 }
 
 - (IBAction)click_join:(id)sender {
-      MainTabBarVc *tb = [MainTabBarVc shared];
-    [tb changeNum];
+    [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
+                                                                      withParameters:@{@"ctl":@"ajax",
+                                                                                       @"act":@"add_cart",
+                                                                                       @"buy_num":self.myModel.min_buy,
+                                                                                       @"data_id":CNull2String(self.myModel.ID)
+                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                           if (SUCCESSED) {
+                                                                                               [[MainTabBarVc shared] changeNum:responseObject[@"data"][@"cart_item_num"]];
+                                                                                           }else{
+                                                                                               ShowNotce;
+                                                                                           }
+                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                           
+                                                                                       }];
     
 }
 

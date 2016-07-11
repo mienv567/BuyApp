@@ -133,11 +133,10 @@
     
 }
 
--(void)changeNum{
-    
-    
-
+-(void)changeNum:(NSString *)numString{
+    self.item3.badgeValue = numString;
 }
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];

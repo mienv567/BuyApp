@@ -117,12 +117,11 @@
     [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"ajax",
                                                                                       @"act":@"add_cart",
-                                                                                      @"buy_num":@"1",
-                                                                                      @"data_id":self.myModel.ID
+                                                                                      @"buy_num":CNull2String(self.myModel.min_buy),
+                                                                                      @"data_id":CNull2String(self.myModel.ID)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           if (SUCCESSED) {
-                                                                                              MainTabBarVc *tb = [MainTabBarVc shared];
-                                                                                              [tb changeNum];
+                                                                                              [[MainTabBarVc shared] changeNum:responseObject[@"data"][@"cart_item_num"]];
                                                                                           }else{
                                                                                               ShowNotce;
                                                                                           }

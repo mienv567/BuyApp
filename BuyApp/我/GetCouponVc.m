@@ -44,6 +44,8 @@
     self.tableView.tableHeaderView = self.topView;
     self.topView.lab_myPoints.text = USERMODEL.score;
     
+    
+    
     UITapGestureRecognizer *singleFingerOne = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(tap_backGound)];
     singleFingerOne.numberOfTouchesRequired = 1; //手指数
     singleFingerOne.numberOfTapsRequired = 1; //tap次数
@@ -53,6 +55,7 @@
     self.dataArray = [NSMutableArray array];
     
     [self loadNew];
+    [self loadNewPoints];
 }
 
 -(void)loadNew{
@@ -134,7 +137,13 @@
     }
 }
 
+-(void)loadNewPoints{
+    NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"我的积分:%d",CNull2Int(USERMODEL.score)]];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(5, noticeStr.length - 5)];
+    [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(5,noticeStr.length - 5)];
+    self.topView.lab_myPoints.attributedText = noticeStr;
 
+}
 #pragma mark - Table view data source
 
 

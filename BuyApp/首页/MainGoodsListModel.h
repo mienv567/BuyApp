@@ -16,4 +16,5 @@
 @property (nonatomic,strong)NSString <Optional>* name;
 @property (nonatomic)NSInteger progress;
 @property (nonatomic,strong)NSString <Optional>* iCon;
+@property (nonatomic,strong)NSString <Optional>* min_buy;
 @end
