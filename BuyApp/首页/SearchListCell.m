@@ -98,7 +98,7 @@
                                                                                            if (SUCCESSED) {
                                                                                                [[MainTabBarVc shared] changeNum:responseObject[@"data"][@"cart_item_num"]];
                                                                                            }else{
-                                                                                               ShowNotce;
+                                                                                               ShowNotceError;
                                                                                            }
                                                                                        } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                            

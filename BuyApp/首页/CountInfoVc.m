@@ -111,7 +111,7 @@
                                                                                               
                                                                                               
                                                                                           }else{
-                                                                                              ShowNotce;
+                                                                                              ShowNotceError;
                                                                                           }
                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                          

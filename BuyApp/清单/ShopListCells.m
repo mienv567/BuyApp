@@ -54,9 +54,7 @@
 }
 
 - (IBAction)click_delete:(id)sender {
-    
-    
-    
+    [self.myRootVc click_deleteGoods:self.myModel cell:self];
 }
 
 -(void)setDataModel:(CarListModel *)model{
@@ -80,6 +78,9 @@
     self.view_changeCount.stepValue = [model.min_buy integerValue];
 }
 
+-(void)setMyRootVc:(ListVc *)myRootVc{
+    _myRootVc = myRootVc;
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

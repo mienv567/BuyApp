@@ -82,7 +82,7 @@ static NSString *footerID = @"footerID";
 
                                                                                               
                                                                                           }else{
-                                                                                              ShowNotce;
+                                                                                              ShowNotceError;
                                                                                           }
                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                           
@@ -111,7 +111,7 @@ static NSString *footerID = @"footerID";
                                                                                             NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
                                                                                             [self.classView reloadSections:indexSet];
                                                                                           }else{
-                                                                                              ShowNotce;
+                                                                                              ShowNotceError;
                                                                                           }
                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                           [self.classView.mj_header endRefreshing];

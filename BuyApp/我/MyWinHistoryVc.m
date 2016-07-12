@@ -57,7 +57,7 @@
                                                                                           if (SUCCESSED) {
                                                                                               [self.dataArray addObjectsFromArray:[WinHistoryModel arrayOfModelsFromDictionaries:responseObject[@"value"] error:nil]];
                                                                                           }else{
-                                                                                              ShowNotce;
+                                                                                              ShowNotceError;
                                                                                           }
                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                           

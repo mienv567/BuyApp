@@ -69,7 +69,7 @@
                                                                                               [self.dataArray addObjectsFromArray:[RedCouponList arrayOfModelsFromDictionaries:responseObject[@"data"][@"data"] error:nil]];
                                                                                               [self.tableView reloadData];
                                                                                           }else{
-                                                                                              ShowNotce;
+                                                                                              ShowNotceError;
                                                                                           }
                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                               [self.tableView.mj_header endRefreshing];
@@ -104,7 +104,7 @@
                                                                                                    [MBProgressHUD showSuccess:responseObject[@"msg"] toView:nil];
                                                                                                    [[UserManager sharedManager]refreshUserInfo];
                                                                                                }else{
-                                                                                                   ShowNotce;
+                                                                                                   ShowNotceError;
                                                                                                }
                                                                                            } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                                
@@ -129,7 +129,7 @@
                                                                                                    [MBProgressHUD showSuccess:responseObject[@"msg"] toView:nil];
                                                                                                    [[UserManager sharedManager]refreshUserInfo];
                                                                                                }else{
-                                                                                                   ShowNotce;
+                                                                                                   ShowNotceError;
                                                                                                }
                                                                                            } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                                

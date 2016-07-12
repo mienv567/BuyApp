@@ -8,6 +8,11 @@
 
 #import "CarListModel.h"
 
+@implementation TotalDataModel
+
+@end
+
+
 @implementation CarListModel
 
 +(JSONKeyMapper*)keyMapper

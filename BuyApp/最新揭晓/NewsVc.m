@@ -77,7 +77,7 @@
                                                                                               [self.dataArray addObjectsFromArray:[NewsListModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"list"] error:nil]];
                                                                                               [self.classView reloadData];
                                                                                           }else{
-                                                                                              ShowNotce;
+                                                                                              ShowNotceError;
                                                                                           }
                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                           [self.classView.mj_header endRefreshing];

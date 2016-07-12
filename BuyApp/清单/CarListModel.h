@@ -8,6 +8,13 @@
 
 #import <JSONModel/JSONModel.h>
 
+@interface TotalDataModel : JSONModel
+@property (nonatomic,strong)NSString <Optional>* cart_item_number; //1
+@property (nonatomic,strong)NSString <Optional>* return_total_score;//0
+@property (nonatomic,strong)NSString <Optional>* total_price;//1
+
+@end
+
 @interface CarListModel : JSONModel
 @property (nonatomic,strong)NSString <Optional>* ID;//96
 @property (nonatomic,strong)NSString <Optional>* session_id;//8ibb87sd4mfvuojlunlsgt7ab5

@@ -63,7 +63,7 @@
                                                                                               [self.tableView reloadData];
                                                                                               
                                                                                           }else{
-                                                                                              ShowNotce;
+                                                                                              ShowNotceError;
                                                                                           }
                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                           [self.tableView.mj_header endRefreshing];

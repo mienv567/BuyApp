@@ -69,8 +69,9 @@
                                                                                           if (SUCCESSED) {
                                                                                               [self.dataArray addObjectsFromArray:[NewsListModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"list"] error:nil]];
                                                                                               [self.tableView reloadData];
+                                                                                              KPopToLastViewController;
                                                                                           }else{
-                                                                                              ShowNotce;
+                                                                                              ShowNotceError;
                                                                                           }
                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                           [self.tableView.mj_header endRefreshing];

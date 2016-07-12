@@ -10,6 +10,7 @@
 #import "ShopListCells.h"
 #import "GoodsBottomView.h"
 #import "CarListModel.h"
+#import "MainTabBarVc.h"
 
 
 @interface ListVc ()<UITableViewDelegate,UITableViewDataSource>
@@ -19,6 +20,8 @@
 @property (nonatomic, strong) GoodsBottomView * bottomView;
 @property (nonatomic, strong) NSMutableArray * dataArray;
 @property (nonatomic) NSInteger pageNo;
+@property (nonatomic, strong) TotalDataModel * totalModel;
+
 @end
 
 @implementation ListVc
@@ -52,7 +55,6 @@
         make.bottom.mas_equalTo(self.bottomView.mas_top);
     }];
     
-    [self refreshBottonView];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNew)];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
     
@@ -67,7 +69,6 @@
 
 -(void)loadMore{
     self.pageNo ++;
-    http://www.quyungou.com/wap/index.php?ctl=cart&show_prog=1
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"cart",
                                                                                       @"page":@(self.pageNo)
@@ -76,11 +77,17 @@
                                                                                           [self.tableView.mj_footer endRefreshing];
                                                                                           if (SUCCESSED) {
                                                                                               
-                                                                                              [self.dataArray addObjectsFromArray:[CarListModel arrayOfModelsFromDictionaries:responseObject[@"data"  ][@"cart_list"] error:nil]];
+                                                                                              [self.dataArray addObjectsFromArray:[CarListModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"cart_list"] error:nil]];
                                                                                               [self.tableView reloadData];
                                                                                               
+                                                                                              self.totalModel = [[TotalDataModel alloc]initWithDictionary:responseObject[@"data"][@"total_data"] error:nil];
+                                                                                              
+                                                                                              [self refreshBottonView:self.totalModel.cart_item_number money:self.totalModel.total_price];
+                                                                                              
+                                                                                              [[MainTabBarVc shared] changeNum:self.totalModel.cart_item_number];
+                                                                                              
                                                                                           }else{
-                                                                                              ShowNotce;
+                                                                                              ShowNotceError;
                                                                                           }
                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                           [self.tableView.mj_header endRefreshing];
@@ -90,12 +97,12 @@
 
 
 
--(void)refreshBottonView{
+-(void)refreshBottonView:(NSString *)countSring money:(NSString *)allMoney{
     
-    NSString * count = @"1";
-    NSString * money = @"1";
+    NSString * count = CNull2String(countSring);
+    NSString * money = CNull2String(allMoney);
     
-    NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"共%@件商品，总计:%@元",@"1",@"1"]];
+    NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"共%@件商品，总计:%@元",count,money]];
     [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:13] range:NSMakeRange(0, 8 + count.length)];
     [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 8 + count.length)];
     
@@ -109,6 +116,25 @@
     
 }
 
+-(void)click_deleteGoods:(CarListModel *)model cell:(ShopListCells *)cell{
+    NSIndexPath * index = [self.tableView indexPathForCell:cell];
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"ajax",
+                                                                                      @"id":model.ID,
+                                                                                      @"act" : @"del_cart"
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          
+                                                                                          if (SUCCESSED) {
+                                                                                              [self.dataArray removeObjectAtIndex:index.row];
+                                                                                              [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:index] withRowAnimation:UITableViewRowAnimationFade];
+                                                                                              
+                                                                                          }else{
+                                                                                              ShowNotceError;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          
+                                                                                      }];
+}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -139,6 +165,9 @@
     }
     
     ShopListCells *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+    WeakSelf;
+    cell.myRootVc = weakSelf;
+    
     cell.backgroundColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryNone;

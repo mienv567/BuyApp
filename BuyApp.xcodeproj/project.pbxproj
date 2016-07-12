@@ -151,6 +151,8 @@
 		03D66C0E1D23FF24006C9855 /* MyWinListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03D66C0C1D23FF24006C9855 /* MyWinListCell.xib */; };
 		03D66C111D241800006C9855 /* BackGoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D66C101D241800006C9855 /* BackGoundView.m */; };
 		03D66C131D241810006C9855 /* BackGoundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03D66C121D241810006C9855 /* BackGoundView.xib */; };
+		03D8B69B1D352D5B00683AAE /* UserEmailVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D8B69A1D352D5B00683AAE /* UserEmailVc.m */; };
+		03D8B69D1D352D7100683AAE /* UserEmailVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03D8B69C1D352D7100683AAE /* UserEmailVc.xib */; };
 		03E8DC1A1D2758300028464B /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E8DC191D2758300028464B /* UserModel.m */; };
 		03E8DC1E1D27598E0028464B /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E8DC1D1D27598E0028464B /* NetworkManager.m */; };
 		03EACFC41D33CE060041E209 /* SearchListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EACFC31D33CE060041E209 /* SearchListModel.m */; };
@@ -424,6 +426,9 @@
 		03D66C0F1D241800006C9855 /* BackGoundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackGoundView.h; sourceTree = "<group>"; };
 		03D66C101D241800006C9855 /* BackGoundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackGoundView.m; sourceTree = "<group>"; };
 		03D66C121D241810006C9855 /* BackGoundView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BackGoundView.xib; sourceTree = "<group>"; };
+		03D8B6991D352D5B00683AAE /* UserEmailVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserEmailVc.h; sourceTree = "<group>"; };
+		03D8B69A1D352D5B00683AAE /* UserEmailVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserEmailVc.m; sourceTree = "<group>"; };
+		03D8B69C1D352D7100683AAE /* UserEmailVc.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserEmailVc.xib; sourceTree = "<group>"; };
 		03E8DC181D2758300028464B /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		03E8DC191D2758300028464B /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		03E8DC1C1D27598E0028464B /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
@@ -873,6 +878,9 @@
 				03EB70D91D1834AA00A94E50 /* LoginVC.h */,
 				03EB70DA1D1834AA00A94E50 /* LoginVC.m */,
 				03EB70DB1D1834AA00A94E50 /* LoginVC.xib */,
+				03D8B6991D352D5B00683AAE /* UserEmailVc.h */,
+				03D8B69A1D352D5B00683AAE /* UserEmailVc.m */,
+				03D8B69C1D352D7100683AAE /* UserEmailVc.xib */,
 				03C5BCEE1D18EE6300060FB3 /* RegisterVc.h */,
 				03C5BCEF1D18EE6300060FB3 /* RegisterVc.m */,
 				03C5BCF01D18EE6300060FB3 /* RegisterVc.xib */,
@@ -1127,6 +1135,7 @@
 				038B195A1D12A88F007C1CC8 /* MBProgressHUD.bundle in Resources */,
 				03A9FD5B1D23BDF8006AD04D /* ChongZhiVc.xib in Resources */,
 				038B18F71D1270D7007C1CC8 /* Assets.xcassets in Resources */,
+				03D8B69D1D352D7100683AAE /* UserEmailVc.xib in Resources */,
 				03A9FD411D23907C006AD04D /* CouponGetCell.xib in Resources */,
 				032940DF1D1E5393000D54D9 /* CountView.xib in Resources */,
 				031B6D631D197D3600BD2585 /* Img_ContentCell.xib in Resources */,
@@ -1272,6 +1281,7 @@
 				03A9FD3C1D2370EC006AD04D /* GetCouponVc.m in Sources */,
 				03A9FD4C1D23AECF006AD04D /* MoneyList.m in Sources */,
 				035C57ED1D2B8076000D68D6 /* MainAdvModel.m in Sources */,
+				03D8B69B1D352D5B00683AAE /* UserEmailVc.m in Sources */,
 				038B19581D12A88F007C1CC8 /* ASWaitingView.m in Sources */,
 				03BB296F1D178E6B00EDEDFD /* SearchListVc.m in Sources */,
 				03BB297A1D17B14300EDEDFD /* GoodsView.m in Sources */,

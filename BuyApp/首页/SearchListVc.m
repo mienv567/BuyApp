@@ -14,7 +14,7 @@
 @interface SearchListVc () <UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)  UITableView *tableView;
 @property (nonatomic, strong) UINib * nib;
-@property (nonatomic, strong) NSMutableArray * dataArray;
+
 @end
 
 @implementation SearchListVc
@@ -50,7 +50,7 @@
                                                                                                   [self.dataArray addObjectsFromArray:[SearchListModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"list"] error:nil]];
                                                                                                   [self.tableView reloadData];
                                                                                               }else{
-                                                                                                  ShowNotce;
+                                                                                                  ShowNotceError;
                                                                                               }
                                                                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                               
@@ -66,7 +66,7 @@
                                                                                                   [self.dataArray addObjectsFromArray:[SearchListModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"list"] error:nil]];
                                                                                                   [self.tableView reloadData];
                                                                                               }else{
-                                                                                                  ShowNotce;
+                                                                                                  ShowNotceError;
                                                                                               }
                                                                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                               

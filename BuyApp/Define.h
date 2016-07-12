@@ -60,7 +60,8 @@
 #define WeakSelf __weak typeof(self)weakSelf = self
 #define SUCCESSED [responseObject[@"code"] intValue] == 200
 #define USERMODEL [UserManager sharedManager].loginUser
-#define ShowNotce [MBProgressHUD showError:responseObject[@"msg"] toView:nil]
+#define ShowNotceError [MBProgressHUD showError:responseObject[@"msg"] toView:nil]
+#define ShowNotceSuccess [MBProgressHUD showSuccess:responseObject[@"msg"] toView:nil]
 #define UserIsLoaded [[UserManager sharedManager]isUserLoad]
 
 //十六进制颜色转换（0xFFFFFF）

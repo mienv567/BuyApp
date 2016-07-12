@@ -51,7 +51,9 @@
     [self getClassView];
 }
 
-
+-(void)click_header{
+    KJumpToViewControllerByNib(@"UserEmailVc");
+}
 - (void)click_chongchi:(id)sender{
     KJumpToViewControllerByNib(@"ChongZhiVc");
 }

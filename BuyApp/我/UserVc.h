@@ -11,5 +11,5 @@
 @interface UserVc : RootViewController
 
 - (void)click_chongchi:(id)sender;
-
+-(void)click_header;
 @end

@@ -16,7 +16,7 @@
     self.img_header.layer.cornerRadius = 30.0;
     self.img_header.layer.masksToBounds = YES;
     self.img_header.image = KDefaultImg;
-    
+
     [self.view_topBackGound mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self);
         make.height.mas_equalTo(@120);
@@ -38,11 +38,19 @@
     
 }
 
+
+- (IBAction)click_imgHeader:(id)sender {
+    
+    [self.myRootVc click_header];
+}
+
 - (IBAction)click_chongchi:(id)sender {
     
     [self.myRootVc click_chongchi:sender];
     
 }
+
+
 
 -(void)setMyRootVc:(id )myRootVc{
 

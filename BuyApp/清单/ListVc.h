@@ -8,6 +8,9 @@
 
 #import "RootViewController.h"
 
-@interface ListVc : RootViewController
+@class ShopListCells;
+@class CarListModel;
 
+@interface ListVc : RootViewController
+-(void)click_deleteGoods:(CarListModel *)model cell:(ShopListCells *)cell;
 @end

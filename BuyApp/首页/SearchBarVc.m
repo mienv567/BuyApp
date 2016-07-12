@@ -8,9 +8,10 @@
 
 #import "SearchBarVc.h"
 #import "SearchListVc.h"
+#import "SearchListModel.h"
 
 @interface SearchBarVc () <UITextFieldDelegate>
-
+@property (nonatomic, strong) NSMutableArray * dataArray;
 @end
 
 @implementation SearchBarVc
@@ -20,7 +21,7 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"搜索";
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    self.dataArray = [NSMutableArray array];
     self.view_bg.backgroundColor = GS_COLOR_WHITE;
     
     self.btn_search.backgroundColor = GS_COLOR_RED;
@@ -54,9 +55,29 @@
     
 }
 - (IBAction)click_search:(id)sender {
-    SearchListVc * vc = [[SearchListVc alloc]init];
-    vc.title = [NSString stringWithFormat:@"%@搜索结果",self.txf_search.text];
-    [self.navigationController pushViewController:vc animated:YES];
+
+
+    [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"search",
+                                                                                      @"act" :@"do_search",
+                                                                                      @"keyword" : CNull2String(self.txf_search.text)
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          if (SUCCESSED) {
+                                                                                              [self.dataArray addObjectsFromArray:[SearchListModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"list"] error:nil]];
+                                                                                              
+                                                                                              SearchListVc * vc = [[SearchListVc alloc]init];
+                                                                                              vc.dataArray = self.dataArray;
+                                                                                              vc.title = [NSString stringWithFormat:@"%@搜索结果",self.txf_search.text];
+                                                                                              [self.navigationController pushViewController:vc animated:YES];
+                                                                                              
+                                                                                          }else{
+                                                                                              ShowNotceError;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          
+                                                                                          
+                                                                                      }];
+    
     
 }
 

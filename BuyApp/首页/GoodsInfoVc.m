@@ -168,7 +168,7 @@
                                                                                                   
                                                                                                   [self.tableView reloadData];
                                                                                               }else{
-                                                                                                  ShowNotce;
+                                                                                                  ShowNotceError;
                                                                                               }
                                                                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                               [self.tableView.mj_footer endRefreshing];
@@ -199,7 +199,7 @@
                                                                                               [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
                                                                                               
                                                                                           }else{
-                                                                                              ShowNotce;
+                                                                                              ShowNotceError;
                                                                                           }
                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                           [self.tableView.mj_footer endRefreshing];

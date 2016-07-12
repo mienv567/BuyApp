@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UserVc.h"
-@interface UserTopView : UIView
+@interface UserTopView : UIView <UIGestureRecognizerDelegate>
 
 
 typedef NS_ENUM(NSUInteger, UserTopViewType) {

@@ -125,7 +125,7 @@
                                                                                                   [[UserManager sharedManager] saveLoginUser:userModel];
                                                                                                   [self click_cancleLogin];
                                                                                               }else{
-                                                                                                  ShowNotce;
+                                                                                                  ShowNotceError;
                                                                                               }
                                                                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                               
@@ -157,7 +157,7 @@
                                                                                                   [[UserManager sharedManager] saveLoginUser:userModel];
                                                                                                    [self click_cancleLogin];
                                                                                               }else{
-                                                                                                  ShowNotce;
+                                                                                                  ShowNotceError;
                                                                                               }
                                                                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                               

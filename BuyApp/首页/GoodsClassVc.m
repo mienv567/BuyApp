@@ -65,7 +65,7 @@
                                                                                               [self.dataArray addObjectsFromArray:[DuoBaoClassModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"list"] error:nil]];
                                                                                               [self.tableView reloadData];
                                                                                           }else{
-                                                                                              ShowNotce;
+                                                                                              ShowNotceError;
                                                                                           }
                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                    
