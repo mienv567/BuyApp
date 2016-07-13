@@ -51,6 +51,16 @@
         make.height.mas_equalTo(@20);
         make.width.mas_equalTo(@150);
     }];
+    
+    [self observeProperty:@"self.view_changeCount.value" withBlock:^(id myCell, id oldValue, id newValue) {
+        if (newValue > 0) {
+            
+            self.myModel.number = [NSString stringWithFormat:@"%@",newValue];
+            [self.delegate click_ShopListCellsValuesChanges];
+        }
+    }];
+    
+    
 }
 
 - (IBAction)click_delete:(id)sender {

@@ -37,4 +37,5 @@
 @property (nonatomic,strong)NSString <Optional>* min_buy;//1
 @property (nonatomic,strong)NSString <Optional>* url;///index.php?ctl=duobao&act=100004221
 @property (nonatomic,strong)NSString <Optional>* residue_count;//6769
+@property (nonatomic,strong)NSString <Optional>* myCount;//我的购买数量
 @end

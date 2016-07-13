@@ -274,6 +274,17 @@
     }
 }
 
+-(void)setMyModel:(AddressModel *)myModel{
+    _myModel = myModel;
+    self.firstString = myModel.region_lv2_name;
+    self.secondString = myModel.region_lv3_name;
+    self.thirdString = myModel.region_lv4_name;
+    self.txf_name.text = myModel.consignee;
+    self.txf_address.text = myModel.address;
+    self.txf_postCode.text = myModel.zip;
+    self.txf_phone.text = myModel.mobile;
+}
+
 -(void)click_commit{
 
 }

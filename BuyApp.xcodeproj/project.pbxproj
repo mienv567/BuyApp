@@ -162,6 +162,7 @@
 		03EB70E21D1835A800A94E50 /* Img_TextfieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03EB70E01D1835A800A94E50 /* Img_TextfieldCell.xib */; };
 		03F44A901D2C94E100CEE5FD /* NewsListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F44A8F1D2C94E100CEE5FD /* NewsListModel.m */; };
 		03F44A9A1D2CEF8E00CEE5FD /* GoodsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F44A991D2CEF8E00CEE5FD /* GoodsInfoModel.m */; };
+		03F796201D3688EB006F1B4A /* AddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F7961F1D3688EB006F1B4A /* AddressModel.m */; };
 		7CFE79213E058E49324C66B2 /* libPods-BuyApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 375A0C6C2CA33FE8A8CA6566 /* libPods-BuyApp.a */; };
 /* End PBXBuildFile section */
 
@@ -446,6 +447,8 @@
 		03F44A971D2CDE8000CEE5FD /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		03F44A981D2CEF8E00CEE5FD /* GoodsInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsInfoModel.h; sourceTree = "<group>"; };
 		03F44A991D2CEF8E00CEE5FD /* GoodsInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsInfoModel.m; sourceTree = "<group>"; };
+		03F7961E1D3688EB006F1B4A /* AddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressModel.h; sourceTree = "<group>"; };
+		03F7961F1D3688EB006F1B4A /* AddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressModel.m; sourceTree = "<group>"; };
 		2580A6A1EA86AEEE5E9E090A /* Pods-BuyApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuyApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuyApp/Pods-BuyApp.debug.xcconfig"; sourceTree = "<group>"; };
 		375A0C6C2CA33FE8A8CA6566 /* libPods-BuyApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BuyApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FEB94A319220DAEE3B9142A /* Pods-BuyApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuyApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BuyApp/Pods-BuyApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -743,6 +746,8 @@
 				037D0E5F1D30A2A700DFF88A /* RedCouponList.m */,
 				037D0E611D30ADFC00DFF88A /* MoneyListModel.h */,
 				037D0E621D30ADFC00DFF88A /* MoneyListModel.m */,
+				03F7961E1D3688EB006F1B4A /* AddressModel.h */,
+				03F7961F1D3688EB006F1B4A /* AddressModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1304,6 +1309,7 @@
 				032940E51D1E9DD8000D54D9 /* MyNumbers.m in Sources */,
 				038B195F1D12A8D8007C1CC8 /* RootViewController.m in Sources */,
 				030BD4BC1D31EF6D000038B6 /* CarListModel.m in Sources */,
+				03F796201D3688EB006F1B4A /* AddressModel.m in Sources */,
 				03BF770D1D216C7C00F1270F /* SheZhiVc.m in Sources */,
 				03CE76B01D2E9DC400A416E7 /* GoodInfoUserList.m in Sources */,
 				034D89E01D1BB173005806C7 /* GoodsInfoVc.m in Sources */,

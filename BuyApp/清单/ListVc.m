@@ -13,15 +13,14 @@
 #import "MainTabBarVc.h"
 
 
-@interface ListVc ()<UITableViewDelegate,UITableViewDataSource>
+@interface ListVc ()<UITableViewDelegate,UITableViewDataSource,ShopListCellsDelegate>
 @property (strong, nonatomic)  UITableView *tableView;
 @property (strong, nonatomic)  UIView *classView;
 @property (nonatomic, strong) UINib * nib;
 @property (nonatomic, strong) GoodsBottomView * bottomView;
 @property (nonatomic, strong) NSMutableArray * dataArray;
-@property (nonatomic) NSInteger pageNo;
 @property (nonatomic, strong) TotalDataModel * totalModel;
-
+@property (nonatomic) NSInteger totalPrice;    //总价
 @end
 
 @implementation ListVc
@@ -31,7 +30,6 @@
     // Do any additional setup after loading the view from its nib.
     [self setRightButton:@" " action:nil];
     self.title = @"购物车";
-    self.pageNo = 0;
     self.dataArray = [NSMutableArray array];
     
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
@@ -56,22 +54,13 @@
     }];
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNew)];
-    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
     
 }
 
 -(void)loadNew{
-    self.pageNo =0;
     [self.dataArray removeAllObjects];
-    [self loadMore];
-}
-
-
--(void)loadMore{
-    self.pageNo ++;
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
-                                                                     withParameters:@{@"ctl":@"cart",
-                                                                                      @"page":@(self.pageNo)
+                                                                     withParameters:@{@"ctl":@"cart"
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           [self.tableView.mj_header endRefreshing];
                                                                                           [self.tableView.mj_footer endRefreshing];
@@ -93,9 +82,17 @@
                                                                                           [self.tableView.mj_header endRefreshing];
                                                                                           [self.tableView.mj_footer endRefreshing];
                                                                                       }];
+
 }
 
 
+-(void)click_ShopListCellsValuesChanges{
+    self.totalPrice = 0;
+    for (CarListModel * model in self.dataArray) {
+        self.totalPrice = self.totalPrice + [model.number integerValue] * [model.unit_price integerValue];
+    }
+    [self refreshBottonView:self.totalModel.cart_item_number money:[NSString stringWithFormat:@"%d",(int)self.totalPrice]];
+}
 
 -(void)refreshBottonView:(NSString *)countSring money:(NSString *)allMoney{
     
@@ -117,7 +114,9 @@
 }
 
 -(void)click_deleteGoods:(CarListModel *)model cell:(ShopListCells *)cell{
+    
     NSIndexPath * index = [self.tableView indexPathForCell:cell];
+    
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"ajax",
                                                                                       @"id":model.ID,
@@ -127,6 +126,10 @@
                                                                                           if (SUCCESSED) {
                                                                                               [self.dataArray removeObjectAtIndex:index.row];
                                                                                               [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:index] withRowAnimation:UITableViewRowAnimationFade];
+                                                                                              
+                                                                                              [self click_ShopListCellsValuesChanges];
+                                                                                              
+                                                                                              [[MainTabBarVc shared] changeNum:[NSString stringWithFormat:@"%d",(int)self.dataArray.count]];
                                                                                               
                                                                                           }else{
                                                                                               ShowNotceError;
@@ -165,6 +168,7 @@
     }
     
     ShopListCells *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+    cell.delegate = self;
     WeakSelf;
     cell.myRootVc = weakSelf;
     
@@ -175,7 +179,7 @@
         CarListModel * model = [self.dataArray objectAtIndex:indexPath.row];
         [cell setDataModel:model];
     }
-    
+
     
     return cell;
 }
@@ -197,9 +201,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(K_WIDTH, 64)] forBarMetrics:UIBarMetricsDefault];
-    if (self.dataArray.count == 0) {
-        [self loadNew];
-    }
+    [self loadNew];
 }
 
 

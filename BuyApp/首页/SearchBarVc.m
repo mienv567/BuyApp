@@ -56,10 +56,8 @@
 }
 - (IBAction)click_search:(id)sender {
 
-
     [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
-                                                                     withParameters:@{@"ctl":@"search",
-                                                                                      @"act" :@"do_search",
+                                                                     withParameters:@{@"ctl":@"duobaos",
                                                                                       @"keyword" : CNull2String(self.txf_search.text)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           if (SUCCESSED) {

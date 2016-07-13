@@ -7,6 +7,7 @@
 //
 
 #import "RootViewController.h"
+#import "AddressModel.h"
 
 @interface AddressInfoVc : RootViewController
 @property (weak, nonatomic) IBOutlet UILabel *lab_name;
@@ -32,5 +33,6 @@
 @property (nonatomic, strong) NSString * secondString;
 @property (nonatomic, strong) NSString * thirdString;
 
+@property (nonatomic, strong)AddressModel * myModel;
 
 @end

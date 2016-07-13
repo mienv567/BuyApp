@@ -11,6 +11,10 @@
 #import "CarListModel.h"
 #import "ListVc.h"
 
+@protocol ShopListCellsDelegate <NSObject>
+-(void)click_ShopListCellsValuesChanges;
+@end
+
 @interface ShopListCells : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *img_header;
@@ -22,5 +26,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lab_notice;
 @property (nonatomic, strong)CarListModel * myModel;
 @property (nonatomic, strong)ListVc * myRootVc;
+@property (nonatomic, weak)id <ShopListCellsDelegate> delegate;
 -(void)setDataModel:(CarListModel *)model;
 @end
