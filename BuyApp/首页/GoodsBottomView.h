@@ -26,6 +26,6 @@ typedef NS_ENUM(NSUInteger, GoodsBottomViewType) {
 
 @property (nonatomic) GoodsBottomViewType showType;
 
-@property (nonatomic, strong)GoodsInfoVc * myRootVc;                     // 父视图
+@property (nonatomic, strong)id myRootVc;                     // 父视图
 
 @end

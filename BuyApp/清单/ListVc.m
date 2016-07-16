@@ -38,6 +38,8 @@
     
     self.bottomView = KGetViewFromNib(@"GoodsBottomView");
     self.bottomView.showType = GoodsBottomViewPay;
+    WeakSelf;
+    self.bottomView.myRootVc = weakSelf;
     [self.view addSubview:self.bottomView];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);
@@ -60,7 +62,8 @@
 -(void)loadNew{
     [self.dataArray removeAllObjects];
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
-                                                                     withParameters:@{@"ctl":@"cart"
+                                                                     withParameters:@{@"ctl":@"cart",
+                                                                                       @"user_id ":CNull2String(USERMODEL.ID)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           [self.tableView.mj_header endRefreshing];
                                                                                           [self.tableView.mj_footer endRefreshing];
@@ -74,6 +77,12 @@
                                                                                               [self refreshBottonView:self.totalModel.cart_item_number money:self.totalModel.total_price];
                                                                                               
                                                                                               [[MainTabBarVc shared] changeNum:self.totalModel.cart_item_number];
+                                                                                              
+                                                                                              if (self.dataArray.count == 0) {
+                                                                                                  BackGoundView * view = KGetViewFromNib(@"BackGoundView");
+                                                                                                  view.myType = BackGoundViewNoData;
+                                                                                                  self.tableView.backgroundView = view;
+                                                                                              }
                                                                                               
                                                                                           }else{
                                                                                               ShowNotceError;
@@ -120,7 +129,8 @@
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"ajax",
                                                                                       @"id":model.ID,
-                                                                                      @"act" : @"del_cart"
+                                                                                      @"act" : @"del_cart",
+                                                                                       @"user_id ":CNull2String(USERMODEL.ID)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           
                                                                                           if (SUCCESSED) {
@@ -137,6 +147,33 @@
                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                           
                                                                                       }];
+}
+
+-(void)click_showDeatil:(id)data{
+
+//    http://www.quyungou.com/wap/index.php?ctl=cart&act=check_cart&show_prog=1
+    NSMutableDictionary * dic = [NSMutableDictionary dictionary];
+    
+    for (CarListModel * model in self.dataArray) {
+        [dic setObject:model.number forKey:[NSString stringWithFormat:@"num[%@]",model.ID]];
+    }
+    [dic setObject:@"cart" forKey:@"ctl"];
+    [dic setObject:@"check_cart" forKey:@"act"];
+    [dic setObject:CNull2String(USERMODEL.ID) forKey:@"user_id"];
+
+    [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
+                                                                     withParameters:dic success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          if (SUCCESSED) {
+                                                                                             KJumpToViewController(@"OrderVc");
+                                                                                          }else{
+                                                                                              ShowNotceError;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          
+                                                                                      }];
+    
+    
+    
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -134,7 +134,7 @@
 }
 
 -(void)changeNum:(NSString *)numString{
-    self.item3.badgeValue = numString;
+    self.item3.badgeValue = CNull2String(numString);
 }
 
 - (void)viewWillAppear:(BOOL)animated{

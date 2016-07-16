@@ -9,7 +9,7 @@
 //测试服务器开关
 #define TEST_SERVER
 #ifdef TEST_SERVER
-#define kAppHost @"http://www.quyungou.com/api/index.php"
+#define kAppHost @"http://ceshi.quyungou.com/api/index.php"
 #define kAppPostHost @"http://line3.71tong.net:53004"
 #else
 #define kAppHost @"http://appapiv3.gosheng.cn"

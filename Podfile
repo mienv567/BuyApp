@@ -14,5 +14,7 @@ target 'BuyApp' do
 	pod 'BlocksKit', '~> 2.2.5'
     pod 'pop', '~> 1.0.9'
     pod 'MZTimerLabel', '~> 0.5.4'
+    pod 'libqrencode', '~> 3.4.2'
+    pod 'XMLReader-Arc', '~> 1.1'
 end
 

@@ -66,6 +66,31 @@
 
 -(void)click_delete:(UserNewsCell *)sender{
     NSIndexPath * index = [self.tableView indexPathForCell:sender];
+//    http://www.quyungou.com/wap/index.php?ctl=uc_msg&act=remove_msg&id=1885&show_prog=1
+    
+    NewsModel * model = [self.dataArray objectAtIndex:index.row];
+    
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"uc_msg",
+                                                                                      @"act":@"remove_msg",
+                                                                                      @"id":model.ID,
+                                                                                      @"user_id ":CNull2String(USERMODEL.ID)
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          if (SUCCESSED) {
+                                                                                              [self.dataArray removeObjectAtIndex:index.row];
+                                                                                              [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:index] withRowAnimation:UITableViewRowAnimationFade];
+                                                                                              if (self.dataArray.count == 0) {
+                                                                                                  BackGoundView * view = KGetViewFromNib(@"BackGoundView");
+                                                                                                  view.myType = BackGoundViewNoData;
+                                                                                                  self.tableView.backgroundView = view;
+                                                                                              }
+                                                                                              [self.tableView reloadData];
+                                                                                          }else{
+                                                                                              ShowNotceError;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          
+                                                                                      }];
 #warning  缺少删除消息的接口
 }
 

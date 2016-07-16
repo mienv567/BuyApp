@@ -20,6 +20,7 @@
 @property (nonatomic) NSInteger secondIndex;
 @property (nonatomic) NSInteger thirdIndex;
 
+@property (nonatomic, strong) UIButton * btn_commit;
 @end
 
 @implementation AddressInfoVc
@@ -48,16 +49,16 @@
     self.txf_address.width = K_WIDTH - self.lab_name.right - 20;
     self.txf_postCode.width = K_WIDTH - self.lab_name.right - 20;
     
-    UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.backgroundColor = GS_COLOR_RED;
-    btn.titleLabel.font = [UIFont boldSystemFontOfSize:13];
-    btn.layer.cornerRadius = 20;
-    btn.layer.masksToBounds = YES;
-    btn.frame = CGRectMake(10, 20, K_WIDTH - 20, 35);
-    [btn setTitle:@"新增地址" forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(click_commit) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn];
-    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.btn_commit = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.btn_commit.backgroundColor = GS_COLOR_RED;
+    self.btn_commit.titleLabel.font = [UIFont boldSystemFontOfSize:13];
+    self.btn_commit.layer.cornerRadius = 20;
+    self.btn_commit.layer.masksToBounds = YES;
+    self.btn_commit.frame = CGRectMake(10, 20, K_WIDTH - 20, 35);
+    [self.btn_commit setTitle:@"确定" forState:UIControlStateNormal];
+    [self.btn_commit addTarget:self action:@selector(click_commit) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.btn_commit];
+    [self.btn_commit mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.txf_phone.mas_bottom).offset(20);
         make.left.equalTo(self.view).offset(10);
         make.right.equalTo(self.view).offset(-10);
@@ -77,6 +78,13 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    if (self.myModel) {
+        self.txf_name.text = self.myModel.consignee;
+        self.txf_address.text = self.myModel.address;
+        self.txf_postCode.text = self.myModel.zip;
+        self.txf_phone.text = self.myModel.mobile;
+    }
+    
     self.lab_classSheng.text = self.firstString.length > 1 ? self.firstString : @"=请选择=";
     if (self.firstString.length > 1) {
         
@@ -100,7 +108,7 @@
     
     self.lab_classShi.text = self.secondString.length > 1 ? self.secondString : @"=请选择=";
     if (self.secondString.length > 1) {
-        NSInteger selectedRow;
+        NSInteger selectedRow = 0;
         if (self.secondString!=nil  && selectedRow > -1  ) {
             selectedRow = [self.SecondArray indexOfObject:self.secondString];
         }else{
@@ -116,7 +124,7 @@
 
     self.lab_classQu.text = self.thirdString.length > 1 ? self.thirdString : @"=请选择=";
     if (self.thirdString.length > 1) {
-        NSInteger selectedRow;
+        NSInteger selectedRow = 0;
         if (self.thirdString!=nil  && selectedRow > -1) {
             selectedRow = [self.ThirdArray indexOfObject:self.thirdString];
         }else{
@@ -279,14 +287,48 @@
     self.firstString = myModel.region_lv2_name;
     self.secondString = myModel.region_lv3_name;
     self.thirdString = myModel.region_lv4_name;
-    self.txf_name.text = myModel.consignee;
-    self.txf_address.text = myModel.address;
-    self.txf_postCode.text = myModel.zip;
-    self.txf_phone.text = myModel.mobile;
+
 }
 
 -(void)click_commit{
-
+//order_item_id:0
+//region_id:60
+//post_xpoint:
+//post_ypoint:
+//consignee:dadad
+//region_lv1:1
+//region_lv2:2
+//region_lv3:52
+//region_lv4:502
+//address:dadadad
+//zip:dadada
+//mobile:18888888888
+    [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"uc_address",
+                                                                                      @"act":@"save",
+                                                                                      @"region_id":@"51",
+                                                                                      @"region_lv1":@"1",
+                                                                                      @"region_lv2":@"2",
+                                                                                      @"region_lv3":@"52",
+                                                                                      @"region_lv4":@"502",
+                                                                                      @"mobile":CNull2String(self.txf_phone.text),
+                                                                                      @"consignee":CNull2String(self.txf_name.text),
+                                                                                      @"address":CNull2String(self.txf_address.text),
+                                                                                      @"zip":CNull2String(self.txf_postCode.text),
+                                                                                      @"user_id ":CNull2String(USERMODEL.ID)
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          if (SUCCESSED) {
+                                                                                         
+                                                                                              
+                                                                                          }else{
+                                                                                              
+                                                                                              ShowNotceError;
+                                                                                              
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          
+                                                                                      }];
+    
 }
 
 

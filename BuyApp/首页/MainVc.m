@@ -63,6 +63,7 @@ static NSString *footerID = @"footerID";
 
     [self.classView registerClass:[MainTopView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:headerID];
     [self.classView registerClass:[MainSegmentView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:footerID];
+    
     self.classView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNew)];
     self.classView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
 }
@@ -108,8 +109,7 @@ static NSString *footerID = @"footerID";
                                                                                           [self.classView.mj_footer endRefreshing];
                                                                                           if (SUCCESSED) {
                                                                                             [self.dataArray addObjectsFromArray:[MainGoodsListModel arrayOfModelsFromDictionaries:responseObject[@"data"  ][@"index_duobao_list"] error:nil]];
-                                                                                            NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
-                                                                                            [self.classView reloadSections:indexSet];
+                                                                                              [self.classView reloadData];
                                                                                           }else{
                                                                                               ShowNotceError;
                                                                                           }
@@ -186,42 +186,42 @@ static NSString *footerID = @"footerID";
 
 //筛选菜单
 - (void)segmentedControlChangedIndex:(NSInteger)index{
-    [self loadNew];
     //1:人气 2:最新 3:进度 4:总需人次
-    switch (index) {
-        case 0:
-        {
-            
-        }
-            break;
-        case 1:
-        {
-            
-        }
-            break;
-        case 2:
-        {
-            
-        }
-            break;
-        case 3:
-        {
-            
-        }
-            break;
-            
-        default:
-            break;
-    }
-
+    [self.classView setContentOffset:CGPointZero];
+    self.pageNo = 1;
+    [self.dataArray removeAllObjects];
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"ajax",
+                                                                                      @"act":@"load_index_list_data",
+                                                                                      @"order":[APIArray objectAtIndex:self.segmentView.segmentedControl.selectedSegmentIndex],
+                                                                                      @"page":@(self.pageNo)
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          [self.classView.mj_header endRefreshing];
+                                                                                          [self.classView.mj_footer endRefreshing];
+                                                                                          if (SUCCESSED) {
+                                                                                              [self.dataArray addObjectsFromArray:[MainGoodsListModel arrayOfModelsFromDictionaries:responseObject[@"data"  ][@"index_duobao_list"] error:nil]];
+                                                                                              NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
+                                                                                              [self.classView reloadSections:indexSet];
+                                                                                          }else{
+                                                                                              ShowNotceError;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          [self.classView.mj_header endRefreshing];
+                                                                                          [self.classView.mj_footer endRefreshing];
+                                                                                      }];
+    
+    
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    MainNewGoodsModel* model = [self.dataModel.newest_doubao_list objectAtIndex:indexPath.row];
-    GoodsInfoVc * vc = [[NSClassFromString(@"GoodsInfoVc") alloc]init];
-    vc.title = model.name;
-    vc.GoodsID = model.ID;
-    [self.navigationController pushViewController:vc animated:YES];
+    if (self.dataModel.newest_doubao_list.count > indexPath.row) {
+        MainNewGoodsModel* model = [self.dataModel.newest_doubao_list objectAtIndex:indexPath.row];
+        GoodsInfoVc * vc = [[NSClassFromString(@"GoodsInfoVc") alloc]init];
+        vc.title = model.name;
+        vc.GoodsID = model.ID;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+
 }
 
 #pragma mark - 创建视图
@@ -242,23 +242,31 @@ static NSString *footerID = @"footerID";
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MainGoodsListCells *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
-    [cell setDataModel:[self.dataArray objectAtIndex:indexPath.row]];
+    if (self.dataArray.count > indexPath.row) {
+        [cell setDataModel:[self.dataArray objectAtIndex:indexPath.row]];
+    }
     return cell;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     
     if (kind == UICollectionElementKindSectionFooter && indexPath.section == 0) {
-        self.TopView = [self.classView  dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:headerID forIndexPath:indexPath];
-        WeakSelf;
-        self.TopView.myRootVc = weakSelf;
+        if (!self.TopView) {
+            self.TopView = [self.classView  dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:headerID forIndexPath:indexPath];
+            WeakSelf;
+            self.TopView.myRootVc = weakSelf;
+        }
+
         return self.TopView;
     }
     
     if (kind == UICollectionElementKindSectionHeader && indexPath.section == 1) {
-        self.segmentView = [collectionView  dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:footerID forIndexPath:indexPath];
-        WeakSelf;
-        self.segmentView.myRootVc = weakSelf;
+        if (!self.segmentView) {
+            self.segmentView = [collectionView  dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:footerID forIndexPath:indexPath];
+            WeakSelf;
+            self.segmentView.myRootVc = weakSelf;
+        }
+
         return self.segmentView;
     }
     return nil;

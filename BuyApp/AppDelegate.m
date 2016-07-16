@@ -15,6 +15,7 @@
 #import "LoginVC.h"
 
 #import "JPUSHService.h"
+#import "SPayClient.h"
 
 static NSString *appKey = @"eac3de4a7717dc5354ba849a";
 static NSString *channel = @"iOS test";
@@ -32,6 +33,11 @@ static BOOL isProduction = FALSE;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    SPayClientQQConfigModel *qqConfigModel = [[SPayClientQQConfigModel alloc] init];
+    qqConfigModel.appScheme =  @"qqSpayDemo";
+    [[SPayClient sharedInstance] qqPayConfig:qqConfigModel];
+    
     
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setTitleTextAttributes: @{NSForegroundColorAttributeName : GS_COLOR_RED,
