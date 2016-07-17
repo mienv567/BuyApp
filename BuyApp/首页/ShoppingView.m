@@ -80,7 +80,21 @@
 }
 
 - (IBAction)click_buy:(id)sender {
-    
+    switch (self.showType) {
+        case ShoppingViewBuy:
+        {
+            [self.myRootVc click_oneBuy];
+        }
+            break;
+        case ShoppingViewAddList:
+        {
+            [self.myRootVc click_addShopList];
+        }
+            break;
+        default:
+            break;
+    }
+
 }
 
 - (void)tap_backGound {

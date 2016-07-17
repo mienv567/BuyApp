@@ -74,7 +74,7 @@ static BOOL isProduction = FALSE;
     self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
     
-    
+    [[UserManager sharedManager] refreshUserInfo];
     
     
     //Required

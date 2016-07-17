@@ -25,4 +25,7 @@
 @property (nonatomic,strong)NSString <Optional>* sex;
 @property (nonatomic,strong)NSString <Optional>* level_id;
 @property (nonatomic,strong)NSString <Optional>* status;
+@property (nonatomic,strong)NSString <Optional>* is_tmp;
 @end
+
+

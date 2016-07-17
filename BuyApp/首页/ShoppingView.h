@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PAStepper.h"
-
+#import "GoodsInfoVc.h"
 
 typedef NS_ENUM(NSUInteger, ShoppingViewType) {
     ShoppingViewBuy,
@@ -39,5 +39,5 @@ typedef NS_ENUM(NSUInteger, ShoppingViewType) {
 
 @property (nonatomic) ShoppingViewType showType;
 
-
+@property (nonatomic, strong)GoodsInfoVc * myRootVc;
 @end

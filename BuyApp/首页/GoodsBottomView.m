@@ -52,6 +52,7 @@
         make.width.mas_equalTo((K_WIDTH - 70) / 2 );
     }];
     
+    
     self.btn_shoppingCart.backgroundColor = [UIColor whiteColor];
     [self.btn_shoppingCart mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.right.equalTo(self).offset(-10);
@@ -59,6 +60,15 @@
         make.top.equalTo(self).offset(10);
         make.width.mas_equalTo(@30);
     }];
+    
+    self.lab_num.layer.cornerRadius = 10.0;
+    self.lab_num.layer.masksToBounds = YES;
+    [self.lab_num mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.btn_shoppingCart.mas_centerY).offset(-5);
+        make.left.equalTo(self.btn_shoppingCart.mas_centerX).offset(5);
+        make.height.mas_equalTo(@20);
+    }];
+    
 }
 
 -(void)setShowType:(GoodsBottomViewType)showType{
@@ -70,6 +80,7 @@
             self.lab_notice.hidden = NO;
             self.btn_showDetail.hidden = NO;
             self.btn_shoppingCart.hidden = YES;
+            self.lab_num.hidden = YES;
             self.btn_addList.hidden = YES;
             self.btn_join.hidden = YES;
         }
@@ -79,6 +90,7 @@
             self.lab_notice.hidden = YES;
             self.btn_showDetail.hidden = YES;
             self.btn_shoppingCart.hidden = NO;
+            self.lab_num.hidden = NO;
             self.btn_addList.hidden = NO;
             self.btn_join.hidden = NO;
         }
@@ -88,6 +100,7 @@
             self.lab_notice.hidden = NO;
             self.btn_showDetail.hidden = NO;
             self.btn_shoppingCart.hidden = YES;
+            self.lab_num.hidden = YES;
             self.btn_addList.hidden = YES;
             self.btn_join.hidden = YES;
             self.btn_showDetail.titleLabel.text = @"结算";

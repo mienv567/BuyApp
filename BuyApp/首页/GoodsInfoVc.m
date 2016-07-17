@@ -19,6 +19,7 @@
 #import "GoodInfoModel.h"
 #import "CountWebVc.h"
 #import "HistoryWinnersVc.h"
+#import "MainTabBarVc.h"
 
 
 @interface GoodsInfoVc () <UITableViewDelegate,UITableViewDataSource>
@@ -76,6 +77,7 @@
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNew)];
     //底部控件
     self.shoppingView = KGetViewFromNib(@"ShoppingView");
+    self.shoppingView.myRootVc = weakSelf;
     [self.view addSubview:self.shoppingView];
     [self.shoppingView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
@@ -157,14 +159,19 @@
                                                                                                   }else{
                                                                                                       self.bottomView.showType = GoodsBottomViewBuy;
                                                                                                   }
-                                                                                                  
+                                                                                                  self.bottomView.lab_num.text = [NSString stringWithFormat:@"%@  ",responseObject[@"data"][@"cart_data"][@"cart_item_num"]];
+                                                                                                
                                                                                                   //购买的约束
-                                                                                                  self.shoppingView.view_count.value = 0;
-                                                                                                  self.shoppingView.view_count.minimumValue = [self.dataModel.item_data.min_buy integerValue];
-                                                                                                  self.shoppingView.view_count.maximumValue = [self.dataModel.item_data.max_buy integerValue];
-                                                                                                  self.shoppingView.view_count.editableManually = YES;
-                                                                                                  self.shoppingView.view_count.stepValue = [self.dataModel.item_data.min_buy integerValue];
-                                                                                               
+                                                                                                  if ([self.dataModel.item_data.surplus_count integerValue] > 0) {
+                                                                                                      self.shoppingView.view_count.value = [self.dataModel.item_data.min_buy integerValue];
+                                                                                                      self.shoppingView.view_count.minimumValue = [self.dataModel.item_data.min_buy integerValue];
+                                                                                                      self.shoppingView.view_count.maximumValue = [self.dataModel.item_data.surplus_count integerValue];
+                                                                                                      self.shoppingView.view_count.editableManually = YES;
+                                                                                                      self.shoppingView.view_count.stepValue = [self.dataModel.item_data.min_buy integerValue];
+                                                                                                      self.shoppingView.lab_noticeTwo.text = [NSString stringWithFormat:@"参与人次需是%@的倍数",self.dataModel.item_data.min_buy];
+                                                                                                  }
+                                                                                                 
+                                                                                                  
                                                                                                   
                                                                                                   [self.tableView reloadData];
                                                                                               }else{
@@ -265,7 +272,9 @@
 
 //显示购物车
 - (void)click_shoppingCart:(id)sender {
-    
+    [self.navigationController popViewControllerAnimated:NO];
+
+    [[MainTabBarVc shared]changeTabBarAtIndex:2];
 }
 
 //显示计算详情
@@ -274,6 +283,54 @@
     vc.GoodsID = self.dataModel.item_data.ID;
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+//一元购买
+-(void)click_oneBuy{
+
+    [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"ajax",
+                                                                                      @"act":@"add_cart",
+                                                                                      @"data_id":self.GoodsID,
+                                                                                      @"user_id ":CNull2String(USERMODEL.ID),
+                                                                                      @"buy_num":@(self.shoppingView.view_count.value)
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                    
+                                                                                          if (SUCCESSED) {
+                                                                                              [self.navigationController popViewControllerAnimated:NO];
+
+                                                                                              [[MainTabBarVc shared]changeTabBarAtIndex:2];
+                                                                                          }else{
+                                                                                              ShowNotceError;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                         
+                                                                                      }];
+    
+
+}
+
+//加入清单
+-(void)click_addShopList{
+    [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"ajax",
+                                                                                      @"act":@"add_cart",
+                                                                                      @"data_id":self.GoodsID,
+                                                                                      @"user_id ":CNull2String(USERMODEL.ID),
+                                                                                      @"buy_num":@(self.shoppingView.view_count.value)
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                  
+                                                                                          if (SUCCESSED) {
+                                                                                              self.bottomView.lab_num.text = [NSString stringWithFormat:@"%@  ",responseObject[@"data"][@"cart_item_num"]];
+                                                                                          }else{
+                                                                                              ShowNotceError;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                         
+                                                                                      }];
+    
+}
+
+
 
 //显示我的号码
 - (void)click_showNumbers:(id)sender{

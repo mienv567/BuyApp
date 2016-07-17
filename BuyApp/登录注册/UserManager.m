@@ -116,14 +116,23 @@ static NSString *kMessageLastUpdate = @"kMessageLastUpdate";
 //刷新用户信息
 - (void)refreshUserInfo{
     if([self isUserLoad]){
-//        [HttpUtil load:@"member/member"
-//                params:@{@"uid" : self.loginUser.UserNo}
-//            completion:^(BOOL succ, NSString *message, id json) {
-//                if(succ){
-//                    UserModel *um = [[UserModel alloc] initWithDictionary:json error:nil];
-//                    self.loginUser = um;
-//                }
-//            }];
+        
+        [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                         withParameters:@{@"act":@"get_info",
+                                                                                          @"ctl":@"user",
+                                                                                          @"mobile":self.loginUser.mobile
+                                                                                          } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                              if (SUCCESSED) {
+                                                                                                  UserModel * userModel = [[UserModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
+                                                                                                  [[UserManager sharedManager] saveLoginUser:userModel];
+                                                                                              }else{
+                                                                                                  ShowNotceError;
+                                                                                              }
+                                                                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                              
+                                                                                              
+                                                                                          }];
+
     }
 }
 

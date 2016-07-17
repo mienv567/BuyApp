@@ -60,6 +60,14 @@
                         <action selector="click_shoppingCart:" destination="8Lh-93-WBe" eventType="touchUpInside" id="RtU-nV-VbT"/>
                     </connections>
                 </button>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B0m-8p-zkQ">
+                    <rect key="frame" x="278" y="10" width="42" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.0" green="0.68627450980000004" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -69,6 +77,7 @@
                 <outlet property="btn_shoppingCart" destination="ynT-Qe-L6O" id="Zsp-Yw-BPC"/>
                 <outlet property="btn_showDetail" destination="4DB-cS-y8H" id="i2f-mR-paK"/>
                 <outlet property="lab_notice" destination="glM-iZ-bzl" id="geY-dL-rHW"/>
+                <outlet property="lab_num" destination="B0m-8p-zkQ" id="KAW-E4-dlN"/>
             </connections>
             <point key="canvasLocation" x="287" y="226"/>
         </view>

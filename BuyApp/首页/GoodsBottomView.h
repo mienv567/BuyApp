@@ -23,6 +23,7 @@ typedef NS_ENUM(NSUInteger, GoodsBottomViewType) {
 @property (weak, nonatomic) IBOutlet UIButton *btn_join;
 @property (weak, nonatomic) IBOutlet UIButton *btn_addList;
 @property (weak, nonatomic) IBOutlet UIButton *btn_shoppingCart;
+@property (weak, nonatomic) IBOutlet UILabel *lab_num;
 
 @property (nonatomic) GoodsBottomViewType showType;
 
