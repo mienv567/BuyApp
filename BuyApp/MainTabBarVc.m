@@ -134,6 +134,9 @@
 }
 
 -(void)changeNum:(NSString *)numString{
+    if ([numString isEqual:[NSNull null]]) {
+        return;
+    }
     self.item3.badgeValue = CNull2String(numString);
 }
 

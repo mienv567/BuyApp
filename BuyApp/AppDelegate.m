@@ -120,7 +120,6 @@ static BOOL isProduction = FALSE;
 }
 
 
-
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
     // Required,For systems with less than or equal to iOS6
@@ -153,6 +152,8 @@ static BOOL isProduction = FALSE;
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [[SPayClient sharedInstance] applicationWillEnterForeground:application];
+
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

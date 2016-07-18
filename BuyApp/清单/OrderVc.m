@@ -9,6 +9,7 @@
 
 
 #import "OrderVc.h"
+#import "PayVc.h"
 
 
 @implementation CartRedPagModel
@@ -121,7 +122,9 @@
                                                                                           if (SUCCESSED) {
                                                                                               self.orderModel = [[OrderModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
                                                                                             [self.ary_redPag addObjectsFromArray:[CartRedPagModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"voucher_list"] error:nil]];
-                                                                                          self.redModel = [self.ary_redPag objectAtIndex:0];
+                                                                                              if (self.ary_redPag.count > 0) {
+                                                                                                  self.redModel = [self.ary_redPag objectAtIndex:0];
+                                                                                              }
                                                                                               [self.tableView reloadData];
                                                                                           }else{
                                                                                               ShowNotceError;
@@ -139,23 +142,25 @@
 //payment:6
 //    id:
 //act:count_buy_total
-    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
-                                                                     withParameters:@{@"ctl":@"ajax",
+    [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"cart",
                                                                                       @"user_id ":CNull2String(USERMODEL.ID),
-                                                                                      @"act" : @"count_buy_total",
+                                                                                      @"act" : @"done",
                                                                                       @"all_account_money":[self.orderModel.total_data objectForKey:@"total_price"],
                                                                                       @"ecvsn" : CNull2String(self.redModel.sn),
-                                                                                      @"payment" :self.btn_weixin.selected ? @"6" : @"0",
+                                                                                      @"payment" : self.btn_weixin.selected ? @"6" : @"0",
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
-                                                                                          
                                                                                           if (SUCCESSED) {
-                                                                                                                                                                                       }else{
+                                                                                              PayVc * vc = [[PayVc alloc]init];
+                                                                                              vc.orderID = responseObject[@"data"][@"order_id"];
+                                                                                              [self.navigationController pushViewController:vc animated:YES];
+                                                                                              
+                                                                                          }else{
                                                                                               ShowNotceError;
                                                                                           }
                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                           
                                                                                       }];
-    
     
 }
 
@@ -166,14 +171,56 @@
 -(void)click_weixinPay{
     self.btn_weixin.selected = YES;
     self.btn_money.selected = NO;
-     [self.tableView reloadData];
+
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"ajax",
+                                                                                      @"user_id ":CNull2String(USERMODEL.ID),
+                                                                                      @"act" : @"count_buy_total",
+                                                                                      @"all_account_money":[self.orderModel.total_data objectForKey:@"total_price"],
+                                                                                      @"ecvsn" : CNull2String(self.redModel.sn),
+                                                                                      @"payment" : @"6",
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          
+                                                                                          if (SUCCESSED) {
+                                                                                                self.orderModel = [[OrderModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
+                                                                                              [self.tableView reloadData];
+                                                                                          }else{
+                                                                                              ShowNotceError;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          
+                                                                                      }];
+    
+    
+    
+    [self.tableView reloadData];
 }
 
 -(void)click_moneyPay{
     self.btn_weixin.selected = NO;
     self.btn_money.selected = YES;
     
-     [self.tableView reloadData];
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl":@"ajax",
+                                                                                      @"user_id ":CNull2String(USERMODEL.ID),
+                                                                                      @"act" : @"count_buy_total",
+                                                                                      @"all_account_money":[self.orderModel.total_data objectForKey:@"total_price"],
+                                                                                      @"ecvsn" : CNull2String(self.redModel.sn),
+                                                                                      @"payment" : @"0",
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          
+                                                                                          if (SUCCESSED) {
+                                                                                              self.orderModel = [[OrderModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
+                                                                                              [self.tableView reloadData];
+                                                                                          }else{
+                                                                                              ShowNotceError;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          
+                                                                                      }];
+    
+    
+    [self.tableView reloadData];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

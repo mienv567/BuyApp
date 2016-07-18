@@ -21,6 +21,11 @@
 
 #import "PayCell.h"
 
+#import <sys/socket.h>
+#import <sys/sockio.h>
+#import <sys/ioctl.h>
+#import <net/if.h>
+#import <arpa/inet.h>
 
 @interface PayVc ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)UITableView *tableView;
@@ -31,6 +36,7 @@
 
 @property (nonatomic, strong) UINib * nib;
 @property (nonatomic,strong)  MBProgressHUD *hud;
+@property (nonatomic,strong)  NSString *myOrderNumber;//订单号
 @end
 
 @implementation PayVc
@@ -63,138 +69,160 @@
     }];
     
     
-    
-    
-    [self loadData];
+    self.myOrderNumber = [NSString spay_out_trade_no];
+ 
+   
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+       [self loadData];
 }
 
 -(void)loadData{
-//    
-//    self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view
-//                                    animated:YES];
-//    [self.hud show:YES];
-//    
-//    NSString *service = @"service";
-//    NSString *version = @"service";
-//    NSString *charset = @"service";
-//    NSString *sign_type = @"service";
-//    NSString *mch_id = @"service";
-//    NSString *out_trade_no = @"service";
-//    NSString *device_info = @"service";
-//    NSString *body = @"service";
-//    NSInteger total_fee = 1;
-//    NSString *mch_create_ip = @"service";
-//    NSString *notify_url = @"service";
-//    NSString *time_start;
-//    NSString *time_expire;
-//    NSString *nonce_str = [NSString spay_nonce_str];
-//    
-//    
-//    NSNumber *amount = [NSNumber numberWithInteger:total_fee];
-//    
-//    //生成提交表单
-//    NSDictionary *postInfo = [[SPRequestForm sharedInstance]
-//                              spay_pay_gateway:service
-//                              version:version
-//                              charset:charset
-//                              sign_type:sign_type
-//                              mch_id:mch_id
-//                              out_trade_no:out_trade_no
-//                              device_info:device_info
-//                              body:body
-//                              total_fee:total_fee
-//                              mch_create_ip:mch_create_ip
-//                              notify_url:notify_url
-//                              time_start:time_start
-//                              time_expire:time_expire
-//                              nonce_str:nonce_str];
-//    
-//    __weak typeof(self) weakSelf = self;
-//    
-//    
-//    //调用支付预下单接口
-//    [[SPHTTPManager sharedInstance] post:kSPconstWebApiInterface_spay_pay_gateway
-//                                paramter:postInfo
-//                                 success:^(id operation, id responseObject) {
-//                                     
-//                                     
-//                                     //返回的XML字符串,如果解析有问题可以打印该字符串
-//                                     //        NSString *response = [[NSString alloc] initWithData:(NSData *)responseObject encoding:NSUTF8StringEncoding];
-//                                     
-//                                     NSError *erro;
-//                                     //XML字符串 to 字典
-//                                     //!!!! XMLReader最后节点都会设置一个kXMLReaderTextNodeKey属性
-//                                     //如果要修改XMLReader的解析，请继承该类然后再去重写，因为SPaySDK也是调用该方法解析数据，如果修改了会导致解析失败
-//                                     NSDictionary *info = [XMLReader dictionaryForXMLData:(NSData *)responseObject error:&erro];
-//                                     
-//                                     NSLog(@"预下单接口返回数据-->>\n%@",info);
-//                                     
-//                                     
-//                                     //判断解析是否成功
-//                                     if (info && [info isKindOfClass:[NSDictionary class]]) {
-//                                         
-//                                         NSDictionary *xmlInfo = info[@"xml"];
-//                                         
-//                                         NSInteger status = [xmlInfo[@"status"][@"text"] integerValue];
-//                                         
-//                                         //判断SPay服务器返回的状态值是否是成功,如果成功则调起SPaySDK
-//                                         if (status == 0) {
-//                                             
-//                                             [weakSelf.hud hide:YES];
-//                                             
-//                                             //获取SPaySDK需要的token_id
-//                                             NSString *token_id = xmlInfo[@"token_id"][@"text"];
-//                                             
-//                                             //获取SPaySDK需要的services
-//                                             NSString *services = xmlInfo[@"services"][@"text"];
-//                                             
-//                                             
-//                                             if (!weakSelf.isSwitfPay.isOn) {
-//                                                 
-//                                                 //调起SPaySDK支付
-//                                                 [[SPayClient sharedInstance] pay:weakSelf
-//                                                                           amount:amount
-//                                                                spayTokenIDString:token_id
-//                                                                payServicesString:@"pay.weixin.wappay"
-//                                                                           finish:^(SPayClientPayStateModel *payStateModel,
-//                                                                                    SPayClientPaySuccessDetailModel *paySuccessDetailModel) {
-//                                                                               
-//                                                                               //更新订单号
-//                                                                               weakSelf.out_trade_noText.text = [NSString spay_out_trade_no];
-//                                                                               
-//                                                                               
-//                                                                               if (payStateModel.payState == SPayClientConstEnumPaySuccess) {
-//                                                                                   
-//                                                                                   NSLog(@"支付成功");
-//                                                                                   NSLog(@"支付订单详情-->>\n%@",[paySuccessDetailModel description]);
-//                                                                               }else{
-//                                                                                   NSLog(@"支付失败，错误号:%d",payStateModel.payState);
-//                                                                               }
-//                                                                               
-//                                                                           }];
-//                                                 
-//                                                 
-//                                             }else{
-//                                                 
-//                                                 
-//                                                 [weakSelf swiftlyPay:amount spayTokenIDString:token_id payServicesString:services];
-//                                             }
-//                                         }else{
-//                                             weakSelf.hud.labelText = xmlInfo[@"message"][@"text"];
-//                                             [weakSelf.hud hide:YES afterDelay:2.0];
-//                                         }
-//                                     }else{
-//                                         weakSelf.hud.labelText = @"预下单接口，解析数据失败";
-//                                         [weakSelf.hud hide:YES afterDelay:2.0];
-//                                     }
-//                                     
-//                                     
-//                                 } failure:^(id operation, NSError *error) {
-//                                     
-//                                     weakSelf.hud.labelText = @"调用预下单接口失败";
-//                                     [weakSelf.hud hide:YES afterDelay:2.0];
-//                                     NSLog(@"调用预下单接口失败-->>\n%@",error);
-//                                 }];
+    
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view
+                                    animated:YES];
+    [self.hud show:YES];
+    
+    //  1.	预下单订单号：订单号长度<=32位，为了防止生成相同的订单号,订单号的生成需要具唯一性,建议生成订单号时加上时间戳和终端类型。
+    //  2.	提交一次订单后取消支付，再次提交相同的订单号并修改了金额值，程序会提示OK错误，支付规则不允许提交相同的订单号并修改金额。
+    NSString *out_trade_no = @"订单号";
+    
+    //  金额以分为单位
+    NSInteger total_fee = 1;
+    
+    // 3.	商户在调用预下单接口时，如果没有后台通知地址，则预下单接口的notify_url字段必须为一个空格字符串。
+    NSString *notify_url = @"http://ceshi.quyungou.com/callback/payment/Wwxwappay_notify.php";
+    
+    NSString *service = @"unified.trade.pay";
+    NSString *version = @"1.0";
+    NSString *charset =@"UTF-8";
+    NSString *sign_type = @"MD5";
+    NSString *mch_id = @"010265000005";
+    NSString *device_info = nil;
+    NSString *body = @"SwiftPass测试商品";
+    NSString *mch_create_ip = @"127.0.0.1";
+    NSString *time_start;
+    NSString *time_expire;
+    NSString *nonce_str = [NSString spay_nonce_str];
+    NSNumber *amount = [NSNumber numberWithInteger:total_fee];
+    
+//    *  @param service       接口类型（必填）
+//    *  @param version       版本号（非必填）
+//    *  @param charset       字符集（非必填）
+//    *  @param sign_type     签名方式（非必填）
+//    *  @param mch_id        商户号（必填）
+//    *  @param out_trade_no  商户订单号（必填）
+//    *  @param device_info   设备号（非必填）
+//    *  @param body          商品描述（必填）
+//    *  @param total_fee     总金额 (必填)
+//    *  @param mch_create_ip 终端IP (必填)
+//    *  @param notify_url    通知地址 (必填)
+//    *  @param time_start    订单生成时间（非必填）
+//    *  @param time_expire   订单超时时间（非必填）
+//    *  @param nonce_str     随机字符串 (必填)
+//    NSLog(@"版本号：%@",[SPayClient sharedInstance].spaySDKVersion);
+//    NSLog(@"版本类型：%@",[SPayClient sharedInstance].spaySDKTypeName);
+//    NSLog(@"ios版本：%@",[[UIDevice currentDevice] systemVersion]);
+//    NSLog(@"设备模式：%@",[[UIDevice currentDevice] model]);
+    
+    
+    //生成提交表单
+    NSDictionary *postInfo = [[SPRequestForm sharedInstance]
+                              spay_pay_gateway:service
+                              version:[SPayClient sharedInstance].spaySDKVersion
+                              charset:charset
+                              sign_type:sign_type
+                              mch_id:mch_id
+                              out_trade_no:self.orderID
+                              device_info:device_info
+                              body:body
+                              total_fee:total_fee
+                              mch_create_ip:[self getDeviceIPIpAddresses]
+                              notify_url:notify_url
+                              time_start:time_start
+                              time_expire:time_expire
+                              nonce_str:nonce_str];
+    
+    __weak typeof(self) weakSelf = self;
+    
+    
+    //调用支付预下单接口
+    [[SPHTTPManager sharedInstance] post:kSPconstWebApiInterface_spay_pay_gateway
+                                paramter:postInfo
+                                 success:^(id operation, id responseObject) {
+                                     
+                                     
+                                     //返回的XML字符串,如果解析有问题可以打印该字符串
+                                     //        NSString *response = [[NSString alloc] initWithData:(NSData *)responseObject encoding:NSUTF8StringEncoding];
+                                     
+                                     NSError *erro;
+                                     //XML字符串 to 字典
+                                     //!!!! XMLReader最后节点都会设置一个kXMLReaderTextNodeKey属性
+                                     //如果要修改XMLReader的解析，请继承该类然后再去重写，因为SPaySDK也是调用该方法解析数据，如果修改了会导致解析失败
+                                     NSDictionary *info = [XMLReader dictionaryForXMLData:(NSData *)responseObject error:&erro];
+                                     
+                                     NSLog(@"预下单接口返回数据-->>\n%@",info);
+                                     
+                                     
+                                     //判断解析是否成功
+                                     if (info && [info isKindOfClass:[NSDictionary class]]) {
+                                         
+                                         NSDictionary *xmlInfo = info[@"xml"];
+                                         
+                                         NSInteger status = [xmlInfo[@"status"][@"text"] integerValue];
+                                         
+                                         //判断SPay服务器返回的状态值是否是成功,如果成功则调起SPaySDK
+                                         if (status == 0) {
+                                             
+                                             [weakSelf.hud hide:YES];
+                                             
+                                             //获取SPaySDK需要的token_id
+                                             NSString *token_id = xmlInfo[@"token_id"][@"text"];
+                                             
+                                             //获取SPaySDK需要的services
+                                             NSString *services = xmlInfo[@"services"][@"text"];
+                                             
+                                                 //调起SPaySDK支付
+                                                 [[SPayClient sharedInstance] pay:weakSelf
+                                                                           amount:amount
+                                                                spayTokenIDString:token_id
+                                                                payServicesString:@"pay.weixin.wappay"
+                                                                           finish:^(SPayClientPayStateModel *payStateModel,
+                                                                                    SPayClientPaySuccessDetailModel *paySuccessDetailModel) {
+                                                                               
+                                                                               //更新订单号
+                                                                               weakSelf.myOrderNumber = [NSString spay_out_trade_no];
+                                                                               
+                                                                               
+                                                                               if (payStateModel.payState == SPayClientConstEnumPaySuccess) {
+                                                                                   
+                                                                                   NSLog(@"支付成功");
+                                                                                   NSLog(@"支付订单详情-->>\n%@",[paySuccessDetailModel description]);
+                                                                               }else{
+                                                                                   NSLog(@"支付失败，错误号:%d",payStateModel.payState);
+                                                                               }
+                                                                               
+                                                                           }];
+                                                 
+                                                 
+
+                                         }else{
+                                             weakSelf.hud.labelText = xmlInfo[@"message"][@"text"];
+                                             [weakSelf.hud hide:YES afterDelay:2.0];
+                                         }
+                                     }else{
+                                         weakSelf.hud.labelText = @"预下单接口，解析数据失败";
+                                         [weakSelf.hud hide:YES afterDelay:2.0];
+                                     }
+                                     
+                                     
+                                 } failure:^(id operation, NSError *error) {
+                                     
+                                     weakSelf.hud.labelText = @"调用预下单接口失败";
+                                     [weakSelf.hud hide:YES afterDelay:2.0];
+                                     NSLog(@"调用预下单接口失败-->>\n%@",error);
+                                 }];
 
 }
 
@@ -251,7 +279,84 @@
 }
 
 
+- (NSString *)getDeviceIPIpAddresses
 
+{
+    
+    int sockfd =socket(AF_INET,SOCK_DGRAM, 0);
+    
+    //    if (sockfd <</span> 0) return nil;
+    
+    NSMutableArray *ips = [NSMutableArray array];
+    
+    int BUFFERSIZE =4096;
+    
+    struct ifconf ifc;
+    
+    char buffer[BUFFERSIZE], *ptr, lastname[IFNAMSIZ], *cptr;
+    
+    struct ifreq *ifr, ifrcopy;
+    
+    ifc.ifc_len = BUFFERSIZE;
+    
+    ifc.ifc_buf = buffer;
+    
+    if (ioctl(sockfd,SIOCGIFCONF, &ifc) >= 0){
+        
+        for (ptr = buffer; ptr < buffer + ifc.ifc_len; ){
+            
+            ifr = (struct ifreq *)ptr;
+            
+            int len =sizeof(struct sockaddr);
+            
+            if (ifr->ifr_addr.sa_len > len) {
+                
+                len = ifr->ifr_addr.sa_len;
+                
+            }
+            
+            ptr += sizeof(ifr->ifr_name) + len;
+            
+            if (ifr->ifr_addr.sa_family !=AF_INET) continue;
+            
+            if ((cptr = (char *)strchr(ifr->ifr_name,':')) != NULL) *cptr =0;
+            
+            if (strncmp(lastname, ifr->ifr_name,IFNAMSIZ) == 0)continue;
+            
+            memcpy(lastname, ifr->ifr_name,IFNAMSIZ);
+            
+            ifrcopy = *ifr;
+            
+            ioctl(sockfd,SIOCGIFFLAGS, &ifrcopy);
+            
+            if ((ifrcopy.ifr_flags &IFF_UP) == 0)continue;
+            
+            NSString *ip = [NSString stringWithFormat:@"%s",inet_ntoa(((struct sockaddr_in *)&ifr->ifr_addr)->sin_addr)];
+            
+            [ips addObject:ip];
+            
+        }
+        
+    }
+    
+    close(sockfd);
+
+    NSString *deviceIP =@"";
+    
+    for (int i=0; i < ips.count; i++)
+        
+    {
+        if (ips.count >0)
+        {
+            deviceIP = [NSString stringWithFormat:@"%@",ips.lastObject];
+ 
+        }
+    }
+    
+    NSLog(@"deviceIP========%@",deviceIP);
+    return deviceIP;
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
