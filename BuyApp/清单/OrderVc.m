@@ -146,7 +146,6 @@
                                                                      withParameters:@{@"ctl":@"cart",
                                                                                       @"user_id ":CNull2String(USERMODEL.ID),
                                                                                       @"act" : @"done",
-                                                                                      @"all_account_money":[self.orderModel.total_data objectForKey:@"total_price"],
                                                                                       @"ecvsn" : CNull2String(self.redModel.sn),
                                                                                       @"payment" : self.btn_weixin.selected ? @"6" : @"0",
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {

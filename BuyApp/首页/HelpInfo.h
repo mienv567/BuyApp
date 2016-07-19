@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HelpInfo : RootViewController
-
+@property(nonatomic, strong)UIWebView *webView;
 @end

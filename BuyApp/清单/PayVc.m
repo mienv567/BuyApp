@@ -36,7 +36,6 @@
 
 @property (nonatomic, strong) UINib * nib;
 @property (nonatomic,strong)  MBProgressHUD *hud;
-@property (nonatomic,strong)  NSString *myOrderNumber;//订单号
 @end
 
 @implementation PayVc
@@ -69,9 +68,7 @@
     }];
     
     
-    self.myOrderNumber = [NSString spay_out_trade_no];
- 
-   
+
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -80,13 +77,19 @@
 
 -(void)loadData{
     
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view
+    
+    
+    
+    
+    self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view
                                     animated:YES];
     [self.hud show:YES];
     
+    
+    
     //  1.	预下单订单号：订单号长度<=32位，为了防止生成相同的订单号,订单号的生成需要具唯一性,建议生成订单号时加上时间戳和终端类型。
     //  2.	提交一次订单后取消支付，再次提交相同的订单号并修改了金额值，程序会提示OK错误，支付规则不允许提交相同的订单号并修改金额。
-    NSString *out_trade_no = @"订单号";
+    NSString *out_trade_no = self.orderID;
     
     //  金额以分为单位
     NSInteger total_fee = 1;
@@ -95,50 +98,32 @@
     NSString *notify_url = @"http://ceshi.quyungou.com/callback/payment/Wwxwappay_notify.php";
     
     NSString *service = @"unified.trade.pay";
-    NSString *version = @"1.0";
-    NSString *charset =@"UTF-8";
+    NSString *version = @"2.0";
+    NSString *charset = @"UTF-8";
     NSString *sign_type = @"MD5";
-    NSString *mch_id = @"010265000005";
-    NSString *device_info = nil;
-    NSString *body = @"SwiftPass测试商品";
+    NSString *mch_id = @"6521000195";
+    NSString *device_info = @"WP10000100001";
+    NSString *body = @"这是商品";
     NSString *mch_create_ip = @"127.0.0.1";
     NSString *time_start;
     NSString *time_expire;
     NSString *nonce_str = [NSString spay_nonce_str];
+    
+    
     NSNumber *amount = [NSNumber numberWithInteger:total_fee];
-    
-//    *  @param service       接口类型（必填）
-//    *  @param version       版本号（非必填）
-//    *  @param charset       字符集（非必填）
-//    *  @param sign_type     签名方式（非必填）
-//    *  @param mch_id        商户号（必填）
-//    *  @param out_trade_no  商户订单号（必填）
-//    *  @param device_info   设备号（非必填）
-//    *  @param body          商品描述（必填）
-//    *  @param total_fee     总金额 (必填)
-//    *  @param mch_create_ip 终端IP (必填)
-//    *  @param notify_url    通知地址 (必填)
-//    *  @param time_start    订单生成时间（非必填）
-//    *  @param time_expire   订单超时时间（非必填）
-//    *  @param nonce_str     随机字符串 (必填)
-//    NSLog(@"版本号：%@",[SPayClient sharedInstance].spaySDKVersion);
-//    NSLog(@"版本类型：%@",[SPayClient sharedInstance].spaySDKTypeName);
-//    NSLog(@"ios版本：%@",[[UIDevice currentDevice] systemVersion]);
-//    NSLog(@"设备模式：%@",[[UIDevice currentDevice] model]);
-    
     
     //生成提交表单
     NSDictionary *postInfo = [[SPRequestForm sharedInstance]
                               spay_pay_gateway:service
-                              version:[SPayClient sharedInstance].spaySDKVersion
+                              version:version
                               charset:charset
                               sign_type:sign_type
                               mch_id:mch_id
-                              out_trade_no:self.orderID
+                              out_trade_no:out_trade_no
                               device_info:device_info
                               body:body
                               total_fee:total_fee
-                              mch_create_ip:[self getDeviceIPIpAddresses]
+                              mch_create_ip:mch_create_ip
                               notify_url:notify_url
                               time_start:time_start
                               time_expire:time_expire
@@ -183,6 +168,8 @@
                                              //获取SPaySDK需要的services
                                              NSString *services = xmlInfo[@"services"][@"text"];
                                              
+                                             
+                                             
                                                  //调起SPaySDK支付
                                                  [[SPayClient sharedInstance] pay:weakSelf
                                                                            amount:amount
@@ -192,13 +179,24 @@
                                                                                     SPayClientPaySuccessDetailModel *paySuccessDetailModel) {
                                                                                
                                                                                //更新订单号
-                                                                               weakSelf.myOrderNumber = [NSString spay_out_trade_no];
+//                                                                               weakSelf.orderID = [NSString spay_out_trade_no];
                                                                                
                                                                                
                                                                                if (payStateModel.payState == SPayClientConstEnumPaySuccess) {
-                                                                                   
-                                                                                   NSLog(@"支付成功");
+//
+                                                                                   NSLog(@"支付成功，%@",self.orderID);
                                                                                    NSLog(@"支付订单详情-->>\n%@",[paySuccessDetailModel description]);
+                                                                                   [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost withParameters:@{@"ctl" : @"payment",@"act" : @"done",@"id" : self.orderID} success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                               if (SUCCESSED) {
+                                                                                                 ShowNotceError;
+                                                                                               }else{
+                                                                                                    ShowNotceError;
+                                                                                               }
+                                                                                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                                                                                         
+                                                                                    }];
+                                                                                   
+                                                                              
                                                                                }else{
                                                                                    NSLog(@"支付失败，错误号:%d",payStateModel.payState);
                                                                                }
@@ -206,7 +204,6 @@
                                                                            }];
                                                  
                                                  
-
                                          }else{
                                              weakSelf.hud.labelText = xmlInfo[@"message"][@"text"];
                                              [weakSelf.hud hide:YES afterDelay:2.0];

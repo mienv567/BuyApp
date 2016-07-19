@@ -33,9 +33,20 @@
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    
+    [self loadData];
 }
 
+-(void)loadData{
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost withParameters:@{@"ctl" : @"helps"} success:^(NSURLSessionDataTask *task, id responseObject) {
+        if (SUCCESSED) {
+
+        }else{
+            ShowNotceError;
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+    }];
+}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     HelpInfo * vc = [[HelpInfo alloc]init];
     [self.navigationController pushViewController:vc animated:YES];

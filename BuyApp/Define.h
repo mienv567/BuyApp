@@ -10,10 +10,10 @@
 #define TEST_SERVER
 #ifdef TEST_SERVER
 #define kAppHost @"http://ceshi.quyungou.com/api/index.php"
-#define kAppPostHost @"http://line3.71tong.net:53004"
+#define kAppPostHost @""
 #else
-#define kAppHost @"http://appapiv3.gosheng.cn"
-#define kAppPostHost @"http://appuploadv3.gosheng.cn"
+#define kAppHost @""
+#define kAppPostHost @""
 #endif
 
 //多语言

@@ -86,8 +86,8 @@
             NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
             NSTimeInterval now =[dat timeIntervalSince1970];
             
-            self.lab_CountDown = [[MZTimerLabel alloc] initWithLabel:self.nameLb andTimerType:MZTimerLabelTypeStopWatch];
-            [self.lab_CountDown setCountDownTime:[model.lottery_time integerValue] + 28800 - now];
+            self.lab_CountDown = [[MZTimerLabel alloc] initWithLabel:self.nameLb andTimerType:MZTimerLabelTypeTimer];
+            [self.lab_CountDown setCountDownTime:[model.lottery_time integerValue] - now + 28800];
             self.lab_CountDown.timeFormat = @"hh:mm:ss:SS";
             NSString* text = @"倒计时: 多少";
             NSRange r = [text rangeOfString:@"多少"];

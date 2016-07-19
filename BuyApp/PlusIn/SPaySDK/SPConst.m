@@ -11,7 +11,7 @@
 /**
  *  商户密钥值
  */
-NSString *const kSPconstSPaySignVal = @"Quyungou2016ASDF199976qyg3399999";
+NSString *const kSPconstSPaySignVal = @"f3be74780809252430446b0e6fc4c740";
 
 
 /**
