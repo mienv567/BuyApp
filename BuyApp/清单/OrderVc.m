@@ -73,13 +73,13 @@
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
-
+        
     }];
     
     self.btn_arrow = [UIButton buttonWithType:UIButtonTypeCustom];
     self.btn_arrow.backgroundColor = [UIColor whiteColor];
     [self.btn_arrow setTitle:@"﹀" forState:UIControlStateNormal];
-     [self.btn_arrow setTitle:@"︿" forState:UIControlStateSelected];
+    [self.btn_arrow setTitle:@"︿" forState:UIControlStateSelected];
     [self.btn_arrow addTarget:self action:@selector(click_showInfo) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -112,16 +112,16 @@
 }
 
 -(void)loadData{
-//http://www.quyungou.com/wap/index.php?ctl=cart&act=check&show_prog=1
+    //http://www.quyungou.com/wap/index.php?ctl=cart&act=check&show_prog=1
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"cart",
-                                                                                      @"user_id ":CNull2String(USERMODEL.ID),
+                                                                                      @"user_id":CNull2String(USERMODEL.ID),
                                                                                       @"act" : @"check"
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           
                                                                                           if (SUCCESSED) {
                                                                                               self.orderModel = [[OrderModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
-                                                                                            [self.ary_redPag addObjectsFromArray:[CartRedPagModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"voucher_list"] error:nil]];
+                                                                                              [self.ary_redPag addObjectsFromArray:[CartRedPagModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"voucher_list"] error:nil]];
                                                                                               if (self.ary_redPag.count > 0) {
                                                                                                   self.redModel = [self.ary_redPag objectAtIndex:0];
                                                                                               }
@@ -135,34 +135,52 @@
 }
 
 -(void)click_goToPay{
-//    http://www.quyungou.com/wap/index.php?ctl=ajax&show_prog=1
-//all_account_money:0
-//ecvsn:333863663436
-//ecvpassword:
-//payment:6
-//    id:
-//act:count_buy_total
+    
     [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
-                                                                     withParameters:@{@"ctl":@"cart",
-                                                                                      @"user_id ":CNull2String(USERMODEL.ID),
+                                                                      withParameters:@{@"ctl":@"cart",
+                                                                                       @"user_id":CNull2String(USERMODEL.ID),
+                                                                                       @"act" : @"done",
+                                                                                       @"ecvsn" : CNull2String(self.redModel.sn),
+                                                                                       @"payment" : self.btn_weixin.selected ? @"6" : @"0",
+                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                           if (SUCCESSED) {
+                                                                                               
+                                                                                               if (!self.btn_weixin.selected) {
+                                                                                                   [self clcik_gotoPaybayYuE:responseObject[@"data"][@"order_id"]];
+                                                                                               }else{
+                                                                                                   PayVc * vc = [[PayVc alloc]init];
+                                                                                                   vc.orderID = responseObject[@"data"][@"order_id"];
+                                                                                                   vc.total_price = responseObject[@"data"][@"total_price"];
+                                                                                                   [self.navigationController pushViewController:vc animated:YES];
+                                                                                               }
+
+                                                                                           }else{
+                                                                                               ShowNotceError;
+                                                                                           }
+                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                           
+                                                                                       }];
+    
+}
+
+
+-(void)clcik_gotoPaybayYuE:(NSString *)orderID{
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl" : @"payment",
                                                                                       @"act" : @"done",
-                                                                                      @"ecvsn" : CNull2String(self.redModel.sn),
-                                                                                      @"payment" : self.btn_weixin.selected ? @"6" : @"0",
+                                                                                      @"id" : orderID,
+                                                                                      @"user_id":CNull2String(USERMODEL.ID)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           if (SUCCESSED) {
-                                                                                              PayVc * vc = [[PayVc alloc]init];
-                                                                                              vc.orderID = responseObject[@"data"][@"order_id"];
-                                                                                              [self.navigationController pushViewController:vc animated:YES];
-                                                                                              
+                                                                                              ShowNotceError;
                                                                                           }else{
                                                                                               ShowNotceError;
                                                                                           }
                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                           
                                                                                       }];
-    
-}
 
+}
 -(void)click_showInfo{
     
 }
@@ -170,18 +188,17 @@
 -(void)click_weixinPay{
     self.btn_weixin.selected = YES;
     self.btn_money.selected = NO;
-
+    
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"ajax",
-                                                                                      @"user_id ":CNull2String(USERMODEL.ID),
+                                                                                      @"user_id":CNull2String(USERMODEL.ID),
                                                                                       @"act" : @"count_buy_total",
-                                                                                      @"all_account_money":[self.orderModel.total_data objectForKey:@"total_price"],
                                                                                       @"ecvsn" : CNull2String(self.redModel.sn),
                                                                                       @"payment" : @"6",
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           
                                                                                           if (SUCCESSED) {
-                                                                                                self.orderModel = [[OrderModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
+                                                                                              self.orderModel = [[OrderModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
                                                                                               [self.tableView reloadData];
                                                                                           }else{
                                                                                               ShowNotceError;
@@ -201,9 +218,8 @@
     
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"ajax",
-                                                                                      @"user_id ":CNull2String(USERMODEL.ID),
+                                                                                      @"user_id":CNull2String(USERMODEL.ID),
                                                                                       @"act" : @"count_buy_total",
-                                                                                      @"all_account_money":[self.orderModel.total_data objectForKey:@"total_price"],
                                                                                       @"ecvsn" : CNull2String(self.redModel.sn),
                                                                                       @"payment" : @"0",
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -240,11 +256,11 @@
 
 #pragma mark - UIActionSheet
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-        if (buttonIndex != actionSheet.cancelButtonIndex) {
-            self.redModel = [self.ary_redPag objectAtIndex:buttonIndex - 1];
-        }else{
-            self.redModel = nil;
-        }
+    if (buttonIndex != actionSheet.cancelButtonIndex) {
+        self.redModel = [self.ary_redPag objectAtIndex:buttonIndex - 1];
+    }else{
+        self.redModel = nil;
+    }
     [self.tableView reloadData];
 }
 
@@ -453,7 +469,7 @@
         default:
             break;
     }
-
+    
     
     return cell;
 }

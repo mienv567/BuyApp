@@ -315,7 +315,7 @@
                                                                                       @"consignee":CNull2String(self.txf_name.text),
                                                                                       @"address":CNull2String(self.txf_address.text),
                                                                                       @"zip":CNull2String(self.txf_postCode.text),
-                                                                                      @"user_id ":CNull2String(USERMODEL.ID)
+                                                                                      @"user_id":CNull2String(USERMODEL.ID)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           if (SUCCESSED) {
                                                                                          

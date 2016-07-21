@@ -82,7 +82,7 @@
                                                                              withParameters:@{@"ctl":@"uc_address",
                                                                                               @"act":@"del",
                                                                                               @"id":model.ID,
-                                                                                              @"user_id ":CNull2String(USERMODEL.ID)
+                                                                                              @"user_id":CNull2String(USERMODEL.ID)
                                                                                               } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                                   if (SUCCESSED) {
                                                                                             
@@ -108,7 +108,7 @@
                                                                      withParameters:@{@"ctl":@"uc_address",
                                                                                       @"act":@"set_default",
                                                                                       @"id":model.ID,
-                                                                                      @"user_id ":CNull2String(USERMODEL.ID)
+                                                                                      @"user_id":CNull2String(USERMODEL.ID)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           if (SUCCESSED) {
                                                                                               ShowNotceSuccess;
@@ -126,7 +126,7 @@
         
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"uc_address",
-                                                                                      @"user_id ":CNull2String(USERMODEL.ID)
+                                                                                      @"user_id":CNull2String(USERMODEL.ID)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           if (SUCCESSED) {
                                                                                                self.dataArray = [AddressModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"consignee_list"] error:nil];

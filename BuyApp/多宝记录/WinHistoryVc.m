@@ -60,7 +60,7 @@
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"uc_duobao_record",
                                                                                       @"act":@"index",
-                                                                                      @"user_id ":CNull2String(USERMODEL.ID),
+                                                                                      @"user_id":CNull2String(USERMODEL.ID),
                                                                                       @"log_type":self.log_type,
                                                                                       @"page":@(self.pageNo)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {

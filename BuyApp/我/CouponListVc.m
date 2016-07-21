@@ -64,7 +64,7 @@
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"uc_ecv",
                                                                                       @"act":@"index",
-                                                                                      @"user_id ":CNull2String(USERMODEL.ID),
+                                                                                      @"user_id":CNull2String(USERMODEL.ID),
                                                                                       @"n_valid":self.n_validString
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           [self.tableView.mj_header endRefreshing];

@@ -10,7 +10,7 @@
 #import "SPayClient.h"
 #import "NSString+SPayUtilsExtras.h"
 #import "NSDictionary+SPayUtilsExtras.h"
-
+#import "MainTabBarVc.h"
 
 #import "SPRequestForm.h"
 #import "SPHTTPManager.h"
@@ -68,11 +68,11 @@
     }];
     
     
-
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-       [self loadData];
+    [self loadData];
 }
 
 -(void)loadData{
@@ -92,7 +92,7 @@
     NSString *out_trade_no = self.orderID;
     
     //  金额以分为单位
-    NSInteger total_fee = 1;
+    NSInteger total_fee = [self.total_price integerValue] * 100;
     
     // 3.	商户在调用预下单接口时，如果没有后台通知地址，则预下单接口的notify_url字段必须为一个空格字符串。
     NSString *notify_url = @"http://ceshi.quyungou.com/callback/payment/Wwxwappay_notify.php";
@@ -170,40 +170,45 @@
                                              
                                              
                                              
-                                                 //调起SPaySDK支付
-                                                 [[SPayClient sharedInstance] pay:weakSelf
-                                                                           amount:amount
-                                                                spayTokenIDString:token_id
-                                                                payServicesString:@"pay.weixin.wappay"
-                                                                           finish:^(SPayClientPayStateModel *payStateModel,
-                                                                                    SPayClientPaySuccessDetailModel *paySuccessDetailModel) {
-                                                                               
-                                                                               //更新订单号
-//                                                                               weakSelf.orderID = [NSString spay_out_trade_no];
-                                                                               
-                                                                               
-                                                                               if (payStateModel.payState == SPayClientConstEnumPaySuccess) {
-//
-                                                                                   NSLog(@"支付成功，%@",self.orderID);
-                                                                                   NSLog(@"支付订单详情-->>\n%@",[paySuccessDetailModel description]);
-                                                                                   [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost withParameters:@{@"ctl" : @"payment",@"act" : @"done",@"id" : self.orderID} success:^(NSURLSessionDataTask *task, id responseObject) {
-                                                                                               if (SUCCESSED) {
-                                                                                                 ShowNotceError;
-                                                                                               }else{
-                                                                                                    ShowNotceError;
-                                                                                               }
-                                                                                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                                                                                                                                         
-                                                                                    }];
+                                             //调起SPaySDK支付
+                                             [[SPayClient sharedInstance] pay:weakSelf
+                                                                       amount:amount
+                                                            spayTokenIDString:token_id
+                                                            payServicesString:@"pay.weixin.wappay"
+                                                                       finish:^(SPayClientPayStateModel *payStateModel,
+                                                                                SPayClientPaySuccessDetailModel *paySuccessDetailModel) {
+                                                                           
+                                                                           //更新订单号
+                                                                           //                                                                               weakSelf.orderID = [NSString spay_out_trade_no];
+                                                                           
+                                                                           if (payStateModel.payState == SPayClientConstEnumPaySuccess) {
+                                                                               //
+                                                                               NSLog(@"支付成功，%@",self.orderID);
+                                                                               NSLog(@"支付订单详情-->>\n%@",[paySuccessDetailModel description]);
+                                                                               [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost withParameters:@{
+                                                                                        @"ctl" : @"payment",
+                                                                                        @"act" : @"done",
+                                                                                        @"id" : self.orderID,
+                                                                                        @"user_id":CNull2String(USERMODEL.ID)
+                                                                                        } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                   if (SUCCESSED) {
+                                                                                       ShowNotceError;
+                                                                                   }else{
+                                                                                       ShowNotceError;
+                                                                                   }
+                                                                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                    
-                                                                              
-                                                                               }else{
-                                                                                   NSLog(@"支付失败，错误号:%d",payStateModel.payState);
-                                                                               }
+                                                                               }];
                                                                                
-                                                                           }];
-                                                 
-                                                 
+                                                                               
+                                                                           }else{
+                                                                               NSLog(@"支付失败，错误号:%d",payStateModel.payState);
+                                                                               [[MainTabBarVc shared]changeTabBarAtIndex:0];
+                                                                           }
+                                                                           
+                                                                       }];
+                                             
+                                             
                                          }else{
                                              weakSelf.hud.labelText = xmlInfo[@"message"][@"text"];
                                              [weakSelf.hud hide:YES afterDelay:2.0];
@@ -220,7 +225,7 @@
                                      [weakSelf.hud hide:YES afterDelay:2.0];
                                      NSLog(@"调用预下单接口失败-->>\n%@",error);
                                  }];
-
+    
 }
 
 
@@ -258,7 +263,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryNone;
     if (self.dataArray.count > indexPath.row) {
-//        CarListModel * model = [self.dataArray objectAtIndex:indexPath.row];
+        //        CarListModel * model = [self.dataArray objectAtIndex:indexPath.row];
         
     }
     
@@ -337,7 +342,7 @@
     }
     
     close(sockfd);
-
+    
     NSString *deviceIP =@"";
     
     for (int i=0; i < ips.count; i++)
@@ -346,7 +351,7 @@
         if (ips.count >0)
         {
             deviceIP = [NSString stringWithFormat:@"%@",ips.lastObject];
- 
+            
         }
     }
     
@@ -361,13 +366,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

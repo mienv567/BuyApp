@@ -9,6 +9,6 @@
 #import "RootViewController.h"
 
 @interface PayVc : RootViewController
-@property (nonatomic,strong)NSString * orderID;//
-
+@property (nonatomic,strong)NSString * orderID;                 //订单号
+@property (nonatomic,strong)NSString * total_price;             //支付金额
 @end

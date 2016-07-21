@@ -52,7 +52,7 @@
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"user_center",
                                                                                       @"act":@"index",
-                                                                                      @"user_id ":CNull2String(USERMODEL.ID)
+                                                                                      @"user_id":CNull2String(USERMODEL.ID)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           if (SUCCESSED) {
                                                                                               [self.dataArray addObjectsFromArray:[WinHistoryModel arrayOfModelsFromDictionaries:responseObject[@"value"] error:nil]];

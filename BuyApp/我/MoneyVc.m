@@ -75,7 +75,7 @@
     if (indexPath.row == 0) {
         cell.img_icon.image = [UIImage imageNamed:@"YuE"];
         cell.lab_title.text = @"账户余额";
-        cell.lab_content.text = [NSString stringWithFormat:@"%@夺宝币",USERMODEL.money];
+        cell.lab_content.text = [NSString stringWithFormat:@"%d夺宝币",(int)[USERMODEL.money integerValue]];
     }else{
         cell.img_icon.image = [UIImage imageNamed:@"ChongZhi"];
         cell.lab_title.text = @"充值";

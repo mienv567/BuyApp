@@ -15,6 +15,7 @@
 #import "SearchListVc.h"
 #import "MainTabBarVc.h"
 #import "HelpVc.h"
+#import "HelpInfo.h"
 #import "GoodsInfoVc.h"
 #import "MainModel.h"
 
@@ -173,7 +174,10 @@ static NSString *footerID = @"footerID";
             break;
         case 3:
         {
-            HelpVc * vc = [[HelpVc alloc]init];
+//            HelpVc * vc = [[HelpVc alloc]init];
+//            vc.title = @"帮助";
+//            [self.navigationController pushViewController:vc animated:YES];
+            HelpInfo * vc = [[HelpInfo alloc]init];
             vc.title = @"帮助";
             [self.navigationController pushViewController:vc animated:YES];
         }

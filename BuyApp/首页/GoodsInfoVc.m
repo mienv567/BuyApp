@@ -106,7 +106,7 @@
                                                                          withParameters:@{@"ctl":@"duobao",
                                                                                           @"act":@"index",
                                                                                           @"data_id":CNull2String(self.GoodsID),
-                                                                                           @"user_id ":CNull2String(USERMODEL.ID)
+                                                                                           @"user_id":CNull2String(USERMODEL.ID)
                                                                                           } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                               [self.tableView.mj_footer endRefreshing];
                                                                                               [self.tableView.mj_header endRefreshing];
@@ -193,7 +193,7 @@
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"duobao",
                                                                                       @"data_id":self.GoodsID,
-                                                                                      @"user_id ":CNull2String(USERMODEL.ID),
+                                                                                      @"user_id":CNull2String(USERMODEL.ID),
                                                                                       @"page":@(self.pageno)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           [self.tableView.mj_footer endRefreshing];
@@ -291,7 +291,7 @@
                                                                      withParameters:@{@"ctl":@"ajax",
                                                                                       @"act":@"add_cart",
                                                                                       @"data_id":self.GoodsID,
-                                                                                      @"user_id ":CNull2String(USERMODEL.ID),
+                                                                                      @"user_id":CNull2String(USERMODEL.ID),
                                                                                       @"buy_num":@(self.shoppingView.view_count.value)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                     
@@ -315,7 +315,7 @@
                                                                      withParameters:@{@"ctl":@"ajax",
                                                                                       @"act":@"add_cart",
                                                                                       @"data_id":self.GoodsID,
-                                                                                      @"user_id ":CNull2String(USERMODEL.ID),
+                                                                                      @"user_id":CNull2String(USERMODEL.ID),
                                                                                       @"buy_num":@(self.shoppingView.view_count.value)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                   

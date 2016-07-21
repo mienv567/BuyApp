@@ -92,6 +92,7 @@
     [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
                                                                       withParameters:@{@"ctl":@"ajax",
                                                                                        @"act":@"add_cart",
+                                                                                       @"user_id":CNull2String(USERMODEL.ID),
                                                                                        @"buy_num":self.myModel.min_buy,
                                                                                        @"data_id":CNull2String(self.myModel.ID)
                                                                                        } success:^(NSURLSessionDataTask *task, id responseObject) {

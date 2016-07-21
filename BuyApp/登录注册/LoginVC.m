@@ -113,7 +113,6 @@
             [MBProgressHUD showError:@"请校验密码"];
             return;
         }
-        
         [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                          withParameters:@{@"ctl":@"user",
                                                                                           @"act":@"dologin",
@@ -121,7 +120,7 @@
                                                                                           @"password":CNull2String(self.txf_password.text)
                                                                                           } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                               if (SUCCESSED) {
-                                                                                                  UserModel * userModel = [[UserModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
+                                                                                                  UserModel * userModel = [[UserModel alloc]initWithDictionary:responseObject[@"data"][@"user_info"] error:nil];
                                                                                                   [[UserManager sharedManager] saveLoginUser:userModel];
                                                                                                   [self click_cancleLogin];
                                                                                               }else{

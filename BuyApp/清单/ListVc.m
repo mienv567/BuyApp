@@ -63,7 +63,7 @@
     [self.dataArray removeAllObjects];
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"cart",
-                                                                                       @"user_id ":CNull2String(USERMODEL.ID)
+                                                                                       @"user_id":CNull2String(USERMODEL.ID)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           [self.tableView.mj_header endRefreshing];
                                                                                           [self.tableView.mj_footer endRefreshing];
@@ -130,7 +130,7 @@
                                                                      withParameters:@{@"ctl":@"ajax",
                                                                                       @"id":model.ID,
                                                                                       @"act" : @"del_cart",
-                                                                                       @"user_id ":CNull2String(USERMODEL.ID)
+                                                                                       @"user_id":CNull2String(USERMODEL.ID)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           
                                                                                           if (SUCCESSED) {

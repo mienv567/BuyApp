@@ -45,7 +45,7 @@
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"uc_msg",
                                                                                       @"act":@"index",
-                                                                                      @"user_id ":CNull2String(USERMODEL.ID)
+                                                                                      @"user_id":CNull2String(USERMODEL.ID)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           if (SUCCESSED) {
                                                                                                   [self.dataArray addObjectsFromArray:[NewsModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"list"] error:nil]];
@@ -74,7 +74,7 @@
                                                                      withParameters:@{@"ctl":@"uc_msg",
                                                                                       @"act":@"remove_msg",
                                                                                       @"id":model.ID,
-                                                                                      @"user_id ":CNull2String(USERMODEL.ID)
+                                                                                      @"user_id":CNull2String(USERMODEL.ID)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           if (SUCCESSED) {
                                                                                               [self.dataArray removeObjectAtIndex:index.row];

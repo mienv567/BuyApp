@@ -45,7 +45,7 @@
     
     [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
                                                                       withParameters:@{@"ctl":@"uc_money",
-                                                                                       @"user_id ":CNull2String(USERMODEL.ID),
+                                                                                       @"user_id":CNull2String(USERMODEL.ID),
                                                                                        } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                            NSLog(@"%@",responseObject[@"data"][@"info"]);
                                                                                            [self.tableView.mj_header endRefreshing];

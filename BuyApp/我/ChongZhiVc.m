@@ -7,6 +7,7 @@
 //
 
 #import "ChongZhiVc.h"
+#import "PayVc.h"
 
 @interface ChongZhiVc () <UITextFieldDelegate>
 @property (nonatomic, strong)NSString * lastPrice;//最后的支付金额
@@ -62,7 +63,24 @@
 
 
 - (IBAction)click_buy:(UIButton *)sender {
-    
+    [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
+                                                                      withParameters:@{@"ctl":@"uc_charge",
+                                                                                       @"user_id":CNull2String(USERMODEL.ID),
+                                                                                       @"money" : self.lastPrice,
+                                                                                       @"act": @"done",
+                                                                                       @"payment": @"6",
+                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                           if (SUCCESSED) {
+                                                                                               PayVc * vc = [[PayVc alloc]init];
+                                                                                               vc.orderID = responseObject[@"data"][@"order_id"];
+                                                                                               [self.navigationController pushViewController:vc animated:YES];
+                                                                                               
+                                                                                           }else{
+                                                                                               ShowNotceError;
+                                                                                           }
+                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                           
+                                                                                       }];
    
 }
 

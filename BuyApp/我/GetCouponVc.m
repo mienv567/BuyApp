@@ -42,7 +42,7 @@
     self.topView = KGetViewFromNib(@"RedCouponTopView");
     self.topView.frame = CGRectMake(0, 0, K_WIDTH, 180);
     self.tableView.tableHeaderView = self.topView;
-    self.topView.lab_myPoints.text = USERMODEL.score;
+    self.topView.lab_myPoints.text = USERMODEL.total_score;
     
     
     
@@ -62,7 +62,7 @@
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"uc_ecv",
                                                                                       @"act":@"exchange",
-                                                                                      @"user_id ":CNull2String(USERMODEL.ID),
+                                                                                      @"user_id":CNull2String(USERMODEL.ID),
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                              [self.tableView.mj_header endRefreshing];
                                                                                           if (SUCCESSED) {
@@ -97,7 +97,7 @@
         [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
                                                                           withParameters:@{@"ctl":@"uc_ecv",
                                                                                            @"act":@"do_snexchange",
-                                                                                           @"user_id ":CNull2String(USERMODEL.ID),
+                                                                                           @"user_id":CNull2String(USERMODEL.ID),
                                                                                            @"id" : CNull2String(@((int)alertView.tag))
                                                                                            } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                                if (SUCCESSED) {
@@ -120,7 +120,7 @@
         [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
                                                                           withParameters:@{@"ctl":@"uc_ecv",
                                                                                            @"act":@"do_snexchange",
-                                                                                           @"user_id ":CNull2String(USERMODEL.ID),
+                                                                                           @"user_id":CNull2String(USERMODEL.ID),
                                                                                            @"sn" : CNull2String(self.topView.txf_key.text)
                                                                                            } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                                NSLog(@"%@",responseObject[@"data"][@"info"]);
@@ -138,7 +138,7 @@
 }
 
 -(void)loadNewPoints{
-    NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"我的积分:%d",CNull2Int(USERMODEL.score)]];
+    NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"我的积分:%d",CNull2Int(USERMODEL.total_score)]];
     [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(5, noticeStr.length - 5)];
     [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(5,noticeStr.length - 5)];
     self.topView.lab_myPoints.attributedText = noticeStr;
