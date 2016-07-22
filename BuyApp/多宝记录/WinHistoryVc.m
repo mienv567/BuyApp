@@ -119,14 +119,15 @@
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-   NewsListModel * model =  [self.dataArray objectAtIndex:indexPath.row];
-    if ([model.has_lottery integerValue] == 0) {
-        return 150;
-    }else{
-       return 210;
+    if (self.dataArray.count > indexPath.row) {
+        NewsListModel * model =  [self.dataArray objectAtIndex:indexPath.row];
+        if ([model.has_lottery integerValue] == 0) {
+            return 150;
+        }else{
+            return 210;
+        }
     }
-    
+     return 0;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

@@ -208,10 +208,14 @@
 }
 
 - (void)needLogin{
-    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    if(appDelegate) {
-        [appDelegate showNeedLoginAlertView];
+    if (![[UserManager sharedManager] isUserLoad]) {
+        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        if(appDelegate) {
+            [appDelegate showNeedLoginAlertView];
+        }
+        return;
     }
+
 }
 
 -(void)MyNavLeftClick{

@@ -40,6 +40,10 @@
 #define KDEVICE_IPHONE6P (K_WIDTH >= 414.0)
 #define KDEVICE_IPHONE5or4  (K_WIDTH <=320.0)
 
+
+#define NEEDLOGIN  if (![[UserManager sharedManager] isUserLoad]) {AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;if(appDelegate) {[appDelegate showNeedLoginAlertView];}return;}
+
+
 #pragma mark --- 数据转换宏
 #define CNull2String(str)  str?str:@""    //null转为空字符串
 #define CNull2Int(str)  [str?str:@"" intValue]    //null转为0

@@ -112,8 +112,7 @@
 }
 
 -(void)click_addToList{
-//    http://www.quyungou.com/wap/index.php?ctl=ajax&show_prog=1&act=add_cart&buy_num=1&data_id=100004221
-
+    NEEDLOGIN;
     [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"ajax",
                                                                                       @"act":@"add_cart",

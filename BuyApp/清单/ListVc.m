@@ -90,6 +90,11 @@
                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                           [self.tableView.mj_header endRefreshing];
                                                                                           [self.tableView.mj_footer endRefreshing];
+                                                                                          if (self.dataArray.count == 0) {
+                                                                                              BackGoundView * view = KGetViewFromNib(@"BackGoundView");
+                                                                                              view.myType = BackGoundViewNoData;
+                                                                                              self.tableView.backgroundView = view;
+                                                                                          }
                                                                                       }];
 
 }
@@ -100,7 +105,7 @@
     for (CarListModel * model in self.dataArray) {
         self.totalPrice = self.totalPrice + [model.number integerValue] * [model.unit_price integerValue];
     }
-    [self refreshBottonView:self.totalModel.cart_item_number money:[NSString stringWithFormat:@"%d",(int)self.totalPrice]];
+    [self refreshBottonView:[NSString stringWithFormat:@"%d",(int)self.dataArray.count] money:[NSString stringWithFormat:@"%d",(int)self.totalPrice]];
 }
 
 -(void)refreshBottonView:(NSString *)countSring money:(NSString *)allMoney{
@@ -152,6 +157,11 @@
 -(void)click_showDeatil:(id)data{
 
 //    http://www.quyungou.com/wap/index.php?ctl=cart&act=check_cart&show_prog=1
+    
+    if (![[UserManager sharedManager] isUserLoad]) {
+        return;
+    }
+    
     NSMutableDictionary * dic = [NSMutableDictionary dictionary];
     
     for (CarListModel * model in self.dataArray) {
@@ -238,6 +248,15 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(K_WIDTH, 64)] forBarMetrics:UIBarMetricsDefault];
+    
+    if (![[UserManager sharedManager] isUserLoad]) {
+        if (self.dataArray.count == 0) {
+            BackGoundView * view = KGetViewFromNib(@"BackGoundView");
+            view.myType = BackGoundViewNoData;
+            self.tableView.backgroundView = view;
+        }
+        return;
+    }
     [self loadNew];
 }
 

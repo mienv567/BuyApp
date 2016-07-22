@@ -8,6 +8,8 @@
 
 #import "AddressInfoVc.h"
 #import "MMPickerView.h"
+#import "AddressPlaceModel.h"
+
 
 @interface AddressInfoVc ()
 
@@ -64,16 +66,11 @@
         make.right.equalTo(self.view).offset(-10);
         make.height.mas_equalTo(@30);
     }];
+    
     self.FirstArray = [NSMutableArray array];
     self.SecondArray = [NSMutableArray array];
     self.ThirdArray = [NSMutableArray array];
     
-
-    
-    self.AllArray = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Area.plist" ofType:nil]];
-    for (NSDictionary * dict in self.AllArray) {
-        [self.FirstArray addObject:[dict objectForKey:@"state"]];
-    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -83,66 +80,120 @@
         self.txf_address.text = self.myModel.address;
         self.txf_postCode.text = self.myModel.zip;
         self.txf_phone.text = self.myModel.mobile;
-    }
-    
-    self.lab_classSheng.text = self.firstString.length > 1 ? self.firstString : @"=请选择=";
-    if (self.firstString.length > 1) {
-        
-        NSInteger selectedRow = 0;
-        if (self.firstString!=nil  &&  selectedRow > -1) {
-            selectedRow = [self.FirstArray indexOfObject:self.firstString];
-        }else{
-            selectedRow = [[self.FirstArray objectAtIndex:0] integerValue];
-        }
-        self.firstIndex = selectedRow;
-        
-        [self.SecondArray removeAllObjects];
-        for (NSDictionary * dict in [[self.AllArray objectAtIndex:selectedRow] objectForKey:@"cities"]) {
-            [self.SecondArray addObject:[dict objectForKey:@"city"]];
-        }
-
     }else{
-        self.firstString = @"";
-        return ;
+        [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                         withParameters:@{@"ctl" : @"uc_address",
+                                                                                          @"act" : @"get_province",
+                                                                                          } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                              if (SUCCESSED) {
+                                                                                                  [self.FirstArray addObjectsFromArray:[AddressPlaceModel arrayOfModelsFromDictionaries:responseObject[@"data"] error:nil]];
+                                                                                              }else{
+                                                                                                  
+                                                                                              }
+                                                                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                              
+                                                                                              
+                                                                                          }];
     }
+
+    self.lab_classSheng.text = self.firstString.length > 1 ? self.firstString : @"=请选择=";
+//    if (self.firstString.length > 1) {
+//        
+//        NSInteger selectedRow = 0;
+//        if (self.firstString!=nil  &&  selectedRow > -1) {
+//            selectedRow = [self.FirstArray indexOfObject:self.firstString];
+//        }else{
+//            selectedRow = [[self.FirstArray objectAtIndex:0] integerValue];
+//        }
+//        self.firstIndex = selectedRow;
+//        
+//        [self.SecondArray removeAllObjects];
+//        for (NSDictionary * dict in [[self.AllArray objectAtIndex:selectedRow] objectForKey:@"cities"]) {
+//            [self.SecondArray addObject:[dict objectForKey:@"city"]];
+//        }
+//
+//    }else{
+//        self.firstString = @"";
+//        return ;
+//    }
     
     self.lab_classShi.text = self.secondString.length > 1 ? self.secondString : @"=请选择=";
-    if (self.secondString.length > 1) {
-        NSInteger selectedRow = 0;
-        if (self.secondString!=nil  && selectedRow > -1  ) {
-            selectedRow = [self.SecondArray indexOfObject:self.secondString];
-        }else{
-            selectedRow = [[self.SecondArray objectAtIndex:0] integerValue];
-        }
-        self.secondIndex = selectedRow;
-        
-        [self.ThirdArray addObjectsFromArray:[[[[self.AllArray objectAtIndex:self.firstIndex] objectForKey:@"cities"] objectAtIndex:self.secondIndex] objectForKey:@"areas"]];
-    }else{
-        self.secondString = @"";
-        return ;
-    }
+//    if (self.secondString.length > 1) {
+//        NSInteger selectedRow = 0;
+//        if (self.secondString!=nil  && selectedRow > -1  ) {
+//            selectedRow = [self.SecondArray indexOfObject:self.secondString];
+//        }else{
+//            selectedRow = [[self.SecondArray objectAtIndex:0] integerValue];
+//        }
+//        self.secondIndex = selectedRow;
+//        
+//        [self.ThirdArray addObjectsFromArray:[[[[self.AllArray objectAtIndex:self.firstIndex] objectForKey:@"cities"] objectAtIndex:self.secondIndex] objectForKey:@"areas"]];
+//    }else{
+//        self.secondString = @"";
+//        return ;
+//    }
 
     self.lab_classQu.text = self.thirdString.length > 1 ? self.thirdString : @"=请选择=";
-    if (self.thirdString.length > 1) {
-        NSInteger selectedRow = 0;
-        if (self.thirdString!=nil  && selectedRow > -1) {
-            selectedRow = [self.ThirdArray indexOfObject:self.thirdString];
-        }else{
-            selectedRow = [[self.ThirdArray objectAtIndex:0] integerValue];
-        }
-        self.thirdIndex = selectedRow;
-    }else{
-        self.thirdString = @"";
-        return ;
-    }
+//    if (self.thirdString.length > 1) {
+//        NSInteger selectedRow = 0;
+//        if (self.thirdString!=nil  && selectedRow > -1) {
+//            selectedRow = [self.ThirdArray indexOfObject:self.thirdString];
+//        }else{
+//            selectedRow = [[self.ThirdArray objectAtIndex:0] integerValue];
+//        }
+//        self.thirdIndex = selectedRow;
+//    }else{
+//        self.thirdString = @"";
+//        return ;
+//    }
 
 }
+
+//http://test.quyungou.com/api/index.php?ctl=uc_address&act=get_province
+//
+
+//
+
 
 
 - (IBAction)click_first:(id)sender {
     [self.view endEditing:YES];
+    if (self.FirstArray.count == 0) {
+        [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                         withParameters:@{@"ctl" : @"uc_address",
+                                                                                          @"act" : @"get_province",
+                                                                                          } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                              if (SUCCESSED) {
+                                                                                                  [self.FirstArray addObjectsFromArray:[AddressPlaceModel arrayOfModelsFromDictionaries:responseObject[@"data"] error:nil]];
+                                                                                                  
+                                                                                                  NSMutableArray * titleArray = [NSMutableArray array];
+                                                                                                  
+                                                                                                  for (AddressPlaceModel * model in self.FirstArray) {
+                                                                                                      [titleArray addObject:model.name];
+                                                                                                  }
+                                                                                                  [self showFirstView:titleArray];
+                                                                                                  
+                                                                                              }else{
+                                                                                                  
+                                                                                              }
+                                                                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                              
+                                                                                              
+                                                                                          }];
+    }else{
+        NSMutableArray * titleArray = [NSMutableArray array];
+        
+        for (AddressPlaceModel * model in self.FirstArray) {
+            [titleArray addObject:model.name];
+        }
+        [self showFirstView:titleArray];
+    }
+   
+}
+
+-(void)showFirstView:(NSMutableArray *)array{
     [MMPickerView showPickerViewInView:self.view
-                           withStrings:self.FirstArray
+                           withStrings:array
                            withOptions:@{MMbackgroundColor: [UIColor whiteColor],
                                          MMtextColor: [UIColor blackColor],
                                          MMtoolbarColor: [UIColor whiteColor],
@@ -153,40 +204,75 @@
                                          MMtextAlignment:@1}
                             completion:^(NSString *selectedString) {
                                 
-                                self.firstString = selectedString;
-                                self.secondString = @"";
-                                self.thirdString = @"";
-                                
-                                self.lab_classSheng.text = self.firstString;
-                                self.lab_classShi.text = @"=请选择=";
-                                self.lab_classQu.text = @"=请选择=";
-                                
-                                NSInteger selectedRow = 0;
-                                if (self.firstString!=nil  &&  selectedRow > -1) {
-                                    selectedRow = [self.FirstArray indexOfObject:self.firstString];
+                                if ([self.firstString isEqualToString:selectedString]) {
+                                    
                                 }else{
-                                    selectedRow = [[self.FirstArray objectAtIndex:0] integerValue];
+                                    self.firstString = selectedString;
+                                    
+                                    self.secondString = @"";
+                                    self.thirdString = @"";
+                                    self.secondID = @"";
+                                    self.thirdID = @"";
+                                    [self.SecondArray removeAllObjects];
+                                    [self.ThirdArray removeAllObjects];
+                                    
+                                    self.lab_classSheng.text = self.firstString;
+                                    self.lab_classShi.text = @"=请选择=";
+                                    self.lab_classQu.text = @"=请选择=";
+                                    
+                                    for (AddressPlaceModel * model in self.FirstArray) {
+                                        if ([model.name isEqualToString:selectedString]) {
+                                            self.firstID = model.ID;
+                                            return ;
+                                        }
+                                    }
                                 }
-                                self.firstIndex = selectedRow;
-                                self.secondIndex = 0;
-                                self.thirdIndex = 0;
-                                [self.SecondArray removeAllObjects];
-                                for (NSDictionary * dict in [[self.AllArray objectAtIndex:selectedRow] objectForKey:@"cities"]) {
-                                    [self.SecondArray addObject:[dict objectForKey:@"city"]];
-                                }
-                                 [self.ThirdArray removeAllObjects];
-                                
                             }];
 
+
 }
+
+//获取城市
+//http://test.quyungou.com/api/index.php?ctl=uc_address&act=get_city&pid=3
+
+
 - (IBAction)click_second:(id)sender {
     [self.view endEditing:YES];
 
-    if (self.SecondArray.count == 0) {
+    if (self.firstID.length == 0) {
         return;
     }
+      [self.SecondArray removeAllObjects];
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl" : @"uc_address",
+                                                                                      @"act" : @"get_city",
+                                                                                      @"pid" : self.firstID
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          if (SUCCESSED) {
+                                                                                              [self.SecondArray addObjectsFromArray:[AddressPlaceModel arrayOfModelsFromDictionaries:responseObject[@"data"] error:nil]];
+                                                                                              
+                                                                                              NSMutableArray * titleArray = [NSMutableArray array];
+                                                                                              
+                                                                                              for (AddressPlaceModel * model in self.SecondArray) {
+                                                                                                  [titleArray addObject:model.name];
+                                                                                              }
+                                                                                              [self showSecondView:titleArray];
+                                                                                              
+                                                                                          }else{
+                                                                                              
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          
+                                                                                          
+                                                                                      }];
+    
+    
+  }
+
+-(void)showSecondView:(NSMutableArray *)array{
+    
     [MMPickerView showPickerViewInView:self.view
-                           withStrings:self.SecondArray
+                           withStrings:array
                            withOptions:@{MMbackgroundColor: [UIColor whiteColor],
                                          MMtextColor: [UIColor blackColor],
                                          MMtoolbarColor: [UIColor whiteColor],
@@ -196,39 +282,70 @@
                                          MMselectedObject:self.secondString,
                                          MMtextAlignment:@1}
                             completion:^(NSString *selectedString) {
-                                self.secondString = selectedString;
-                                self.thirdString = @"";
-                                
-                                self.lab_classShi.text = self.secondString;
-                                self.lab_classQu.text = @"=请选择=";
-                                
-                                NSInteger selectedRow;
-                                if (self.secondString!=nil  && selectedRow > -1  ) {
-                                    selectedRow = [self.SecondArray indexOfObject:self.secondString];
+                                if ([self.secondString isEqualToString:selectedString]) {
+                                    
                                 }else{
-                                    selectedRow = [[self.SecondArray objectAtIndex:0] integerValue];
+                                    self.secondString = selectedString;
+                                    
+                                    self.thirdString = @"";
+                                    self.thirdID = @"";
+                                    [self.ThirdArray removeAllObjects];
+                                    
+                                    self.lab_classShi.text = self.secondString;
+                                    self.lab_classQu.text = @"=请选择=";
+                                    
+                                    for (AddressPlaceModel * model in self.SecondArray) {
+                                        if ([model.name isEqualToString:selectedString]) {
+                                            self.secondID = model.ID;
+                                            return ;
+                                        }
+                                    }
                                 }
-                                self.secondIndex = selectedRow;
-                                self.thirdIndex = 0;
-                                
-                                [self.ThirdArray removeAllObjects];
-                                [self.ThirdArray addObjectsFromArray:[[[[self.AllArray objectAtIndex:self.firstIndex] objectForKey:@"cities"] objectAtIndex:self.secondIndex] objectForKey:@"areas"]];
-                                
-                                if (self.ThirdArray.count == 0) {
-                                    self.lab_classQu.text = @"";
-;
-                                }
+
                             }];
+
 }
+
+
+//获取区域
+//http://test.quyungou.com/api/index.php?ctl=uc_address&act=get_area&cid=3401
 
 - (IBAction)click_third:(id)sender {
     [self.view endEditing:YES];
 
-    if (self.ThirdArray.count == 0) {
+    if (self.secondID.length == 0) {
         return;
     }
+    [self.ThirdArray removeAllObjects];
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl" : @"uc_address",
+                                                                                      @"act" : @"get_area",
+                                                                                      @"cid" : self.secondID
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          if (SUCCESSED) {
+                                                                                              [self.ThirdArray addObjectsFromArray:[AddressPlaceModel arrayOfModelsFromDictionaries:responseObject[@"data"] error:nil]];
+                                                                                              
+                                                                                              NSMutableArray * titleArray = [NSMutableArray array];
+                                                                                              
+                                                                                              for (AddressPlaceModel * model in self.ThirdArray) {
+                                                                                                  [titleArray addObject:model.name];
+                                                                                              }
+                                                                                              [self showThirdView:titleArray];
+                                                                                              
+                                                                                          }else{
+                                                                                              
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          
+                                                                                          
+                                                                                      }];
+   
+}
+
+-(void)showThirdView:(NSMutableArray *)array{
+    
     [MMPickerView showPickerViewInView:self.view
-                           withStrings:self.ThirdArray
+                           withStrings:array
                            withOptions:@{MMbackgroundColor: [UIColor whiteColor],
                                          MMtextColor: [UIColor blackColor],
                                          MMtoolbarColor: [UIColor whiteColor],
@@ -243,18 +360,14 @@
                                 
                                 self.lab_classQu.text = self.thirdString;
                                 
-                                NSInteger selectedRow;
-                                if (self.thirdString!=nil  && selectedRow > -1  ) {
-                                    selectedRow = [self.ThirdArray indexOfObject:self.thirdString];
-                                }else{
-                                    selectedRow = [[self.ThirdArray objectAtIndex:0] integerValue];
+                                for (AddressPlaceModel * model in self.ThirdArray) {
+                                    if ([model.name isEqualToString:selectedString]) {
+                                        self.thirdID = model.ID;
+                                        return ;
+                                    }
                                 }
-                                self.thirdIndex = selectedRow;
-                                
-                                
+
                             }];
-    
-    
 }
 
 -(void)setFirstString:(NSString *)firstString{
@@ -287,7 +400,9 @@
     self.firstString = myModel.region_lv2_name;
     self.secondString = myModel.region_lv3_name;
     self.thirdString = myModel.region_lv4_name;
-
+    self.firstID = myModel.region_lv2;
+    self.secondID = myModel.region_lv3;
+    self.thirdID = myModel.region_lv4;
 }
 
 -(void)click_commit{
@@ -306,11 +421,11 @@
     [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"uc_address",
                                                                                       @"act":@"save",
-                                                                                      @"region_id":@"51",
+                                                                                      @"region_id":self.myModel ? self.myModel.ID : @"",
                                                                                       @"region_lv1":@"1",
-                                                                                      @"region_lv2":@"2",
-                                                                                      @"region_lv3":@"52",
-                                                                                      @"region_lv4":@"502",
+                                                                                      @"region_lv2":CNull2String(self.firstID),
+                                                                                      @"region_lv3":CNull2String(self.secondID),
+                                                                                      @"region_lv4":CNull2String(self.thirdID),
                                                                                       @"mobile":CNull2String(self.txf_phone.text),
                                                                                       @"consignee":CNull2String(self.txf_name.text),
                                                                                       @"address":CNull2String(self.txf_address.text),
@@ -319,7 +434,7 @@
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           if (SUCCESSED) {
                                                                                          
-                                                                                              
+                                                                                              KPopToLastViewController;
                                                                                           }else{
                                                                                               
                                                                                               ShowNotceError;

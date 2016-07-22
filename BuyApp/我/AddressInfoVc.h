@@ -33,6 +33,12 @@
 @property (nonatomic, strong) NSString * secondString;
 @property (nonatomic, strong) NSString * thirdString;
 
+@property (nonatomic, strong) NSString * firstID;
+@property (nonatomic, strong) NSString * secondID;
+@property (nonatomic, strong) NSString * thirdID;
+
+
+
 @property (nonatomic, strong)AddressModel * myModel;
 
 @end

@@ -173,6 +173,7 @@
 		03F44A901D2C94E100CEE5FD /* NewsListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F44A8F1D2C94E100CEE5FD /* NewsListModel.m */; };
 		03F44A9A1D2CEF8E00CEE5FD /* GoodsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F44A991D2CEF8E00CEE5FD /* GoodsInfoModel.m */; };
 		03F796201D3688EB006F1B4A /* AddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F7961F1D3688EB006F1B4A /* AddressModel.m */; };
+		03FAD82B1D4250CD004686D9 /* AddressPlaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 03FAD82A1D4250CD004686D9 /* AddressPlaceModel.m */; };
 		7CFE79213E058E49324C66B2 /* libPods-BuyApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 375A0C6C2CA33FE8A8CA6566 /* libPods-BuyApp.a */; };
 /* End PBXBuildFile section */
 
@@ -493,6 +494,8 @@
 		03F44A991D2CEF8E00CEE5FD /* GoodsInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsInfoModel.m; sourceTree = "<group>"; };
 		03F7961E1D3688EB006F1B4A /* AddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressModel.h; sourceTree = "<group>"; };
 		03F7961F1D3688EB006F1B4A /* AddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressModel.m; sourceTree = "<group>"; };
+		03FAD8291D4250CD004686D9 /* AddressPlaceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressPlaceModel.h; sourceTree = "<group>"; };
+		03FAD82A1D4250CD004686D9 /* AddressPlaceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressPlaceModel.m; sourceTree = "<group>"; };
 		2580A6A1EA86AEEE5E9E090A /* Pods-BuyApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuyApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuyApp/Pods-BuyApp.debug.xcconfig"; sourceTree = "<group>"; };
 		375A0C6C2CA33FE8A8CA6566 /* libPods-BuyApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BuyApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FEB94A319220DAEE3B9142A /* Pods-BuyApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuyApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BuyApp/Pods-BuyApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -797,6 +800,8 @@
 				037D0E621D30ADFC00DFF88A /* MoneyListModel.m */,
 				03F7961E1D3688EB006F1B4A /* AddressModel.h */,
 				03F7961F1D3688EB006F1B4A /* AddressModel.m */,
+				03FAD8291D4250CD004686D9 /* AddressPlaceModel.h */,
+				03FAD82A1D4250CD004686D9 /* AddressPlaceModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1336,6 +1341,7 @@
 				037232DD1D20B85000F258D2 /* UserTopView.m in Sources */,
 				039A19781D24EDD500D10287 /* MMPickerView.m in Sources */,
 				034D89E31D1BB21F005806C7 /* GoodsInfoTopView.m in Sources */,
+				03FAD82B1D4250CD004686D9 /* AddressPlaceModel.m in Sources */,
 				038B19591D12A88F007C1CC8 /* MBProgressHUD+JY.m in Sources */,
 				038B18EF1D1270D7007C1CC8 /* AppDelegate.m in Sources */,
 				03A9FD401D23907C006AD04D /* CouponGetCell.m in Sources */,

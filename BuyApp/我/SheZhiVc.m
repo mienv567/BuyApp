@@ -51,6 +51,8 @@
     self.topView.myRootVc = weakSelf;
     self.tableView.tableHeaderView = self.topView;
     
+    
+    
     UIView * bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, K_WIDTH, 70)];
     UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.backgroundColor = GS_COLOR_RED;
@@ -69,7 +71,30 @@
     [[MainTabBarVc shared] changeTabBarAtIndex:0];
 }
 
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if ([[UserManager sharedManager] isUserLoad]) {
+        [[UserManager sharedManager] refreshUserInfo];
+        self.topView.lab_userName.text = USERMODEL.user_name;
+        
+        NSMutableAttributedString *scoreStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"积分: %d",CNull2Int(USERMODEL.total_score)]];
+        [scoreStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 4)];
+        [scoreStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_GoldRed range:NSMakeRange(0, 4)];
+        [scoreStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(4, scoreStr.length - 4)];
+        [scoreStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_Gold range:NSMakeRange(4,scoreStr.length - 4)];
+        self.topView.lab_content.attributedText = scoreStr;
+        
+        
+        NSMutableAttributedString *coinStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"夺宝币: %d",CNull2Int(USERMODEL.money)]];
+        [coinStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 5)];
+        [coinStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_GoldRed range:NSMakeRange(0, 5)];
+        [coinStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(5, coinStr.length - 5)];
+        [coinStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_Gold range:NSMakeRange(5,coinStr.length - 5)];
+        self.topView.lab_coinCount.attributedText = coinStr;
+    }
+    
+    
+}
 - (void)click_chongchi:(id)sender{
     KJumpToViewControllerByNib(@"ChongZhiVc");
 }

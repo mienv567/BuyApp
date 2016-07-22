@@ -96,7 +96,7 @@
     
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     if(appDelegate) {
-        [appDelegate showNeedLoginAlertView];
+        [appDelegate showNotNeedLoginAlertView];
     }
 }
 

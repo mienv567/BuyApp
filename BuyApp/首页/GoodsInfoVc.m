@@ -286,7 +286,7 @@
 
 //一元购买
 -(void)click_oneBuy{
-
+    NEEDLOGIN;
     [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"ajax",
                                                                                       @"act":@"add_cart",
@@ -311,6 +311,7 @@
 
 //加入清单
 -(void)click_addShopList{
+     NEEDLOGIN;
     [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"ajax",
                                                                                       @"act":@"add_cart",

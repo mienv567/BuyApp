@@ -164,14 +164,18 @@ static BOOL isProduction = FALSE;
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (void)showNeedLoginAlertView{
+- (void)showNotNeedLoginAlertView{
     LoginVC *phoneVC = [[NSClassFromString(@"LoginVC") alloc]initWithNibName:@"LoginVC" bundle:nil];
     UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:phoneVC];
-    [self.window.rootViewController  presentViewController:nc animated:NO completion:nil];
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还未登录，请先登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
-//    alert.tag = 10086;
-//    [alert show];
+    [self.window.rootViewController  presentViewController:nc animated:YES completion:nil];
 }
+
+- (void)showNeedLoginAlertView{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还未登录，请先登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
+    alert.tag = 10086;
+    [alert show];
+}
+
 
 #pragma mark - alertView delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

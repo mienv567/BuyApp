@@ -110,7 +110,7 @@
         if (tabBarController.selectedIndex == 4 || tabBarController.selectedIndex == 3) {
             AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
             if(appDelegate) {
-                [appDelegate showNeedLoginAlertView];
+                [appDelegate showNotNeedLoginAlertView];
             }
             self.selectedIndex = 0;
         }
@@ -135,9 +135,14 @@
 
 -(void)changeNum:(NSString *)numString{
     if ([numString isEqual:[NSNull null]]) {
+        self.item3.badgeValue = nil;
         return;
     }
-    self.item3.badgeValue = CNull2String(numString);
+    if ([numString integerValue] == 0) {
+        self.item3.badgeValue = 0;
+    }else{
+        self.item3.badgeValue = CNull2String(numString);
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{

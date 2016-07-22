@@ -89,6 +89,7 @@
 }
 
 - (IBAction)click_join:(id)sender {
+     NEEDLOGIN;
     [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
                                                                       withParameters:@{@"ctl":@"ajax",
                                                                                        @"act":@"add_cart",

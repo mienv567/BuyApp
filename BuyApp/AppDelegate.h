@@ -16,5 +16,6 @@
 
 
 - (void)showNeedLoginAlertView;
+- (void)showNotNeedLoginAlertView;
 
 @end
