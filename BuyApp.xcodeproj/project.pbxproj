@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		030561881D37E56F0078732D /* OrderVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 030561871D37E56F0078732D /* OrderVc.m */; };
+		030901981D4471020003E9B9 /* PayClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 030901971D4471020003E9B9 /* PayClassModel.m */; };
 		030BD4BC1D31EF6D000038B6 /* CarListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 030BD4BB1D31EF6D000038B6 /* CarListModel.m */; };
 		031B6D5D1D19764B00BD2585 /* GoodsClassVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 031B6D5B1D19764B00BD2585 /* GoodsClassVc.m */; };
 		031B6D5E1D19764B00BD2585 /* GoodsClassVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 031B6D5C1D19764B00BD2585 /* GoodsClassVc.xib */; };
@@ -112,6 +113,14 @@
 		03A9FD511D23B075006AD04D /* MoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03A9FD4F1D23B075006AD04D /* MoneyCell.xib */; };
 		03A9FD5A1D23BDF8006AD04D /* ChongZhiVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A9FD581D23BDF8006AD04D /* ChongZhiVc.m */; };
 		03A9FD5B1D23BDF8006AD04D /* ChongZhiVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03A9FD591D23BDF8006AD04D /* ChongZhiVc.xib */; };
+		03B945741D44AF3000A429F8 /* DuoBaoListVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B945721D44AF3000A429F8 /* DuoBaoListVc.m */; };
+		03B945751D44AF3000A429F8 /* DuoBaoListVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03B945731D44AF3000A429F8 /* DuoBaoListVc.xib */; };
+		03B945791D44B2B600A429F8 /* DuoBaoListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B945771D44B2B600A429F8 /* DuoBaoListCell.m */; };
+		03B9457A1D44B2B600A429F8 /* DuoBaoListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03B945781D44B2B600A429F8 /* DuoBaoListCell.xib */; };
+		03B9457D1D44BC9B00A429F8 /* DuobaoListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B9457C1D44BC9B00A429F8 /* DuobaoListModel.m */; };
+		03B945811D44BF1200A429F8 /* DuoBaoListInfoVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B9457F1D44BF1200A429F8 /* DuoBaoListInfoVc.m */; };
+		03B945821D44BF1200A429F8 /* DuoBaoListInfoVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03B945801D44BF1200A429F8 /* DuoBaoListInfoVc.xib */; };
+		03B945851D44DABD00A429F8 /* MyInviteVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B945841D44DABD00A429F8 /* MyInviteVc.m */; };
 		03BB29511D17757800EDEDFD /* MainTabBarVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 03BB29501D17757800EDEDFD /* MainTabBarVc.m */; };
 		03BB29541D17765F00EDEDFD /* UITabBarItem+Universal.m in Sources */ = {isa = PBXBuildFile; fileRef = 03BB29531D17765F00EDEDFD /* UITabBarItem+Universal.m */; };
 		03BB295C1D17821700EDEDFD /* MainVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 03BB295B1D17821700EDEDFD /* MainVc.m */; };
@@ -180,6 +189,8 @@
 /* Begin PBXFileReference section */
 		030561861D37E56F0078732D /* OrderVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderVc.h; sourceTree = "<group>"; };
 		030561871D37E56F0078732D /* OrderVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderVc.m; sourceTree = "<group>"; };
+		030901961D4471020003E9B9 /* PayClassModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayClassModel.h; sourceTree = "<group>"; };
+		030901971D4471020003E9B9 /* PayClassModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayClassModel.m; sourceTree = "<group>"; };
 		030BD4BA1D31EF6D000038B6 /* CarListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarListModel.h; sourceTree = "<group>"; };
 		030BD4BB1D31EF6D000038B6 /* CarListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarListModel.m; sourceTree = "<group>"; };
 		031B6D5A1D19764B00BD2585 /* GoodsClassVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsClassVc.h; sourceTree = "<group>"; };
@@ -368,6 +379,19 @@
 		03A9FD571D23BDF8006AD04D /* ChongZhiVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChongZhiVc.h; sourceTree = "<group>"; };
 		03A9FD581D23BDF8006AD04D /* ChongZhiVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChongZhiVc.m; sourceTree = "<group>"; };
 		03A9FD591D23BDF8006AD04D /* ChongZhiVc.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChongZhiVc.xib; sourceTree = "<group>"; };
+		03B945711D44AF3000A429F8 /* DuoBaoListVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuoBaoListVc.h; sourceTree = "<group>"; };
+		03B945721D44AF3000A429F8 /* DuoBaoListVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuoBaoListVc.m; sourceTree = "<group>"; };
+		03B945731D44AF3000A429F8 /* DuoBaoListVc.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DuoBaoListVc.xib; sourceTree = "<group>"; };
+		03B945761D44B2B600A429F8 /* DuoBaoListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuoBaoListCell.h; sourceTree = "<group>"; };
+		03B945771D44B2B600A429F8 /* DuoBaoListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuoBaoListCell.m; sourceTree = "<group>"; };
+		03B945781D44B2B600A429F8 /* DuoBaoListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DuoBaoListCell.xib; sourceTree = "<group>"; };
+		03B9457B1D44BC9B00A429F8 /* DuobaoListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuobaoListModel.h; sourceTree = "<group>"; };
+		03B9457C1D44BC9B00A429F8 /* DuobaoListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuobaoListModel.m; sourceTree = "<group>"; };
+		03B9457E1D44BF1200A429F8 /* DuoBaoListInfoVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuoBaoListInfoVc.h; sourceTree = "<group>"; };
+		03B9457F1D44BF1200A429F8 /* DuoBaoListInfoVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuoBaoListInfoVc.m; sourceTree = "<group>"; };
+		03B945801D44BF1200A429F8 /* DuoBaoListInfoVc.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DuoBaoListInfoVc.xib; sourceTree = "<group>"; };
+		03B945831D44DABD00A429F8 /* MyInviteVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInviteVc.h; sourceTree = "<group>"; };
+		03B945841D44DABD00A429F8 /* MyInviteVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInviteVc.m; sourceTree = "<group>"; };
 		03BB294F1D17757800EDEDFD /* MainTabBarVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarVc.h; sourceTree = "<group>"; };
 		03BB29501D17757800EDEDFD /* MainTabBarVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarVc.m; sourceTree = "<group>"; };
 		03BB29521D17765F00EDEDFD /* UITabBarItem+Universal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarItem+Universal.h"; sourceTree = "<group>"; };
@@ -585,6 +609,9 @@
 				037232EA1D21209700F258D2 /* HistoryListCells.h */,
 				037232EB1D21209700F258D2 /* HistoryListCells.m */,
 				037232EC1D21209700F258D2 /* HistoryListCells.xib */,
+				03B945761D44B2B600A429F8 /* DuoBaoListCell.h */,
+				03B945771D44B2B600A429F8 /* DuoBaoListCell.m */,
+				03B945781D44B2B600A429F8 /* DuoBaoListCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -811,6 +838,8 @@
 			children = (
 				039DCDD01D2A11FC000DA425 /* WinModel.h */,
 				039DCDD11D2A11FC000DA425 /* WinModel.m */,
+				03B9457B1D44BC9B00A429F8 /* DuobaoListModel.h */,
+				03B9457C1D44BC9B00A429F8 /* DuobaoListModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -833,6 +862,12 @@
 				03BB29641D17825800EDEDFD /* HistoryVc.m */,
 				037232E61D21175D00F258D2 /* WinHistoryVc.h */,
 				037232E71D21175D00F258D2 /* WinHistoryVc.m */,
+				03B945711D44AF3000A429F8 /* DuoBaoListVc.h */,
+				03B945721D44AF3000A429F8 /* DuoBaoListVc.m */,
+				03B945731D44AF3000A429F8 /* DuoBaoListVc.xib */,
+				03B9457E1D44BF1200A429F8 /* DuoBaoListInfoVc.h */,
+				03B9457F1D44BF1200A429F8 /* DuoBaoListInfoVc.m */,
+				03B945801D44BF1200A429F8 /* DuoBaoListInfoVc.xib */,
 			);
 			path = "多宝记录";
 			sourceTree = "<group>";
@@ -850,6 +885,8 @@
 				03BF60851D3A32B00007BBFF /* PayVc.h */,
 				03BF60861D3A32B00007BBFF /* PayVc.m */,
 				03BF60871D3A32B00007BBFF /* PayVc.xib */,
+				030901961D4471020003E9B9 /* PayClassModel.h */,
+				030901971D4471020003E9B9 /* PayClassModel.m */,
 			);
 			path = "清单";
 			sourceTree = "<group>";
@@ -918,6 +955,8 @@
 				039A196E1D24C9B500D10287 /* AddressInfoVc.h */,
 				039A196F1D24C9B500D10287 /* AddressInfoVc.m */,
 				039A19701D24C9B500D10287 /* AddressInfoVc.xib */,
+				03B945831D44DABD00A429F8 /* MyInviteVc.h */,
+				03B945841D44DABD00A429F8 /* MyInviteVc.m */,
 			);
 			path = "我";
 			sourceTree = "<group>";
@@ -1225,6 +1264,7 @@
 				039A19721D24C9B500D10287 /* AddressInfoVc.xib in Resources */,
 				03D50DAD1D1C34DF0017AAC3 /* WinnerListCell.xib in Resources */,
 				03BF60891D3A32B00007BBFF /* PayVc.xib in Resources */,
+				03B9457A1D44B2B600A429F8 /* DuoBaoListCell.xib in Resources */,
 				038B18FA1D1270D7007C1CC8 /* LaunchScreen.storyboard in Resources */,
 				03BF608E1D3A49330007BBFF /* PayCell.xib in Resources */,
 				03D66C131D241810006C9855 /* BackGoundView.xib in Resources */,
@@ -1248,9 +1288,11 @@
 				032940DF1D1E5393000D54D9 /* CountView.xib in Resources */,
 				031B6D631D197D3600BD2585 /* Img_ContentCell.xib in Resources */,
 				037232EE1D21209700F258D2 /* HistoryListCells.xib in Resources */,
+				03B945821D44BF1200A429F8 /* DuoBaoListInfoVc.xib in Resources */,
 				037232E51D20F7AA00F258D2 /* ShopListCells.xib in Resources */,
 				0360BCDD1D22656900A2C07D /* UserNewsCell.xib in Resources */,
 				034D89E51D1BB234005806C7 /* GoodsInfoTopView.xib in Resources */,
+				03B945751D44AF3000A429F8 /* DuoBaoListVc.xib in Resources */,
 				038B18F51D1270D7007C1CC8 /* Main.storyboard in Resources */,
 				03D50DA51D1C27C80017AAC3 /* GoodsUsersCell.xib in Resources */,
 				03A9FD391D236AE9006AD04D /* RedCouponTopView.xib in Resources */,
@@ -1339,12 +1381,14 @@
 				03D312DC1D1D023F00B2BB26 /* GoodsBottomView.m in Sources */,
 				03D50DA41D1C27C80017AAC3 /* GoodsUsersCell.m in Sources */,
 				037232DD1D20B85000F258D2 /* UserTopView.m in Sources */,
+				03B945851D44DABD00A429F8 /* MyInviteVc.m in Sources */,
 				039A19781D24EDD500D10287 /* MMPickerView.m in Sources */,
 				034D89E31D1BB21F005806C7 /* GoodsInfoTopView.m in Sources */,
 				03FAD82B1D4250CD004686D9 /* AddressPlaceModel.m in Sources */,
 				038B19591D12A88F007C1CC8 /* MBProgressHUD+JY.m in Sources */,
 				038B18EF1D1270D7007C1CC8 /* AppDelegate.m in Sources */,
 				03A9FD401D23907C006AD04D /* CouponGetCell.m in Sources */,
+				03B945741D44AF3000A429F8 /* DuoBaoListVc.m in Sources */,
 				03BB29871D17CBB900EDEDFD /* XLPlainFlowLayout.m in Sources */,
 				03D66C111D241800006C9855 /* BackGoundView.m in Sources */,
 				03BB297D1D17B1BC00EDEDFD /* MainGoodsModel.m in Sources */,
@@ -1387,6 +1431,7 @@
 				038B195B1D12A88F007C1CC8 /* GSValidate.m in Sources */,
 				038B19341D12A44B007C1CC8 /* NSString+Addition.m in Sources */,
 				039DCDCE1D29FEB1000DA425 /* WinHistoryModel.m in Sources */,
+				03B945811D44BF1200A429F8 /* DuoBaoListInfoVc.m in Sources */,
 				03A9FD491D23ACCC006AD04D /* MoneyVc.m in Sources */,
 				03BB29681D17826400EDEDFD /* ListVc.m in Sources */,
 				038B19351D12A44B007C1CC8 /* UIBarButtonItem+Badge.m in Sources */,
@@ -1415,6 +1460,7 @@
 				03376B331D1AC71A004EE048 /* HelpVc.m in Sources */,
 				03C5BCF61D19080E00060FB3 /* ResetPassWordVc.m in Sources */,
 				031B6D5D1D19764B00BD2585 /* GoodsClassVc.m in Sources */,
+				030901981D4471020003E9B9 /* PayClassModel.m in Sources */,
 				03BB29511D17757800EDEDFD /* MainTabBarVc.m in Sources */,
 				032940E51D1E9DD8000D54D9 /* MyNumbers.m in Sources */,
 				038B195F1D12A8D8007C1CC8 /* RootViewController.m in Sources */,
@@ -1429,6 +1475,8 @@
 				038B19381D12A44B007C1CC8 /* UIImage+Scale.m in Sources */,
 				038B19571D12A88F007C1CC8 /* EGOCache.m in Sources */,
 				03CE76B31D2E9FE800A416E7 /* GoodInfoModel.m in Sources */,
+				03B9457D1D44BC9B00A429F8 /* DuobaoListModel.m in Sources */,
+				03B945791D44B2B600A429F8 /* DuoBaoListCell.m in Sources */,
 				039A19711D24C9B500D10287 /* AddressInfoVc.m in Sources */,
 				035C57F01D2B83E1000D68D6 /* MainGoodsListModel.m in Sources */,
 				038B19311D12A44B007C1CC8 /* Cipher.m in Sources */,

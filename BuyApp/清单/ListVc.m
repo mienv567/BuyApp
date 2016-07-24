@@ -54,7 +54,7 @@
         make.left.right.top.equalTo(self.view);
         make.bottom.mas_equalTo(self.bottomView.mas_top);
     }];
-    
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNew)];
     
 }

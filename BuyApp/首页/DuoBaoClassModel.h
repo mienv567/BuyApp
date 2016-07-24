@@ -14,5 +14,6 @@
 @property (nonatomic,strong)NSString <Optional>* name;
 @property (nonatomic,strong)NSString <Optional>* iconfont;
 @property (nonatomic,strong)NSString <Optional>* iconcolor;
+@property (nonatomic,strong)NSString <Optional>* icon;
 
 @end

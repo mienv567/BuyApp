@@ -81,7 +81,6 @@ static NSString *footerID = @"footerID";
                                                                                               self.TopView.ary_news = self.dataModel.newest_lottery_list;
                                                                                               self.TopView.ary_adv = self.dataModel.advs;
                                                                                               self.TopView.ary_newGoods = self.dataModel.newest_doubao_list;
-
                                                                                               
                                                                                           }else{
                                                                                               ShowNotceError;

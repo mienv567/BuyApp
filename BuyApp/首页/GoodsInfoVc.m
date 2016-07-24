@@ -114,6 +114,8 @@
                                                                                                   
                                                                                                   self.dataModel = [[GoodInfoModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
                                                                                                   
+                                                                                                  self.title = self.dataModel.item_data.name;
+                                                                                                  
                                                                                                   //广告
                                                                                                   [self.pageView setDataModel:self.dataModel.item_data];
                                                                                                   if (self.dataModel.item_data.luck_lottery) {
@@ -154,7 +156,7 @@
                                                                                                   
                                                                                                   
                                                                                                   //底部的购买view
-                                                                                                  if (self.dataModel.next_id.length > 0) {
+                                                                                                  if (self.dataModel.next_id.length > 0 && self.dataModel.next_id != self.dataModel.item_data.ID) {
                                                                                                       self.bottomView.showType = GoodsBottomViewNeedJoin;
                                                                                                   }else{
                                                                                                       self.bottomView.showType = GoodsBottomViewBuy;
@@ -238,7 +240,7 @@
     if (indexPath.section == 1 ) {
         if (indexPath.row == 0) {
             CountWebVc * vc = [[NSClassFromString(@"CountWebVc") alloc]init];
-            vc.HtmlString = self.dataModel.item_data.Description;
+            vc.IDString = self.dataModel.next_id;
             [self.navigationController pushViewController:vc animated:YES];
             
         }else{

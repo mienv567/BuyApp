@@ -11,6 +11,7 @@
 #import "HistoryListCells.h"
 #import "NewsListModel.h"
 #import "GoodsInfoVc.h"
+#import "DuoBaoListVc.h"
 
 
 @interface WinHistoryVc ()<UITableViewDelegate,UITableViewDataSource,HistoryListCellsDelegate>
@@ -89,21 +90,30 @@
 }
 
 -(void)click_showAllCounts:(HistoryListCells *)cell{
-    if (!self.allCountsView) {
-        self.allCountsView = KGetViewFromNib(@"AllCountsView");
-        [self.view addSubview:self.allCountsView];
-        [self.allCountsView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self.view);
-        }];
-    }
-    self.allCountsView.hidden = NO;
+
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    NewsListModel * model = [self.dataArray objectAtIndex:indexPath.row];
     
-    NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:@"  计算公式\n  [(数值A+数值B)÷商品所需人次]取余数+100000001"];
-    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:16] range:NSMakeRange(0, 6)];
-    [noticeStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, 6)];
-    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:13] range:NSMakeRange(6, noticeStr.length - 6)];
-    [noticeStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(6,noticeStr.length - 6)];
-    self.allCountsView.lab_notice.attributedText = noticeStr;
+    DuoBaoListVc * vc = [[DuoBaoListVc alloc]init];
+    vc.IDString = model.ID;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+//    if (!self.allCountsView) {
+//        self.allCountsView = KGetViewFromNib(@"AllCountsView");
+//        [self.view addSubview:self.allCountsView];
+//        [self.allCountsView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.edges.equalTo(self.view);
+//        }];
+//    }
+//    self.allCountsView.hidden = NO;
+//    
+//    NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:@"  计算公式\n  [(数值A+数值B)÷商品所需人次]取余数+100000001"];
+//    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:16] range:NSMakeRange(0, 6)];
+//    [noticeStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, 6)];
+//    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:13] range:NSMakeRange(6, noticeStr.length - 6)];
+//    [noticeStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(6,noticeStr.length - 6)];
+//    self.allCountsView.lab_notice.attributedText = noticeStr;
     
 }
 

@@ -24,6 +24,7 @@
     self.title = @"会员充值";
     self.view.backgroundColor = GS_COLOR_WHITE;
     
+    self.lab_firstTitle.backgroundColor = GS_COLOR_LIGHTGRAY;
     [self.lab_firstTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view);
         make.height.mas_equalTo(@40);
@@ -35,6 +36,7 @@
         make.height.mas_equalTo(@90);
     }];
     
+    self.lab_secondTitle.backgroundColor = GS_COLOR_LIGHTGRAY;
     [self.lab_secondTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         make.top.equalTo(self.view_classBackGound.mas_bottom);
@@ -68,10 +70,11 @@
                                                                                        @"user_id":CNull2String(USERMODEL.ID),
                                                                                        @"money" : self.lastPrice,
                                                                                        @"act": @"done",
-                                                                                       @"payment": @"6",
+                                                                                       @"payment_id": @"5",
                                                                                        } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                            if (SUCCESSED) {
                                                                                                PayVc * vc = [[PayVc alloc]init];
+                                                                                               vc.total_price = [NSString stringWithFormat:@"%d",(int)[responseObject[@"data"][@"payment_code"][@"pay_money"] integerValue]/100] ;
                                                                                                vc.orderID = responseObject[@"data"][@"order_id"];
                                                                                                [self.navigationController pushViewController:vc animated:YES];
                                                                                                

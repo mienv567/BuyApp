@@ -149,9 +149,12 @@
     if (indexPath.section == 0) {
         cell.lab_content.text = @"全部商品";
     }else{
-        cell.lab_content.text = [TitleArray objectAtIndex:indexPath.row];
+        if (self.dataArray.count > indexPath.row) {
+            DuoBaoClassModel * model = [self.dataArray objectAtIndex:indexPath.row];
+            cell.lab_content.text = [TitleArray objectAtIndex:indexPath.row];
+            [cell.img_icon sd_setImageWithURL:[NSURL URLWithString:model.name] placeholderImage:KDefaultImg];
+        }
     }
-
     return cell;
 }
 

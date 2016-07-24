@@ -22,7 +22,7 @@
     [view loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.quyungou.com/wap/index.php?ctl=helps&show_prog=1"]]];
     [self.view addSubview:view];
     [view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(-44, 0, 0, 0));
+        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(-50, 0, 0, 0));
     }];
     
 }

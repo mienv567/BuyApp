@@ -10,6 +10,7 @@
 #define TEST_SERVER
 #ifdef TEST_SERVER
 #define kAppHost @"http://ceshi.quyungou.com/api/index.php"
+#define kAppHostWap @"http://ceshi.quyungou.com/wap/index.php"
 #define kAppPostHost @""
 #else
 #define kAppHost @""

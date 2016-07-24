@@ -10,5 +10,5 @@
 
 @interface CountWebVc : RootViewController
 @property(nonatomic, strong)NSString * UrlString;
-@property(nonatomic, strong)NSString * HtmlString;
+@property(nonatomic, strong)NSString * IDString;
 @end

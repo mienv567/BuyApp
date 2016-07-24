@@ -96,7 +96,7 @@
                 KJumpToViewController(@"MyWinHistoryVc");
 
             }if (indexPath.row == 2){//我的邀请
-            
+                KJumpToViewController(@"MyInviteVc");
             }
         }
             break;

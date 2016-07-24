@@ -47,13 +47,13 @@
     [self.lab_number mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.equalTo(self.view).offset(10);
         make.right.equalTo(self.view.mas_right).offset(-10);
-        make.height.mas_equalTo(@20);
+        make.height.mas_equalTo(@30);
     }];
     
     [self.btn_buttonAction mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.equalTo(self.view).offset(10);
-        make.right.equalTo(self.view.mas_right).offset(-10);
-        make.height.mas_equalTo(@30);
+        make.top.equalTo(self.lab_number.mas_bottom).offset(10);
+        make.left.right.equalTo(self.lab_number);
+        make.height.mas_equalTo(@40);
     }];
     
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
@@ -72,6 +72,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.lab_number.text = [NSString stringWithFormat:@"订单编号:%@",self.orderID];
     [self loadData];
 }
 
@@ -192,7 +193,8 @@
                                                                                         @"user_id":CNull2String(USERMODEL.ID)
                                                                                         } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                    if (SUCCESSED) {
-                                                                                       ShowNotceError;
+                                                                                       ShowNotceSuccess;
+                                                                                       [self.btn_buttonAction setTitle:@"订单已经收款" forState:UIControlStateNormal] ;
                                                                                    }else{
                                                                                        ShowNotceError;
                                                                                    }
@@ -202,6 +204,7 @@
                                                                                
                                                                                
                                                                            }else{
+                                                                               self.btn_buttonAction.titleLabel.text = @"订单支付失败";
                                                                                NSLog(@"支付失败，错误号:%d",payStateModel.payState);
                                                                                [[MainTabBarVc shared]changeTabBarAtIndex:0];
                                                                            }
@@ -216,6 +219,7 @@
                                      }else{
                                          weakSelf.hud.labelText = @"预下单接口，解析数据失败";
                                          [weakSelf.hud hide:YES afterDelay:2.0];
+                                         self.btn_buttonAction.titleLabel.text = @"订单下单失败";
                                      }
                                      
                                      
@@ -223,6 +227,7 @@
                                      
                                      weakSelf.hud.labelText = @"调用预下单接口失败";
                                      [weakSelf.hud hide:YES afterDelay:2.0];
+                                     self.btn_buttonAction.titleLabel.text = @"订单下单失败";
                                      NSLog(@"调用预下单接口失败-->>\n%@",error);
                                  }];
     

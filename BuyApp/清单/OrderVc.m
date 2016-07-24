@@ -10,7 +10,7 @@
 
 #import "OrderVc.h"
 #import "PayVc.h"
-
+#import "PayClassModel.h"
 
 @implementation CartRedPagModel
 +(JSONKeyMapper*)keyMapper
@@ -51,6 +51,7 @@
 
 @property (nonatomic, strong)CartRedPagModel *redModel;
 @property (nonatomic, strong)OrderModel *orderModel;
+@property (nonatomic, strong)PayClassModel *payClassModel;
 @end
 
 
@@ -120,6 +121,7 @@
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           
                                                                                           if (SUCCESSED) {
+                                                                                              [self click_weixinPay];
                                                                                               self.orderModel = [[OrderModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
                                                                                               [self.ary_redPag addObjectsFromArray:[CartRedPagModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"voucher_list"] error:nil]];
                                                                                               if (self.ary_redPag.count > 0) {
@@ -128,11 +130,14 @@
                                                                                               [self.tableView reloadData];
                                                                                           }else{
                                                                                               ShowNotceError;
+                                                                                              KPopToLastViewController;
                                                                                           }
                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                           
                                                                                       }];
+    
 }
+
 
 -(void)click_goToPay{
     
@@ -141,7 +146,7 @@
                                                                                        @"user_id":CNull2String(USERMODEL.ID),
                                                                                        @"act" : @"done",
                                                                                        @"ecvsn" : CNull2String(self.redModel.sn),
-                                                                                       @"payment" : self.btn_weixin.selected ? @"6" : @"0",
+                                                                                       @"payment" : self.btn_weixin.selected ? @"5" : @"0",
                                                                                        } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                            if (SUCCESSED) {
                                                                                                
@@ -153,7 +158,6 @@
                                                                                                    vc.total_price = responseObject[@"data"][@"total_price"];
                                                                                                    [self.navigationController pushViewController:vc animated:YES];
                                                                                                }
-
                                                                                            }else{
                                                                                                ShowNotceError;
                                                                                            }
@@ -165,22 +169,30 @@
 
 
 -(void)clcik_gotoPaybayYuE:(NSString *)orderID{
+    NSString * str =CNull2String(orderID);
+
+    if ([orderID isEqual:[NSNull null]] ) {
+        return;
+    }
+    if (str.length  == 0 ) {
+        return;
+    }
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl" : @"payment",
                                                                                       @"act" : @"done",
                                                                                       @"id" : orderID,
                                                                                       @"user_id":CNull2String(USERMODEL.ID)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
-                                                                                          if (SUCCESSED) {
-                                                                                              ShowNotceError;
-                                                                                          }else{
+                                                                                            if (SUCCESSED) {
+                                                                                              ShowNotceSuccess;
+                                                                                           }else{
                                                                                               ShowNotceError;
                                                                                           }
                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                           
                                                                                       }];
-
 }
+
 -(void)click_showInfo{
     
 }
@@ -194,11 +206,11 @@
                                                                                       @"user_id":CNull2String(USERMODEL.ID),
                                                                                       @"act" : @"count_buy_total",
                                                                                       @"ecvsn" : CNull2String(self.redModel.sn),
-                                                                                      @"payment" : @"6",
+                                                                                      @"payment" : @"5",
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           
                                                                                           if (SUCCESSED) {
-                                                                                              self.orderModel = [[OrderModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
+                                                                                              self.payClassModel = [[PayClassModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
                                                                                               [self.tableView reloadData];
                                                                                           }else{
                                                                                               ShowNotceError;
@@ -225,7 +237,7 @@
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           
                                                                                           if (SUCCESSED) {
-                                                                                              self.orderModel = [[OrderModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
+                                                                                              self.payClassModel = [[PayClassModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
                                                                                               [self.tableView reloadData];
                                                                                           }else{
                                                                                               ShowNotceError;
@@ -311,21 +323,22 @@
             break;
         case 4:
         {
-            if (self.redModel) {
-                if (self.btn_weixin.selected) {
-                    return 6;
-                }else{
-                    return 5;
-                }
-                
-            }else{
-                if (self.btn_weixin.selected) {
-                    return 5;
-                }else{
-                    return 4;
-                }
-            }
-            return 4;
+            return self.payClassModel.feeinfo.count;
+//            if (self.redModel) {
+//                if (self.btn_weixin.selected) {
+//                    return 6;
+//                }else{
+//                    return 5;
+//                }
+//                
+//            }else{
+//                if (self.btn_weixin.selected) {
+//                    return 5;
+//                }else{
+//                    return 4;
+//                }
+//            }
+//            return 4;
         }
             break;
         default:
@@ -410,59 +423,96 @@
             break;
         case 4:
         {
-            if (self.redModel) {
-                if (indexPath.row == 0) {
-                    cell.textLabel.text = @"商品总价";
-                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",[self.orderModel.total_data objectForKey:@"total_price"]];
-                }else if (indexPath.row == 1){
-                    if (self.btn_money.selected){
-                        cell.textLabel.text = @"余额支付";
-                        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",[self.orderModel.total_data objectForKey:@"total_price"]];
-                    }else if (self.btn_weixin.selected){
-                        cell.textLabel.text = @"支付方式";
-                        cell.detailTextLabel.text = @"微信支付";
-                    }
-                }else if (indexPath.row == 2){
-                    cell.textLabel.text = @"红包支付";
-                    cell.detailTextLabel.text = self.redModel.name;
-                }else if (indexPath.row == 3){
-                    cell.textLabel.text = @"红包支付";
-                    cell.detailTextLabel.text = self.orderModel.returnScore;
-                }else if (indexPath.row == 4){
-                    cell.textLabel.text = @"总计";
-                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",[self.orderModel.total_data objectForKey:@"total_price"]];
-                }else if (indexPath.row == 5){
-                    cell.textLabel.text = @"应付总额";
-                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",[self.orderModel.total_data objectForKey:@"total_price"]];
-                }
-                
-            }else{
-                if (indexPath.row == 0) {
-                    cell.textLabel.text = @"商品总价";
-                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",[self.orderModel.total_data objectForKey:@"total_price"]];
-                }else if (indexPath.row == 1){
-                    if (self.redModel) {
-                        cell.textLabel.text = @"红包支付";
-                        cell.detailTextLabel.text = self.redModel.name;
-                    }else if (self.btn_money.selected){
-                        cell.textLabel.text = @"余额支付";
-                        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",[self.orderModel.total_data objectForKey:@"total_price"]];
-                    }else if (self.btn_weixin.selected){
-                        cell.textLabel.text = @"支付方式";
-                        cell.detailTextLabel.text = @"微信支付";
-                    }
-                    
-                }else if (indexPath.row == 2){
-                    cell.textLabel.text = @"返还积分";
-                    cell.detailTextLabel.text = self.orderModel.returnScore;
-                }else if (indexPath.row == 3){
-                    cell.textLabel.text = @"总计";
-                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",[self.orderModel.total_data objectForKey:@"total_price"]];
-                }else if (indexPath.row == 4){
-                    cell.textLabel.text = @"应付总额";
-                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",[self.orderModel.total_data objectForKey:@"total_price"]];
-                }
+            
+            if (self.payClassModel.feeinfo.count > indexPath.row) {
+                PayFeeinfo * model = [self.payClassModel.feeinfo objectAtIndex:indexPath.row];
+                cell.textLabel.text = model.name;
+                cell.detailTextLabel.text = model.value;
             }
+
+            
+            
+            
+//            if (self.redModel) {
+//                if (indexPath.row == 0) {
+//                    cell.textLabel.text = @"商品总价";
+//                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",[self.orderModel.total_data objectForKey:@"total_price"]];
+//                    if (self.payClassModel) {
+//                        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",self.payClassModel.result.total_price];
+//                    }
+//                }else if (indexPath.row == 1){
+//                    if (self.btn_money.selected){
+//                        cell.textLabel.text = @"余额支付";
+//                        cell.detailTextLabel.text = [self.orderModel.total_data objectForKey:@"total_price"];
+//                        if (self.payClassModel) {
+//                            cell.detailTextLabel.text = self.payClassModel.result.total_price;
+//                        }
+//                    }else if (self.btn_weixin.selected){
+//                        cell.textLabel.text = @"支付方式";
+//                        cell.detailTextLabel.text = @"微信支付";
+//                    }
+//                }else if (indexPath.row == 2){
+//                    cell.textLabel.text = @"红包支付";
+//                    cell.detailTextLabel.text = self.redModel.name;
+//                }else if (indexPath.row == 3){
+//                    cell.textLabel.text = @"红包支付";
+//                    cell.detailTextLabel.text = self.orderModel.returnScore;
+//                }else if (indexPath.row == 4){
+//                    cell.textLabel.text = @"总计";
+//                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",[self.orderModel.total_data objectForKey:@"total_price"]];
+//                    if (self.payClassModel) {
+//                        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",self.payClassModel.result.total_price];
+//                    }
+//                }else if (indexPath.row == 5){
+//                    cell.textLabel.text = @"应付总额";
+//                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",[self.orderModel.total_data objectForKey:@"total_price"]];
+//                    if (self.payClassModel) {
+//                        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",self.payClassModel.result.pay_price];
+//                    }
+//                }
+//                
+//            }else{
+//                if (indexPath.row == 0) {
+//                    cell.textLabel.text = @"商品总价";
+//                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",[self.orderModel.total_data objectForKey:@"total_price"]];
+//                    if (self.payClassModel) {
+//                        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",self.payClassModel.result.total_price];
+//                    }
+//                }else if (indexPath.row == 1){
+//                    if (self.redModel) {
+//                        cell.textLabel.text = @"红包支付";
+//                        cell.detailTextLabel.text = self.redModel.name;
+//                    }else if (self.btn_money.selected){
+//                        cell.textLabel.text = @"余额支付";
+//                        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",[self.orderModel.total_data objectForKey:@"total_price"]];
+//                        if (self.payClassModel) {
+//                            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",self.payClassModel.result.pay_price];
+//                        }
+//                    }else if (self.btn_weixin.selected){
+//                        cell.textLabel.text = @"支付方式";
+//                        cell.detailTextLabel.text = @"微信支付";
+//                    }
+//                    
+//                }else if (indexPath.row == 2){
+//                    cell.textLabel.text = @"返还积分";
+//                    cell.detailTextLabel.text = self.orderModel.returnScore;
+//                    if (self.payClassModel) {
+//                        cell.detailTextLabel.text = self.payClassModel.result.return_total_score;
+//                    }
+//                }else if (indexPath.row == 3){
+//                    cell.textLabel.text = @"总计";
+//                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",[self.orderModel.total_data objectForKey:@"total_price"]];
+//                    if (self.payClassModel) {
+//                        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",self.payClassModel.result.total_price];
+//                    }
+//                }else if (indexPath.row == 4){
+//                    cell.textLabel.text = @"应付总额";
+//                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",[self.orderModel.total_data objectForKey:@"pay_price"]];
+//                    if (self.payClassModel) {
+//                        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",self.payClassModel.result.pay_price];
+//                    }
+//                }
+//            }
             
         }
             break;
