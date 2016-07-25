@@ -28,6 +28,17 @@
             make.top.left.right.equalTo(self.contentView);
             make.height.mas_equalTo(@100);
         }];
+//        
+//        self.btn_showInfo = [UIButton buttonWithType:UIButtonTypeCustom];
+//        self.btn_showInfo.backgroundColor = [UIColor clearColor];
+////        [self.btn_showInfo addTarget:self action:@selector(click_showGoodsInfo) forControlEvents:UIControlEventTouchUpInside];
+//        [self.contentView addSubview:self.btn_showInfo];
+//        [self.btn_showInfo mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.left.right.equalTo(self.contentView);
+//            make.height.mas_equalTo(@100);
+//        }];
+        
+        
         
         self.lab_title = [UILabel new];
         self.lab_title.backgroundColor = [UIColor whiteColor];
@@ -109,6 +120,12 @@
     
     self.view_process.progress = (CGFloat)model.progress / 100;
     
+}
+
+-(void)click_showGoodsInfo{
+    if ([self.delegate respondsToSelector:@selector(clickMainGoodsListCells:)]) {
+        [self.delegate clickMainGoodsListCells:self];
+    }
 }
 
 -(void)click_addToList{

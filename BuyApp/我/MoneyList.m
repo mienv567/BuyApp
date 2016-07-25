@@ -10,6 +10,7 @@
 #import "ImgTitleContent.h"
 #import "MoneyCell.h"
 #import "MoneyListModel.h"
+#import "MoneyVc.h"
 
 @interface MoneyList ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)  UITableView *tableView;
@@ -42,7 +43,18 @@
 }
 
 -(void)navBackVc{
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    for (id view in self.navigationController.viewControllers) {
+        if ([view isKindOfClass:[MoneyVc class]]) {
+            [self.navigationController popToViewController:view animated:YES];
+            return;
+        }
+    }
+    
+    [self.navigationController popToRootViewControllerAnimated:NO];
+    [[MainTabBarVc shared]changeTabBarAtIndex:0];
+    
+    
 }
 
 

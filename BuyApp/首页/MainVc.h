@@ -10,6 +10,8 @@
 #import "ASPageView.h"
 #import "MainNewsModel.h"
 
+@class MainGoodsListCells;
+
 @interface MainVc : RootViewController
 
 //最新揭晓
@@ -26,5 +28,8 @@
 
 //数据列表筛选
 - (void)segmentedControlChangedIndex:(NSInteger)index;
+
+//晒单
+-(void)click_showGoodsInfo:(MainGoodsListCells *)cell;
 
 @end

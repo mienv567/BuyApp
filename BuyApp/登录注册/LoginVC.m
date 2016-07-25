@@ -27,8 +27,8 @@
 #pragma mark - 宏
 
 #define maxNum 60
-#define CodeLoginString @"手机验证码登录"
-#define AccountLoginString @"账号登录"
+#define CodeLoginString @"手机账号登录"
+#define AccountLoginString @"手机登录"
 #define CellPlaceHolderArrayStyleOne @[@"请输入手机号/邮箱/用户名",@"请输入密码"]
 #define CellPlaceHolderArrayStyleTwo @[@"请输入手机号",@"请输入手机短信中的验证码"]
 #define CellImgArrayStyleOne @[@"UserName",@"Password"]
@@ -100,19 +100,19 @@
 - (IBAction)click_login:(id)sender {
     
     if ([self.btn_changeStyle.titleLabel.text isEqualToString:AccountLoginString]) {
-        if ( [GSValidate validateStringLong:self.txf_name.text requireMinLong:6] ) {
-            
-        }else{
-            [MBProgressHUD showError:@"请校验登录账号"];
-            return;
-        }
-        
-        if ([GSValidate validateStringLong:self.txf_password.text requireMinLong:6] && [GSValidate validateStringLong:self.txf_password.text requireMaxLong:10]) {
-            
-        }else{
-            [MBProgressHUD showError:@"请校验密码"];
-            return;
-        }
+//        if ( [GSValidate validateStringLong:self.txf_name.text requireMinLong:6] ) {
+//            
+//        }else{
+//            [MBProgressHUD showError:@"请校验登录账号"];
+//            return;
+//        }
+//        
+//        if ([GSValidate validateStringLong:self.txf_password.text requireMinLong:6] && [GSValidate validateStringLong:self.txf_password.text requireMaxLong:10]) {
+//            
+//        }else{
+//            [MBProgressHUD showError:@"请校验密码"];
+//            return;
+//        }
         [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                          withParameters:@{@"ctl":@"user",
                                                                                           @"act":@"dologin",
@@ -131,25 +131,25 @@
                                                                                           }];
     }else{
 
-        if ([GSValidate validateString:self.txf_name.text withRequireType:RequireTypeIsMobile] && [GSValidate validateStringLong:self.txf_name.text requireMinLong:11] ) {
-            
-        }else{
-            [MBProgressHUD showError:@"请校验手机号码"];
-            return;
-        }
-        
-        if ([GSValidate validateStringLong:self.txf_password.text requireMinLong:6] && [GSValidate validateStringLong:self.txf_password.text requireMaxLong:10]) {
-            
-        }else{
-            [MBProgressHUD showError:@"请校验密码"];
-            return;
-        }
+//        if ([GSValidate validateString:self.txf_name.text withRequireType:RequireTypeIsMobile] && [GSValidate validateStringLong:self.txf_name.text requireMinLong:11] ) {
+//            
+//        }else{
+//            [MBProgressHUD showError:@"请校验手机号码"];
+//            return;
+//        }
+//        
+//        if ([GSValidate validateStringLong:self.txf_password.text requireMinLong:6] && [GSValidate validateStringLong:self.txf_password.text requireMaxLong:10]) {
+//            
+//        }else{
+//            [MBProgressHUD showError:@"请校验验证码"];
+//            return;
+//        }
         
         [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                          withParameters:@{@"ctl":@"user",
                                                                                           @"act":@"dophlogin",
-                                                                                          @"name ":CNull2String(self.txf_name.text),
-                                                                                          @"password":CNull2String(self.txf_password.text)
+                                                                                          @"mobile":CNull2String(self.txf_name.text),
+                                                                                          @"sms_verify":CNull2String(self.txf_password.text)
                                                                                           } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                               if (SUCCESSED) {
                                                                                                   UserModel * userModel = [[UserModel alloc]initWithDictionary:responseObject[@"data"] error:nil];
@@ -199,7 +199,7 @@
         [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                          withParameters:@{@"ctl":@"ajax",
                                                                                           @"act":@"send_sms_code",
-                                                                                          @"mobile ":CNull2String(self.txf_name.text),
+                                                                                          @"mobile":CNull2String(self.txf_name.text),
                                                                                           @"unique":@"0"
                                                                                           } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                               if (SUCCESSED) {
@@ -269,15 +269,18 @@
         self.txf_name = cell.txf_content;
     }else{
         self.txf_password = cell.txf_content;
+       
     }
     
     //设置图片
     if (self.btn_code.hidden) {
         cell.txf_content.placeholder = [CellPlaceHolderArrayStyleOne objectAtIndex:indexPath.row];
         cell.img_icon.image = [UIImage imageNamed:[CellImgArrayStyleOne objectAtIndex:indexPath.row]];
+         self.txf_password.secureTextEntry = YES;
     }else{
         cell.txf_content.placeholder = [CellPlaceHolderArrayStyleTwo objectAtIndex:indexPath.row];
         cell.img_icon.image = [UIImage imageNamed:[CellImgArrayStyleTwo objectAtIndex:indexPath.row]];
+         self.txf_password.secureTextEntry = NO;
     
     }
     if (indexPath.row == 0 && indexPath.section == 0) {

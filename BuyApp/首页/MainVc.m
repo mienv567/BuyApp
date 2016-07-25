@@ -25,7 +25,7 @@ static NSString *footerID = @"footerID";
 
 #define APIArray @[@"click_count",@"create_time",@"progress",@"max_buy"]
 
-@interface MainVc () <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface MainVc () <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,MainGoodsListCellsDelegate>
 @property (nonatomic, strong)MainTopView * TopView;            //  顶部背景
 @property (nonatomic, strong)MainSegmentView * segmentView;                 //  中奖信息背景
 @property(nonatomic, strong)UICollectionView * classView;      //瀑布流
@@ -67,6 +67,7 @@ static NSString *footerID = @"footerID";
     
     self.classView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNew)];
     self.classView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
+    
 }
 
 #pragma mark - 获取数据
@@ -96,7 +97,6 @@ static NSString *footerID = @"footerID";
     [self loadMainData];
 }
 
-
 -(void)loadMore{
     self.pageNo ++;
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
@@ -120,9 +120,6 @@ static NSString *footerID = @"footerID";
 }
 
 #pragma mark - 事件
-
-
-
 
 //最新揭晓
 - (void)tapAction:(NSInteger)index
@@ -203,8 +200,9 @@ static NSString *footerID = @"footerID";
                                                                                           [self.classView.mj_footer endRefreshing];
                                                                                           if (SUCCESSED) {
                                                                                               [self.dataArray addObjectsFromArray:[MainGoodsListModel arrayOfModelsFromDictionaries:responseObject[@"data"  ][@"index_duobao_list"] error:nil]];
-                                                                                              NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
-                                                                                              [self.classView reloadSections:indexSet];
+//                                                                                              NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
+//                                                                                              [self.classView reloadSections:indexSet];
+                                                                                                [self.classView reloadData];
                                                                                           }else{
                                                                                               ShowNotceError;
                                                                                           }
@@ -217,8 +215,8 @@ static NSString *footerID = @"footerID";
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.dataModel.newest_doubao_list.count > indexPath.row) {
-        MainNewGoodsModel* model = [self.dataModel.newest_doubao_list objectAtIndex:indexPath.row];
+    if (self.dataArray.count > indexPath.row) {
+        MainNewGoodsModel* model = [self.dataArray objectAtIndex:indexPath.row];
         GoodsInfoVc * vc = [[NSClassFromString(@"GoodsInfoVc") alloc]init];
         vc.title = model.name;
         vc.GoodsID = model.ID;
@@ -226,6 +224,20 @@ static NSString *footerID = @"footerID";
     }
 
 }
+
+-(void)clickMainGoodsListCells:(MainGoodsListCells *)cell{
+        NSIndexPath * indexPath = [self.classView indexPathForCell:cell];
+    
+    if (self.dataArray.count > indexPath.row) {
+        MainNewGoodsModel* model = [self.dataModel.newest_doubao_list objectAtIndex:indexPath.row];
+        GoodsInfoVc * vc = [[NSClassFromString(@"GoodsInfoVc") alloc]init];
+        vc.title = model.name;
+        vc.GoodsID = model.ID;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+ 
+}
+
 
 #pragma mark - 创建视图
 #pragma mark - 创建UICollectionView
@@ -246,6 +258,7 @@ static NSString *footerID = @"footerID";
 {
     MainGoodsListCells *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
     if (self.dataArray.count > indexPath.row) {
+        cell.delegate = self;
         [cell setDataModel:[self.dataArray objectAtIndex:indexPath.row]];
     }
     return cell;

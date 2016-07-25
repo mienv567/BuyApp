@@ -28,6 +28,11 @@
 #import <arpa/inet.h>
 #import "CarListModel.h"
 
+
+#import <ifaddrs.h>
+#import <arpa/inet.h>
+
+
 @interface PayVc ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)UITableView *tableView;
 @property (nonatomic, strong)NSMutableArray *dataArray;
@@ -37,6 +42,9 @@
 
 @property (nonatomic, strong) UINib * nib;
 @property (nonatomic,strong)  MBProgressHUD *hud;
+
+@property (nonatomic,strong)  NSString *orderStatus;
+
 @end
 
 @implementation PayVc
@@ -48,7 +56,7 @@
     [self.lab_number mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.equalTo(self.view).offset(10);
         make.right.equalTo(self.view.mas_right).offset(-10);
-        make.height.mas_equalTo(@30);
+        make.height.mas_equalTo(@40);
     }];
     
     [self.btn_buttonAction mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -67,13 +75,12 @@
         make.top.equalTo(self.btn_buttonAction.mas_bottom).offset(10);
         make.left.right.bottom.equalTo(self.view);
     }];
-    
-    
-    
 }
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.lab_number.text = [NSString stringWithFormat:@"订单编号:%@",self.orderID];
+    [self loadOrderInfo];
     
 }
 
@@ -97,18 +104,11 @@
                                                                                       }];
 }
 
-
 -(void)loadData:(NSString *)orderString{
-    
-    
-    
-    
     
     self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view
                                     animated:YES];
     [self.hud show:YES];
-    
-    
     
     //  1.	预下单订单号：订单号长度<=32位，为了防止生成相同的订单号,订单号的生成需要具唯一性,建议生成订单号时加上时间戳和终端类型。
     //  2.	提交一次订单后取消支付，再次提交相同的订单号并修改了金额值，程序会提示OK错误，支付规则不允许提交相同的订单号并修改金额。
@@ -127,7 +127,7 @@
     NSString *mch_id = @"6521000195";
     NSString *device_info = @"WP10000100001";
     NSString *body = @"趣云购订单";
-    NSString *mch_create_ip = @"127.0.0.1";
+    NSString *mch_create_ip = @"192.178.1.1";
     NSString *time_start;
     NSString *time_expire;
     NSString *nonce_str = [NSString spay_nonce_str];
@@ -207,7 +207,7 @@
                                                                            if (payStateModel.payState == SPayClientConstEnumPaySuccess) {
                                                                                //
                                                                                
-                                                                               NSLog(@"支付成功，%@",self.orderID);
+                                                                               NSLog(@"支付成功，%@  %@",self.orderID,[NSString spay_out_trade_no]);
                                                                                NSLog(@"支付订单详情-->>\n%@",[paySuccessDetailModel description]);
                                                                                
                                                                                [MBProgressHUD showNetworkIndicator];
@@ -250,13 +250,13 @@
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl" : @"payment",
                                                                                       @"act" : @"check_deal_order_status",
-                                                                                      @"id" : self.orderID,
+                                                                                      @"id" : [NSString spay_out_trade_no],
                                                                                       @"user_id":CNull2String(USERMODEL.ID)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           if (SUCCESSED) {
                                                                                               ShowNotceSuccess;
-                                                                                              [self.btn_buttonAction setTitle:responseObject[@"data"][@"pay_info"] forState:UIControlStateNormal] ;
-                                                                                              self.lab_number.text = [NSString stringWithFormat:@"订单编号:%@",responseObject[@"data"][@"order_id"]];
+                                                                                              [self.btn_buttonAction setTitle:responseObject[@"data"][@"notice_sn"] forState:UIControlStateNormal] ;
+                                                                                              self.lab_number.text = [NSString stringWithFormat:@"  订单编号:%@",responseObject[@"data"][@"order_id"]];
                                                                                               
                                                                                           }else{
                                                                                               ShowNotceError;
@@ -281,7 +281,7 @@
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 80;
+    return 60;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -289,7 +289,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -306,7 +306,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryNone;
     if (self.dataArray.count > indexPath.row) {
-                CarListModel * model = [self.dataArray objectAtIndex:indexPath.row];
+        CarListModel * model = [self.dataArray objectAtIndex:indexPath.row];
         cell.lab_time.text = model.create_time;
         
         NSMutableAttributedString *joinCountString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@人次",model.number]];
@@ -406,6 +406,32 @@
     NSLog(@"deviceIP========%@",deviceIP);
     return deviceIP;
     
+}
+
+- (NSString *)getIPAddress {
+    NSString *address = @"error";
+    struct ifaddrs *interfaces = NULL;
+    struct ifaddrs *temp_addr = NULL;
+    int success = 0;
+    // retrieve the current interfaces - returns 0 on success
+    success = getifaddrs(&interfaces);
+    if (success == 0) {
+        // Loop through linked list of interfaces
+        temp_addr = interfaces;
+        while(temp_addr != NULL) {
+            if(temp_addr->ifa_addr->sa_family == AF_INET) {
+                // Check if interface is en0 which is the wifi connection on the iPhone
+                if([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
+                    // Get NSString from C String
+                    address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
+                }
+            }
+            temp_addr = temp_addr->ifa_next;
+        }
+    }
+    // Free memory
+    freeifaddrs(interfaces);
+    return address;
 }
 
 - (void)didReceiveMemoryWarning {
