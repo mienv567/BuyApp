@@ -117,6 +117,16 @@
     
 }
 
+-(void)click_addMore:(HistoryListCells *)cell{
+    
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    NewsListModel * model = [self.dataArray objectAtIndex:indexPath.row];
+    GoodsInfoVc * vc = [[NSClassFromString(@"GoodsInfoVc") alloc]init];
+    vc.title = model.name;
+    vc.GoodsID = model.ID;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NewsListModel* model = [self.dataArray objectAtIndex:indexPath.row];
     GoodsInfoVc * vc = [[NSClassFromString(@"GoodsInfoVc") alloc]init];

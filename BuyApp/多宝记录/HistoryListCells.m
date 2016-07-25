@@ -165,8 +165,9 @@
 }
 
 - (IBAction)click_addGoods:(id)sender {
-    MainTabBarVc * main = [MainTabBarVc shared];
-//    [main changeNum];
+    if ([self.delegate respondsToSelector:@selector(click_addMore:)]) {
+        [self.delegate click_addMore:self];
+    }
     
 }
 

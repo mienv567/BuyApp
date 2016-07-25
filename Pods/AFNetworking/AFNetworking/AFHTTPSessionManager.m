@@ -272,6 +272,7 @@
 
         return nil;
     }
+    NSLog(@"调用接口_____%@ ",request.URL);
 
     __block NSURLSessionDataTask *dataTask = nil;
     dataTask = [self dataTaskWithRequest:request

@@ -63,7 +63,6 @@
     [self getClassView];
 }
 
-
 - (IBAction)click_buy:(UIButton *)sender {
     [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
                                                                       withParameters:@{@"ctl":@"uc_charge",

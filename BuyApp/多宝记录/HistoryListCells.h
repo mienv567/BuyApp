@@ -24,7 +24,7 @@ typedef NS_ENUM(NSUInteger, HistoryListCellsType) {
 @protocol HistoryListCellsDelegate <NSObject>
 
 -(void)click_showAllCounts:(HistoryListCells *)cell;
-
+-(void)click_addMore:(HistoryListCells *)cell;
 @end
 
 

@@ -26,6 +26,7 @@
 #import <sys/ioctl.h>
 #import <net/if.h>
 #import <arpa/inet.h>
+#import "CarListModel.h"
 
 @interface PayVc ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)UITableView *tableView;
@@ -73,10 +74,31 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.lab_number.text = [NSString stringWithFormat:@"订单编号:%@",self.orderID];
-    [self loadData];
+    
 }
 
--(void)loadData{
+-(void)loadOrderInfo{
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl" : @"payment",
+                                                                                      @"act" : @"done",
+                                                                                      @"id" : self.orderID,
+                                                                                      @"user_id":CNull2String(USERMODEL.ID),
+                                                                                      @"payment" : @"5"
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          if (SUCCESSED) {
+//                                                                                              ShowNotceSuccess;
+                                                                                              [self loadData:responseObject[@"data"][@"notice_sn"]];
+                                                                                              
+                                                                                          }else{
+                                                                                              ShowNotceError;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          
+                                                                                      }];
+}
+
+
+-(void)loadData:(NSString *)orderString{
     
     
     
@@ -90,7 +112,7 @@
     
     //  1.	预下单订单号：订单号长度<=32位，为了防止生成相同的订单号,订单号的生成需要具唯一性,建议生成订单号时加上时间戳和终端类型。
     //  2.	提交一次订单后取消支付，再次提交相同的订单号并修改了金额值，程序会提示OK错误，支付规则不允许提交相同的订单号并修改金额。
-    NSString *out_trade_no = self.orderID;
+    NSString *out_trade_no = orderString;
     
     //  金额以分为单位
     NSInteger total_fee = [self.total_price integerValue] * 100;
@@ -99,12 +121,12 @@
     NSString *notify_url = @"http://ceshi.quyungou.com/callback/payment/Wwxwappay_notify.php";
     
     NSString *service = @"unified.trade.pay";
-    NSString *version = @"2.0";
+    NSString *version = @"1.0";
     NSString *charset = @"UTF-8";
     NSString *sign_type = @"MD5";
     NSString *mch_id = @"6521000195";
     NSString *device_info = @"WP10000100001";
-    NSString *body = @"这是商品";
+    NSString *body = @"趣云购订单";
     NSString *mch_create_ip = @"127.0.0.1";
     NSString *time_start;
     NSString *time_expire;
@@ -184,28 +206,18 @@
                                                                            
                                                                            if (payStateModel.payState == SPayClientConstEnumPaySuccess) {
                                                                                //
+                                                                               
                                                                                NSLog(@"支付成功，%@",self.orderID);
                                                                                NSLog(@"支付订单详情-->>\n%@",[paySuccessDetailModel description]);
-                                                                               [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost withParameters:@{
-                                                                                        @"ctl" : @"payment",
-                                                                                        @"act" : @"done",
-                                                                                        @"id" : self.orderID,
-                                                                                        @"user_id":CNull2String(USERMODEL.ID)
-                                                                                        } success:^(NSURLSessionDataTask *task, id responseObject) {
-                                                                                   if (SUCCESSED) {
-                                                                                       ShowNotceSuccess;
-                                                                                       [self.btn_buttonAction setTitle:@"订单已经收款" forState:UIControlStateNormal] ;
-                                                                                   }else{
-                                                                                       ShowNotceError;
-                                                                                   }
-                                                                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                                                                   
-                                                                               }];
                                                                                
+                                                                               [MBProgressHUD showNetworkIndicator];
+                                                                               [self performSelector:@selector(getStatus:) withObject:payStateModel afterDelay:5];//r秒后执行TheAnimation
                                                                                
                                                                            }else{
                                                                                self.btn_buttonAction.titleLabel.text = @"订单支付失败";
                                                                                NSLog(@"支付失败，错误号:%d",payStateModel.payState);
+                                                                               
+                                                                               [self.navigationController popToRootViewControllerAnimated:NO];
                                                                                [[MainTabBarVc shared]changeTabBarAtIndex:0];
                                                                            }
                                                                            
@@ -233,9 +245,35 @@
     
 }
 
+-(void)getStatus:(SPayClientPayStateModel *)payStateModel{
+    
+    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl" : @"payment",
+                                                                                      @"act" : @"check_deal_order_status",
+                                                                                      @"id" : self.orderID,
+                                                                                      @"user_id":CNull2String(USERMODEL.ID)
+                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          if (SUCCESSED) {
+                                                                                              ShowNotceSuccess;
+                                                                                              [self.btn_buttonAction setTitle:responseObject[@"data"][@"pay_info"] forState:UIControlStateNormal] ;
+                                                                                              self.lab_number.text = [NSString stringWithFormat:@"订单编号:%@",responseObject[@"data"][@"order_id"]];
+                                                                                              
+                                                                                          }else{
+                                                                                              ShowNotceError;
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          
+                                                                                      }];
+    
+}
 
 - (IBAction)click_buttonAction:(id)sender {
-    
+    if ([self.isChongzhi integerValue] == 1) {
+        KJumpToViewController(@"MoneyList");
+    }else{
+        [self.navigationController popToRootViewControllerAnimated:NO];
+        [[MainTabBarVc shared]changeTabBarAtIndex:3];
+    }
 }
 
 
@@ -243,7 +281,7 @@
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 140;
+    return 80;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -251,7 +289,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count;
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -268,8 +306,13 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryNone;
     if (self.dataArray.count > indexPath.row) {
-        //        CarListModel * model = [self.dataArray objectAtIndex:indexPath.row];
+                CarListModel * model = [self.dataArray objectAtIndex:indexPath.row];
+        cell.lab_time.text = model.create_time;
         
+        NSMutableAttributedString *joinCountString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@人次",model.number]];
+        [joinCountString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, joinCountString.length - 2)];
+        [joinCountString addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(0, joinCountString.length - 2)];
+        cell.lab_count.attributedText = joinCountString;
     }
     
     
@@ -379,5 +422,10 @@
  // Pass the selected object to the new view controller.
  }
  */
+
+
+//http://ceshi.quyungou.com/api/index.php?ctl=cart&act=done&payment=5&ecvsn=&user_id=1679
+
+
 
 @end

@@ -118,9 +118,9 @@ static NSString *kMessageLastUpdate = @"kMessageLastUpdate";
     if([self isUserLoad]){
         
         [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
-                                                                         withParameters:@{@"act":@"get_info",
+                                                                         withParameters:@{@"act":@"get_user_info",
                                                                                           @"ctl":@"user",
-                                                                                          @"mobile":self.loginUser.mobile
+                                                                                          @"user_id":self.loginUser.ID
                                                                                           } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                               if (SUCCESSED) {
                                                                                                   UserModel * userModel = [[UserModel alloc]initWithDictionary:responseObject[@"data"] error:nil];

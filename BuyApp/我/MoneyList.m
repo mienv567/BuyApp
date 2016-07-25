@@ -41,6 +41,11 @@
     [self loadNew];
 }
 
+-(void)navBackVc{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 -(void)loadNew{
     
     [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost

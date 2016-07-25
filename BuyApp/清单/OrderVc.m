@@ -138,7 +138,6 @@
     
 }
 
-
 -(void)click_goToPay{
     
     [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
@@ -146,7 +145,7 @@
                                                                                        @"user_id":CNull2String(USERMODEL.ID),
                                                                                        @"act" : @"done",
                                                                                        @"ecvsn" : CNull2String(self.redModel.sn),
-                                                                                       @"payment" : self.btn_weixin.selected ? @"5" : @"0",
+                                                                                       @"payment" : self.btn_weixin.selected ? @"5" : @"1",
                                                                                        } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                            if (SUCCESSED) {
                                                                                                
@@ -169,14 +168,11 @@
 
 
 -(void)clcik_gotoPaybayYuE:(NSString *)orderID{
-    NSString * str =CNull2String(orderID);
 
     if ([orderID isEqual:[NSNull null]] ) {
         return;
     }
-    if (str.length  == 0 ) {
-        return;
-    }
+
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl" : @"payment",
                                                                                       @"act" : @"done",
@@ -218,8 +214,6 @@
                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                           
                                                                                       }];
-    
-    
     
     [self.tableView reloadData];
 }
