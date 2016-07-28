@@ -81,7 +81,7 @@
         [scoreStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 4)];
         [scoreStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_GoldRed range:NSMakeRange(0, 4)];
         [scoreStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(4, scoreStr.length - 4)];
-        [scoreStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_Gold range:NSMakeRange(4,scoreStr.length - 4)];
+        [scoreStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_YELLOW range:NSMakeRange(4,scoreStr.length - 4)];
         self.topView.lab_content.attributedText = scoreStr;
         
         
@@ -89,7 +89,7 @@
         [coinStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 5)];
         [coinStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_GoldRed range:NSMakeRange(0, 5)];
         [coinStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(5, coinStr.length - 5)];
-        [coinStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_Gold range:NSMakeRange(5,coinStr.length - 5)];
+        [coinStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_YELLOW range:NSMakeRange(5,coinStr.length - 5)];
         self.topView.lab_coinCount.attributedText = coinStr;
     }
     

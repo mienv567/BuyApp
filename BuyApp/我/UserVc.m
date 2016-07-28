@@ -21,8 +21,8 @@
 
 #define ImgArray @[@"Userclass1",@"Userclass2",@"Userclass3"]
 #define TitleArray @[@"正在进行",@"已经揭晓",@"中奖纪录"]
-#define CellTitleArray @[@[@"全部夺宝纪录"],@[@"我的红包",@"我的消息"],@[@"资金纪录",@"中奖纪录",@"我的邀请"],@[@"设置"]]
-#define CellImgArray @[@[@"UserCellImg1"],@[@"UserCellImg2",@"UserCellImg3"],@[@"UserCellImg4",@"UserCellImg5",@"UserCellImg6"],@[@"UserCellImg7"]]
+#define CellTitleArray @[@[@"全部夺宝纪录"],@[@"我的红包",@"我的消息"],@[@"资金纪录",@"中奖纪录",@"我的晒单",@"我的邀请"],@[@"设置"]]
+#define CellImgArray @[@[@"UserCellImg1"],@[@"UserCellImg2",@"UserCellImg3"],@[@"UserCellImg4",@"UserCellImg5",@"UserCellImg8",@"UserCellImg6"],@[@"UserCellImg7"]]
 @implementation UserVc
 
 - (void)viewDidLoad {
@@ -95,7 +95,9 @@
             }else if (indexPath.row == 1){//中奖记录
                 KJumpToViewController(@"MyWinHistoryVc");
 
-            }if (indexPath.row == 2){//我的邀请
+            }else if (indexPath.row == 2){//我的晒单
+                KJumpToViewControllerByNib(@"ShowMyOrdersVc");
+            }else if (indexPath.row == 3){//我的邀请
                 KJumpToViewController(@"MyInviteVc");
             }
         }
@@ -195,7 +197,7 @@
             break;
         case 2:
         {
-            return 3;
+            return 4;
         }
             break;
         case 3:
@@ -278,24 +280,22 @@
         [[UserManager sharedManager] refreshUserInfo];
         self.topView.lab_userName.text = USERMODEL.user_name;
         
-        NSMutableAttributedString *scoreStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"积分: %d",CNull2Int(USERMODEL.total_score)]];
-        [scoreStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 4)];
-        [scoreStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_GoldRed range:NSMakeRange(0, 4)];
-        [scoreStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(4, scoreStr.length - 4)];
-        [scoreStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_Gold range:NSMakeRange(4,scoreStr.length - 4)];
+        NSMutableAttributedString *scoreStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"积分 : %d",CNull2Int(USERMODEL.total_score)]];
+        [scoreStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:15] range:NSMakeRange(0, 4)];
+        [scoreStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, 4)];
+        [scoreStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:15] range:NSMakeRange(4, scoreStr.length - 4)];
+        [scoreStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_YELLOW range:NSMakeRange(4,scoreStr.length - 4)];
         self.topView.lab_content.attributedText = scoreStr;
         
         
-        NSMutableAttributedString *coinStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"夺宝币: %d",CNull2Int(USERMODEL.money)]];
-        [coinStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 5)];
+        NSMutableAttributedString *coinStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"夺宝币 : %d",CNull2Int(USERMODEL.money)]];
+        [coinStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:15] range:NSMakeRange(0, 5)];
         [coinStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_GoldRed range:NSMakeRange(0, 5)];
-        [coinStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(5, coinStr.length - 5)];
-        [coinStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_Gold range:NSMakeRange(5,coinStr.length - 5)];
+        [coinStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:15] range:NSMakeRange(5, coinStr.length - 5)];
+        [coinStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_YELLOW range:NSMakeRange(5,coinStr.length - 5)];
         self.topView.lab_coinCount.attributedText = coinStr;
     }
-    
 
-    
 }
 
 

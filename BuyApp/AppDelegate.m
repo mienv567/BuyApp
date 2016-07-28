@@ -17,6 +17,8 @@
 #import "JPUSHService.h"
 #import "SPayClient.h"
 
+#import "WXApiManager.h"
+
 static NSString *appKey = @"eac3de4a7717dc5354ba849a";
 static NSString *channel = @"iOS test";
 static BOOL isProduction = FALSE;
@@ -37,6 +39,11 @@ static BOOL isProduction = FALSE;
     SPayClientQQConfigModel *qqConfigModel = [[SPayClientQQConfigModel alloc] init];
     qqConfigModel.appScheme =  @"qqSpayDemo";
     [[SPayClient sharedInstance] qqPayConfig:qqConfigModel];
+    
+    
+    //向微信注册
+    [WXApi registerApp:@"wxd930ea5d5a258f4f" withDescription:@"demo 1.0"];
+    
     
     
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -138,6 +145,13 @@ static BOOL isProduction = FALSE;
     NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
 }
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return  [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
+}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

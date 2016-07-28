@@ -48,7 +48,7 @@
     
     [self.tableView registerClass:[ShopListCells class] forCellReuseIdentifier:@"ShopListCells"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self.view);

@@ -159,7 +159,12 @@ NSString * const MMshowsSelectionIndicator = @"showsSelectionIndicator";
   if (chosenObject!=nil && selectedRow > -1 && chosenObject.length > 0) {
     selectedRow = [_pickerViewArray indexOfObject:chosenObject];
   }else{
-    selectedRow = [[_pickerViewArray objectAtIndex:0] integerValue];
+      if (_pickerViewArray.count > 0) {
+          selectedRow = [[_pickerViewArray objectAtIndex:0] integerValue];
+      }else{
+          return;
+      }
+      
   }
   
   
@@ -202,9 +207,6 @@ NSString * const MMshowsSelectionIndicator = @"showsSelectionIndicator";
     singleFingerOne.numberOfTapsRequired = 1; //tap次数
     singleFingerOne.delegate = self;
     [_pickerViewContainerView addGestureRecognizer:singleFingerOne];
-    
-    
-    
     
     
   //PickerView Container with top bar

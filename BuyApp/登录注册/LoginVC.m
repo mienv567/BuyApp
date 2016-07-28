@@ -10,11 +10,25 @@
 #import "Img_TextfieldCell.h"
 #import "ResetPassWordVc.h"
 
-@interface LoginVC ()
+#import "WXApiRequestHandler.h"
+#import "WXApiManager.h"
+#import "Constant.h"
+#import "WechatAuthSDK.h"
+
+
+@interface LoginVC ()<WXApiManagerDelegate, WechatAuthAPIDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tabView;
 @property (weak, nonatomic) IBOutlet UIButton *btn_Login;
 @property (weak, nonatomic) IBOutlet UIButton *btn_changeStyle;
 @property (weak, nonatomic) IBOutlet UIButton *btn_forgetPassWord;
+@property (weak, nonatomic) IBOutlet UIImageView *line_noticebg;
+@property (weak, nonatomic) IBOutlet UILabel *lab_notice;
+@property (weak, nonatomic) IBOutlet UIImageView *img_icon;
+@property (weak, nonatomic) IBOutlet UIButton *btn_weChatLogin;
+
+
+
+
 @property (strong,nonatomic)UITextField * txf_name;
 @property (strong,nonatomic)UITextField * txf_password;
 @property (nonatomic, strong) UINib * nib;
@@ -90,6 +104,92 @@
         
     }];
 }
+
+
+#pragma mark - 微信第三方登录
+- (IBAction)click_wechatLogin:(id)sender {
+    
+    [WXApiRequestHandler sendAuthRequestScope: kAuthScope
+                                        State:kAuthState
+                                       OpenID:kAuthOpenID
+                             InViewController:self];
+}
+
+
+
+- (void)managerDidRecvAuthResponse:(SendAuthResp *)response {
+    NSString *strTitle = [NSString stringWithFormat:@"Auth结果"];
+    NSString *strMsg = [NSString stringWithFormat:@"code:%@,state:%@,errcode:%d", response.code, response.state, response.errCode];
+    
+}
+
+
+//成功登录
+- (void)onAuthFinish:(int)errCode AuthCode:(NSString *)authCode
+{
+    NSLog(@"onAuthFinish");
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"onAuthFinish"
+                                                    message:[NSString stringWithFormat:@"authCode:%@ errCode:%d", authCode, errCode]
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil, nil];
+    [alert show];
+}
+
+- (void)managerDidRecvLaunchFromWXReq:(LaunchFromWXReq *)req {
+    WXMediaMessage *msg = req.message;
+    
+    //从微信启动App
+    NSString *strTitle = [NSString stringWithFormat:@"从微信启动"];
+    NSString *strMsg = [NSString stringWithFormat:@"openID: %@, messageExt:%@", req.openID, msg.messageExt];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle
+                                                    message:strMsg
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil, nil];
+    [alert show];
+}
+
+- (void)managerDidRecvMessageResponse:(SendMessageToWXResp *)response {
+    NSString *strTitle = [NSString stringWithFormat:@"发送媒体消息结果"];
+    NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", response.errCode];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle
+                                                    message:strMsg
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil, nil];
+    [alert show];
+}
+
+- (void)managerDidRecvAddCardResponse:(AddCardToWXCardPackageResp *)response {
+    NSMutableString* cardStr = [[NSMutableString alloc] init];
+    for (WXCardItem* cardItem in response.cardAry) {
+        [cardStr appendString:[NSString stringWithFormat:@"cardid:%@ cardext:%@ cardstate:%u\n",cardItem.cardId,cardItem.extMsg,(unsigned int)cardItem.cardState]];
+    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"add card resp"
+                                                    message:cardStr
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil, nil];
+    [alert show];
+}
+
+- (void)managerDidRecvChooseCardResponse:(WXChooseCardResp *)response {
+    NSMutableString* cardStr = [[NSMutableString alloc] init];
+    for (WXCardItem* cardItem in response.cardAry) {
+        [cardStr appendString:[NSString stringWithFormat:@"cardid:%@, encryptCode:%@, appId:%@\n",cardItem.cardId,cardItem.encryptCode,cardItem.appID]];
+    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"choose card resp"
+                                                    message:cardStr
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil, nil];
+    [alert show];
+}
+
 
 #pragma mark - 注册
 -(void)click_register{

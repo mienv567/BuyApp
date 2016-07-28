@@ -12,7 +12,7 @@
 @end
 @interface PayResult : JSONModel
 @property (nonatomic,strong)NSString <Optional>* account_money ;// 0;
-@property (nonatomic,strong)NSString <Optional>* ecv_data ;// 0;
+//@property (nonatomic,strong)NSString <Optional>* ecv_data ;// 0;
 @property (nonatomic,strong)NSString <Optional>* ecv_money ;// <null>;
 @property (nonatomic,strong)NSString <Optional>* paid_account_money ;// 0;
 @property (nonatomic,strong)NSString <Optional>* paid_ecv_money ;// 0;

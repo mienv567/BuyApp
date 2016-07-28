@@ -27,6 +27,17 @@
 		032940E51D1E9DD8000D54D9 /* MyNumbers.m in Sources */ = {isa = PBXBuildFile; fileRef = 032940E41D1E9DD8000D54D9 /* MyNumbers.m */; };
 		032940E81D1EA9B8000D54D9 /* AllCountsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 032940E71D1EA9B8000D54D9 /* AllCountsView.m */; };
 		032940EA1D1EAA52000D54D9 /* AllCountsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 032940E91D1EAA52000D54D9 /* AllCountsView.xib */; };
+		0331F8431D48615B0049DFFA /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0331F83E1D48615A0049DFFA /* libWeChatSDK.a */; };
+		0331F8441D48615B0049DFFA /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0331F83F1D48615A0049DFFA /* README.txt */; };
+		0331F8461D4862A40049DFFA /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0331F8451D4862A40049DFFA /* libsqlite3.0.tbd */; };
+		0331F8481D4862AE0049DFFA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0331F8471D4862AE0049DFFA /* libz.tbd */; };
+		0331F84A1D4862BB0049DFFA /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0331F8491D4862BB0049DFFA /* libc++.tbd */; };
+		0331F8521D48648C0049DFFA /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0331F84D1D48648C0049DFFA /* WXApiManager.m */; };
+		0331F8531D48648C0049DFFA /* WXApiRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0331F84F1D48648C0049DFFA /* WXApiRequestHandler.m */; };
+		0331F8541D48648C0049DFFA /* WXApiResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0331F8511D48648C0049DFFA /* WXApiResponseHandler.m */; };
+		0331F85E1D4866940049DFFA /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0331F8591D4866940049DFFA /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m */; };
+		0331F85F1D4866940049DFFA /* SendMessageToWXReq+requestWithTextOrMediaMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0331F85B1D4866940049DFFA /* SendMessageToWXReq+requestWithTextOrMediaMessage.m */; };
+		0331F8601D4866940049DFFA /* WXMediaMessage+messageConstruct.m in Sources */ = {isa = PBXBuildFile; fileRef = 0331F85D1D4866940049DFFA /* WXMediaMessage+messageConstruct.m */; };
 		03376B2A1D1AB51B004EE048 /* SearchBarVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 03376B281D1AB51B004EE048 /* SearchBarVc.m */; };
 		03376B2B1D1AB51B004EE048 /* SearchBarVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03376B291D1AB51B004EE048 /* SearchBarVc.xib */; };
 		03376B2F1D1ABBA6004EE048 /* SearchListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03376B2D1D1ABBA6004EE048 /* SearchListCell.m */; };
@@ -47,6 +58,17 @@
 		035C57F01D2B83E1000D68D6 /* MainGoodsListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 035C57EF1D2B83E1000D68D6 /* MainGoodsListModel.m */; };
 		035C57F31D2B85B9000D68D6 /* MainNewGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 035C57F21D2B85B9000D68D6 /* MainNewGoodsModel.m */; };
 		035C57F61D2B8650000D68D6 /* MainNewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 035C57F51D2B8650000D68D6 /* MainNewsModel.m */; };
+		035F34691D46F00A0082C7FD /* ShowMyOrdersVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 035F34671D46F00A0082C7FD /* ShowMyOrdersVc.m */; };
+		035F346A1D46F00A0082C7FD /* ShowMyOrdersVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 035F34681D46F00A0082C7FD /* ShowMyOrdersVc.xib */; };
+		035F346E1D46F2630082C7FD /* ShowOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 035F346C1D46F2630082C7FD /* ShowOrderListCell.m */; };
+		035F346F1D46F2630082C7FD /* ShowOrderListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 035F346D1D46F2630082C7FD /* ShowOrderListCell.xib */; };
+		035F34721D46F9370082C7FD /* ShowTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 035F34711D46F9370082C7FD /* ShowTopView.m */; };
+		035F34741D46F9480082C7FD /* ShowTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 035F34731D46F9480082C7FD /* ShowTopView.xib */; };
+		035F34781D46FBF60082C7FD /* ShowMorderNoticeVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 035F34761D46FBF60082C7FD /* ShowMorderNoticeVc.m */; };
+		035F34791D46FBF60082C7FD /* ShowMorderNoticeVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 035F34771D46FBF60082C7FD /* ShowMorderNoticeVc.xib */; };
+		035F347D1D4708850082C7FD /* ShowMyOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 035F347B1D4708850082C7FD /* ShowMyOrder.m */; };
+		035F347E1D4708850082C7FD /* ShowMyOrder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 035F347C1D4708850082C7FD /* ShowMyOrder.xib */; };
+		035F34811D470A800082C7FD /* ImgArrayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 035F34801D470A800082C7FD /* ImgArrayView.m */; };
 		0360BCD71D2264EE00A2C07D /* UserNewsVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 0360BCD61D2264EE00A2C07D /* UserNewsVc.m */; };
 		0360BCDC1D22656900A2C07D /* UserNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0360BCDA1D22656900A2C07D /* UserNewsCell.m */; };
 		0360BCDD1D22656900A2C07D /* UserNewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0360BCDB1D22656900A2C07D /* UserNewsCell.xib */; };
@@ -221,6 +243,27 @@
 		032940E61D1EA9B8000D54D9 /* AllCountsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllCountsView.h; sourceTree = "<group>"; };
 		032940E71D1EA9B8000D54D9 /* AllCountsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllCountsView.m; sourceTree = "<group>"; };
 		032940E91D1EAA52000D54D9 /* AllCountsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllCountsView.xib; sourceTree = "<group>"; };
+		0331F83E1D48615A0049DFFA /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		0331F83F1D48615A0049DFFA /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		0331F8401D48615A0049DFFA /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		0331F8411D48615A0049DFFA /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		0331F8421D48615A0049DFFA /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		0331F8451D4862A40049DFFA /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		0331F8471D4862AE0049DFFA /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		0331F8491D4862BB0049DFFA /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		0331F84C1D48648C0049DFFA /* WXApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiManager.h; sourceTree = "<group>"; };
+		0331F84D1D48648C0049DFFA /* WXApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiManager.m; sourceTree = "<group>"; };
+		0331F84E1D48648C0049DFFA /* WXApiRequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiRequestHandler.h; sourceTree = "<group>"; };
+		0331F84F1D48648C0049DFFA /* WXApiRequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiRequestHandler.m; sourceTree = "<group>"; };
+		0331F8501D48648C0049DFFA /* WXApiResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiResponseHandler.h; sourceTree = "<group>"; };
+		0331F8511D48648C0049DFFA /* WXApiResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiResponseHandler.m; sourceTree = "<group>"; };
+		0331F8571D4866940049DFFA /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
+		0331F8581D4866940049DFFA /* GetMessageFromWXResp+responseWithTextOrMediaMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GetMessageFromWXResp+responseWithTextOrMediaMessage.h"; sourceTree = "<group>"; };
+		0331F8591D4866940049DFFA /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GetMessageFromWXResp+responseWithTextOrMediaMessage.m"; sourceTree = "<group>"; };
+		0331F85A1D4866940049DFFA /* SendMessageToWXReq+requestWithTextOrMediaMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SendMessageToWXReq+requestWithTextOrMediaMessage.h"; sourceTree = "<group>"; };
+		0331F85B1D4866940049DFFA /* SendMessageToWXReq+requestWithTextOrMediaMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SendMessageToWXReq+requestWithTextOrMediaMessage.m"; sourceTree = "<group>"; };
+		0331F85C1D4866940049DFFA /* WXMediaMessage+messageConstruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WXMediaMessage+messageConstruct.h"; sourceTree = "<group>"; };
+		0331F85D1D4866940049DFFA /* WXMediaMessage+messageConstruct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WXMediaMessage+messageConstruct.m"; sourceTree = "<group>"; };
 		03376B271D1AB51B004EE048 /* SearchBarVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchBarVc.h; sourceTree = "<group>"; };
 		03376B281D1AB51B004EE048 /* SearchBarVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchBarVc.m; sourceTree = "<group>"; };
 		03376B291D1AB51B004EE048 /* SearchBarVc.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchBarVc.xib; sourceTree = "<group>"; };
@@ -255,6 +298,23 @@
 		035C57F21D2B85B9000D68D6 /* MainNewGoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNewGoodsModel.m; sourceTree = "<group>"; };
 		035C57F41D2B8650000D68D6 /* MainNewsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNewsModel.h; sourceTree = "<group>"; };
 		035C57F51D2B8650000D68D6 /* MainNewsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNewsModel.m; sourceTree = "<group>"; };
+		035F34661D46F00A0082C7FD /* ShowMyOrdersVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowMyOrdersVc.h; sourceTree = "<group>"; };
+		035F34671D46F00A0082C7FD /* ShowMyOrdersVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowMyOrdersVc.m; sourceTree = "<group>"; };
+		035F34681D46F00A0082C7FD /* ShowMyOrdersVc.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowMyOrdersVc.xib; sourceTree = "<group>"; };
+		035F346B1D46F2630082C7FD /* ShowOrderListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowOrderListCell.h; sourceTree = "<group>"; };
+		035F346C1D46F2630082C7FD /* ShowOrderListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowOrderListCell.m; sourceTree = "<group>"; };
+		035F346D1D46F2630082C7FD /* ShowOrderListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowOrderListCell.xib; sourceTree = "<group>"; };
+		035F34701D46F9370082C7FD /* ShowTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowTopView.h; sourceTree = "<group>"; };
+		035F34711D46F9370082C7FD /* ShowTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowTopView.m; sourceTree = "<group>"; };
+		035F34731D46F9480082C7FD /* ShowTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowTopView.xib; sourceTree = "<group>"; };
+		035F34751D46FBF60082C7FD /* ShowMorderNoticeVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowMorderNoticeVc.h; sourceTree = "<group>"; };
+		035F34761D46FBF60082C7FD /* ShowMorderNoticeVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowMorderNoticeVc.m; sourceTree = "<group>"; };
+		035F34771D46FBF60082C7FD /* ShowMorderNoticeVc.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowMorderNoticeVc.xib; sourceTree = "<group>"; };
+		035F347A1D4708850082C7FD /* ShowMyOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowMyOrder.h; sourceTree = "<group>"; };
+		035F347B1D4708850082C7FD /* ShowMyOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowMyOrder.m; sourceTree = "<group>"; };
+		035F347C1D4708850082C7FD /* ShowMyOrder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowMyOrder.xib; sourceTree = "<group>"; };
+		035F347F1D470A800082C7FD /* ImgArrayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImgArrayView.h; sourceTree = "<group>"; };
+		035F34801D470A800082C7FD /* ImgArrayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImgArrayView.m; sourceTree = "<group>"; };
 		0360BCD51D2264EE00A2C07D /* UserNewsVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserNewsVc.h; sourceTree = "<group>"; };
 		0360BCD61D2264EE00A2C07D /* UserNewsVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserNewsVc.m; sourceTree = "<group>"; };
 		0360BCD91D22656900A2C07D /* UserNewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserNewsCell.h; sourceTree = "<group>"; };
@@ -530,8 +590,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0331F84A1D4862BB0049DFFA /* libc++.tbd in Frameworks */,
+				0331F8481D4862AE0049DFFA /* libz.tbd in Frameworks */,
+				0331F8461D4862A40049DFFA /* libsqlite3.0.tbd in Frameworks */,
 				039DCDD61D2A51F2000DA425 /* jpush-ios-2.1.8.a in Frameworks */,
 				7CFE79213E058E49324C66B2 /* libPods-BuyApp.a in Frameworks */,
+				0331F8431D48615B0049DFFA /* libWeChatSDK.a in Frameworks */,
 				03BF607A1D3A2F7A0007BBFF /* libSPaySDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -539,6 +603,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0331F83D1D48615A0049DFFA /* SDKExport */ = {
+			isa = PBXGroup;
+			children = (
+				0331F8561D4866940049DFFA /* Helper */,
+				0331F84B1D48648C0049DFFA /* Control */,
+				0331F83E1D48615A0049DFFA /* libWeChatSDK.a */,
+				0331F83F1D48615A0049DFFA /* README.txt */,
+				0331F8401D48615A0049DFFA /* WechatAuthSDK.h */,
+				0331F8411D48615A0049DFFA /* WXApi.h */,
+				0331F8421D48615A0049DFFA /* WXApiObject.h */,
+			);
+			path = SDKExport;
+			sourceTree = "<group>";
+		};
+		0331F84B1D48648C0049DFFA /* Control */ = {
+			isa = PBXGroup;
+			children = (
+				0331F84C1D48648C0049DFFA /* WXApiManager.h */,
+				0331F84D1D48648C0049DFFA /* WXApiManager.m */,
+				0331F84E1D48648C0049DFFA /* WXApiRequestHandler.h */,
+				0331F84F1D48648C0049DFFA /* WXApiRequestHandler.m */,
+				0331F8501D48648C0049DFFA /* WXApiResponseHandler.h */,
+				0331F8511D48648C0049DFFA /* WXApiResponseHandler.m */,
+			);
+			path = Control;
+			sourceTree = "<group>";
+		};
+		0331F8561D4866940049DFFA /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				0331F8571D4866940049DFFA /* Constant.h */,
+				0331F8581D4866940049DFFA /* GetMessageFromWXResp+responseWithTextOrMediaMessage.h */,
+				0331F8591D4866940049DFFA /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m */,
+				0331F85A1D4866940049DFFA /* SendMessageToWXReq+requestWithTextOrMediaMessage.h */,
+				0331F85B1D4866940049DFFA /* SendMessageToWXReq+requestWithTextOrMediaMessage.m */,
+				0331F85C1D4866940049DFFA /* WXMediaMessage+messageConstruct.h */,
+				0331F85D1D4866940049DFFA /* WXMediaMessage+messageConstruct.m */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		03376B371D1AE1A1004EE048 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -570,6 +675,9 @@
 				03D66C0A1D23FF24006C9855 /* MyWinListCell.h */,
 				03D66C0B1D23FF24006C9855 /* MyWinListCell.m */,
 				03D66C0C1D23FF24006C9855 /* MyWinListCell.xib */,
+				035F346B1D46F2630082C7FD /* ShowOrderListCell.h */,
+				035F346C1D46F2630082C7FD /* ShowOrderListCell.m */,
+				035F346D1D46F2630082C7FD /* ShowOrderListCell.xib */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -577,6 +685,9 @@
 		037232DA1D20B83E00F258D2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				035F34701D46F9370082C7FD /* ShowTopView.h */,
+				035F34711D46F9370082C7FD /* ShowTopView.m */,
+				035F34731D46F9480082C7FD /* ShowTopView.xib */,
 				037232DB1D20B85000F258D2 /* UserTopView.h */,
 				037232DC1D20B85000F258D2 /* UserTopView.m */,
 				037232DE1D20B85800F258D2 /* UserTopView.xib */,
@@ -586,6 +697,8 @@
 				03D66C0F1D241800006C9855 /* BackGoundView.h */,
 				03D66C101D241800006C9855 /* BackGoundView.m */,
 				03D66C121D241810006C9855 /* BackGoundView.xib */,
+				035F347F1D470A800082C7FD /* ImgArrayView.h */,
+				035F34801D470A800082C7FD /* ImgArrayView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -673,6 +786,7 @@
 		038B19031D12A44B007C1CC8 /* PlusIn */ = {
 			isa = PBXGroup;
 			children = (
+				0331F83D1D48615A0049DFFA /* SDKExport */,
 				03BF60641D3A2F7A0007BBFF /* SPaySDK */,
 				039DCDD31D2A51F2000DA425 /* JPush */,
 				03E8DC1B1D27598E0028464B /* NetWorking */,
@@ -957,6 +1071,15 @@
 				039A19701D24C9B500D10287 /* AddressInfoVc.xib */,
 				03B945831D44DABD00A429F8 /* MyInviteVc.h */,
 				03B945841D44DABD00A429F8 /* MyInviteVc.m */,
+				035F34661D46F00A0082C7FD /* ShowMyOrdersVc.h */,
+				035F34671D46F00A0082C7FD /* ShowMyOrdersVc.m */,
+				035F34681D46F00A0082C7FD /* ShowMyOrdersVc.xib */,
+				035F34751D46FBF60082C7FD /* ShowMorderNoticeVc.h */,
+				035F34761D46FBF60082C7FD /* ShowMorderNoticeVc.m */,
+				035F34771D46FBF60082C7FD /* ShowMorderNoticeVc.xib */,
+				035F347A1D4708850082C7FD /* ShowMyOrder.h */,
+				035F347B1D4708850082C7FD /* ShowMyOrder.m */,
+				035F347C1D4708850082C7FD /* ShowMyOrder.xib */,
 			);
 			path = "我";
 			sourceTree = "<group>";
@@ -1189,6 +1312,9 @@
 		D0EA62AC7BE5431D707B8431 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0331F8491D4862BB0049DFFA /* libc++.tbd */,
+				0331F8471D4862AE0049DFFA /* libz.tbd */,
+				0331F8451D4862A40049DFFA /* libsqlite3.0.tbd */,
 				375A0C6C2CA33FE8A8CA6566 /* libPods-BuyApp.a */,
 			);
 			name = Frameworks;
@@ -1256,6 +1382,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				031B6D681D19895800BD2585 /* SearchBarView.xib in Resources */,
+				0331F8441D48615B0049DFFA /* README.txt in Resources */,
 				039A19741D24ED8A00D10287 /* Area.plist in Resources */,
 				03D312DE1D1D024A00B2BB26 /* GoodsBottomView.xib in Resources */,
 				03D312E31D1D139C00B2BB26 /* ShoppingView.xib in Resources */,
@@ -1270,6 +1397,7 @@
 				03D66C131D241810006C9855 /* BackGoundView.xib in Resources */,
 				037232DF1D20B85800F258D2 /* UserTopView.xib in Resources */,
 				031B6D5E1D19764B00BD2585 /* GoodsClassVc.xib in Resources */,
+				035F34741D46F9480082C7FD /* ShowTopView.xib in Resources */,
 				038B193E1D12A44B007C1CC8 /* Block-KVO.podspec in Resources */,
 				03EB70E21D1835A800A94E50 /* Img_TextfieldCell.xib in Resources */,
 				034D89EA1D1BB387005806C7 /* GoodsWinnerView.xib in Resources */,
@@ -1279,8 +1407,10 @@
 				03376B301D1ABBA6004EE048 /* SearchListCell.xib in Resources */,
 				034D89EF1D1BCD32005806C7 /* GoodsCountsView.xib in Resources */,
 				032224DD1D2278A200B20525 /* CouponListCell.xib in Resources */,
+				035F34791D46FBF60082C7FD /* ShowMorderNoticeVc.xib in Resources */,
 				03BF607B1D3A2F7A0007BBFF /* SPaySDKResource.bundle in Resources */,
 				038B195A1D12A88F007C1CC8 /* MBProgressHUD.bundle in Resources */,
+				035F346A1D46F00A0082C7FD /* ShowMyOrdersVc.xib in Resources */,
 				03A9FD5B1D23BDF8006AD04D /* ChongZhiVc.xib in Resources */,
 				038B18F71D1270D7007C1CC8 /* Assets.xcassets in Resources */,
 				03D8B69D1D352D7100683AAE /* UserEmailVc.xib in Resources */,
@@ -1292,12 +1422,14 @@
 				037232E51D20F7AA00F258D2 /* ShopListCells.xib in Resources */,
 				0360BCDD1D22656900A2C07D /* UserNewsCell.xib in Resources */,
 				034D89E51D1BB234005806C7 /* GoodsInfoTopView.xib in Resources */,
+				035F346F1D46F2630082C7FD /* ShowOrderListCell.xib in Resources */,
 				03B945751D44AF3000A429F8 /* DuoBaoListVc.xib in Resources */,
 				038B18F51D1270D7007C1CC8 /* Main.storyboard in Resources */,
 				03D50DA51D1C27C80017AAC3 /* GoodsUsersCell.xib in Resources */,
 				03A9FD391D236AE9006AD04D /* RedCouponTopView.xib in Resources */,
 				03376B3C1D1AE1BB004EE048 /* NewsCells.xib in Resources */,
 				03376B2B1D1AB51B004EE048 /* SearchBarVc.xib in Resources */,
+				035F347E1D4708850082C7FD /* ShowMyOrder.xib in Resources */,
 				03A9FD461D23A8CA006AD04D /* ImgTitleContent.xib in Resources */,
 				03C5BCF71D19080E00060FB3 /* ResetPassWordVc.xib in Resources */,
 			);
@@ -1359,6 +1491,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03BB29731D1799A400EDEDFD /* MainClassView.m in Sources */,
+				035F34811D470A800082C7FD /* ImgArrayView.m in Sources */,
 				03D50DA01D1C1C950017AAC3 /* Title_ContentOrImg_Cell.m in Sources */,
 				03A9FD5A1D23BDF8006AD04D /* ChongZhiVc.m in Sources */,
 				03D66C091D23F5EB006C9855 /* MyWinHistoryVc.m in Sources */,
@@ -1394,6 +1527,7 @@
 				03BB297D1D17B1BC00EDEDFD /* MainGoodsModel.m in Sources */,
 				038B193C1D12A44B007C1CC8 /* UITableViewCell+GSMasonryAutoCellHeight.m in Sources */,
 				038B193A1D12A44B007C1CC8 /* UITableView+GSCacheHeight.m in Sources */,
+				0331F8521D48648C0049DFFA /* WXApiManager.m in Sources */,
 				037232E81D21175D00F258D2 /* WinHistoryVc.m in Sources */,
 				03D66C0D1D23FF24006C9855 /* MyWinListCell.m in Sources */,
 				03376B2F1D1ABBA6004EE048 /* SearchListCell.m in Sources */,
@@ -1408,6 +1542,7 @@
 				03D312E11D1D138800B2BB26 /* ShoppingView.m in Sources */,
 				03BB29831D17C91E00EDEDFD /* MainSegmentView.m in Sources */,
 				03EB70DC1D1834AA00A94E50 /* LoginVC.m in Sources */,
+				035F34781D46FBF60082C7FD /* ShowMorderNoticeVc.m in Sources */,
 				03CE76B61D2EA04300A416E7 /* GoodsItemModel.m in Sources */,
 				039DCDC81D29F734000DA425 /* CouponModel.m in Sources */,
 				037D0E691D31343900DFF88A /* DuoBaoClassModel.m in Sources */,
@@ -1428,6 +1563,7 @@
 				039A196A1D24A9EE00D10287 /* ResetPhoneVc.m in Sources */,
 				032224D51D22761E00B20525 /* RedCouponVc.m in Sources */,
 				03E8DC1E1D27598E0028464B /* NetworkManager.m in Sources */,
+				0331F8541D48648C0049DFFA /* WXApiResponseHandler.m in Sources */,
 				038B195B1D12A88F007C1CC8 /* GSValidate.m in Sources */,
 				038B19341D12A44B007C1CC8 /* NSString+Addition.m in Sources */,
 				039DCDCE1D29FEB1000DA425 /* WinHistoryModel.m in Sources */,
@@ -1443,6 +1579,7 @@
 				038B19581D12A88F007C1CC8 /* ASWaitingView.m in Sources */,
 				03BB296F1D178E6B00EDEDFD /* SearchListVc.m in Sources */,
 				03BB297A1D17B14300EDEDFD /* GoodsView.m in Sources */,
+				035F346E1D46F2630082C7FD /* ShowOrderListCell.m in Sources */,
 				030561881D37E56F0078732D /* OrderVc.m in Sources */,
 				039DCDD21D2A11FC000DA425 /* WinModel.m in Sources */,
 				038B19561D12A88F007C1CC8 /* ASCache.m in Sources */,
@@ -1455,18 +1592,24 @@
 				038B19401D12A44B007C1CC8 /* MTKObserver.m in Sources */,
 				037232ED1D21209700F258D2 /* HistoryListCells.m in Sources */,
 				03BF608D1D3A49330007BBFF /* PayCell.m in Sources */,
+				0331F8531D48648C0049DFFA /* WXApiRequestHandler.m in Sources */,
+				0331F85E1D4866940049DFFA /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m in Sources */,
 				03376B3B1D1AE1BB004EE048 /* NewsCells.m in Sources */,
 				032224D81D22762F00B20525 /* CouponListVc.m in Sources */,
 				03376B331D1AC71A004EE048 /* HelpVc.m in Sources */,
 				03C5BCF61D19080E00060FB3 /* ResetPassWordVc.m in Sources */,
+				035F347D1D4708850082C7FD /* ShowMyOrder.m in Sources */,
 				031B6D5D1D19764B00BD2585 /* GoodsClassVc.m in Sources */,
 				030901981D4471020003E9B9 /* PayClassModel.m in Sources */,
+				0331F8601D4866940049DFFA /* WXMediaMessage+messageConstruct.m in Sources */,
 				03BB29511D17757800EDEDFD /* MainTabBarVc.m in Sources */,
+				035F34691D46F00A0082C7FD /* ShowMyOrdersVc.m in Sources */,
 				032940E51D1E9DD8000D54D9 /* MyNumbers.m in Sources */,
 				038B195F1D12A8D8007C1CC8 /* RootViewController.m in Sources */,
 				030BD4BC1D31EF6D000038B6 /* CarListModel.m in Sources */,
 				03F796201D3688EB006F1B4A /* AddressModel.m in Sources */,
 				03BF770D1D216C7C00F1270F /* SheZhiVc.m in Sources */,
+				035F34721D46F9370082C7FD /* ShowTopView.m in Sources */,
 				03CE76B01D2E9DC400A416E7 /* GoodInfoUserList.m in Sources */,
 				034D89E01D1BB173005806C7 /* GoodsInfoVc.m in Sources */,
 				037232E41D20F7AA00F258D2 /* ShopListCells.m in Sources */,
@@ -1481,6 +1624,7 @@
 				035C57F01D2B83E1000D68D6 /* MainGoodsListModel.m in Sources */,
 				038B19311D12A44B007C1CC8 /* Cipher.m in Sources */,
 				034D89ED1D1BCD29005806C7 /* GoodsCountsView.m in Sources */,
+				0331F85F1D4866940049DFFA /* SendMessageToWXReq+requestWithTextOrMediaMessage.m in Sources */,
 				0360BCD71D2264EE00A2C07D /* UserNewsVc.m in Sources */,
 				03BB29621D17824C00EDEDFD /* NewsVc.m in Sources */,
 				03F44A9A1D2CEF8E00CEE5FD /* GoodsInfoModel.m in Sources */,
@@ -1600,6 +1744,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = BuyApp/PrefixHeader.pch;
 				INFOPLIST_FILE = BuyApp/Info.plist;
@@ -1609,9 +1754,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/BuyApp/PlusIn/JPush",
 					"$(PROJECT_DIR)/BuyApp/PlusIn/SPaySDK",
+					"$(PROJECT_DIR)/BuyApp/PlusIn/SDKExport",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.D.MyApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1621,6 +1768,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = BuyApp/PrefixHeader.pch;
 				INFOPLIST_FILE = BuyApp/Info.plist;
@@ -1630,9 +1778,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/BuyApp/PlusIn/JPush",
 					"$(PROJECT_DIR)/BuyApp/PlusIn/SPaySDK",
+					"$(PROJECT_DIR)/BuyApp/PlusIn/SDKExport",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.D.MyApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

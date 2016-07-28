@@ -35,7 +35,7 @@
 
 @interface PayVc ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)UITableView *tableView;
-@property (nonatomic, strong)NSMutableArray *dataArray;
+@property (nonatomic, strong)NSArray *dataArray;
 
 @property (weak, nonatomic) IBOutlet UILabel *lab_number;
 @property (weak, nonatomic) IBOutlet UIButton *btn_buttonAction;
@@ -52,6 +52,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.dataArray = [NSArray array];
+    self.title = @"支付结果";
     
     [self.lab_number mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.equalTo(self.view).offset(10);
@@ -59,6 +61,7 @@
         make.height.mas_equalTo(@40);
     }];
     
+    self.btn_buttonAction.backgroundColor = GS_COLOR_RED;
     [self.btn_buttonAction mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lab_number.mas_bottom).offset(10);
         make.left.right.equalTo(self.lab_number);
@@ -75,6 +78,7 @@
         make.top.equalTo(self.btn_buttonAction.mas_bottom).offset(10);
         make.left.right.bottom.equalTo(self.view);
     }];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -93,8 +97,21 @@
                                                                                       @"payment" : @"5"
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           if (SUCCESSED) {
-//                                                                                              ShowNotceSuccess;
-                                                                                              [self loadData:responseObject[@"data"][@"notice_sn"]];
+                                                                                              
+                                                                                              if ([self.isAlreadyBuy integerValue] == 1) {
+                                                                                                  self.dataArray = [CarListModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"deal_order_item"] error:nil];
+                                                                                                  [self.tableView reloadData];
+                                                                                                  
+                                                                                                  [self.btn_buttonAction setTitle:responseObject[@"data"][@"pay_info"] forState:UIControlStateNormal] ;
+                                                                                                  self.lab_number.text = [NSString stringWithFormat:@"  订单编号:%@",responseObject[@"data"][@"order_sn"]];
+                                                                                                  
+                                                                                                  
+                                                                                              }else{
+                                                                                                  [self loadData:responseObject[@"data"][@"notice_sn"]];
+                                                                                                  
+                                                                                                  [self.btn_buttonAction setTitle:responseObject[@"data"][@"pay_info"] forState:UIControlStateNormal] ;
+                                                                                                  self.lab_number.text = [NSString stringWithFormat:@"  订单编号:%@",responseObject[@"data"][@"notice_sn"]];
+                                                                                              }
                                                                                               
                                                                                           }else{
                                                                                               ShowNotceError;
@@ -191,8 +208,6 @@
                                              //获取SPaySDK需要的services
                                              NSString *services = xmlInfo[@"services"][@"text"];
                                              
-                                             
-                                             
                                              //调起SPaySDK支付
                                              [[SPayClient sharedInstance] pay:weakSelf
                                                                        amount:amount
@@ -206,12 +221,12 @@
                                                                            
                                                                            if (payStateModel.payState == SPayClientConstEnumPaySuccess) {
                                                                                //
-                                                                               
+                                                                               [self.btn_buttonAction setTitle:@"支付成功" forState:UIControlStateNormal] ;
                                                                                NSLog(@"支付成功，%@  %@",self.orderID,[NSString spay_out_trade_no]);
                                                                                NSLog(@"支付订单详情-->>\n%@",[paySuccessDetailModel description]);
                                                                                
                                                                                [MBProgressHUD showNetworkIndicator];
-                                                                               [self performSelector:@selector(getStatus:) withObject:payStateModel afterDelay:5];//r秒后执行TheAnimation
+                                                                               [self performSelector:@selector(getStatus:) withObject:orderString afterDelay:3];//r秒后执行TheAnimation
                                                                                
                                                                            }else{
                                                                                self.btn_buttonAction.titleLabel.text = @"订单支付失败";
@@ -245,18 +260,23 @@
     
 }
 
--(void)getStatus:(SPayClientPayStateModel *)payStateModel{
+-(void)getStatus:(NSString *)orderString{
     
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl" : @"payment",
                                                                                       @"act" : @"check_deal_order_status",
-                                                                                      @"id" : [NSString spay_out_trade_no],
+                                                                                      @"id" : self.orderID,
                                                                                       @"user_id":CNull2String(USERMODEL.ID)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           if (SUCCESSED) {
-                                                                                              ShowNotceSuccess;
-                                                                                              [self.btn_buttonAction setTitle:responseObject[@"data"][@"notice_sn"] forState:UIControlStateNormal] ;
-                                                                                              self.lab_number.text = [NSString stringWithFormat:@"  订单编号:%@",responseObject[@"data"][@"order_id"]];
+                                                                                              NSString * str = responseObject[@"data"][@"status"];
+                                                                                              if ([str integerValue] == 1) {
+                                                                                                  self.isAlreadyBuy = @"1";
+                                                                                                  [self loadOrderInfo];
+                                                                                                    ShowNotceSuccess;
+                                                                                              }
+                                                                                            
+                                                                                             
                                                                                               
                                                                                           }else{
                                                                                               ShowNotceError;
@@ -307,6 +327,9 @@
     cell.accessoryType = UITableViewCellAccessoryNone;
     if (self.dataArray.count > indexPath.row) {
         CarListModel * model = [self.dataArray objectAtIndex:indexPath.row];
+        
+        cell.lab_title.text = model.name;
+        
         cell.lab_time.text = model.create_time;
         
         NSMutableAttributedString *joinCountString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@人次",model.number]];
@@ -433,6 +456,14 @@
     freeifaddrs(interfaces);
     return address;
 }
+
+
+
+-(void)navBackVc{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
