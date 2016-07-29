@@ -11,7 +11,7 @@
 #import "UserTopView.h"
 #import "WinHistoryModel.h"
 
-@interface MyWinHistoryVc ()<UITableViewDelegate,UITableViewDataSource>
+@interface MyWinHistoryVc ()<UITableViewDelegate,UITableViewDataSource,MyWinListCellDelegate>
 @property (strong, nonatomic)  UITableView *tableView;
 @property (nonatomic, strong)  UINib * nib;
 @property (nonatomic, strong)  UserTopView * topView;
@@ -50,12 +50,12 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
-                                                                     withParameters:@{@"ctl":@"user_center",
-                                                                                      @"act":@"index",
+                                                                     withParameters:@{@"ctl":@"uc_winlog",
                                                                                       @"user_id":CNull2String(USERMODEL.ID)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           if (SUCCESSED) {
-                                                                                              [self.dataArray addObjectsFromArray:[WinHistoryModel arrayOfModelsFromDictionaries:responseObject[@"value"] error:nil]];
+                                                                                              [self.dataArray addObjectsFromArray:[WinHistoryModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"list"] error:nil]];
+                                                                                              [self.tableView reloadData];
                                                                                           }else{
                                                                                               ShowNotceError;
                                                                                           }
@@ -65,6 +65,14 @@
 
 }
 
+
+-(void)click_MyWinListCell:(MyWinListCell *)cell{
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    WinHistoryModel * model = [self.dataArray objectAtIndex:indexPath.row];
+    
+    
+    
+}
 #pragma mark - Table view data source
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -87,10 +95,11 @@
         [tableView registerNib:self.nib forCellReuseIdentifier:identy];
     }
     MyWinListCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+    cell.delegate = self;
+    
     cell.backgroundColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (self.dataArray.count > indexPath.row) {
-#warning 我的中奖纪录接口，缺少标题，参与期号，下单时间，
         [cell setDataModel:[self.dataArray objectAtIndex:indexPath.row]];
     }
     return cell;

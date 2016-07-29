@@ -9,5 +9,10 @@
 #import "WinHistoryModel.h"
 
 @implementation WinHistoryModel
-
++(JSONKeyMapper*)keyMapper
+{
+    return [[JSONKeyMapper alloc] initWithDictionary:@{
+                                                       @"id" : @"ID"
+                                                       }];
+}
 @end

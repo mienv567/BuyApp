@@ -74,16 +74,16 @@
         MainAdvModel * model = [self.items objectAtIndex:i];
         UIImageView *iv = [[UIImageView alloc] init];
         iv.userInteractionEnabled = YES;
-        iv.backgroundColor = [UIColor clearColor];//设置了背景颜色
+        iv.backgroundColor = [UIColor whiteColor];//设置了背景颜色
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap_Image:)];
         [iv addGestureRecognizer:tap];
         iv.tag = i;
         [iv sd_setImageWithURL:[NSURL URLWithString:model.img] placeholderImage:KDefaultImg completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             if (error) {
-                iv.contentMode = UIViewContentModeCenter;
+                iv.contentMode = UIViewContentModeScaleAspectFit;
                 iv.image = KDefaultImg;
             }else{
-                iv.contentMode = UIViewContentModeScaleToFill;
+                iv.contentMode = UIViewContentModeScaleAspectFit;
             }
         }];
         [self.contentView addSubview:iv];

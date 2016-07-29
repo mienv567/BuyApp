@@ -18,7 +18,7 @@
         make.top.equalTo(self.img_goods);
         make.left.equalTo(self.img_goods.mas_right).offset(10);
         make.right.equalTo(self.mas_right).offset(-10);
-        make.height.mas_equalTo(@20);
+        make.height.mas_equalTo(@32);
     }];
     
     self.lab_luckyNum.textColor = GS_COLOR_DARKGRAY;
@@ -26,14 +26,21 @@
     self.lab_time.textColor = GS_COLOR_DARKGRAY;
     self.lab_status.textColor = GS_COLOR_DARKGRAY;
 }
+- (IBAction)click_buttonClcik:(id)sender {
+    
+    if ([self.delegate respondsToSelector:@selector(click_MyWinListCell:)]) {
+        [self.delegate click_MyWinListCell:self];
+    }
+    
+}
 
 -(void)setDataModel:(WinHistoryModel *)model{
+    [self.img_goods sd_setImageWithURL:[NSURL URLWithString:model.deal_icon] placeholderImage:KDefaultImg];
+    self.lab_title.text = [NSString stringWithFormat:@"参与期号: %@",model.name];
+    self.lab_qihao.text = [NSString stringWithFormat:@"幸运号码: %@",model.duobao_item_id];
+    self.lab_time.text = [NSString stringWithFormat:@"下单时间: %@",model.create_time];
     
-    self.lab_title.text = @"无该字段";
-    self.lab_qihao.text = @"无该字段";
-    self.lab_time.text = @"无该字段";
-    
-    NSMutableAttributedString *luckyNumStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"幸运号码: %@",model.deliverty_status]];
+    NSMutableAttributedString *luckyNumStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"幸运号码: %@",model.lottery_sn]];
     [luckyNumStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 6)];
     [luckyNumStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 6)];
     [luckyNumStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(6, luckyNumStr.length - 6)];

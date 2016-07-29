@@ -18,6 +18,11 @@
 @property (nonatomic,strong)NSString <Optional>* zip;
 @property (nonatomic,strong)NSString <Optional>* user_id;
 @property (nonatomic,strong)NSString <Optional>* user_name;
-
+@property (nonatomic,strong)NSString <Optional>*name;
+@property (nonatomic,strong)NSString <Optional>*lottery_sn;
+@property (nonatomic,strong)NSString <Optional>*deal_icon;
+@property (nonatomic,strong)NSString <Optional>*create_time;
+@property (nonatomic,strong)NSString <Optional>*ID;
+@property (nonatomic,strong)NSString <Optional>*duobao_item_id;
 @end
 

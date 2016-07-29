@@ -25,7 +25,7 @@
     [self addSubview:self.pageView];
     [self.pageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.width.equalTo(self);
-        make.height.equalTo(self.pageView.mas_width).dividedBy(660.0/410.0);
+        make.height.equalTo(self.pageView.mas_width).dividedBy(375.0/220.0);
     }];
     
     
@@ -174,13 +174,13 @@
     [self.pageView setItems:array andTimeInterval:5];
     
     
-    NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"            %@\n%@",model.name,model.brief]];
+    NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"            %@%@",model.name,model.brief]];
     [titleString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(titleString.length - model.brief.length, model.brief.length)];
     [titleString addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(titleString.length - model.brief.length, model.brief.length)];
     self.lab_title.attributedText = titleString;
     
     
-    self.lab_state.text = model.luck_user_id?@"已揭晓":@"进行中";
+    self.lab_state.text = [model.luck_user_id integerValue] > 0 ?@"已揭晓":@"进行中";
     self.lab_processQihao.text = [NSString stringWithFormat:@"期号:%@",model.ID];
     self.lab_all.text = [NSString stringWithFormat:@"总需%@人次",model.max_buy];
     self.view_progress.progress = (CGFloat)[model.progress integerValue] / 100;

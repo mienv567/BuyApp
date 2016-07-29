@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btn_Login;
 @property (weak, nonatomic) IBOutlet UIButton *btn_changeStyle;
 @property (weak, nonatomic) IBOutlet UIButton *btn_forgetPassWord;
+
 @property (weak, nonatomic) IBOutlet UIImageView *line_noticebg;
 @property (weak, nonatomic) IBOutlet UILabel *lab_notice;
 @property (weak, nonatomic) IBOutlet UIImageView *img_icon;
@@ -95,7 +96,38 @@
     [self.btn_code setTitle:@"点击获取验证码" forState:UIControlStateNormal];
     [self.btn_code setTitleColor:GS_COLOR_RED forState:UIControlStateNormal];
     self.btn_code.hidden = !self.JustUsePhoneLogin;
+    
+    [self.btn_weChatLogin setTitleColor:GS_COLOR_LIGHTBLACK forState:UIControlStateNormal];
+    [self.btn_weChatLogin mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view.mas_bottom).offset(-20);
+        make.centerX.equalTo(self.view);
+        make.width.height.mas_equalTo(@50);
+    }];
+    
+    self.img_icon.image = KDefaultImg;
+    [self.img_icon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view);
+        make.width.height.mas_equalTo(@20);
+        make.bottom.equalTo(self.btn_weChatLogin.mas_centerY).offset(-20);
+    }];
+    
+    self.lab_notice.textColor = GS_COLOR_LIGHTBLACK;
+    self.lab_notice.backgroundColor = GS_COLOR_WHITE;
+    [self.lab_notice mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view);
+        make.width.mas_equalTo(@80);
+//        make.height.mas_equalTo(@30);
+        make.bottom.equalTo(self.img_icon.mas_top).offset(-20);
+    }];
 
+    self.line_noticebg.backgroundColor = GS_COLOR_GRAY;
+    [self.line_noticebg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.lab_notice);
+        make.centerX.equalTo(self.view);
+        make.width.mas_equalTo(K_WIDTH - 20);
+        make.height.mas_equalTo(@1);
+    }];
+    
 }
 
 #pragma mark - 取消登录

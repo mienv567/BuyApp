@@ -61,7 +61,7 @@
     [self addSubview:self.topBackGroundView];
     [self.topBackGroundView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self);
-        make.height.mas_equalTo(@(K_WIDTH / 660.0 * 410.0 + 80 + K_WIDTH / 3 + 30  +40));
+        make.height.mas_equalTo(@(K_WIDTH / 370.0 * 180.0 + 80 + K_WIDTH / 3 + 30  +40));
     }];
     
     //创建广告
@@ -72,7 +72,7 @@
     [self.topBackGroundView addSubview:self.pageView];
     [self.pageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.width.equalTo(self.topBackGroundView);
-        make.height.equalTo(self.pageView.mas_width).dividedBy(660.0/410.0);
+        make.height.equalTo(self.pageView.mas_width).dividedBy(370.0/180.0);
     }];
     
     //创建功能菜单

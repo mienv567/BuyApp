@@ -62,7 +62,7 @@
     
     self.pageView = KGetViewFromNib(@"GoodsInfoTopView");
     self.pageView.backgroundColor = [UIColor whiteColor];
-    self.pageView.frame = CGRectMake(0, 0, K_WIDTH, K_WIDTH * 410.0 / 660.0 + 50 + 80);
+    self.pageView.frame = CGRectMake(0, 0, K_WIDTH, K_WIDTH * 220.0 / 375.0 + 50 + 80);
     self.pageView.showType = GoodsInfoTopViewProcess;
     self.tableView.tableHeaderView = self.pageView;
     
@@ -120,7 +120,7 @@
                                                                                                   [self.pageView setDataModel:self.dataModel.item_data];
                                                                                                   if (self.dataModel.item_data.luck_lottery) {
 #warning 倒计时或者进度    
-                                                                                                      self.pageView.frame = CGRectMake(0, 0, K_WIDTH, K_WIDTH * 410.0 / 660.0 + 50 );
+                                                                                                      self.pageView.frame = CGRectMake(0, 0, K_WIDTH, K_WIDTH * 220.0 / 375.0 + 50 );
                                                                                                       self.tableView.tableHeaderView = self.pageView;
 
                                                                                                       self.pageView.showType = GoodsInfoTopViewNone;

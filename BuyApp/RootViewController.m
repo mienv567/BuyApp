@@ -186,6 +186,7 @@
     self.navigationItem.titleView = titleLabel;
 }
 
+
 #pragma mark - Wating Method
 
 -(void)setTitle:(NSString *)title{

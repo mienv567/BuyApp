@@ -57,7 +57,8 @@ static NSString *footerID = @"footerID";
     self.classView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.classView];
     [self.classView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.left.right.bottom.equalTo(self.view);
+        make.top.equalTo(self.view.mas_top).offset(-2);
     }];
     
     [self.classView registerClass:[MainGoodsListCells class] forCellWithReuseIdentifier:cellID];
@@ -299,7 +300,7 @@ static NSString *footerID = @"footerID";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
     if (section == 0) {
-        return CGSizeMake(0, K_WIDTH / 660.0 * 410.0 + 80 + K_WIDTH / 3 + 30  + 40);
+        return CGSizeMake(0, K_WIDTH / 370.0 * 180.0 + 80 + K_WIDTH / 3 + 30  + 40);
     }
     return CGSizeMake(0, 0);
 }
