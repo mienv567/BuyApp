@@ -44,6 +44,9 @@
 
 #define NEEDLOGIN  if (![[UserManager sharedManager] isUserLoad]) {AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;if(appDelegate) {[appDelegate showNeedLoginAlertView];}return;}
 
+#pragma mark --- 切换字体
+#define kGlobalFontFamilyName   @"Verdana-Bold"
+#define FontSize(int)  [UIFont systemFontOfSize:int]
 
 #pragma mark --- 数据转换宏
 #define CNull2String(str)  str?str:@""    //null转为空字符串
@@ -80,7 +83,7 @@
 #define GS_COLOR_BLACK        HEXRGBCOLOR(0x000000)
 #define GS_COLOR_LIGHTBLACK   HEXRGBCOLOR(0x404040)
 #define GS_COLOR_GREEN        HEXRGBCOLOR(0x60A000)
-#define GS_COLOR_BLUE         [UIColor blueColor]//HEXRGBCOLOR(0x18B4ED)
+#define GS_COLOR_BLUE         [UIColor colorWithRed:46.0/255.0 green:99.0/255.0 blue:189.0/255.0 alpha:1]//HEXRGBCOLOR(0x18B4ED)
 #define GS_COLOR_YELLOW       HEXRGBCOLOR(0xFFC000)
 #define GS_COLOR_LIGHTYELLOW  HEXRGBCOLOR(0xFAE6B4)
 #define GS_COLOR_ORANGE       HEXRGBCOLOR(0xFF8000)
@@ -91,27 +94,16 @@
 #define GS_COLOR_GRAYT        HEXRGBCOLOR(0xCCCCCC)
 #define GS_COLOR_Main         HEXRGBCOLOR(0x6E7D8B)
 #define GS_COLOR_Gold         HEXRGBCOLOR(0xff7423)
-#define GS_COLOR_GoldRed         HEXRGBCOLOR(0xF7CAD3)
+#define GS_COLOR_GoldRed      HEXRGBCOLOR(0xF7CAD3)
 
 //通知
 #define Notification_APNS           @"Notification_APNS"
 #define Notification_Main          @"Notification_MainTime"
-//新浪微博
-#define kAppKey                 @""
-#define kRedirectURI            @""
-#define Sina_Key                @""
+
 //微信
 #define WeixinAppID             @""
 #define WeixinAppSecret         @""
-//腾讯
-#define TencentAppKey           @""
-#define TencentAppScheme        @""
-#define TencentAppSecret        @""//
-//支付宝
-#define ZhiFuBaoScheme          @""
-#define ZhiFuBaoNotification    @""
-//百度
-#define BMAP_KEY                @""
+
 //极光
 #define JPUSH_KEY               @"eac3de4a7717dc5354ba849a"
 //用户信息

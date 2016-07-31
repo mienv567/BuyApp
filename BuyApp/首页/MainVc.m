@@ -47,14 +47,14 @@ static NSString *footerID = @"footerID";
     self.dataArray = [NSMutableArray array];
     
     XLPlainFlowLayout *layout = [XLPlainFlowLayout new];
-    layout.itemSize = CGSizeMake(K_WIDTH / 2 - 0.5 , 180);
+    layout.itemSize = CGSizeMake(K_WIDTH / 2 - 0.5 , 230);
     layout.sectionInset = UIEdgeInsetsMake(1, 0, 1, 0);
     layout.naviHeight = 0;
 
     self.classView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, K_WIDTH, K_HEIGHT) collectionViewLayout:layout];
     self.classView.dataSource = self;
     self.classView.delegate = self;
-    self.classView.backgroundColor = [UIColor clearColor];
+    self.classView.backgroundColor = GS_COLOR_WHITE;
     [self.view addSubview:self.classView];
     [self.classView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);
@@ -69,6 +69,7 @@ static NSString *footerID = @"footerID";
     self.classView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNew)];
     self.classView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
     
+    [self.classView setContentOffset:CGPointMake(0, -5)];
 }
 
 #pragma mark - 获取数据

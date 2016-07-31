@@ -41,18 +41,27 @@
     self.lab_time.text = [NSString stringWithFormat:@"下单时间: %@",model.create_time];
     
     NSMutableAttributedString *luckyNumStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"幸运号码: %@",model.lottery_sn]];
-    [luckyNumStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 6)];
+    [luckyNumStr addAttribute:NSFontAttributeName value:FontSize(13) range:NSMakeRange(0, 6)];
     [luckyNumStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 6)];
-    [luckyNumStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(6, luckyNumStr.length - 6)];
+    [luckyNumStr addAttribute:NSFontAttributeName value:FontSize(13) range:NSMakeRange(6, luckyNumStr.length - 6)];
     [luckyNumStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(6,luckyNumStr.length - 6)];
     self.lab_luckyNum.attributedText = luckyNumStr;
     
-    NSMutableAttributedString *statusStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"状态: %@",model.deliverty_status]];
-    [statusStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 4)];
+    NSMutableAttributedString *statusStr;
+    if ([model.delivery_status integerValue] == 0) {
+        statusStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"状态: %@",@"未发货"]];
+    }else if ([model.delivery_status integerValue] == 1){
+        statusStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"状态: %@",@"已发货"]];
+    }else if ([model.delivery_status integerValue] == 5){
+        statusStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"状态: %@",@"无需发货"]];
+    }
+    
+    [statusStr addAttribute:NSFontAttributeName value:FontSize(13) range:NSMakeRange(0, 4)];
     [statusStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 4)];
-    [statusStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(4, statusStr.length - 4)];
+    [statusStr addAttribute:NSFontAttributeName value:FontSize(13) range:NSMakeRange(4, statusStr.length - 4)];
     [statusStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(4,statusStr.length - 4)];
     self.lab_status.attributedText = statusStr;
+    
 }
 
 

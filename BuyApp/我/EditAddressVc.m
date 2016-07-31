@@ -229,7 +229,7 @@
     }
     cell.textLabel.textColor = GS_COLOR_DARKGRAY;
     cell.backgroundColor = GS_COLOR_WHITE;
-    cell.textLabel.font = [UIFont systemFontOfSize:13];
+    cell.textLabel.font = FontSize(13);
     cell.backgroundColor = GS_COLOR_WHITE;
 
     AddressModel * model = [self.dataArray objectAtIndex:indexPath.section];
@@ -274,6 +274,8 @@
         [cell setSeparatorInset:UIEdgeInsetsZero];
     }
 }
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

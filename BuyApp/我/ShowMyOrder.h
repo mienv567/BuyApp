@@ -10,4 +10,6 @@
 
 @interface ShowMyOrder : RootViewController
 
+@property (nonatomic, strong)NSString * myShowGoodsID;  //我要晒单的ID
+
 @end

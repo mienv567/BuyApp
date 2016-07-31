@@ -9,8 +9,11 @@
 #import "ShowMyOrdersVc.h"
 #import "ShowOrderListCell.h"
 #import "ShowTopView.h"
+#import "WinHistoryModel.h"
+#import "ShowMorderNoticeVc.h"
 
-@interface ShowMyOrdersVc ()<UITableViewDelegate,UITableViewDataSource>
+
+@interface ShowMyOrdersVc ()<UITableViewDelegate,UITableViewDataSource,ShowOrderListCellDelegate>
 @property (strong, nonatomic)  ShowTopView *view_topBg;
 @property (strong, nonatomic)  UITableView *tableView;
 @property (nonatomic, strong)  UINib * nib;
@@ -35,7 +38,7 @@
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.bottom.equalTo(self.view);
-//        make.top.equalTo(self.view.mas_top).offset(50);
+        //        make.top.equalTo(self.view.mas_top).offset(50);
     }];
     
     self.tableView.tableHeaderView = KGetViewFromNib(@"ShowTopView");
@@ -44,14 +47,17 @@
     
 }
 
-
 -(void)loadData{
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl" : @"uc_share",
                                                                                       @"user_id":CNull2String(USERMODEL.ID)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           if (SUCCESSED) {
-//                                                                                              [self.dataArray addObjectsFromArray:[AddressPlaceModel arrayOfModelsFromDictionaries:responseObject[@"data"] error:nil]];
+                                                                                              
+                                                                                              [self.dataArray addObjectsFromArray:[WinHistoryModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"share_list"] error:nil]];
+                                                                                              
+                                                                                              [self.tableView reloadData];
+                                                                                              
                                                                                           }else{
                                                                                               
                                                                                           }
@@ -60,7 +66,17 @@
                                                                                           
                                                                                       }];
 }
-//http://www.quyungou.com/wap/index.php?ctl=uc_share&show_prog=1
+
+-(void)click_ShowOrderListCell:(ShowOrderListCell *)cell{
+    
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    WinHistoryModel * model = [self.dataArray objectAtIndex:indexPath.row];
+    
+    ShowMorderNoticeVc * vc = [[NSClassFromString(@"ShowMorderNoticeVc") alloc]initWithNibName:@"ShowMorderNoticeVc" bundle:nil];
+    vc.myShowGoodsID = model.ID;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     KJumpToViewControllerByNib(@"ShowMorderNoticeVc");
@@ -79,7 +95,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -90,13 +106,17 @@
         [tableView registerNib:self.nib forCellReuseIdentifier:identy];
     }
     ShowOrderListCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+    cell.delegate = self;
     
     cell.backgroundColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryNone;
-//    cell.lab_title.text = ;
-//    cell.lab_content.text = [CellTitleArray objectAtIndex:indexPath.row];
-//    cell.img_icon.image =[UIImage imageNamed:[CellImgArray objectAtIndex:indexPath.row]];
+    if (self.dataArray.count > indexPath.row) {
+        WinHistoryModel * model = [self.dataArray objectAtIndex:indexPath.row];
+        cell.lab_title.text = model.name;
+        cell.lab_qihao.text = [NSString stringWithFormat:@"期号 : %@", model.duobao_item_id];
+        [cell.img_goods sd_setImageWithURL:[NSURL URLWithString:model.deal_icon] placeholderImage:KDefaultImg];
+    }
     return cell;
 }
 
@@ -119,13 +139,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

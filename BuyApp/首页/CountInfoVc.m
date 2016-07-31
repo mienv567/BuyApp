@@ -176,14 +176,14 @@
     cell.backgroundColor = GS_COLOR_WHITE;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.textColor = GS_COLOR_DARKGRAY;
-    cell.textLabel.font = [UIFont systemFontOfSize:13];
+    cell.textLabel.font = FontSize(13);
     
     UILabel * lab_content = [UILabel new];
     [cell.contentView addSubview:lab_content];
     lab_content.lineBreakMode = NSLineBreakByTruncatingTail;
     lab_content.textAlignment = NSTextAlignmentCenter;
     lab_content.textColor = GS_COLOR_DARKGRAY;
-    lab_content.font = [UIFont systemFontOfSize:13];
+    lab_content.font = FontSize(13);
     [lab_content mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(cell.contentView);
         make.right.equalTo(cell.contentView).offset(-10);
@@ -206,7 +206,7 @@
         self.headViewA.lab_history.text = @"=截止该商品开奖时间前最后50条全站参与记录";
 
         NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"=%@",@"5156806346"]];
-        [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 1)];
+        [noticeStr addAttribute:NSFontAttributeName value:FontSize(12) range:NSMakeRange(0, 1)];
         [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 1)];
         [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:12] range:NSMakeRange(1, noticeStr.length - 1)];
         [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(1,noticeStr.length - 1)];
@@ -218,11 +218,11 @@
         self.headViewB.lab_history.text = @"=最近一期的开奖结果";
 
         NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"=%@%@",@"27181",@"(第160622006期)"]];
-        [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 1)];
+        [noticeStr addAttribute:NSFontAttributeName value:FontSize(12) range:NSMakeRange(0, 1)];
         [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 1)];
-        [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:12] range:NSMakeRange(1, 5)];
+        [noticeStr addAttribute:NSFontAttributeName value:FontSize(12) range:NSMakeRange(1, 5)];
         [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(1,5)];
-        [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(6, noticeStr.length - 6)];
+        [noticeStr addAttribute:NSFontAttributeName value:FontSize(12) range:NSMakeRange(6, noticeStr.length - 6)];
         [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(6,noticeStr.length - 6)];
         
         self.headViewB.lab_qiHao.attributedText = noticeStr;
@@ -231,9 +231,9 @@
     }else if (section == 2){
         self.headViewResult.lab_title.text = @"计算结果";
         NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"幸运号码:%@",@"5156806346"]];
-        [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:17] range:NSMakeRange(0, 5)];
+        [noticeStr addAttribute:NSFontAttributeName value:FontSize(17) range:NSMakeRange(0, 5)];
         [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_LIGHTBLACK range:NSMakeRange(0, 5)];
-        [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:17] range:NSMakeRange(5, noticeStr.length - 5)];
+        [noticeStr addAttribute:NSFontAttributeName value:FontSize(17) range:NSMakeRange(5, noticeStr.length - 5)];
         [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(5,noticeStr.length - 5)];
          self.headViewResult.lab_luckyNumber.attributedText = noticeStr;
         

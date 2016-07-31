@@ -236,7 +236,7 @@ NSString * const MMshowsSelectionIndicator = @"showsSelectionIndicator";
   }
   
   if (pickerViewFont==nil) {
-    _pickerViewFont = [UIFont systemFontOfSize:22];
+    _pickerViewFont = FontSize(22);
   }
   _pickerViewFont = pickerViewFont;
   

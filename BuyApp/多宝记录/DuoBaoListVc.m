@@ -87,7 +87,7 @@
                                                                                               self.lab_qihao.text = [NSString stringWithFormat:@"期号: %@",responseObject[@"data"][@"duobao_item"][@"id"]];
                                                                                               
                                                                                               NSMutableAttributedString *joinCountString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"参与了%@人次",responseObject[@"data"][@"duobao_count"]]];
-                                                                                              [joinCountString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(3, joinCountString.length - 5)];
+                                                                                              [joinCountString addAttribute:NSFontAttributeName value:FontSize(13) range:NSMakeRange(3, joinCountString.length - 5)];
                                                                                               [joinCountString addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(3, joinCountString.length -5)];
                                                                                               self.lab_count.attributedText = joinCountString;
                                                                                               
@@ -162,7 +162,7 @@
         cell.lab_time.text = model.create_time;
         
         NSMutableAttributedString *joinCountString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@人次",model.number]];
-        [joinCountString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, joinCountString.length - 2)];
+        [joinCountString addAttribute:NSFontAttributeName value:FontSize(13) range:NSMakeRange(0, joinCountString.length - 2)];
         [joinCountString addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(0, joinCountString.length - 2)];
         cell.lab_count.attributedText = joinCountString;
         

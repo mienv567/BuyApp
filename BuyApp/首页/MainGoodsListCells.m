@@ -25,8 +25,9 @@
         self.img_goods.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:self.img_goods];
         [self.img_goods mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.right.equalTo(self.contentView);
-            make.height.mas_equalTo(@100);
+            make.top.left.equalTo(self.contentView).offset(10);
+            make.right.equalTo(self.contentView).offset(-10);
+            make.height.mas_equalTo(@140);
         }];
 //        
 //        self.btn_showInfo = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -42,8 +43,8 @@
         
         self.lab_title = [UILabel new];
         self.lab_title.backgroundColor = [UIColor whiteColor];
-        self.lab_title.textColor = [UIColor blackColor];
-        self.lab_title.font = [UIFont systemFontOfSize:13];
+        self.lab_title.textColor = GS_COLOR_LIGHTBLACK;
+        self.lab_title.font = FontSize(13);
         self.lab_title.text = @"新款笔记本电脑，现在只卖10000元，快来抢购吧，机不可失失不再来！";
         [self.contentView addSubview:self.lab_title];
         [self.lab_title sizeToFit];
@@ -62,7 +63,7 @@
         self.btn_addList.layer.masksToBounds = YES;
         self.btn_addList.layer.borderColor = GS_COLOR_RED.CGColor;
         self.btn_addList.layer.borderWidth = 1.0;
-        self.btn_addList.titleLabel.font = [UIFont systemFontOfSize:12];
+        self.btn_addList.titleLabel.font = FontSize(12);
         [self.btn_addList setTitleColor:GS_COLOR_RED forState:UIControlStateNormal];
         [self.btn_addList addTarget:self action:@selector(click_addToList) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:self.btn_addList];
@@ -75,7 +76,7 @@
         self.lab_process = [UILabel new];
         self.lab_process.backgroundColor = [UIColor whiteColor];
         self.lab_process.textColor = GS_COLOR_DARKGRAY;
-        self.lab_process.font = [UIFont systemFontOfSize:12];
+        self.lab_process.font = FontSize(12);
         self.lab_process.text = @"最新进度";
         [self.contentView addSubview:self.lab_process];
         [self.lab_process sizeToFit];
@@ -112,9 +113,9 @@
     [self.img_goods sd_setImageWithURL:[NSURL URLWithString:model.iCon] placeholderImage:KDefaultImg];
     
     NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"开奖进度%d\%%",(int)model.progress]];
-    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 4)];
+    [noticeStr addAttribute:NSFontAttributeName value:FontSize(12) range:NSMakeRange(0, 4)];
     [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_LIGHTBLACK range:NSMakeRange(0, 4)];
-    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(4, noticeStr.length - 4)];
+    [noticeStr addAttribute:NSFontAttributeName value:FontSize(12) range:NSMakeRange(4, noticeStr.length - 4)];
     [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_BLUE range:NSMakeRange(4,noticeStr.length - 4)];
     self.lab_process.attributedText = noticeStr;
     

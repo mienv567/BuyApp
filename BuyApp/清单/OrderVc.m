@@ -69,7 +69,7 @@
     self.lab_redCount = [UILabel new];
     self.lab_redCount.backgroundColor = GS_COLOR_RED;
     self.lab_redCount.textColor = [UIColor whiteColor];
-    self.lab_redCount.font = [UIFont systemFontOfSize:13];
+    self.lab_redCount.font = FontSize(13);
     self.lab_redCount.textAlignment = NSTextAlignmentCenter;
     
     
@@ -387,9 +387,9 @@
         cell.detailTextLabel.textColor = GS_COLOR_RED;
     }
     if (indexPath.row == 0 && indexPath.section !=4) {
-        cell.textLabel.font = [UIFont systemFontOfSize:15];
+        cell.textLabel.font = FontSize(15);
     }else{
-        cell.textLabel.font = [UIFont systemFontOfSize:12];
+        cell.textLabel.font = FontSize(12);
     }
     
     

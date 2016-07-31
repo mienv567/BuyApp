@@ -175,7 +175,7 @@
     
     
     NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"            %@%@",model.name,model.brief]];
-    [titleString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(titleString.length - model.brief.length, model.brief.length)];
+    [titleString addAttribute:NSFontAttributeName value:FontSize(15) range:NSMakeRange(titleString.length - model.brief.length, model.brief.length)];
     [titleString addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(titleString.length - model.brief.length, model.brief.length)];
     self.lab_title.attributedText = titleString;
     
@@ -187,7 +187,7 @@
 
     
     NSMutableAttributedString *lastString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"剩余%@",model.surplus_count]];
-    [lastString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(2, lastString.length - 2)];
+    [lastString addAttribute:NSFontAttributeName value:FontSize(13) range:NSMakeRange(2, lastString.length - 2)];
     [lastString addAttribute:NSForegroundColorAttributeName value:GS_COLOR_BLUE range:NSMakeRange(2, lastString.length - 2)];
     self.lab_last.attributedText = lastString;
 

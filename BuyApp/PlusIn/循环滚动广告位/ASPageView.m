@@ -38,7 +38,7 @@
         
         self.pageControl = [[UIPageControl alloc] init];
         self.pageControl.pageIndicatorTintColor = GS_COLOR_GRAY;
-        self.pageControl.currentPageIndicatorTintColor = GS_COLOR_DARKGRAY;
+        self.pageControl.currentPageIndicatorTintColor = GS_COLOR_RED;
         [self addSubview:self.pageControl];
         [self.pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.equalTo(self);

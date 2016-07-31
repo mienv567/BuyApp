@@ -70,7 +70,12 @@
     }];
     
     if ([model.has_lottery integerValue] == 1) {
+        
+        if (model.luck_user_name.length > 3 ) {
+            model.luck_user_name = [NSString stringWithFormat:@"%@...",[model.luck_user_name substringWithRange:NSMakeRange(0, 3)]];
+        }
         NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"恭喜%@中奖\n幸运号%@",model.luck_user_name,model.lottery_sn]];
+        
         [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:11] range:NSMakeRange(0, 2)];
         [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_LIGHTBLACK range:NSMakeRange(0, 2)];
         [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:11] range:NSMakeRange(2, model.luck_user_name.length)];

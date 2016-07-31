@@ -7,6 +7,7 @@
 //
 
 #import "ShowMorderNoticeVc.h"
+#import "ShowMyOrder.h"
 
 @interface ShowMorderNoticeVc ()
 @property (weak, nonatomic) IBOutlet UIImageView *img_icon;
@@ -81,7 +82,11 @@
 
 
 - (IBAction)click_startSHow:(id)sender {
-    KJumpToViewControllerByNib(@"ShowMyOrder");
+    
+    ShowMyOrder * vc = [[NSClassFromString(@"ShowMyOrder") alloc]initWithNibName:@"ShowMyOrder" bundle:nil];
+    vc.myShowGoodsID = self.myShowGoodsID;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning {

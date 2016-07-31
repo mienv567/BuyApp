@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "MainTabBarVc.h"
 
-#define FontSize   15
+#define FontSizeCount   15
 @implementation RootViewController
 - (id)init
 {
@@ -45,7 +45,7 @@
     if (imgName.length > 0) {
         UIButton *leftBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
         leftBarButton.frame = CGRectMake(0.0, 0.0, 30.0, 20.0);
-        leftBarButton.titleLabel.font = [UIFont systemFontOfSize:FontSize];
+        leftBarButton.titleLabel.font = FontSize(FontSizeCount);
         [leftBarButton setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
         [leftBarButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
         leftBarButton.showsTouchWhenHighlighted = YES;
@@ -61,7 +61,7 @@
     if (titleName.length > 0) {
         UIButton *leftBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
         leftBarButton.frame = CGRectMake(0.0, 0.0, 40.0, 20.0);
-        leftBarButton.titleLabel.font = [UIFont systemFontOfSize:FontSize];
+        leftBarButton.titleLabel.font = FontSize(FontSizeCount);
         [leftBarButton setTitle:titleName forState:UIControlStateNormal];
         [leftBarButton setTitleColor:GS_COLOR_RED forState:UIControlStateNormal];
         [leftBarButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
@@ -79,7 +79,7 @@
     if (imgName.length > 0) {
         UIButton *rightBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
         rightBarButton.frame = CGRectMake(5.0, 0.0, 20.0, 20.0);
-        rightBarButton.titleLabel.font = [UIFont systemFontOfSize:FontSize];
+        rightBarButton.titleLabel.font = FontSize(FontSizeCount);
         [rightBarButton setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
         [rightBarButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
         rightBarButton.showsTouchWhenHighlighted = YES;
@@ -95,7 +95,7 @@
     if (titleName.length > 0) {
         UIButton *rightBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
         rightBarButton.frame = CGRectMake(0.0, 0.0, 80.0, 20.0);
-        rightBarButton.titleLabel.font = [UIFont systemFontOfSize:FontSize];
+        rightBarButton.titleLabel.font = FontSize(FontSizeCount);
         [rightBarButton setTitle:titleName forState:UIControlStateNormal];
         if ([titleName isEqualToString:@"红包兑换"]) {
             [rightBarButton setTitleColor:GS_COLOR_BLUE forState:UIControlStateNormal];
@@ -123,7 +123,7 @@
         UIButton *leftBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
         leftBarButton.frame = CGRectMake(10.0, 24.0, 30.0, 30.0);
         leftBarButton.tag = 10000;
-        leftBarButton.titleLabel.font = [UIFont systemFontOfSize:FontSize];
+        leftBarButton.titleLabel.font = FontSize(FontSizeCount);
         leftBarButton.backgroundColor = [UIColor clearColor];
         [leftBarButton setImage:[UIImage imageNamed:leftImgString] forState:UIControlStateNormal];
         [leftBarButton addTarget:self action:@selector(MyNavLeftClick) forControlEvents:UIControlEventTouchUpInside];
@@ -135,7 +135,7 @@
         UIButton *rightBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
         rightBarButton.frame = CGRectMake(K_WIDTH - 40, 24.0, 30.0, 30.0);
         rightBarButton.tag = 10001;
-        rightBarButton.titleLabel.font = [UIFont systemFontOfSize:FontSize];
+        rightBarButton.titleLabel.font = FontSize(FontSizeCount);
         rightBarButton.backgroundColor = [UIColor clearColor];
         [rightBarButton setImage:[UIImage imageNamed:rightImgString] forState:UIControlStateNormal];
         [rightBarButton addTarget:self action:@selector(MyNavRightClick) forControlEvents:UIControlEventTouchUpInside];
@@ -145,7 +145,7 @@
     
     if (titleStr.length > 0) {
         UILabel *lab_class = [[UILabel alloc] initWithFrame:CGRectMake(10, 24.0 , K_WIDTH, 20)];
-        lab_class.font = [UIFont systemFontOfSize:FontSize];
+        lab_class.font = FontSize(FontSizeCount);
         lab_class.text = titleStr;
         lab_class.backgroundColor = [UIColor clearColor];
         lab_class.textColor = [UIColor clearColor];
@@ -162,7 +162,7 @@
 - (void)setTitleLabel:(NSString *)titleStr{
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0 , 150, 80)];
     titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.font = [UIFont systemFontOfSize:20];
+    titleLabel.font = FontSize(20);
     titleLabel.textColor = [UIColor whiteColor];//设置文本颜色
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.numberOfLines=1;
@@ -176,7 +176,7 @@
 - (void)setRedTitleLabel:(NSString *)titleStr{
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0 , 200, 80)];
     titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.font = [UIFont systemFontOfSize:20];
+    titleLabel.font = FontSize(20);
     titleLabel.textColor = GS_COLOR_RED;//设置文本颜色
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.numberOfLines=1;

@@ -333,7 +333,7 @@
         cell.lab_time.text = model.create_time;
         
         NSMutableAttributedString *joinCountString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@人次",model.number]];
-        [joinCountString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, joinCountString.length - 2)];
+        [joinCountString addAttribute:NSFontAttributeName value:FontSize(13) range:NSMakeRange(0, joinCountString.length - 2)];
         [joinCountString addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(0, joinCountString.length - 2)];
         cell.lab_count.attributedText = joinCountString;
     }

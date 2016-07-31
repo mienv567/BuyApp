@@ -161,7 +161,10 @@
                                                                                                   }else{
                                                                                                       self.bottomView.showType = GoodsBottomViewBuy;
                                                                                                   }
-                                                                                                  self.bottomView.lab_num.text = [NSString stringWithFormat:@"%@  ",responseObject[@"data"][@"cart_data"][@"cart_item_num"]];
+                                                                                                  if ([[NSString stringWithFormat:@"%@  ",responseObject[@"data"][@"cart_info"][@"cart_item_num"]] integerValue] > 0) {
+                                                                                                       self.bottomView.lab_num.text = [NSString stringWithFormat:@"%@  ",responseObject[@"data"][@"cart_info"][@"cart_item_num"]];
+                                                                                                  }
+                                                                                                 
                                                                                                 
                                                                                                   //购买的约束
                                                                                                   if ([self.dataModel.item_data.surplus_count integerValue] > 0) {
@@ -350,7 +353,7 @@
     self.allCountsView.lab_title.text = self.dataModel.item_data.name;
     
     NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"共参与了%@人次:",@(self.dataModel.my_duobao_log.count)]];
-    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(4, noticeStr.length - 6)];
+    [noticeStr addAttribute:NSFontAttributeName value:FontSize(12) range:NSMakeRange(4, noticeStr.length - 6)];
     [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(4, noticeStr.length - 6)];
     self.allCountsView.lab_notice.attributedText = noticeStr;
 }

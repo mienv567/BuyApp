@@ -195,10 +195,10 @@
     [MMPickerView showPickerViewInView:self.view
                            withStrings:array
                            withOptions:@{MMbackgroundColor: [UIColor whiteColor],
-                                         MMtextColor: [UIColor blackColor],
+                                         MMtextColor: GS_COLOR_LIGHTBLACK,
                                          MMtoolbarColor: [UIColor whiteColor],
                                          MMbuttonColor: GS_COLOR_BLUE,
-                                         MMfont: [UIFont systemFontOfSize:18],
+                                         MMfont: FontSize(18),
                                          MMvalueY: @3,
                                          MMselectedObject:self.firstString,
                                          MMtextAlignment:@1}
@@ -274,10 +274,10 @@
     [MMPickerView showPickerViewInView:self.view
                            withStrings:array
                            withOptions:@{MMbackgroundColor: [UIColor whiteColor],
-                                         MMtextColor: [UIColor blackColor],
+                                         MMtextColor: GS_COLOR_LIGHTBLACK,
                                          MMtoolbarColor: [UIColor whiteColor],
                                          MMbuttonColor: GS_COLOR_BLUE,
-                                         MMfont: [UIFont systemFontOfSize:18],
+                                         MMfont: FontSize(18),
                                          MMvalueY: @3,
                                          MMselectedObject:self.secondString,
                                          MMtextAlignment:@1}
@@ -347,10 +347,10 @@
     [MMPickerView showPickerViewInView:self.view
                            withStrings:array
                            withOptions:@{MMbackgroundColor: [UIColor whiteColor],
-                                         MMtextColor: [UIColor blackColor],
+                                         MMtextColor: GS_COLOR_LIGHTBLACK,
                                          MMtoolbarColor: [UIColor whiteColor],
                                          MMbuttonColor: GS_COLOR_BLUE,
-                                         MMfont: [UIFont systemFontOfSize:18],
+                                         MMfont: FontSize(18),
                                          MMvalueY: @3,
                                          MMselectedObject:self.thirdString,
                                          MMtextAlignment:@1}

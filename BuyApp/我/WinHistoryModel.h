@@ -24,5 +24,8 @@
 @property (nonatomic,strong)NSString <Optional>*create_time;
 @property (nonatomic,strong)NSString <Optional>*ID;
 @property (nonatomic,strong)NSString <Optional>*duobao_item_id;
+@property (nonatomic,strong)NSString <Optional>*share_id;
+@property (nonatomic,strong)NSString <Optional>*delivery_status;
+@property (nonatomic,strong)NSString <Optional>*is_arrival;
 @end
 

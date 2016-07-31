@@ -41,16 +41,16 @@
     
     NSMutableAttributedString *joinCountString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"参与了%@人次%@",model.number,model.f_create_time]];
     
-    [joinCountString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 3)];
+    [joinCountString addAttribute:NSFontAttributeName value:FontSize(13) range:NSMakeRange(0, 3)];
     [joinCountString addAttribute:NSForegroundColorAttributeName value:GS_COLOR_LIGHTBLACK range:NSMakeRange(0, 3)];
     
-    [joinCountString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(3, model.number.length)];
+    [joinCountString addAttribute:NSFontAttributeName value:FontSize(13) range:NSMakeRange(3, model.number.length)];
     [joinCountString addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(3, model.number.length)];
     
-    [joinCountString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(model.number.length + 3, 2)];
+    [joinCountString addAttribute:NSFontAttributeName value:FontSize(13) range:NSMakeRange(model.number.length + 3, 2)];
     [joinCountString addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(model.number.length + 3, 2)];
     
-    [joinCountString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(joinCountString.length - model.f_create_time.length, model.f_create_time.length)];
+    [joinCountString addAttribute:NSFontAttributeName value:FontSize(13) range:NSMakeRange(joinCountString.length - model.f_create_time.length, model.f_create_time.length)];
     [joinCountString addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(joinCountString.length - model.f_create_time.length, model.f_create_time.length)];
     
     self.lab_joinCount.attributedText = joinCountString;

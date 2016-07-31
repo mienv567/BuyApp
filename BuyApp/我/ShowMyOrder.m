@@ -61,6 +61,40 @@
 
 //发布
 - (IBAction)click_commit:(id)sender {
+//    晒单地址
+//http://test.quyungou.com/wap/index.php?ctl=uc_share&act=do_save&show_prog=1
+//    
+//    参数：
+//    id  夺定期号ID
+//    title 晒单标题
+//    content 晒单内容
+//    img_data 图片数据 (二进制流)
+    NSString * str1 = [UIImageJPEGRepresentation([self.imgArray objectAtIndex:0],0.1) base64EncodedStringWithOptions:0] ;
+    NSString * str2 = [UIImageJPEGRepresentation([self.imgArray objectAtIndex:1],0.1) base64EncodedStringWithOptions:0] ;
+    NSString * str3 = [UIImageJPEGRepresentation([self.imgArray objectAtIndex:2],0.1) base64EncodedStringWithOptions:0] ;
+    
+    [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
+                                                                     withParameters:@{@"ctl" : @"uc_share",
+                                                                                      @"act" : @"do_save",
+                                                                                      @"id" : self.myShowGoodsID,
+                                                                                      @"title" : self.txv_content.text,
+                                                                                      @"content" : self.txv_content.text,
+                                                                                      @"user_id":CNull2String(USERMODEL.ID),
+                                                                                      @"img_data[0]" :UIImageJPEGRepresentation([self.imgArray objectAtIndex:0],0.1) ,
+                                                                                      @"img_data[1]" :UIImageJPEGRepresentation([self.imgArray objectAtIndex:1],0.1),
+                                                                                      @"img_data[2]" : UIImageJPEGRepresentation([self.imgArray objectAtIndex:2],0.1)} success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                          if (SUCCESSED) {
+                                                                                              NSLog(@"%@",responseObject);
+                                                                                              
+                                                                                          }else{
+                                                                                              
+                                                                                              NSLog(@"%@",responseObject);
+                                                                                              
+                                                                                          }
+                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                          
+                                                                                          
+                                                                                      }];
     
     
 }

@@ -1,20 +1,18 @@
 //
-//  NewsModel.m
+//  MyShowOrderModel.m
 //  BuyApp
 //
-//  Created by D on 16/7/4.
+//  Created by D on 16/7/29.
 //  Copyright © 2016年 Super_D. All rights reserved.
 //
 
-#import "NewsModel.h"
+#import "MyShowOrderModel.h"
 
-@implementation NewsModel
-
+@implementation MyShowOrderModel
 +(JSONKeyMapper*)keyMapper
 {
     return [[JSONKeyMapper alloc] initWithDictionary:@{
                                                        @"id" : @"ID"
                                                        }];
 }
-
 @end

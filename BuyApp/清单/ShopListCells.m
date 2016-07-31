@@ -75,7 +75,7 @@
     [self.img_header sd_setImageWithURL:[NSURL URLWithString:model.deal_icon] placeholderImage:KDefaultImg];
     
     NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"总需:%@人才,剩余%@人次",model.max_buy,model.residue_count]];
-    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(noticeStr.length - model.residue_count.length - 2, model.residue_count.length)];
+    [noticeStr addAttribute:NSFontAttributeName value:FontSize(13) range:NSMakeRange(noticeStr.length - model.residue_count.length - 2, model.residue_count.length)];
     [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_BLUE range:NSMakeRange(noticeStr.length - model.residue_count.length - 2, model.residue_count.length)];
     self.lab_allcounts.attributedText = noticeStr;
     

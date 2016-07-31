@@ -29,6 +29,11 @@
     self.btn_show.layer.masksToBounds = YES;
 }
 - (IBAction)click_showMyOrder:(id)sender {
+    
+    if ([self.delegate respondsToSelector:@selector(click_ShowOrderListCell:)]) {
+        [self.delegate click_ShowOrderListCell:self];
+    }
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

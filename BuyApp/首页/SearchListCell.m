@@ -78,9 +78,9 @@
     self.lab_title.text = model.name;
     
     NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"剩余%@",model.surplus_buy]];
-    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, 2)];
+    [noticeStr addAttribute:NSFontAttributeName value:FontSize(12) range:NSMakeRange(0, 2)];
     [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 2)];
-    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(2, noticeStr.length - 2)];
+    [noticeStr addAttribute:NSFontAttributeName value:FontSize(12) range:NSMakeRange(2, noticeStr.length - 2)];
     [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_BLUE range:NSMakeRange(2,noticeStr.length - 2)];
     self.lab_last.attributedText = noticeStr;
     

@@ -74,7 +74,7 @@
                                                                                               self.lab_qihao.text = [NSString stringWithFormat:@"期号: %@",responseObject[@"data"][@"duobao_item"][@"id"]];
                                                                                               
                                                                                               NSMutableAttributedString *joinCountString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"参与了%@人次,以下是您的所有的夺宝号码",responseObject[@"data"][@"duobao_count"]]];
-                                                                                              [joinCountString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(3, joinCountString.length - 18)];
+                                                                                              [joinCountString addAttribute:NSFontAttributeName value:FontSize(13) range:NSMakeRange(3, joinCountString.length - 18)];
                                                                                               [joinCountString addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(3, joinCountString.length -18)];
                                                                                               self.lab_count.attributedText = joinCountString;
 
@@ -114,7 +114,7 @@
     
     UILabel * label = [UILabel new];
     label.backgroundColor = [UIColor whiteColor];
-    label.font = [UIFont systemFontOfSize:12];
+    label.font = FontSize(12);
     [cell.contentView addSubview:label];
     label.textColor = GS_COLOR_LIGHTBLACK;
     label.textAlignment = NSTextAlignmentCenter;

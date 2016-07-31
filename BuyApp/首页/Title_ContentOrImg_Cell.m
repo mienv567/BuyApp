@@ -16,14 +16,14 @@
         self.lab_titile = [UILabel new];
         self.lab_titile.backgroundColor = [UIColor whiteColor];
         self.lab_titile.textColor = GS_COLOR_LIGHTBLACK;
-        self.lab_titile.font = [UIFont systemFontOfSize:15];
+        self.lab_titile.font = FontSize(15);
         [self.contentView addSubview:self.lab_titile];
         
         self.lab_content = [UILabel new];
         self.lab_content.textAlignment = NSTextAlignmentRight;
         self.lab_content.backgroundColor = [UIColor whiteColor];
         self.lab_content.textColor = GS_COLOR_DARKGRAY;
-        self.lab_content.font = [UIFont systemFontOfSize:13];
+        self.lab_content.font = FontSize(13);
         [self.contentView addSubview:self.lab_content];
 
         UIImageView * line  = [UIImageView new];

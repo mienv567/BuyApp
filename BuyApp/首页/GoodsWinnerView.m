@@ -84,9 +84,9 @@
     [self.img_header sd_setImageWithURL:[NSURL URLWithString:model.luck_lottery.user_logo] placeholderImage:KDefaultImg];
     
     NSMutableAttributedString *nameStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"获奖者:  %@",model.luck_user_name]];
-    [nameStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 6)];
+    [nameStr addAttribute:NSFontAttributeName value:FontSize(13) range:NSMakeRange(0, 6)];
     [nameStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 6)];
-    [nameStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(6, model.luck_user_name.length)];
+    [nameStr addAttribute:NSFontAttributeName value:FontSize(15) range:NSMakeRange(6, model.luck_user_name.length)];
     [nameStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_BLUE range:NSMakeRange(6,model.luck_user_name.length )];
     self.lab_name.attributedText = nameStr;
 
@@ -98,7 +98,7 @@
     self.lab_qiHao.text = [NSString stringWithFormat:@"期    号:  %@",model.ID];
 
     NSMutableAttributedString *canyuStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"本期参与: %@人次",model.luck_user_buy_count]];
-    [canyuStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(6, model.luck_user_buy_count.length)];
+    [canyuStr addAttribute:NSFontAttributeName value:FontSize(13) range:NSMakeRange(6, model.luck_user_buy_count.length)];
     [canyuStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(6, model.luck_user_buy_count.length)];
     self.lab_joinCount.attributedText = canyuStr;
     
@@ -107,7 +107,7 @@
 
     
     NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"幸运号码: %@",model.lottery_sn]];
-    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 6)];
+    [noticeStr addAttribute:NSFontAttributeName value:FontSize(13) range:NSMakeRange(0, 6)];
     [noticeStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, 6)];
     [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:15] range:NSMakeRange(6, model.lottery_sn.length)];
     [noticeStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(6,model.lottery_sn.length )];

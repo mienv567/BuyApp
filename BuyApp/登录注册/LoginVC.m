@@ -92,7 +92,7 @@
     self.btn_code = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 120, 30)];
     self.btn_code.backgroundColor = [UIColor whiteColor];
     [self.btn_code addTarget:self action:@selector(click_getCode) forControlEvents:UIControlEventTouchUpInside];
-    self.btn_code.titleLabel.font = [UIFont systemFontOfSize:13];
+    self.btn_code.titleLabel.font = FontSize(13);
     [self.btn_code setTitle:@"点击获取验证码" forState:UIControlStateNormal];
     [self.btn_code setTitleColor:GS_COLOR_RED forState:UIControlStateNormal];
     self.btn_code.hidden = !self.JustUsePhoneLogin;
@@ -148,13 +148,11 @@
 }
 
 
-
 - (void)managerDidRecvAuthResponse:(SendAuthResp *)response {
     NSString *strTitle = [NSString stringWithFormat:@"Auth结果"];
     NSString *strMsg = [NSString stringWithFormat:@"code:%@,state:%@,errcode:%d", response.code, response.state, response.errCode];
     
 }
-
 
 //成功登录
 - (void)onAuthFinish:(int)errCode AuthCode:(NSString *)authCode

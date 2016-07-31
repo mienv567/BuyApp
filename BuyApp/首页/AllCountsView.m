@@ -152,7 +152,7 @@
     
     UILabel * label = [UILabel new];
     label.backgroundColor = [UIColor whiteColor];
-    label.font = [UIFont systemFontOfSize:12];
+    label.font = FontSize(12);
     [cell.contentView addSubview:label];
     label.textColor = GS_COLOR_LIGHTBLACK;
     label.textAlignment = NSTextAlignmentCenter;
