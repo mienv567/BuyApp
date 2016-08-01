@@ -15,7 +15,7 @@
 @property (strong, nonatomic)  UITableView *tableView;
 @property (strong ,nonatomic) NSArray * dataArray;
 @property (nonatomic, strong)  UINib * nib;
-
+@property (nonatomic, strong)  NSIndexPath * selectIndexPath;
 @end
 
 @implementation ChoseAddressListVc
@@ -27,6 +27,19 @@
     self.dataArray = [NSMutableArray array];
     
     self.title = @"订单地址选择";
+    self.selectIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    
+    UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.backgroundColor = GS_COLOR_RED;
+    btn.frame = CGRectMake(0, 0, K_WIDTH, 50);
+    btn.titleLabel.font = [UIFont boldSystemFontOfSize:18];
+    [btn setTitle:@"新增地址" forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(click_addNewAddress) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.view);
+        make.height.mas_equalTo(@50);
+    }];
     
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
@@ -37,16 +50,10 @@
     self.tableView.backgroundColor = GS_COLOR_WHITE;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.left.right.top.equalTo(self.view);
+        make.bottom.equalTo(btn.mas_top);
     }];
-    
-    UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.backgroundColor = GS_COLOR_RED;
-    btn.frame = CGRectMake(0, 0, K_WIDTH, 40);
-    btn.titleLabel.font = [UIFont boldSystemFontOfSize:15];
-    [btn setTitle:@"新增地址" forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(click_addNewAddress) forControlEvents:UIControlEventTouchUpInside];
-    self.tableView.tableFooterView = btn;
+
     
 }
 
@@ -64,6 +71,8 @@
     [super viewWillAppear:animated];
 //    http://ceshi.quyungou.com/wap/index.php?ctl=uc_winlog&act=winlog_address&order_item_id=2957485&show_prog=1
     
+    
+    
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"uc_winlog",
                                                                                       @"act":@"winlog_address",
@@ -71,9 +80,15 @@
                                                                                       @"user_id":CNull2String(USERMODEL.ID)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           if (SUCCESSED) {
+                                                                                           
                                                                                               self.dataArray = [AddressModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"consignee_list"] error:nil];
                                                                                               
                                                                                               [self.tableView reloadData];
+                                                                                              
+                                                                                              if (self.dataArray.count > 0 && self.selectIndexPath != nil) {
+                                                                                                  [self.tableView selectRowAtIndexPath:self.selectIndexPath animated:YES scrollPosition:UITableViewScrollPositionBottom];
+                                                                                              }
+                                                                                              
                                                                                           }else{
                                                                                               ShowNotceError;
                                                                                           }
@@ -82,9 +97,31 @@
                                                                                       }];
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    self.selectIndexPath = indexPath;
+    ChoseAddressListCell *cell  = [self.tableView cellForRowAtIndexPath:indexPath];
+    cell.selected = YES;
+}
+
+- (void)showNeedLoginAlertView{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"确定选择这个地址吗?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alert show];
+}
+
+
+#pragma mark - alertView delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(alertView.cancelButtonIndex != buttonIndex){
+#warning 需要添加选择地址的接口
+        KPopToLastViewController;
+        //
+    }
+}
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;
+    return 80;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -103,12 +140,15 @@
         [tableView registerNib:self.nib forCellReuseIdentifier:identy];
     }
     ChoseAddressListCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLabel.textColor = GS_COLOR_DARKGRAY;
+    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+    cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
+    cell.selectedBackgroundView.backgroundColor = GS_COLOR_RED;
+    cell.lab_name.textColor = GS_COLOR_DARK;
+    cell.lab_address.textColor = GS_COLOR_DARK;
+    cell.lab_tel.textColor = GS_COLOR_DARK;
     cell.backgroundColor = GS_COLOR_WHITE;
-    cell.textLabel.font = FontSize(13);
-    
+
+
     if (self.dataArray.count > indexPath.row) {
         AddressModel * model = [self.dataArray objectAtIndex:indexPath.section];
         cell.lab_tel.text = model.mobile;

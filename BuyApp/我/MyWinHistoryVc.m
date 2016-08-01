@@ -11,6 +11,7 @@
 #import "UserTopView.h"
 #import "WinHistoryModel.h"
 #import "ChoseAddressListVc.h"
+#import "ShowMorderNoticeVc.h"
 
 @interface MyWinHistoryVc ()<UITableViewDelegate,UITableViewDataSource,MyWinListCellDelegate>
 @property (strong, nonatomic)  UITableView *tableView;
@@ -50,11 +51,13 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
     [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl":@"uc_winlog",
                                                                                       @"user_id":CNull2String(USERMODEL.ID)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           if (SUCCESSED) {
+                                                                                              [self.dataArray removeAllObjects];
                                                                                               [self.dataArray addObjectsFromArray:[WinHistoryModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"list"] error:nil]];
                                                                                               [self.tableView reloadData];
                                                                                           }else{
@@ -71,15 +74,21 @@
     NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
     WinHistoryModel * model = [self.dataArray objectAtIndex:indexPath.row];
     
-    ChoseAddressListVc * vc = [[ChoseAddressListVc alloc]init];
-    vc.itemID = model.duobao_item_id;
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([model.is_set_consignee integerValue] == 0) {
+        ChoseAddressListVc * vc = [[ChoseAddressListVc alloc]init];
+        vc.itemID = model.duobao_item_id;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        ShowMorderNoticeVc * vc = [[NSClassFromString(@"ShowMorderNoticeVc") alloc]initWithNibName:@"ShowMorderNoticeVc" bundle:nil];
+        vc.myShowGoodsID = model.duobao_item_id;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
 }
 #pragma mark - Table view data source
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 130;
+    return 160;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

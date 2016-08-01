@@ -44,7 +44,7 @@
         self.lab_title = [UILabel new];
         self.lab_title.backgroundColor = [UIColor whiteColor];
         self.lab_title.textColor = GS_COLOR_LIGHTBLACK;
-        self.lab_title.font = FontSize(13);
+        self.lab_title.font = [UIFont systemFontOfSize:13];
         self.lab_title.text = @"新款笔记本电脑，现在只卖10000元，快来抢购吧，机不可失失不再来！";
         [self.contentView addSubview:self.lab_title];
         [self.lab_title sizeToFit];

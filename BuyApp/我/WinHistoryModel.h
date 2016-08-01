@@ -27,5 +27,6 @@
 @property (nonatomic,strong)NSString <Optional>*share_id;
 @property (nonatomic,strong)NSString <Optional>*delivery_status;
 @property (nonatomic,strong)NSString <Optional>*is_arrival;
+@property (nonatomic,strong)NSString <Optional>*is_set_consignee;
 @end
 

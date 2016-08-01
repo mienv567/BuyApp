@@ -14,7 +14,11 @@
 -(void)awakeFromNib{
     
     self.lab_noticeOne.textColor = GS_COLOR_LIGHTBLACK;
+    
     self.lab_noticeTwo.textColor = GS_COLOR_RED;
+    self.lab_noticeTwo.font = [UIFont systemFontOfSize:11];
+    
+    
     [self.btn_close setTitleColor:GS_COLOR_DARKGRAY forState:UIControlStateNormal];
     self.img_line.backgroundColor = GS_COLOR_WHITE;
     self.lab_title.textColor = GS_COLOR_LIGHTBLACK;

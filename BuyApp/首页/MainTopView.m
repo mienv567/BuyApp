@@ -94,7 +94,7 @@
     [self.newsBackView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.width.equalTo(self.classView);
         make.top.equalTo(self.classView.mas_bottom).offset(2);
-        make.height.mas_equalTo(@40);
+        make.height.mas_equalTo(@30);
     }];
     
     //创建最新揭晓
@@ -120,7 +120,7 @@
     UILabel * titleLab = [[UILabel alloc] init];
     titleLab.backgroundColor = [UIColor whiteColor];
     titleLab.textColor = GS_COLOR_Main;
-    titleLab.font = FontSize(NSAppFontM);
+    titleLab.font = FontSize(13);
     titleLab.text = @"  最新揭晓";
     [self.goodsBackView addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -176,8 +176,8 @@
     
     self.newsLabel = [[UILabel alloc] init];
     self.newsLabel.backgroundColor = [UIColor clearColor];
-    self.newsLabel.textColor = GS_COLOR_LIGHTBLACK;
-    self.newsLabel.font = [UIFont gs_boldfont:NSAppFontL];
+    self.newsLabel.textColor = GS_COLOR_DARKGRAY;
+    self.newsLabel.font = [UIFont boldSystemFontOfSize:13];
     self.newsLabel.text = @" 暂时没有数据";
     
 //    NSString * user = @"用户A";
@@ -223,7 +223,7 @@
     }
     self.timeCount ++;
     
-    if (self.timeCount % 3  != 0) {
+    if (self.timeCount % 3 != 0) {
         return;
     }else{
         self.timeCount = 0;
@@ -235,15 +235,14 @@
     }else{
         self.currentNewsModel = [self.ary_news objectAtIndex:self.newsButton.tag];
         self.newsButton.tag += 1;
-
     }
     NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"恭喜%@%@获得%@",self.currentNewsModel.user_name,self.currentNewsModel.span_time,self.currentNewsModel.name]];
-    [noticeStr addAttribute:NSFontAttributeName value:FontSize(14) range:NSMakeRange(0, 2)];
-    [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_LIGHTBLACK range:NSMakeRange(0, 2)];
-    [noticeStr addAttribute:NSFontAttributeName value:FontSize(14) range:NSMakeRange(2, self.currentNewsModel.user_name.length)];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:13] range:NSMakeRange(0, 2)];
+    [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 2)];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:13] range:NSMakeRange(2, self.currentNewsModel.user_name.length)];
     [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_BLUE range:NSMakeRange(2, self.currentNewsModel.user_name.length)];
-    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:14] range:NSMakeRange(self.currentNewsModel.user_name.length + 2, noticeStr.length - self.currentNewsModel.user_name.length - 2)];
-    [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_LIGHTBLACK range:NSMakeRange(self.currentNewsModel.user_name.length + 2,noticeStr.length - self.currentNewsModel.user_name.length - 2)];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:13] range:NSMakeRange(self.currentNewsModel.user_name.length + 2, noticeStr.length - self.currentNewsModel.user_name.length - 2)];
+    [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(self.currentNewsModel.user_name.length + 2,noticeStr.length - self.currentNewsModel.user_name.length - 2)];
     self.newsLabel.attributedText = noticeStr;
 }
 
@@ -258,12 +257,12 @@
         self.newsButton.tag = 0;
         self.currentNewsModel = [self.ary_news objectAtIndex:0];
         NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"恭喜%@%@获得%@",self.currentNewsModel.user_name,self.currentNewsModel.span_time,self.currentNewsModel.name]];
-        [noticeStr addAttribute:NSFontAttributeName value:FontSize(14) range:NSMakeRange(0, 2)];
-        [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_LIGHTBLACK range:NSMakeRange(0, 2)];
-        [noticeStr addAttribute:NSFontAttributeName value:FontSize(14) range:NSMakeRange(2, self.currentNewsModel.user_name.length)];
+        [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:13] range:NSMakeRange(0, 2)];
+        [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 2)];
+        [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:13] range:NSMakeRange(2, self.currentNewsModel.user_name.length)];
         [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_BLUE range:NSMakeRange(2, self.currentNewsModel.user_name.length)];
-        [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:14] range:NSMakeRange(self.currentNewsModel.user_name.length + 2, noticeStr.length - self.currentNewsModel.user_name.length - 2)];
-        [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_LIGHTBLACK range:NSMakeRange(self.currentNewsModel.user_name.length + 2,noticeStr.length - self.currentNewsModel.user_name.length - 2)];
+        [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:13] range:NSMakeRange(self.currentNewsModel.user_name.length + 2, noticeStr.length - self.currentNewsModel.user_name.length - 2)];
+        [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(self.currentNewsModel.user_name.length + 2,noticeStr.length - self.currentNewsModel.user_name.length - 2)];
         self.newsLabel.attributedText = noticeStr;
     }
 }

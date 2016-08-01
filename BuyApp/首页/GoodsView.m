@@ -39,7 +39,7 @@
         _nameLb=[[UILabel alloc]init];
         _nameLb.backgroundColor=[UIColor clearColor];
         _nameLb.font=[UIFont gs_fontNum:10];
-        _nameLb.textColor = GS_COLOR_LIGHTBLACK;
+        _nameLb.textColor = GS_COLOR_DARKGRAY;
         _nameLb.lineBreakMode = NSLineBreakByTruncatingMiddle;
         _nameLb.numberOfLines = 0;
         _nameLb.textAlignment = NSTextAlignmentCenter;
@@ -77,11 +77,11 @@
         NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"恭喜%@中奖\n幸运号%@",model.luck_user_name,model.lottery_sn]];
         
         [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:11] range:NSMakeRange(0, 2)];
-        [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_LIGHTBLACK range:NSMakeRange(0, 2)];
+        [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 2)];
         [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:11] range:NSMakeRange(2, model.luck_user_name.length)];
         [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_Main range:NSMakeRange(2, model.luck_user_name.length)];
-        [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:11] range:NSMakeRange(model.luck_user_name.length + 2, 3)];
-        [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_LIGHTBLACK range:NSMakeRange(model.luck_user_name.length + 2, 3)];
+        [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:11] range:NSMakeRange(model.luck_user_name.length + 2, 6)];
+        [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(model.luck_user_name.length + 2, 6)];
         [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:11] range:NSMakeRange(noticeStr.length - model.lottery_sn.length , model.lottery_sn.length)];
         [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(noticeStr.length - model.lottery_sn.length,model.lottery_sn.length)];
         self.nameLb.attributedText = noticeStr;

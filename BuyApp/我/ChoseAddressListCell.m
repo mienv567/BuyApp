@@ -42,13 +42,24 @@
         make.right.equalTo(self.img_selected.mas_left).offset(-10);
     }];
     
+
+    
     
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+    if (selected == YES) {
+        self.lab_name.textColor = [UIColor whiteColor];
+        self.lab_tel.textColor = [UIColor whiteColor];
+        self.lab_address.textColor = [UIColor whiteColor];
+    }else{
+        self.lab_name.textColor = GS_COLOR_DARK;
+        self.lab_tel.textColor = GS_COLOR_DARK;
+        self.lab_address.textColor = GS_COLOR_DARK;
+    }
+
 }
 
 @end

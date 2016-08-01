@@ -135,7 +135,7 @@
     NSInteger total_fee = [self.total_price integerValue] * 100;
     
     // 3.	商户在调用预下单接口时，如果没有后台通知地址，则预下单接口的notify_url字段必须为一个空格字符串。
-    NSString *notify_url = @"http://ceshi.quyungou.com/callback/payment/Wwxwappay_notify.php";
+    NSString *notify_url = @"http://www.quyungou.com/callback/payment/Wwxwappay_notify.php";
     
     NSString *service = @"unified.trade.pay";
     NSString *version = @"1.0";

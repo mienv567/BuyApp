@@ -7,14 +7,14 @@
 //
 
 //测试服务器开关
-#define TEST_SERVER
+//#define TEST_SERVER
 #ifdef TEST_SERVER
 #define kAppHost @"http://ceshi.quyungou.com/api/index.php"
 #define kAppHostWap @"http://ceshi.quyungou.com/wap/index.php"
 #define kAppPostHost @""
 #else
-#define kAppHost @""
-#define kAppPostHost @""
+#define kAppHost @"http://www.quyungou.com/api/index.php"
+#define kAppHostWap @"http://www.quyungou.com/wap/index.php"
 #endif
 
 //多语言
@@ -78,10 +78,12 @@
 #define GS_COLOR_WHITE        HEXRGBCOLOR(0xF8F8F8)
 #define GS_COLOR_LIGHT        HEXRGBCOLOR(0xF2F2F2)
 #define GS_COLOR_LIGHTGRAY    HEXRGBCOLOR(0xE6E6E6)
-#define GS_COLOR_GRAY         HEXRGBCOLOR(0xC0C0C0)
-#define GS_COLOR_DARKGRAY     HEXRGBCOLOR(0x808080)
+#define GS_COLOR_GRAY         [UIColor colorWithRed:160.0/255.0 green:136.0/255.0 blue:136.0/255.0 alpha:1] //HEXRGBCOLOR(0xC0C0C0)
+#define GS_COLOR_DARKGRAY     [UIColor colorWithRed:86.0/255.0 green:86.0/255.0 blue:86.0/255.0 alpha:1]// HEXRGBCOLOR(0x808080)
+#define GS_COLOR_DARK         [UIColor colorWithRed:67.0/255.0 green:67.0/255.0 blue:67.0/255.0 alpha:1]// HEXRGBCOLOR(0x808080)
+
 #define GS_COLOR_BLACK        HEXRGBCOLOR(0x000000)
-#define GS_COLOR_LIGHTBLACK   HEXRGBCOLOR(0x404040)
+#define GS_COLOR_LIGHTBLACK   [UIColor colorWithRed:38.0/255.0 green:38.0/255.0 blue:38.0/255.0 alpha:1]
 #define GS_COLOR_GREEN        HEXRGBCOLOR(0x60A000)
 #define GS_COLOR_BLUE         [UIColor colorWithRed:46.0/255.0 green:99.0/255.0 blue:189.0/255.0 alpha:1]//HEXRGBCOLOR(0x18B4ED)
 #define GS_COLOR_YELLOW       HEXRGBCOLOR(0xFFC000)

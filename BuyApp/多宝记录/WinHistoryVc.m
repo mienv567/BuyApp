@@ -144,7 +144,7 @@
         if ([model.has_lottery integerValue] == 0) {
             return 150;
         }else{
-            return 210;
+            return 220;
         }
     }
      return 0;

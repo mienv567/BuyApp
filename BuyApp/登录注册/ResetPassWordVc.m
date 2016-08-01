@@ -70,6 +70,17 @@
     [self.btn_Login setTitleColor:GS_COLOR_GRAY forState:UIControlStateNormal];
 }
 
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    if (self.showType == ResetPassWordVcPhone) {
+        [self.btn_Login setTitle:@"立即绑定" forState:UIControlStateNormal];
+    }
+    
+    
+}
+
 #pragma mark - 导航返回主页
 
 -(void)click_rightNav{
@@ -104,31 +115,58 @@
         return;
     }
     
-    if ([GSValidate validateStringLong:self.txf_password.text requireMinLong:6] && [GSValidate validateStringLong:self.txf_password.text requireMaxLong:10]) {
-        if (self.txf_password.text != self.txf_rePassword.text) {
+    
+    
+    if (self.showType == ResetPassWordVcPhone) {
+        [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
+                                                                         withParameters:@{@"ctl":@"user",
+                                                                                          @"act":@"dophbind",
+                                                                                          @"mobile":CNull2String(self.txf_mobile.text),
+                                                                                          @"sms_verify":CNull2String(self.txf_code.text),
+                                                                                          @"new_pwd":CNull2String(self.txf_password.text),
+                                                                                          @"user_id":CNull2String(USERMODEL.ID)
+                                                                                          } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                              if (SUCCESSED) {
+                                                                                                  [RootViewController showAlerMessage:responseObject[@"msg"]];
+                                                                                                  KPopToLastViewController;
+                                                                                              }else{
+                                                                                                  
+                                                                                              }
+                                                                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                              
+                                                                                          }];
+        
+    }else if (self.showType == ResetPassWordVcPassWord || self.showType == ResetPassWordVcNomal) {
+        if ([GSValidate validateStringLong:self.txf_password.text requireMinLong:4] ) {
+            if (self.txf_password.text != self.txf_rePassword.text) {
+                [MBProgressHUD showError:@"请检查密码"];
+            }
+        }else{
             [MBProgressHUD showError:@"请检查密码"];
+            return;
         }
-    }else{
-        [MBProgressHUD showError:@"请检查密码"];
-        return;
-    }    
-    [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
-                                                                     withParameters:@{@"ctl":@"user",
-                                                                                      @"act":@"phmodifypassword",
-                                                                                      @"mobile":CNull2String(self.txf_mobile.text),
-                                                                                      @"sms_verify":CNull2String(self.txf_code.text),
-                                                                                      @"new_pwd":CNull2String(self.txf_password.text),
-                                                                                      @"cfm_new_pwd":CNull2String(self.txf_rePassword.text),
-                                                                                      } success:^(NSURLSessionDataTask *task, id responseObject) {
-                                                                                          if (SUCCESSED) {
+        [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
+                                                                         withParameters:@{@"ctl":@"user",
+                                                                                          @"act":@"phmodifypassword",
+                                                                                          @"mobile":CNull2String(self.txf_mobile.text),
+                                                                                          @"sms_verify":CNull2String(self.txf_code.text),
+                                                                                          @"new_pwd":CNull2String(self.txf_password.text),
+                                                                                          @"cfm_new_pwd":CNull2String(self.txf_rePassword.text)
+                                                                                          } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                              if (SUCCESSED) {
+                                                                                                  [RootViewController showAlerMessage:responseObject[@"msg"]];
+                                                                                                  KPopToLastViewController;
+                                                                                              }else{
+                                                                                                  
+                                                                                              }
+                                                                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                                                               
-                                                                                          }else{
-                                                                                              
-                                                                                          }
-                                                                                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                                                                          
-                                                                                      }];
+                                                                                          }];
 
+    }
+    
+    
+  
 }
 
 #pragma mark - 获取验证码
@@ -140,8 +178,8 @@
         [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
                                                                          withParameters:@{@"ctl":@"ajax",
                                                                                           @"act":@"send_sms_code",
-                                                                                          @"mobile ":CNull2String(self.txf_mobile.text),
-                                                                                          @"unique":@"0"
+                                                                                          @"mobile":CNull2String(self.txf_mobile.text),
+                                                                                          @"unique":@"2"
                                                                                           } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                               if (SUCCESSED) {
                                                                                                   self.countDown = maxNum;
@@ -195,6 +233,7 @@
         case ResetPassWordVcPhone:
         {
             self.title = @"会员资料更新";
+            [self.btn_Login setTitle:@"立即绑定" forState:UIControlStateNormal];
             
         }
             break;

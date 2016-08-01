@@ -82,7 +82,8 @@
 - (instancetype)YHBaseInit
 {
     id __self = [self YHBaseInit];
-    UIFont * font = [UIFont fontWithName:kGlobalFontFamilyName size:self.font.pointSize];
+//    UIFont * font = [UIFont fontWithName:kGlobalFontFamilyName size:self.font.pointSize];
+    UIFont * font = [UIFont  systemFontOfSize:self.font.pointSize];
     if (font) {
         self.font=font;
     }
@@ -91,7 +92,8 @@
 
 -(instancetype)YHBaseInitWithFrame:(CGRect)rect{
     id __self = [self YHBaseInitWithFrame:rect];
-    UIFont * font = [UIFont fontWithName:kGlobalFontFamilyName size:self.font.pointSize];
+//    UIFont * font = [UIFont fontWithName:kGlobalFontFamilyName size:self.font.pointSize];
+    UIFont * font = [UIFont  systemFontOfSize:self.font.pointSize];
     if (font) {
         self.font=font;
     }
@@ -100,7 +102,8 @@
 
 -(void)YHBaseAwakeFromNib{
     [self YHBaseAwakeFromNib];
-    UIFont * font = [UIFont fontWithName:kGlobalFontFamilyName size:self.font.pointSize];
+//    UIFont * font = [UIFont fontWithName:kGlobalFontFamilyName size:self.font.pointSize];
+    UIFont * font = [UIFont  systemFontOfSize:self.font.pointSize];
     if (font) {
         self.font=font;
     }

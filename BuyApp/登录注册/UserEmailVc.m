@@ -80,10 +80,12 @@
                                                                                                @"user_name":CNull2String(USERMODEL.user_name),
                                                                                                @"password":CNull2String(self.txf_password.text),
                                                                                                @"is_phone_register": @"1",
-                                                                                               @"is_tmp" : @"1"
+                                                                                               @"is_tmp" : @"1",
+                                                                                               @"user_id":CNull2String(USERMODEL.ID)
                                                                                                } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                                    if (SUCCESSED) {
                                                                                                        ShowNotceSuccess;
+                                                                                                       KPopToLastViewController;
                                                                                                    }else{
                                                                                                        ShowNotceError;
                                                                                                    }

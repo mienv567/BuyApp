@@ -22,6 +22,7 @@
         make.width.height.mas_equalTo(@80);
     }];
     
+    self.lab_title.font = [UIFont systemFontOfSize:13];
     self.lab_title.textColor = GS_COLOR_LIGHTBLACK;
     [self.lab_title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(10);
@@ -44,6 +45,7 @@
         make.width.mas_equalTo(@120);
     }];
     
+    self.lab_notice.font = [UIFont systemFontOfSize:11];
     self.lab_notice.textColor = GS_COLOR_RED;
     [self.lab_notice mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view_changeCount.mas_bottom).offset(5);

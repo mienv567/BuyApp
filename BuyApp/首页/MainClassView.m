@@ -75,8 +75,8 @@
         UILabel *lb = [[UILabel alloc] init];
         lb.tag=200+i;
         lb.backgroundColor = [UIColor whiteColor];
-        lb.textColor = GS_COLOR_LIGHTBLACK;
-        lb.font = [UIFont gs_boldfont:NSAppFontS];
+        lb.textColor = GS_COLOR_DARKGRAY;
+        lb.font = [UIFont boldSystemFontOfSize:13];
         [button addSubview:lb];
         lb.text = model.Title;
         [lb sizeToFit];

@@ -34,7 +34,7 @@
         make.height.mas_equalTo(@25);
         make.width.mas_equalTo(@85);
     }];
-    
+    [self.btn_showMyNumbers setTitleColor:GS_COLOR_BLUE forState:UIControlStateNormal];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
