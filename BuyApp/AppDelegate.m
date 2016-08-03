@@ -13,7 +13,7 @@
 #import "UserVc.h"
 #import "NewsVc.h"
 #import "LoginVC.h"
-
+#import "BaiduMobStat.h"
 #import "JPUSHService.h"
 #import "SPayClient.h"
 
@@ -44,7 +44,12 @@ static BOOL isProduction = FALSE;
     //向微信注册
     [WXApi registerApp:@"wxd930ea5d5a258f4f" withDescription:@"demo 1.0"];
     
-    
+    BaiduMobStat* statTracker = [BaiduMobStat defaultStat];
+    statTracker.shortAppVersion = @"1.0";
+    [statTracker startWithAppId:@"fa5198e5bd"];
+                                   
+                                   
+                                   
     
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setTitleTextAttributes: @{NSForegroundColorAttributeName : GS_COLOR_RED,

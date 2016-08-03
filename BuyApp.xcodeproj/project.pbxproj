@@ -46,6 +46,8 @@
 		03376B361D1ADB77004EE048 /* HelpInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 03376B351D1ADB77004EE048 /* HelpInfo.m */; };
 		03376B3B1D1AE1BB004EE048 /* NewsCells.m in Sources */ = {isa = PBXBuildFile; fileRef = 03376B391D1AE1BB004EE048 /* NewsCells.m */; };
 		03376B3C1D1AE1BB004EE048 /* NewsCells.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03376B3A1D1AE1BB004EE048 /* NewsCells.xib */; };
+		0340E6C11D503F7800FD01C5 /* libBaiduMobStat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0340E6C01D503F7800FD01C5 /* libBaiduMobStat.a */; };
+		0340E6C31D50409700FD01C5 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0340E6C21D50409700FD01C5 /* JavaScriptCore.framework */; };
 		034D89E01D1BB173005806C7 /* GoodsInfoVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 034D89DF1D1BB173005806C7 /* GoodsInfoVc.m */; };
 		034D89E31D1BB21F005806C7 /* GoodsInfoTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 034D89E21D1BB21F005806C7 /* GoodsInfoTopView.m */; };
 		034D89E51D1BB234005806C7 /* GoodsInfoTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 034D89E41D1BB234005806C7 /* GoodsInfoTopView.xib */; };
@@ -282,6 +284,9 @@
 		03376B381D1AE1BB004EE048 /* NewsCells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCells.h; sourceTree = "<group>"; };
 		03376B391D1AE1BB004EE048 /* NewsCells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCells.m; sourceTree = "<group>"; };
 		03376B3A1D1AE1BB004EE048 /* NewsCells.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsCells.xib; sourceTree = "<group>"; };
+		0340E6BF1D503F7800FD01C5 /* BaiduMobStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobStat.h; sourceTree = "<group>"; };
+		0340E6C01D503F7800FD01C5 /* libBaiduMobStat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduMobStat.a; sourceTree = "<group>"; };
+		0340E6C21D50409700FD01C5 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		034D89DE1D1BB173005806C7 /* GoodsInfoVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsInfoVc.h; sourceTree = "<group>"; };
 		034D89DF1D1BB173005806C7 /* GoodsInfoVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsInfoVc.m; sourceTree = "<group>"; };
 		034D89E11D1BB21F005806C7 /* GoodsInfoTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsInfoTopView.h; sourceTree = "<group>"; };
@@ -604,12 +609,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0340E6C31D50409700FD01C5 /* JavaScriptCore.framework in Frameworks */,
 				0331F84A1D4862BB0049DFFA /* libc++.tbd in Frameworks */,
 				0331F8481D4862AE0049DFFA /* libz.tbd in Frameworks */,
 				0331F8461D4862A40049DFFA /* libsqlite3.0.tbd in Frameworks */,
 				039DCDD61D2A51F2000DA425 /* jpush-ios-2.1.8.a in Frameworks */,
 				7CFE79213E058E49324C66B2 /* libPods-BuyApp.a in Frameworks */,
 				0331F8431D48615B0049DFFA /* libWeChatSDK.a in Frameworks */,
+				0340E6C11D503F7800FD01C5 /* libBaiduMobStat.a in Frameworks */,
 				03BF607A1D3A2F7A0007BBFF /* libSPaySDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -666,6 +673,15 @@
 				03376B3A1D1AE1BB004EE048 /* NewsCells.xib */,
 			);
 			name = Cell;
+			sourceTree = "<group>";
+		};
+		0340E6BE1D503F7800FD01C5 /* BaiDuMTJ */ = {
+			isa = PBXGroup;
+			children = (
+				0340E6BF1D503F7800FD01C5 /* BaiduMobStat.h */,
+				0340E6C01D503F7800FD01C5 /* libBaiduMobStat.a */,
+			);
+			path = BaiDuMTJ;
 			sourceTree = "<group>";
 		};
 		0360BCD81D22654A00A2C07D /* Cell */ = {
@@ -803,6 +819,7 @@
 		038B19031D12A44B007C1CC8 /* PlusIn */ = {
 			isa = PBXGroup;
 			children = (
+				0340E6BE1D503F7800FD01C5 /* BaiDuMTJ */,
 				0331F83D1D48615A0049DFFA /* SDKExport */,
 				03BF60641D3A2F7A0007BBFF /* SPaySDK */,
 				039DCDD31D2A51F2000DA425 /* JPush */,
@@ -1335,6 +1352,7 @@
 		D0EA62AC7BE5431D707B8431 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0340E6C21D50409700FD01C5 /* JavaScriptCore.framework */,
 				0331F8491D4862BB0049DFFA /* libc++.tbd */,
 				0331F8471D4862AE0049DFFA /* libz.tbd */,
 				0331F8451D4862A40049DFFA /* libsqlite3.0.tbd */,
@@ -1783,6 +1801,7 @@
 					"$(PROJECT_DIR)/BuyApp/PlusIn/JPush",
 					"$(PROJECT_DIR)/BuyApp/PlusIn/SPaySDK",
 					"$(PROJECT_DIR)/BuyApp/PlusIn/SDKExport",
+					"$(PROJECT_DIR)/BuyApp/PlusIn/BaiDuMTJ",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.App.Buy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1807,6 +1826,7 @@
 					"$(PROJECT_DIR)/BuyApp/PlusIn/JPush",
 					"$(PROJECT_DIR)/BuyApp/PlusIn/SPaySDK",
 					"$(PROJECT_DIR)/BuyApp/PlusIn/SDKExport",
+					"$(PROJECT_DIR)/BuyApp/PlusIn/BaiDuMTJ",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.App.Buy;
 				PRODUCT_NAME = "$(TARGET_NAME)";

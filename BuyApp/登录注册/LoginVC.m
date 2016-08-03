@@ -104,7 +104,6 @@
         make.width.height.mas_equalTo(@50);
     }];
     
-    self.img_icon.image = KDefaultImg;
     [self.img_icon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
         make.width.height.mas_equalTo(@20);
@@ -127,7 +126,11 @@
         make.width.mas_equalTo(K_WIDTH - 20);
         make.height.mas_equalTo(@1);
     }];
-    
+    if([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"weixin://"]]){
+        self.img_icon.image = [UIImage imageNamed:@"WEIXIN"];
+    }else{
+        self.img_icon.image = [UIImage imageNamed:@"WEIXINGray"];
+    }
 }
 
 #pragma mark - 取消登录

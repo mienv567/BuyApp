@@ -148,6 +148,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (indexPath.section == 0) {
         cell.lab_content.text = @"全部商品";
+        cell.img_icon.image = [UIImage imageNamed:@"ALLGOODSLIST"];
     }else{
         if (self.dataArray.count > indexPath.row) {
             DuoBaoClassModel * model = [self.dataArray objectAtIndex:indexPath.row];

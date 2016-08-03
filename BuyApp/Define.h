@@ -103,8 +103,8 @@
 #define Notification_Main          @"Notification_MainTime"
 
 //微信
-#define WeixinAppID             @""
-#define WeixinAppSecret         @""
+#define WeixinAppID             @"wx02e8e9d809501616"
+#define WeixinAppSecret         @"58b6963cc193511c3ed652a35d4ccfd8"
 
 //极光
 #define JPUSH_KEY               @"eac3de4a7717dc5354ba849a"
