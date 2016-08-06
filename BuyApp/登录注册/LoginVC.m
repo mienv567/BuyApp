@@ -55,7 +55,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    [WXApiManager sharedManager].delegate = self;
     self.JustUsePhoneLogin = NO;
     self.title = @"趣云购-登录";
     self.view.backgroundColor = GS_COLOR_WHITE;

@@ -42,6 +42,7 @@
     self.topView = KGetViewFromNib(@"UserTopView");
     self.topView.frame = CGRectMake(0, 0, K_WIDTH, 120);
     self.topView.showType = UserTopViewOnly;
+    [self.topView.img_header sd_setImageWithURL:[NSURL URLWithString:USERMODEL.user_logo] placeholderImage:KDefaultImg];
     self.topView.lab_userName.text = CNull2String(USERMODEL.user_name);
     self.topView.lab_content.text = [NSString stringWithFormat:@"ID:%@",USERMODEL.ID];
     self.tableView.tableHeaderView = self.topView;
@@ -60,6 +61,7 @@
                                                                                               [self.dataArray removeAllObjects];
                                                                                               [self.dataArray addObjectsFromArray:[WinHistoryModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"list"] error:nil]];
                                                                                               [self.tableView reloadData];
+                      
                                                                                           }else{
                                                                                               ShowNotceError;
                                                                                           }
@@ -76,11 +78,11 @@
     
     if ([model.is_set_consignee integerValue] == 0) {
         ChoseAddressListVc * vc = [[ChoseAddressListVc alloc]init];
-        vc.itemID = model.duobao_item_id;
+        vc.itemID = model.ID;
         [self.navigationController pushViewController:vc animated:YES];
     }else{
         ShowMorderNoticeVc * vc = [[NSClassFromString(@"ShowMorderNoticeVc") alloc]initWithNibName:@"ShowMorderNoticeVc" bundle:nil];
-        vc.myShowGoodsID = model.duobao_item_id;
+        vc.myShowGoodsID = model.ID;
         [self.navigationController pushViewController:vc animated:YES];
     }
     
@@ -108,7 +110,6 @@
     }
     MyWinListCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
     cell.delegate = self;
-    
     cell.backgroundColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (self.dataArray.count > indexPath.row) {

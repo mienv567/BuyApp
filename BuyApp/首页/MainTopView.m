@@ -177,7 +177,7 @@
     self.newsLabel = [[UILabel alloc] init];
     self.newsLabel.backgroundColor = [UIColor clearColor];
     self.newsLabel.textColor = GS_COLOR_DARKGRAY;
-    self.newsLabel.font = [UIFont boldSystemFontOfSize:13];
+    self.newsLabel.font = [UIFont systemFontOfSize:13];
     self.newsLabel.text = @" 暂时没有数据";
     
 //    NSString * user = @"用户A";
@@ -237,11 +237,11 @@
         self.newsButton.tag += 1;
     }
     NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"恭喜%@%@获得%@",self.currentNewsModel.user_name,self.currentNewsModel.span_time,self.currentNewsModel.name]];
-    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:13] range:NSMakeRange(0, 2)];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 2)];
     [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(0, 2)];
-    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:13] range:NSMakeRange(2, self.currentNewsModel.user_name.length)];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(2, self.currentNewsModel.user_name.length)];
     [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_BLUE range:NSMakeRange(2, self.currentNewsModel.user_name.length)];
-    [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:13] range:NSMakeRange(self.currentNewsModel.user_name.length + 2, noticeStr.length - self.currentNewsModel.user_name.length - 2)];
+    [noticeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(self.currentNewsModel.user_name.length + 2, noticeStr.length - self.currentNewsModel.user_name.length - 2)];
     [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_DARKGRAY range:NSMakeRange(self.currentNewsModel.user_name.length + 2,noticeStr.length - self.currentNewsModel.user_name.length - 2)];
     self.newsLabel.attributedText = noticeStr;
 }

@@ -73,7 +73,7 @@
         }else if ([model.delivery_status integerValue] == 5){
             statusStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"状态: %@",@"无需发货"]];
         }
-        if ([model.is_arrival integerValue] == 1){
+        if ([model.is_arrival integerValue] == 1 && [model.is_set_consignee integerValue] != 1){
             self.btn_action.hidden = NO;
             [self.btn_action mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self.lab_status.mas_left).offset(70);

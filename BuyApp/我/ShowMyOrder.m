@@ -8,6 +8,7 @@
 
 #import "ShowMyOrder.h"
 #import "ImgArrayView.h"
+#import "CommitJsonData.h"
 
 @interface ShowMyOrder ()<UITextFieldDelegate,UITextViewDelegate,ImgArrayViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (nonatomic, strong) ImgArrayView *imgArrayView;
@@ -50,14 +51,25 @@
         make.height.mas_equalTo(@100);
     }];
     
+
     
     self.imgArrayView = [[ImgArrayView alloc]initWithFrame:CGRectMake(0,self.txv_content.bottom + 10, self.view.width, 10)];
     self.imgArrayView.delegate = self;
     self.imgArray = [NSMutableArray array];
     [self.imgArrayView createViewWithImgArray:self.imgArray isGray:0];    
     [self.view addSubview:self.imgArrayView];
+    
+    self.btn_comit.backgroundColor = GS_COLOR_RED;
+    [self.btn_comit mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.imgArrayView.mas_bottom).offset(30);
+        make.left.equalTo(self.view).offset(10);
+        make.right.equalTo(self.view).offset(-10);
+        make.height.mas_equalTo(@40);
+    }];
+    
+    self.txf_title.text =@"12345678";
+    self.txv_content.text =@"123456781234567812345678123456781234567812345678123456781234567812345678";
 }
-
 
 //发布
 - (IBAction)click_commit:(id)sender {
@@ -69,9 +81,40 @@
 //    title 晒单标题
 //    content 晒单内容
 //    img_data 图片数据 (二进制流)
-    NSString * str1 = [UIImageJPEGRepresentation([self.imgArray objectAtIndex:0],0.1) base64EncodedStringWithOptions:0] ;
-    NSString * str2 = [UIImageJPEGRepresentation([self.imgArray objectAtIndex:1],0.1) base64EncodedStringWithOptions:0] ;
-    NSString * str3 = [UIImageJPEGRepresentation([self.imgArray objectAtIndex:2],0.1) base64EncodedStringWithOptions:0] ;
+    
+//    if (self.imgArray.count < 3) {
+//        [RootViewController showAlerMessage:@"秀满三张图片"];
+//    }
+    
+    
+//    NSString * str1 = [UIImageJPEGRepresentation([self.imgArray objectAtIndex:0],0.1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength] ;
+//    NSString * str2 = [UIImageJPEGRepresentation([self.imgArray objectAtIndex:0],0.1) base64EncodedStringWithOptions:0] ;
+//    NSString * str3 = [UIImageJPEGRepresentation([self.imgArray objectAtIndex:0],0.1) base64EncodedStringWithOptions:0] ;
+//    NSString * str4 = [NSJSONSerialization JSONObjectWithData:[str1 dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+//    NSString * str5 = [NSJSONSerialization JSONObjectWithData:[str2 dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+//    NSString * str6 = [NSJSONSerialization JSONObjectWithData:[str3 dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+//    NSData *data = [NSJSONSerialization dataWithJSONObject:UIImageJPEGRepresentation([self.imgArray objectAtIndex:0],0.1) options:NSJSONWritingPrettyPrinted error:nil];
+    
+    NSMutableArray *arr = [[NSMutableArray alloc]init];
+    //生成四张测试图片
+    for (int i = 0; i < 3; i++) {
+        CommitJsonData * model = [CommitJsonData new];
+        
+        NSString *string = [UIImageJPEGRepresentation([self.imgArray objectAtIndex:0],0.001) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength] ;
+        model.size = string.length;
+        model.base64 = [NSString stringWithFormat:@"data:image/jpeg;base64,%@",string];
+        NSString *baseString = (__bridge NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                                                 (CFStringRef)[model toJSONStringWithKeys:@[@"base64",@"size"]],
+                                                                                                 NULL,
+                                                                                                 CFSTR(":/?#[]@!$&’()*+,;="),
+                                                                                                 kCFStringEncodingUTF8);
+        [arr addObject:baseString];
+
+        
+    }
+//    NSString * str = [arr tojson];
+//    NSString* strAfterDecodeByUTF8AndURI = [str stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
     
     [NetworkManager startNetworkRequestDataFromRemoteServerByPostMethodWithURLString:kAppHost
                                                                      withParameters:@{@"ctl" : @"uc_share",
@@ -80,24 +123,38 @@
                                                                                       @"title" : self.txv_content.text,
                                                                                       @"content" : self.txv_content.text,
                                                                                       @"user_id":CNull2String(USERMODEL.ID),
-                                                                                      @"img_data[0]" :UIImageJPEGRepresentation([self.imgArray objectAtIndex:0],0.1) ,
-                                                                                      @"img_data[1]" :UIImageJPEGRepresentation([self.imgArray objectAtIndex:1],0.1),
-                                                                                      @"img_data[2]" : UIImageJPEGRepresentation([self.imgArray objectAtIndex:2],0.1)} success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                      @"img_data": arr}
+                                                                                      success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           if (SUCCESSED) {
                                                                                               NSLog(@"%@",responseObject);
-                                                                                              
+                                                                                              KPopToLastViewController;
                                                                                           }else{
                                                                                               
                                                                                               NSLog(@"%@",responseObject);
                                                                                               
                                                                                           }
                                                                                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                                                                          
+                                                                                          NSLog(@"%@",error);
                                                                                           
                                                                                       }];
     
     
 }
+
+- (NSData *)toJSONData:(id)theData{
+    
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:theData
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    
+    if ([jsonData length] > 0 && error == nil){
+        return jsonData;
+    }else{
+        return nil;
+    }
+}
+
 
 #pragma mark- UIImagePickerControllerDelegate
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
@@ -179,7 +236,7 @@
     
     if ([textView isEqual:self.txv_content] && [textView.text isEqualToString:@"幸运感言，不少于30个字"]) {
         textView.text = @"";
-        self.txf_title.textColor = GS_COLOR_LIGHTBLACK;
+        textView.textColor = GS_COLOR_LIGHTBLACK;
     }
     
 }
@@ -189,7 +246,7 @@
     if (textView.text.length < 1) {
         if ([textView isEqual:self.txv_content]) {
             textView.text = @"幸运感言，不少于30个字";
-            self.txf_title.textColor = GS_COLOR_DARKGRAY;
+            textView.textColor = GS_COLOR_DARKGRAY;
         }
     }
 }

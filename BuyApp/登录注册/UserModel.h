@@ -26,6 +26,9 @@
 @property (nonatomic,strong)NSString <Optional>* level_id;
 @property (nonatomic,strong)NSString <Optional>* status;
 @property (nonatomic,strong)NSString <Optional>* is_tmp;
+@property (nonatomic,strong)NSString <Optional>* msg_count;
+@property (nonatomic,strong)NSString <Optional>* winning_count;
+@property (nonatomic,strong)NSString <Optional>* user_logo;
 @end
 
 

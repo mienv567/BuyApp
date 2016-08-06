@@ -47,7 +47,7 @@ static NSString *kAppMessageExt = @"这是第三方带的测试字段";
 static NSString *kAppMessageAction = @"<action>dotaliTest</action>";
 
 static NSString *kAuthScope = @"snsapi_message,snsapi_userinfo,snsapi_friend,snsapi_contact";
-static NSString *kAuthOpenID = @"0c806938e2413ce73eef92cc3";
+static NSString *kAuthOpenID = @"wx02e8e9d809501616";
 static NSString *kAuthState = @"xxx";
 
 static NSString *kFileTitle = @"iphone4.pdf";

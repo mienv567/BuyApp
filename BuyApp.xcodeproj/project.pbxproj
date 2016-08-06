@@ -201,6 +201,7 @@
 		03E021101D4BA960006C3210 /* ChoseAddressListVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E0210F1D4BA960006C3210 /* ChoseAddressListVc.m */; };
 		03E021141D4BB338006C3210 /* ChoseAddressListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E021121D4BB338006C3210 /* ChoseAddressListCell.m */; };
 		03E021151D4BB338006C3210 /* ChoseAddressListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03E021131D4BB338006C3210 /* ChoseAddressListCell.xib */; };
+		03E276271D5640060050D136 /* CommitJsonData.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E276261D5640060050D136 /* CommitJsonData.m */; };
 		03E8DC1A1D2758300028464B /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E8DC191D2758300028464B /* UserModel.m */; };
 		03E8DC1E1D27598E0028464B /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E8DC1D1D27598E0028464B /* NetworkManager.m */; };
 		03EACFC41D33CE060041E209 /* SearchListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EACFC31D33CE060041E209 /* SearchListModel.m */; };
@@ -578,6 +579,9 @@
 		03E021111D4BB338006C3210 /* ChoseAddressListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoseAddressListCell.h; sourceTree = "<group>"; };
 		03E021121D4BB338006C3210 /* ChoseAddressListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoseAddressListCell.m; sourceTree = "<group>"; };
 		03E021131D4BB338006C3210 /* ChoseAddressListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoseAddressListCell.xib; sourceTree = "<group>"; };
+		03E276241D5637B90050D136 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		03E276251D5640060050D136 /* CommitJsonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommitJsonData.h; sourceTree = "<group>"; };
+		03E276261D5640060050D136 /* CommitJsonData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommitJsonData.m; sourceTree = "<group>"; };
 		03E8DC181D2758300028464B /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		03E8DC191D2758300028464B /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		03E8DC1C1D27598E0028464B /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
@@ -592,7 +596,6 @@
 		03EB70E01D1835A800A94E50 /* Img_TextfieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Img_TextfieldCell.xib; sourceTree = "<group>"; };
 		03F44A8E1D2C94E100CEE5FD /* NewsListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsListModel.h; sourceTree = "<group>"; };
 		03F44A8F1D2C94E100CEE5FD /* NewsListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsListModel.m; sourceTree = "<group>"; };
-		03F44A971D2CDE8000CEE5FD /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		03F44A981D2CEF8E00CEE5FD /* GoodsInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsInfoModel.h; sourceTree = "<group>"; };
 		03F44A991D2CEF8E00CEE5FD /* GoodsInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsInfoModel.m; sourceTree = "<group>"; };
 		03F7961E1D3688EB006F1B4A /* AddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressModel.h; sourceTree = "<group>"; };
@@ -785,7 +788,7 @@
 			isa = PBXGroup;
 			children = (
 				038B19441D12A528007C1CC8 /* Define.h */,
-				03F44A971D2CDE8000CEE5FD /* Header.h */,
+				03E276241D5637B90050D136 /* Header.h */,
 				038B18ED1D1270D7007C1CC8 /* AppDelegate.h */,
 				038B18EE1D1270D7007C1CC8 /* AppDelegate.m */,
 				03BB294F1D17757800EDEDFD /* MainTabBarVc.h */,
@@ -1120,6 +1123,8 @@
 				035F347A1D4708850082C7FD /* ShowMyOrder.h */,
 				035F347B1D4708850082C7FD /* ShowMyOrder.m */,
 				035F347C1D4708850082C7FD /* ShowMyOrder.xib */,
+				03E276251D5640060050D136 /* CommitJsonData.h */,
+				03E276261D5640060050D136 /* CommitJsonData.m */,
 			);
 			path = "我";
 			sourceTree = "<group>";
@@ -1662,6 +1667,7 @@
 				037D0E631D30ADFC00DFF88A /* MoneyListModel.m in Sources */,
 				03BB29771D179A7500EDEDFD /* MainClassModel.m in Sources */,
 				038B19381D12A44B007C1CC8 /* UIImage+Scale.m in Sources */,
+				03E276271D5640060050D136 /* CommitJsonData.m in Sources */,
 				038B19571D12A88F007C1CC8 /* EGOCache.m in Sources */,
 				03CE76B31D2E9FE800A416E7 /* GoodInfoModel.m in Sources */,
 				03B9457D1D44BC9B00A429F8 /* DuobaoListModel.m in Sources */,
@@ -1803,7 +1809,7 @@
 					"$(PROJECT_DIR)/BuyApp/PlusIn/SDKExport",
 					"$(PROJECT_DIR)/BuyApp/PlusIn/BaiDuMTJ",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.App.Buy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.App.QYG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1828,7 +1834,7 @@
 					"$(PROJECT_DIR)/BuyApp/PlusIn/SDKExport",
 					"$(PROJECT_DIR)/BuyApp/PlusIn/BaiDuMTJ",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.App.Buy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.App.QYG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

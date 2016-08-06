@@ -73,7 +73,7 @@
     WinHistoryModel * model = [self.dataArray objectAtIndex:indexPath.row];
     
     ShowMorderNoticeVc * vc = [[NSClassFromString(@"ShowMorderNoticeVc") alloc]initWithNibName:@"ShowMorderNoticeVc" bundle:nil];
-    vc.myShowGoodsID = model.ID;
+    vc.myShowGoodsID = model.duobao_item_id;
     [self.navigationController pushViewController:vc animated:YES];
     
 }

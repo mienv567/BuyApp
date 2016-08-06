@@ -17,6 +17,9 @@
 @property (strong, nonatomic)  UIView *classView;
 @property (nonatomic, strong) UINib * nib;
 
+@property (strong, nonatomic)  UILabel *lab_unReadMsgCount;
+@property (strong, nonatomic)  UILabel *lab_winnerMsgCount;
+
 @end
 
 #define ImgArray @[@"Userclass1",@"Userclass2",@"Userclass3"]
@@ -33,7 +36,6 @@
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    
     self.topView = KGetViewFromNib(@"UserTopView");
     WeakSelf;
     self.topView.myRootVc = weakSelf;
@@ -48,7 +50,23 @@
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, 0.1)];
+    
+    
     [self getClassView];
+    
+    self.lab_unReadMsgCount = [UILabel new];
+    self.lab_unReadMsgCount.backgroundColor = [UIColor whiteColor];
+    self.lab_unReadMsgCount.textColor = GS_COLOR_RED;
+    self.lab_unReadMsgCount.font = FontSize(13);
+    self.lab_unReadMsgCount.textAlignment = NSTextAlignmentCenter;
+    
+    self.lab_winnerMsgCount = [UILabel new];
+    self.lab_winnerMsgCount.backgroundColor =[UIColor whiteColor] ;
+    self.lab_winnerMsgCount.textColor = GS_COLOR_RED;
+    self.lab_winnerMsgCount.font = FontSize(13);
+    self.lab_winnerMsgCount.textAlignment = NSTextAlignmentCenter;
+    
 }
 
 -(void)click_header{
@@ -160,7 +178,7 @@
         UILabel *lb = [[UILabel alloc] init];
         lb.tag = 200+i;
         lb.backgroundColor = [UIColor whiteColor];
-        lb.textColor = GS_COLOR_Main;
+        lb.textColor = GS_COLOR_DARKGRAY;
         lb.font = [UIFont gs_boldfont:NSAppFontS];
         [button addSubview:lb];
         lb.text =[TitleArray objectAtIndex:i];
@@ -224,9 +242,30 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.lab_content.textColor = GS_COLOR_Main;
+    cell.lab_content.font = [UIFont boldSystemFontOfSize:17];
     cell.lab_content.text = [[CellTitleArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     cell.img_icon.image =[UIImage imageNamed: [[CellImgArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row]];
 
+    if (indexPath.section == 1 && indexPath.row == 1) {
+        if ([USERMODEL.msg_count integerValue] > 0) {
+            NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"我的消息(%@条未读)",USERMODEL.msg_count]];
+            [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:17] range:NSMakeRange(4, noticeStr.length - 4)];
+            [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(4,noticeStr.length - 4)];
+            cell.lab_content.attributedText = noticeStr;
+        }
+
+    }
+    
+
+    if (indexPath.section == 2 && indexPath.row == 1) {
+        if ([USERMODEL.winning_count integerValue] > 0) {
+            NSMutableAttributedString *noticeStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"中奖纪录(%@条未确认地址)",USERMODEL.winning_count]];
+            [noticeStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:17] range:NSMakeRange(4, noticeStr.length -4)];
+            [noticeStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_RED range:NSMakeRange(4,noticeStr.length -4 )];
+            cell.lab_content.attributedText = noticeStr;
+        }
+    }
+    
     return cell;
 }
 
@@ -279,7 +318,7 @@
     if ([[UserManager sharedManager] isUserLoad]) {
         [[UserManager sharedManager] refreshUserInfo];
         self.topView.lab_userName.text = USERMODEL.user_name;
-        
+        [self.topView.img_header sd_setImageWithURL:[NSURL URLWithString:USERMODEL.user_logo] placeholderImage:KDefaultImg];
         NSMutableAttributedString *scoreStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"积分 : %d",CNull2Int(USERMODEL.total_score)]];
         [scoreStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:15] range:NSMakeRange(0, 4)];
         [scoreStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, 4)];
@@ -294,6 +333,8 @@
         [coinStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:15] range:NSMakeRange(5, coinStr.length - 5)];
         [coinStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_YELLOW range:NSMakeRange(5,coinStr.length - 5)];
         self.topView.lab_coinCount.attributedText = coinStr;
+        
+        [self.tableView reloadData];
     }
 
 }

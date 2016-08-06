@@ -80,7 +80,8 @@
     if ([[UserManager sharedManager] isUserLoad]) {
         [[UserManager sharedManager] refreshUserInfo];
         self.topView.lab_userName.text = USERMODEL.user_name;
-        
+        [self.topView.img_header sd_setImageWithURL:[NSURL URLWithString:USERMODEL.user_logo] placeholderImage:KDefaultImg];
+
         NSMutableAttributedString *scoreStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"积分: %d",CNull2Int(USERMODEL.total_score)]];
         [scoreStr addAttribute:NSFontAttributeName value:FontSize(14) range:NSMakeRange(0, 4)];
         [scoreStr addAttribute:NSForegroundColorAttributeName value:GS_COLOR_GoldRed range:NSMakeRange(0, 4)];

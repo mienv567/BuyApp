@@ -53,7 +53,7 @@
         make.left.right.top.equalTo(self.view);
         make.bottom.equalTo(btn.mas_top);
     }];
-
+    
     
 }
 
@@ -69,7 +69,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    http://ceshi.quyungou.com/wap/index.php?ctl=uc_winlog&act=winlog_address&order_item_id=2957485&show_prog=1
+    //    http://ceshi.quyungou.com/wap/index.php?ctl=uc_winlog&act=winlog_address&order_item_id=2957485&show_prog=1
     
     
     
@@ -80,7 +80,7 @@
                                                                                       @"user_id":CNull2String(USERMODEL.ID)
                                                                                       } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                                                           if (SUCCESSED) {
-                                                                                           
+                                                                                              
                                                                                               self.dataArray = [AddressModel arrayOfModelsFromDictionaries:responseObject[@"data"][@"consignee_list"] error:nil];
                                                                                               
                                                                                               [self.tableView reloadData];
@@ -99,8 +99,13 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     self.selectIndexPath = indexPath;
+    
     ChoseAddressListCell *cell  = [self.tableView cellForRowAtIndexPath:indexPath];
     cell.selected = YES;
+    
+    [self showNeedLoginAlertView];
+    
+    
 }
 
 - (void)showNeedLoginAlertView{
@@ -113,9 +118,23 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(alertView.cancelButtonIndex != buttonIndex){
-#warning 需要添加选择地址的接口
-        KPopToLastViewController;
-        //
+        AddressModel * model = [self.dataArray objectAtIndex:self.selectIndexPath.row];
+        [NetworkManager startNetworkRequestDataFromRemoteServerByGetMethodWithURLString:kAppHost
+                                                                         withParameters:@{@"ctl":@"uc_winlog",
+                                                                                          @"act":@"uc_luck_confirm_address",
+                                                                                          @"order_item_id":self.itemID,
+                                                                                          @"consignee_id":model.ID,
+                                                                                          @"user_id":CNull2String(USERMODEL.ID)
+                                                                                          } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                                                              if (SUCCESSED) {
+                                                                                                  KPopToLastViewController;
+                                                                                              }else{
+                                                                                                  ShowNotceError;
+                                                                                              }
+                                                                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                                                              
+                                                                                          }];
+        
     }
 }
 
@@ -147,10 +166,10 @@
     cell.lab_address.textColor = GS_COLOR_DARK;
     cell.lab_tel.textColor = GS_COLOR_DARK;
     cell.backgroundColor = GS_COLOR_WHITE;
-
-
+    
+    
     if (self.dataArray.count > indexPath.row) {
-        AddressModel * model = [self.dataArray objectAtIndex:indexPath.section];
+        AddressModel * model = [self.dataArray objectAtIndex:indexPath.row];
         cell.lab_tel.text = model.mobile;
         cell.lab_name.text = [NSString stringWithFormat:@"收货人:%@",model.consignee];
         cell.lab_address.text = [NSString stringWithFormat:@"收货地址:%@ %@ %@ %@",model.region_lv2_name,model.region_lv3_name,model.region_lv4_name,model.address];
@@ -181,13 +200,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
