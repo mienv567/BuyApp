@@ -62,10 +62,21 @@
                             <action selector="click_buttonClcik:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="any-9S-fXS"/>
                         </connections>
                     </button>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1ok-m4-fge">
+                        <rect key="frame" x="214" y="111" width="57" height="27"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="确认收货"/>
+                        <connections>
+                            <action selector="click_buttonClcik:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="4bL-0h-SyI"/>
+                            <action selector="click_getGoods:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="gpy-H0-jj8"/>
+                        </connections>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="btn_action" destination="V1u-81-ghl" id="gPc-D6-bit"/>
+                <outlet property="btn_getGoods" destination="1ok-m4-fge" id="6fr-n4-tyU"/>
                 <outlet property="img_goods" destination="ulG-FQ-cCq" id="TeH-lz-hQl"/>
                 <outlet property="lab_luckyNum" destination="h7G-RX-fww" id="xCL-RR-L12"/>
                 <outlet property="lab_qihao" destination="rJ3-WA-NLW" id="bmO-HZ-Eep"/>
@@ -77,6 +88,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="placeHolder" width="225" height="140"/>
+        <image name="placeHolder" width="120" height="120"/>
     </resources>
 </document>

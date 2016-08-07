@@ -11,7 +11,10 @@
 #import "ShowTopView.h"
 #import "WinHistoryModel.h"
 #import "ShowMorderNoticeVc.h"
-
+#import "ShowMyOrderListCell.h"
+#import "GoodsInfoVc.h"
+#import "UITableViewCell+GSMasonryAutoCellHeight.h"
+#import "ShowOrderWebVc.h"
 
 @interface ShowMyOrdersVc ()<UITableViewDelegate,UITableViewDataSource,ShowOrderListCellDelegate>
 @property (strong, nonatomic)  ShowTopView *view_topBg;
@@ -32,13 +35,11 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    [self.tableView registerClass:[ShowOrderListCell class] forCellReuseIdentifier:@"ShowOrderListCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.tableView.backgroundColor = GS_COLOR_WHITE;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.bottom.equalTo(self.view);
-        //        make.top.equalTo(self.view.mas_top).offset(50);
     }];
     
     self.tableView.tableHeaderView = KGetViewFromNib(@"ShowTopView");
@@ -75,18 +76,56 @@
     ShowMorderNoticeVc * vc = [[NSClassFromString(@"ShowMorderNoticeVc") alloc]initWithNibName:@"ShowMorderNoticeVc" bundle:nil];
     vc.myShowGoodsID = model.duobao_item_id;
     [self.navigationController pushViewController:vc animated:YES];
-    
+
 }
+
+
+
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    KJumpToViewControllerByNib(@"ShowMorderNoticeVc");
-}
+    
+//    http://www.quyungou.com/wap/index.php?ctl=uc_order&act=check_delivery&item_id=3283433&show_prog=1
 
+    
+    WinHistoryModel * model = [self.dataArray objectAtIndex:indexPath.row];
+    ShowOrderWebVc * vc = [[NSClassFromString(@"ShowOrderWebVc") alloc]init];
+    vc.title = model.name;
+    vc.UrlString = [NSString stringWithFormat:@"http://www.quyungou.com/wap/index.php?ctl=share&act=detail&id=%@&show_prog=1",model.share_id];
+    vc.IDString = model.duobao_item_id;
+    [self.navigationController pushViewController:vc animated:YES];
+
+}
 
 #pragma mark - Table view data source
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.dataArray.count > indexPath.row) {
+        WinHistoryModel * model = [self.dataArray objectAtIndex:indexPath.row];
+        if ([model.is_send_share integerValue] == 1) {
+            return [ShowMyOrderListCell GS_heightForIndexPath:indexPath config:^(UITableViewCell *sourceCell) {
+                ShowMyOrderListCell *cell = (ShowMyOrderListCell *)sourceCell;
+                cell.lab_title.text = model.title;
+                [cell.img_header sd_setImageWithURL:[NSURL URLWithString:model.avatar] placeholderImage:KDefaultImg];
+                cell.lab_qihao.text = [NSString stringWithFormat:@"期号 : %@", model.duobao_item_id];
+                cell.lab_username.text = model.user_name;
+                cell.lab_goodsContent.text = model.content;
+                cell.lab_goodsName.text = model.name;
+                cell.lab_time.text = model.create_time;
+            } cache:^NSDictionary *{
+                return @{kGSCacheUniqueKey: [NSString stringWithFormat:@"%@", model.ID],
+                         kGSCacheStateKey : [NSString stringWithFormat:@"%@", model.ID],
+                         kGSCacheForTableViewKey : tableView,
+                         // 如果设置为YES，若有缓存，则更新缓存，否则直接计算并缓存
+                         // 主要是对社交这种有动态评论等不同状态，高度也会不同的情况的处理
+                         kGSRecalculateForStateKey : @(NO) // 标识不用重新更新
+                         };
+            }];
+        }else{
+            return 120;
+        }
+        return 120;
+    }
     return 120;
 }
 
@@ -100,24 +139,57 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *identy = @"ShowOrderListCell";
-    if (!self.nib) {
-        self.nib = [UINib nibWithNibName:@"ShowOrderListCell" bundle:nil];
-        [tableView registerNib:self.nib forCellReuseIdentifier:identy];
-    }
-    ShowOrderListCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
-    cell.delegate = self;
+     static NSString *identy = @"ShowOrderListCell";
+     static NSString *identy2 = @"ShowMyOrderListCell";
     
-    cell.backgroundColor = [UIColor whiteColor];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.accessoryType = UITableViewCellAccessoryNone;
     if (self.dataArray.count > indexPath.row) {
+        
         WinHistoryModel * model = [self.dataArray objectAtIndex:indexPath.row];
-        cell.lab_title.text = model.name;
-        cell.lab_qihao.text = [NSString stringWithFormat:@"期号 : %@", model.duobao_item_id];
-        [cell.img_goods sd_setImageWithURL:[NSURL URLWithString:model.deal_icon] placeholderImage:KDefaultImg];
+        
+        if ([model.is_send_share integerValue] == 1) {
+            ShowMyOrderListCell *cell = [tableView dequeueReusableCellWithIdentifier:identy2];
+            if (!cell) {
+                cell = [[ShowMyOrderListCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy2];
+                cell.backgroundColor = [UIColor whiteColor];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+            WinHistoryModel * model = [self.dataArray objectAtIndex:indexPath.row];
+            cell.lab_title.text = model.title;
+            [cell.img_header sd_setImageWithURL:[NSURL URLWithString:model.avatar] placeholderImage:KDefaultImg];
+            cell.lab_qihao.text = [NSString stringWithFormat:@"期号 : %@", model.duobao_item_id];
+            cell.lab_username.text = model.user_name;
+            cell.lab_goodsContent.text = model.content;
+            cell.lab_goodsName.text = model.name;
+            cell.lab_time.text = model.create_time;
+            if (model.image_list.count >  2) {
+                image_listModel * model1 = [model.image_list objectAtIndex:0];
+                image_listModel * model2 = [model.image_list objectAtIndex:1];
+                image_listModel * model3 = [model.image_list objectAtIndex:2];
+                [cell.img_one sd_setImageWithURL:[NSURL URLWithString:model1.path] placeholderImage:KDefaultImg];
+                [cell.img_two sd_setImageWithURL:[NSURL URLWithString:model2.path] placeholderImage:KDefaultImg];
+                [cell.img_three sd_setImageWithURL:[NSURL URLWithString:model3.path] placeholderImage:KDefaultImg];
+            }
+            return cell;
+        }
+        else
+        {
+            UINib *nib = [UINib nibWithNibName:@"ShowOrderListCell" bundle:nil];
+            [tableView registerNib:nib forCellReuseIdentifier:identy];
+            ShowOrderListCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+            cell.delegate = self;
+            cell.backgroundColor = [UIColor whiteColor];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            
+            WinHistoryModel * model = [self.dataArray objectAtIndex:indexPath.row];
+            cell.lab_title.text = model.name;
+            cell.lab_qihao.text = [NSString stringWithFormat:@"期号 : %@", model.duobao_item_id];
+            [cell.img_goods sd_setImageWithURL:[NSURL URLWithString:model.deal_icon] placeholderImage:KDefaultImg];
+            return cell;
+        }
     }
-    return cell;
+    return [UITableViewCell new];
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{

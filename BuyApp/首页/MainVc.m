@@ -18,6 +18,7 @@
 #import "HelpInfo.h"
 #import "GoodsInfoVc.h"
 #import "MainModel.h"
+#import "LoginVC.h"
 
 static NSString *cellID = @"MainGoodsListCellID";
 static NSString *headerID = @"headerID";
@@ -172,15 +173,22 @@ static NSString *footerID = @"footerID";
             break;
         case 3:
         {
-//            HelpVc * vc = [[HelpVc alloc]init];
-//            vc.title = @"帮助";
-//            [self.navigationController pushViewController:vc animated:YES];
+            if (![[UserManager sharedManager] isUserLoad]) {
+                LoginVC *phoneVC = [[NSClassFromString(@"LoginVC") alloc]initWithNibName:@"LoginVC" bundle:nil];
+                UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:phoneVC];
+                [self.view.window.rootViewController  presentViewController:nc animated:YES completion:nil];
+                return;
+            }
+            KJumpToViewControllerByNib(@"ShowMyOrdersVc");
+        }
+            break;
+        case 4:
+        {
             HelpInfo * vc = [[HelpInfo alloc]init];
             vc.title = @"帮助";
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-            
         default:
             break;
     }
@@ -202,8 +210,6 @@ static NSString *footerID = @"footerID";
                                                                                           [self.classView.mj_footer endRefreshing];
                                                                                           if (SUCCESSED) {
                                                                                               [self.dataArray addObjectsFromArray:[MainGoodsListModel arrayOfModelsFromDictionaries:responseObject[@"data"  ][@"index_duobao_list"] error:nil]];
-//                                                                                              NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
-//                                                                                              [self.classView reloadSections:indexSet];
                                                                                                 [self.classView reloadData];
                                                                                           }else{
                                                                                               ShowNotceError;
@@ -217,6 +223,7 @@ static NSString *footerID = @"footerID";
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
     if (self.dataArray.count > indexPath.row) {
         MainNewGoodsModel* model = [self.dataArray objectAtIndex:indexPath.row];
         GoodsInfoVc * vc = [[NSClassFromString(@"GoodsInfoVc") alloc]init];
@@ -228,8 +235,8 @@ static NSString *footerID = @"footerID";
 }
 
 -(void)clickMainGoodsListCells:(MainGoodsListCells *)cell{
-        NSIndexPath * indexPath = [self.classView indexPathForCell:cell];
     
+    NSIndexPath * indexPath = [self.classView indexPathForCell:cell];
     if (self.dataArray.count > indexPath.row) {
         MainNewGoodsModel* model = [self.dataModel.newest_doubao_list objectAtIndex:indexPath.row];
         GoodsInfoVc * vc = [[NSClassFromString(@"GoodsInfoVc") alloc]init];
@@ -237,7 +244,6 @@ static NSString *footerID = @"footerID";
         vc.GoodsID = model.ID;
         [self.navigationController pushViewController:vc animated:YES];
     }
- 
 }
 
 

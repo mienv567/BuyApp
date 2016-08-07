@@ -8,6 +8,10 @@
 
 #import "WinHistoryModel.h"
 
+@implementation image_listModel
+
+@end
+
 @implementation WinHistoryModel
 +(JSONKeyMapper*)keyMapper
 {

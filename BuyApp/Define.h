@@ -7,7 +7,7 @@
 //
 
 //测试服务器开关
-#define TEST_SERVER
+//#define TEST_SERVER
 #ifdef TEST_SERVER
 #define kAppHost @"http://ceshi.quyungou.com/api/index.php"
 #define kAppHostWap @"http://ceshi.quyungou.com/wap/index.php"

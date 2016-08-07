@@ -15,9 +15,10 @@
     
     
     self.view_topBackGound.layer.shadowColor = [UIColor blackColor].CGColor;//shadowColor阴影颜色
-    self.view_topBackGound.layer.shadowOffset = CGSizeMake(0,0);
-    self.view_topBackGound.layer.shadowOpacity = 1;//阴影透明度，默认0
+    self.view_topBackGound.layer.shadowOffset = CGSizeMake(4,4);
+    self.view_topBackGound.layer.shadowOpacity = 0.6;//阴影透明度，默认0
     self.view_topBackGound.layer.shadowRadius = 3;//阴影半径，默认3
+    
     [self.view_topBackGound mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.equalTo(self).offset(10);
         make.right.equalTo(self).offset(-10);

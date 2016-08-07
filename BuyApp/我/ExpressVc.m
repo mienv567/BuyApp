@@ -1,19 +1,20 @@
 //
-//  CountWebVc.m
+//  ExpressVc.m
 //  BuyApp
 //
-//  Created by D on 16/6/25.
+//  Created by D on 16/8/7.
 //  Copyright © 2016年 Super_D. All rights reserved.
 //
 
-#import "CountWebVc.h"
+#import "ExpressVc.h"
 
-@interface CountWebVc ()
+@interface ExpressVc ()
+
 @property (nonatomic, strong)UIWebView * webView;
 
 @end
 
-@implementation CountWebVc
+@implementation ExpressVc
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,20 +27,21 @@
     [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(-50, 0, 0, 0));
     }];
-//    self.webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-    self.webView.scalesPageToFit=YES;
-      self.webView.scrollView.bounces = NO;
-//    self.webView.multipleTouchEnabled=YES;
-//    self.webView.userInteractionEnabled=YES;
-
+    self.webView.scrollView.bounces = NO;
+    self.webView.scalesPageToFit = YES;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
-    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?ctl=duobao&act=more&data_id=%@&show_prog=1",kAppHostWap,self.IDString]];//创建URL
+    
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@&user_id=%@",self.UrlString,USERMODEL.ID]];//创建URL
     NSURLRequest* request = [NSURLRequest requestWithURL:url];//创建NSURLRequest
     [self.webView loadRequest:request];//加载
+}
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -112,6 +112,10 @@
 		038B195B1D12A88F007C1CC8 /* GSValidate.m in Sources */ = {isa = PBXBuildFile; fileRef = 038B19521D12A88F007C1CC8 /* GSValidate.m */; };
 		038B195C1D12A88F007C1CC8 /* ASPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 038B19551D12A88F007C1CC8 /* ASPageView.m */; };
 		038B195F1D12A8D8007C1CC8 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 038B195E1D12A8D8007C1CC8 /* RootViewController.m */; };
+		03933B591D571D7D004FF938 /* ShowMyOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03933B581D571D7D004FF938 /* ShowMyOrderListCell.m */; };
+		03933B5B1D571D87004FF938 /* ShowMyOrderListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03933B5A1D571D87004FF938 /* ShowMyOrderListCell.xib */; };
+		03933B5E1D5745A8004FF938 /* ShowOrderWebVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 03933B5D1D5745A8004FF938 /* ShowOrderWebVc.m */; };
+		03933B611D5752E3004FF938 /* ExpressVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 03933B601D5752E3004FF938 /* ExpressVc.m */; };
 		039A196A1D24A9EE00D10287 /* ResetPhoneVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 039A19691D24A9EE00D10287 /* ResetPhoneVc.m */; };
 		039A196D1D24B71F00D10287 /* EditAddressVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 039A196C1D24B71F00D10287 /* EditAddressVc.m */; };
 		039A19711D24C9B500D10287 /* AddressInfoVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 039A196F1D24C9B500D10287 /* AddressInfoVc.m */; };
@@ -407,6 +411,13 @@
 		038B19551D12A88F007C1CC8 /* ASPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASPageView.m; sourceTree = "<group>"; };
 		038B195D1D12A8D8007C1CC8 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		038B195E1D12A8D8007C1CC8 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		03933B571D571D7D004FF938 /* ShowMyOrderListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowMyOrderListCell.h; sourceTree = "<group>"; };
+		03933B581D571D7D004FF938 /* ShowMyOrderListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowMyOrderListCell.m; sourceTree = "<group>"; };
+		03933B5A1D571D87004FF938 /* ShowMyOrderListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowMyOrderListCell.xib; sourceTree = "<group>"; };
+		03933B5C1D5745A8004FF938 /* ShowOrderWebVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowOrderWebVc.h; sourceTree = "<group>"; };
+		03933B5D1D5745A8004FF938 /* ShowOrderWebVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowOrderWebVc.m; sourceTree = "<group>"; };
+		03933B5F1D5752E3004FF938 /* ExpressVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressVc.h; sourceTree = "<group>"; };
+		03933B601D5752E3004FF938 /* ExpressVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressVc.m; sourceTree = "<group>"; };
 		039A19681D24A9EE00D10287 /* ResetPhoneVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPhoneVc.h; sourceTree = "<group>"; };
 		039A19691D24A9EE00D10287 /* ResetPhoneVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPhoneVc.m; sourceTree = "<group>"; };
 		039A196B1D24B71F00D10287 /* EditAddressVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditAddressVc.h; sourceTree = "<group>"; };
@@ -714,6 +725,9 @@
 				03E021111D4BB338006C3210 /* ChoseAddressListCell.h */,
 				03E021121D4BB338006C3210 /* ChoseAddressListCell.m */,
 				03E021131D4BB338006C3210 /* ChoseAddressListCell.xib */,
+				03933B571D571D7D004FF938 /* ShowMyOrderListCell.h */,
+				03933B581D571D7D004FF938 /* ShowMyOrderListCell.m */,
+				03933B5A1D571D87004FF938 /* ShowMyOrderListCell.xib */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -968,6 +982,8 @@
 		039DCDC51D29F481000DA425 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				03E276251D5640060050D136 /* CommitJsonData.h */,
+				03E276261D5640060050D136 /* CommitJsonData.m */,
 				039DCDC61D29F734000DA425 /* CouponModel.h */,
 				039DCDC71D29F734000DA425 /* CouponModel.m */,
 				039DCDC91D29FB69000DA425 /* NewsModel.h */,
@@ -1123,8 +1139,10 @@
 				035F347A1D4708850082C7FD /* ShowMyOrder.h */,
 				035F347B1D4708850082C7FD /* ShowMyOrder.m */,
 				035F347C1D4708850082C7FD /* ShowMyOrder.xib */,
-				03E276251D5640060050D136 /* CommitJsonData.h */,
-				03E276261D5640060050D136 /* CommitJsonData.m */,
+				03933B5C1D5745A8004FF938 /* ShowOrderWebVc.h */,
+				03933B5D1D5745A8004FF938 /* ShowOrderWebVc.m */,
+				03933B5F1D5752E3004FF938 /* ExpressVc.h */,
+				03933B601D5752E3004FF938 /* ExpressVc.m */,
 			);
 			path = "我";
 			sourceTree = "<group>";
@@ -1448,6 +1466,7 @@
 				03EB70E21D1835A800A94E50 /* Img_TextfieldCell.xib in Resources */,
 				034D89EA1D1BB387005806C7 /* GoodsWinnerView.xib in Resources */,
 				032940EA1D1EAA52000D54D9 /* AllCountsView.xib in Resources */,
+				03933B5B1D571D87004FF938 /* ShowMyOrderListCell.xib in Resources */,
 				03C5BCF21D18EE6300060FB3 /* RegisterVc.xib in Resources */,
 				03D66C0E1D23FF24006C9855 /* MyWinListCell.xib in Resources */,
 				03376B301D1ABBA6004EE048 /* SearchListCell.xib in Resources */,
@@ -1549,6 +1568,7 @@
 				037D0E601D30A2A700DFF88A /* RedCouponList.m in Sources */,
 				038B18F21D1270D7007C1CC8 /* ViewController.m in Sources */,
 				03EB70E11D1835A800A94E50 /* Img_TextfieldCell.m in Sources */,
+				03933B591D571D7D004FF938 /* ShowMyOrderListCell.m in Sources */,
 				038B19371D12A44B007C1CC8 /* UIFont+Addtion.m in Sources */,
 				03E8DC1A1D2758300028464B /* UserModel.m in Sources */,
 				03BF60821D3A320F0007BBFF /* SPConst.m in Sources */,
@@ -1603,6 +1623,7 @@
 				035C57F31D2B85B9000D68D6 /* MainNewGoodsModel.m in Sources */,
 				03A9FD371D236ADF006AD04D /* RedCouponTopView.m in Sources */,
 				038B193F1D12A44B007C1CC8 /* MTKDeallocator.m in Sources */,
+				03933B611D5752E3004FF938 /* ExpressVc.m in Sources */,
 				038B18EC1D1270D7007C1CC8 /* main.m in Sources */,
 				03BF60831D3A320F0007BBFF /* SPHTTPManager.m in Sources */,
 				035C57F61D2B8650000D68D6 /* MainNewsModel.m in Sources */,
@@ -1635,6 +1656,7 @@
 				038B19561D12A88F007C1CC8 /* ASCache.m in Sources */,
 				03376B361D1ADB77004EE048 /* HelpInfo.m in Sources */,
 				03EACFC41D33CE060041E209 /* SearchListModel.m in Sources */,
+				03933B5E1D5745A8004FF938 /* ShowOrderWebVc.m in Sources */,
 				03A9FD451D23A8CA006AD04D /* ImgTitleContent.m in Sources */,
 				032224DC1D2278A200B20525 /* CouponListCell.m in Sources */,
 				03C5BCF11D18EE6300060FB3 /* RegisterVc.m in Sources */,

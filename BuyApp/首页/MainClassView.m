@@ -9,8 +9,8 @@
 #import "MainClassView.h"
 #import "MainClassModel.h"
 
-#define TitleArray @[@"分类",@"十元专区",@"揭晓",@"帮助"]
-#define ImageArray @[@"Fenlei",@"Zhuanqu",@"Jiexiao",@"Bangzhu"]
+#define TitleArray @[@"分类",@"十元专区",@"揭晓",@"晒单",@"帮助"]
+#define ImageArray @[@"Fenlei",@"Zhuanqu",@"Jiexiao",@"Shaidan",@"Bangzhu"]
 
 @implementation MainClassView
 
@@ -26,7 +26,7 @@
     [self removeAllSubViews];
     
     NSMutableArray * dataArray =[[ NSMutableArray alloc]init];
-    for (int i = 0 ; i < 4; i++) {
+    for (int i = 0 ; i < 5; i++) {
         MainClassModel * model = [[MainClassModel alloc]init];
         model.PicPath = @"";
         model.Title = [TitleArray objectAtIndex:i];
@@ -48,15 +48,15 @@
             } else {
                 make.top.equalTo(self.mas_top);
             }
-            if (i%4==0) {
+            if (i%5==0) {
                 make.left.equalTo(self.mas_left).offset(8);
             } else {
                 make.left.equalTo(lastBtn.mas_right);
             }
             make.height.mas_equalTo(@80);
-            make.width.mas_equalTo(K_WIDTH/4-4);
+            make.width.mas_equalTo(K_WIDTH/5-4);
         }];
-        if ((i+1)%4==0) {
+        if ((i+1)%5==0) {
             firstBtn=button;
         }
         lastBtn=button;
@@ -66,7 +66,7 @@
         [button addSubview:iv];
 //        [iv sd_setImageWithURL:[NSURL URLWithString:model.PicPath] placeholderImage:KDefaultImg];
         [iv mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(button).with.offset(25);
+            make.left.equalTo(button).with.offset(15);
             make.top.equalTo(button).with.offset(10);
             make.height.equalTo(iv.mas_width);
             make.centerX.equalTo(button);

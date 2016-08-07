@@ -9,6 +9,8 @@
 #import "ShowMyOrder.h"
 #import "ImgArrayView.h"
 #import "CommitJsonData.h"
+#import "ShowMyOrderListCell.h"
+#import "ShowOrderWebVc.h"
 
 @interface ShowMyOrder ()<UITextFieldDelegate,UITextViewDelegate,ImgArrayViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (nonatomic, strong) ImgArrayView *imgArrayView;
@@ -234,9 +236,12 @@
 #pragma mark ----- textView  placeholder methods
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     
-    if ([textView isEqual:self.txv_content] && [textView.text isEqualToString:@"幸运感言，不少于30个字"]) {
+    if ([textView isEqual:self.txv_content] && [textView.text isEqualToString:@"幸运感言，不少于10个字"]) {
         textView.text = @"";
         textView.textColor = GS_COLOR_LIGHTBLACK;
+    }else{
+        textView.textColor = GS_COLOR_DARKGRAY;
+
     }
     
 }
@@ -245,9 +250,11 @@
 - (void)textViewDidEndEditing:(UITextView *)textView {
     if (textView.text.length < 1) {
         if ([textView isEqual:self.txv_content]) {
-            textView.text = @"幸运感言，不少于30个字";
+            textView.text = @"幸运感言，不少于10个字";
             textView.textColor = GS_COLOR_DARKGRAY;
         }
+    }else{
+        textView.textColor = GS_COLOR_LIGHTBLACK;
     }
 }
 
